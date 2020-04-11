@@ -1,7 +1,5 @@
 *.suo
 *.exe
-bin/
-obj/
-Udemy_Calculator/bin/**
-Udemy_Calculator/obj/**
-.vs/**
+Udemy_Calculator/bin/
+Udemy_Calculator/obj/
+.vs/
