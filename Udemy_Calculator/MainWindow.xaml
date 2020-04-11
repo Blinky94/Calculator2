@@ -12,7 +12,7 @@
         <Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="FontSize"
-                        Value="15" />
+                        Value="20" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -22,7 +22,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -30,22 +29,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--Formula Area-->
-        <Label x:Name="formulaLabel"
-               Grid.Column="0"
-               Grid.Row="0"
-               Grid.ColumnSpan="4"
-               HorizontalContentAlignment="Left"
-               VerticalContentAlignment="Top"              
-               Content="0"
-               Foreground="LightGreen"
-               FontSize="15" 
-               FontWeight="ExtraBold"
-               Margin="5 0 5 0"/>
         <!--Calul Area-->
         <Label x:Name="resultLabel"
                Grid.Column="0"
-               Grid.Row="1"
+               Grid.Row="0"
                Grid.ColumnSpan="4"
                HorizontalContentAlignment="Right"
                VerticalContentAlignment="Bottom"
@@ -53,100 +40,100 @@
                FontSize="50" />
         <!--AC +/1 % /-->
         <Button Grid.Column="0"
-                Grid.Row="2"
+                Grid.Row="1"
                 x:Name="aCButton"
                 Content="AC"
                 Margin="5"
                 Click="aCButton_Click" />
         <Button Grid.Column="1"
-                Grid.Row="2"
+                Grid.Row="1"
                 x:Name="negativeButton"
                 Content="+/1"
                 Margin="5"
                 Click="transformNumberButton_Click" />
         <Button Grid.Column="2"
-                Grid.Row="2"
+                Grid.Row="1"
                 x:Name="percentButton"
                 Content="%"
                 Margin="5"
                 Click="transformNumberButton_Click" />
         <Button Grid.Column="3"
-                Grid.Row="2"
+                Grid.Row="1"
                 x:Name="divideButton"
-                Content="/"
+                Content="÷"
                 Margin="5"
                 Click="operatorButton_Click" />
         <!--7 8 9 *-->
         <Button Grid.Column="0"
-                Grid.Row="3"
+                Grid.Row="2"
                 x:Name="sevenButton"
                 Content="7"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="1"
-                Grid.Row="3"
+                Grid.Row="2"
                 x:Name="heightButton"
                 Content="8"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="2"
-                Grid.Row="3"
+                Grid.Row="2"
                 x:Name="nineButton"
                 Content="9"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="3"
-                Grid.Row="3"
+                Grid.Row="2"
                 x:Name="multiplyButton"
-                Content="X"
+                Content="×"
                 Margin="5"
                 Click="operatorButton_Click" />
         <!--4 5 6 - -->
         <Button Grid.Column="0"
-                Grid.Row="4"
+                Grid.Row="3"
                 x:Name="fourButton"
                 Content="4"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="1"
-                Grid.Row="4"
+                Grid.Row="3"
                 x:Name="fiveButton"
                 Content="5"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="2"
-                Grid.Row="4"
+                Grid.Row="3"
                 x:Name="sixButton"
                 Content="6"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="3"
-                Grid.Row="4"
+                Grid.Row="3"
                 x:Name="minusButton"
                 Content="-"
                 Margin="5"
                 Click="operatorButton_Click" />
         <!--1 2 3 + -->
         <Button Grid.Column="0"
-                Grid.Row="5"
+                Grid.Row="4"
                 x:Name="oneButton"
                 Content="1"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="1"
-                Grid.Row="5"
+                Grid.Row="4"
                 x:Name="twoButton"
                 Content="2"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="2"
-                Grid.Row="5"
+                Grid.Row="4"
                 x:Name="threeButton"
                 Content="3"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="3"
-                Grid.Row="5"
+                Grid.Row="4"
                 x:Name="plusButton"
                 Content="+"
                 Margin="5"
@@ -154,19 +141,19 @@
         <!--0 . = -->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Grid.Row="6"
+                Grid.Row="5"
                 x:Name="zeroButton"
                 Content="0"
                 Margin="5"
                 Click="numberButton_Click" />
         <Button Grid.Column="2"
-                Grid.Row="6"
+                Grid.Row="5"
                 x:Name="pointButton"
                 Content="."
                 Margin="5"
                 Click="pointButton_Click" />
         <Button Grid.Column="3"
-                Grid.Row="6"
+                Grid.Row="5"
                 x:Name="equalButton"
                 Content="="
                 Margin="5"
