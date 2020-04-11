@@ -1,7 +1,0 @@
-*.suo
-*.exe
-*~
-.vs/
-Udemy_Calculator/bin/
-Udemy_Calculator/obj/
-*.log
