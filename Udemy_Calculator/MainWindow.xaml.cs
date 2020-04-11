@@ -19,18 +19,28 @@ namespace Udemy_Calculator
 
         private double mLastNumber;
         private SelectedOperator mSelectedOperator;
+        private string mSpecialSymbols = "×÷+-";
 
         private void numberButton_Click(object sender, RoutedEventArgs e)
         {
-            string lNumber = (e.Source as Button).Content.ToString();
-            resultLabel.Content = lNumber;
+            double lNumber;
+            double.TryParse((e.Source as Button).Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out lNumber);
+
+            if (resultLabel.Content.ToString() == "0" || mSpecialSymbols.Contains(resultLabel.Content.ToString()))
+            {
+                resultLabel.Content = lNumber;
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}{lNumber}";
+            }
         }
 
         private void pointButton_Click(object sender, RoutedEventArgs e)
         {
             if (!resultLabel.Content.ToString().Contains('.'))
             {
-
+                resultLabel.Content = $"{resultLabel.Content}.";
             }
         }
 
@@ -53,12 +63,12 @@ namespace Udemy_Calculator
             return default;
         }
 
-        private void transformNumberButton_Click(object sender, RoutedEventArgs e)
+        private void multiPlyCoefButton_Click(object sender, RoutedEventArgs e)
         {
             double lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
             double lResult;
 
-            if(double.TryParse(resultLabel.Content.ToString(), out lResult))
+            if (double.TryParse(resultLabel.Content.ToString(), out lResult))
             {
                 resultLabel.Content = lResult * lTransformCoef;
             }
@@ -66,38 +76,36 @@ namespace Udemy_Calculator
 
         private void operatorButton_Click(object sender, RoutedEventArgs e)
         {
-            if(double.TryParse(resultLabel.Content.ToString(), out mLastNumber))
-            {
-                resultLabel.Content = (e.Source as Button).Content.ToString();
-            }
+            double.TryParse(resultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+            resultLabel.Content = (e.Source as Button).Content.ToString();
 
-            if(sender == plusButton)
+            if (sender == plusButton)
             {
                 mSelectedOperator = SelectedOperator.Addition;
             }
-            else if(sender == minusButton)
+            else if (sender == minusButton)
             {
                 mSelectedOperator = SelectedOperator.Substraction;
             }
-            else if(sender == multiplyButton)
+            else if (sender == multiplyButton)
             {
                 mSelectedOperator = SelectedOperator.Multiplication;
             }
-            else if(sender == divideButton)
+            else if (sender == divideButton)
             {
                 mSelectedOperator = SelectedOperator.Division;
-            }          
+            }
         }
 
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
             double lNewNumber;
-            if(double.TryParse(resultLabel.Content.ToString(), out lNewNumber))
+            if (double.TryParse(resultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
             {
                 switch (mSelectedOperator)
                 {
                     case SelectedOperator.Addition:
-                       resultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
+                        resultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Substraction:
                         resultLabel.Content = SimpleMath.Sub(mLastNumber, lNewNumber);
@@ -119,28 +127,5 @@ namespace Udemy_Calculator
         Substraction,
         Multiplication,
         Division
-    }
-
-    public static class SimpleMath
-    {
-        public static double Add(double p1, double p2)
-        {
-            return p1 + p2;
-        }
-
-        public static double Sub(double p1, double p2)
-        {
-            return p1 - p2;
-        }
-
-        public static double Mul(double p1, double p2)
-        {
-            return p1 * p2;
-        }
-
-        public static double Div(double p1, double p2)
-        {
-            return p1 / p2;
-        }
     }
 }
