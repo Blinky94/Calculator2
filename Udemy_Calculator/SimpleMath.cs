@@ -24,7 +24,7 @@ namespace Udemy_Calculator
             if (double.IsInfinity(p1 / p2))
             {
                 MessageBox.Show("Invalid operation", "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return 0;
+                return 0;//Totot
             }
 
             return p1 / p2;
