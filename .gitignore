@@ -2,5 +2,6 @@
 *.exe
 bin/
 obj/
-Udemy_Calculator/bin/*
-Udemy_Calculator/obj/*
+Udemy_Calculator/bin/**
+Udemy_Calculator/obj/**
+.vs/**
