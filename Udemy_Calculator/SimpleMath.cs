@@ -1,4 +1,6 @@
-﻿namespace Udemy_Calculator
+﻿using System.Windows;
+
+namespace Udemy_Calculator
 {
     public class SimpleMath
     {
@@ -7,18 +9,24 @@
             return p1 + p2;
         }
 
-        public static double Sub(double p1, double p2)
+        public static double Substract(double p1, double p2)
         {
             return p1 - p2;
         }
 
-        public static double Mul(double p1, double p2)
+        public static double Multiply(double p1, double p2)
         {
             return p1 * p2;
         }
 
-        public static double Div(double p1, double p2)
-        {
+        public static double Divide(double p1, double p2)
+        { 
+            if (double.IsInfinity(p1 / p2))
+            {
+                MessageBox.Show("Invalid operation", "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 0;
+            }
+
             return p1 / p2;
         }
     }

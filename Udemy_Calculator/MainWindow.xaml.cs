@@ -108,13 +108,13 @@ namespace Udemy_Calculator
                         resultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Substraction:
-                        resultLabel.Content = SimpleMath.Sub(mLastNumber, lNewNumber);
+                        resultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Multiplication:
-                        resultLabel.Content = SimpleMath.Mul(mLastNumber, lNewNumber);
+                        resultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Division:
-                        resultLabel.Content = SimpleMath.Div(mLastNumber, lNewNumber);
+                        resultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
                         break;
                 }
             }
