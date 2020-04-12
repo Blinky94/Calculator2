@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -15,38 +17,92 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
+            AddNewDetails();
         }
 
         private double mLastNumber;
         private SelectedOperator mSelectedOperator;
         private string mSpecialSymbols = "×÷+-";
+        private Paragraph mParagraph;
+        private bool mIsResult = false;
 
-        private void numberButton_Click(object sender, RoutedEventArgs e)
+        private void AddNewDetails()
+        {
+            mParagraph = new Paragraph();
+        }
+
+        private Block AppendDetails(string pText)
+        {
+            pText = pText.Replace(',', '.');
+            mParagraph.Inlines.Add(new Run(pText));
+            UIDetailsFlowDoc.Blocks.Add(mParagraph);
+            UIdetailsTextBox.Document = UIDetailsFlowDoc;
+
+            return UIdetailsTextBox.Document.Blocks.LastOrDefault();
+        }
+
+        private void AppendDetailsResult(string pText)
+        {
+            Block lCurrentBlock = AppendDetails(pText);
+            lCurrentBlock.TextAlignment = TextAlignment.Right;
+            lCurrentBlock.Foreground = Brushes.LightSalmon;
+        }
+
+        private void AppendDetailsFormula(string pText)
+        {
+            if (mIsResult)
+            {
+                pText = $"{mLastNumber}{pText}";
+            }
+
+            Block lCurrentBlock = AppendDetails(pText);
+            lCurrentBlock.TextAlignment = TextAlignment.Left;
+            lCurrentBlock.Foreground = Brushes.LightGreen;
+        }
+
+        private void ReplaceDetailsFormula(string pText)
+        {           
+            if (mIsResult)
+            {
+                pText = $"{mLastNumber}{pText}";
+            }
+
+            Block lCurrentBlock = AppendDetails(pText);
+            lCurrentBlock.TextAlignment = TextAlignment.Left;
+            lCurrentBlock.Foreground = Brushes.LightGreen;
+        }
+
+        private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
             double lNumber;
-            double.TryParse((e.Source as Button).Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out lNumber);
+            double.TryParse((e.Source as Button).Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNumber);
 
-            if (resultLabel.Content.ToString() == "0" || mSpecialSymbols.Contains(resultLabel.Content.ToString()))
+            if (UIResultLabel.Content.ToString() == "0" || mSpecialSymbols.Contains(UIResultLabel.Content.ToString()) || mIsResult)
             {
-                resultLabel.Content = lNumber;
+                UIResultLabel.Content = lNumber;
+                mIsResult = false;
             }
             else
             {
-                resultLabel.Content = $"{resultLabel.Content}{lNumber}";
+                UIResultLabel.Content = $"{UIResultLabel.Content}{lNumber}";
             }
+
+            AppendDetailsFormula(lNumber.ToString());
         }
 
-        private void pointButton_Click(object sender, RoutedEventArgs e)
+        private void UIPointButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!resultLabel.Content.ToString().Contains('.'))
+            if (!UIResultLabel.Content.ToString().Contains('.'))
             {
-                resultLabel.Content = $"{resultLabel.Content}.";
+                UIResultLabel.Content = $"{UIResultLabel.Content}.";
+                AppendDetailsFormula((e.Source as Button).Content.ToString());
             }
         }
 
-        private void aCButton_Click(object sender, RoutedEventArgs e)
+        private void UIACButton_Click(object sender, RoutedEventArgs e)
         {
-            resultLabel.Content = "0";
+            UIResultLabel.Content = "0";
+            AddNewDetails();
         }
 
         private double TransformCoef(string pButtonPressed)
@@ -63,61 +119,75 @@ namespace Udemy_Calculator
             return default;
         }
 
-        private void multiPlyCoefButton_Click(object sender, RoutedEventArgs e)
+        private void UIMultiplyCoefButton_Click(object sender, RoutedEventArgs e)
         {
             double lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
             double lResult;
 
-            if (double.TryParse(resultLabel.Content.ToString(), out lResult))
+            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
             {
-                resultLabel.Content = lResult * lTransformCoef;
+                UIResultLabel.Content = lResult * lTransformCoef;
+                ReplaceDetailsFormula(UIResultLabel.Content.ToString());
             }
         }
 
-        private void operatorButton_Click(object sender, RoutedEventArgs e)
+        private void UIOperatorButton_Click(object sender, RoutedEventArgs e)
         {
-            double.TryParse(resultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-            resultLabel.Content = (e.Source as Button).Content.ToString();
+            AppendDetailsFormula((e.Source as Button).Content.ToString());
 
-            if (sender == plusButton)
+            double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+            UIResultLabel.Content = (e.Source as Button).Content.ToString();
+
+            if (sender == UIPlusButton)
             {
                 mSelectedOperator = SelectedOperator.Addition;
             }
-            else if (sender == minusButton)
+            else if (sender == UIMinusButton)
             {
                 mSelectedOperator = SelectedOperator.Substraction;
             }
-            else if (sender == multiplyButton)
+            else if (sender == UIMultiplyButton)
             {
                 mSelectedOperator = SelectedOperator.Multiplication;
             }
-            else if (sender == divideButton)
+            else if (sender == UIDivideButton)
             {
                 mSelectedOperator = SelectedOperator.Division;
             }
         }
 
-        private void equalButton_Click(object sender, RoutedEventArgs e)
+        private void UIEqualButton_Click(object sender, RoutedEventArgs e)
         {
             double lNewNumber;
-            if (double.TryParse(resultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
+            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
             {
                 switch (mSelectedOperator)
                 {
                     case SelectedOperator.Addition:
-                        resultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
+                        UIResultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Substraction:
-                        resultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
+                        UIResultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Multiplication:
-                        resultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
+                        UIResultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
                         break;
                     case SelectedOperator.Division:
-                        resultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
+                        UIResultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
                         break;
                 }
+
+                mIsResult = true;
+                AddNewDetails();
+                double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                AppendDetailsResult(UIResultLabel.Content.ToString());
+                AddNewDetails();
             }
+        }
+
+        private void UIDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UIDetailsScrollViewer.ScrollToEnd();
         }
     }
 

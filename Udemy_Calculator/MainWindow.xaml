@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="Caluculator"
         Height="500"
-        Width="350">
+        Width="650">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="FontSize"
                         Value="20" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="40" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -20,6 +24,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*" />
@@ -30,133 +35,160 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Calul Area-->
-        <Label x:Name="resultLabel"
+        <Label x:Name="UIResultLabel"
                Grid.Column="0"
                Grid.Row="0"
                Grid.ColumnSpan="4"
                HorizontalContentAlignment="Right"
                VerticalContentAlignment="Bottom"
-               Content="0"
-               FontSize="50" />
+               Content="0" />
         <!--AC +/1 % /-->
         <Button Grid.Column="0"
                 Grid.Row="1"
-                x:Name="aCButton"
+                x:Name="UIACButton"
                 Content="AC"
                 Margin="5"
-                Click="aCButton_Click" />
+                Click="UIACButton_Click" />
         <Button Grid.Column="1"
                 Grid.Row="1"
-                x:Name="negativeButton"
+                x:Name="UINegativeButton"
                 Content="+/1"
                 Margin="5"
-                Click="multiPlyCoefButton_Click" />
+                Click="UIMultiplyCoefButton_Click" />
         <Button Grid.Column="2"
                 Grid.Row="1"
-                x:Name="percentButton"
+                x:Name="UIPercentButton"
                 Content="%"
                 Margin="5"
-                Click="multiPlyCoefButton_Click" />
+                Click="UIMultiplyCoefButton_Click" />
         <Button Grid.Column="3"
                 Grid.Row="1"
-                x:Name="divideButton"
+                x:Name="UIDivideButton"
                 Content="÷"
                 Margin="5"
-                Click="operatorButton_Click" />
+                Click="UIOperatorButton_Click" />
         <!--7 8 9 *-->
         <Button Grid.Column="0"
                 Grid.Row="2"
-                x:Name="sevenButton"
+                x:Name="UISevenButton"
                 Content="7"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="1"
                 Grid.Row="2"
-                x:Name="heightButton"
+                x:Name="UIHeightButton"
                 Content="8"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="2"
                 Grid.Row="2"
-                x:Name="nineButton"
+                x:Name="UINineButton"
                 Content="9"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="3"
                 Grid.Row="2"
-                x:Name="multiplyButton"
+                x:Name="UIMultiplyButton"
                 Content="×"
                 Margin="5"
-                Click="operatorButton_Click" />
+                Click="UIOperatorButton_Click" />
         <!--4 5 6 - -->
         <Button Grid.Column="0"
                 Grid.Row="3"
-                x:Name="fourButton"
+                x:Name="UIFourButton"
                 Content="4"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="1"
                 Grid.Row="3"
-                x:Name="fiveButton"
+                x:Name="UIFiveButton"
                 Content="5"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="2"
                 Grid.Row="3"
-                x:Name="sixButton"
+                x:Name="UISixButton"
                 Content="6"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="3"
                 Grid.Row="3"
-                x:Name="minusButton"
+                x:Name="UIMinusButton"
                 Content="-"
                 Margin="5"
-                Click="operatorButton_Click" />
+                Click="UIOperatorButton_Click" />
         <!--1 2 3 + -->
         <Button Grid.Column="0"
                 Grid.Row="4"
-                x:Name="oneButton"
+                x:Name="UIOneButton"
                 Content="1"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="1"
                 Grid.Row="4"
-                x:Name="twoButton"
+                x:Name="UITwoButton"
                 Content="2"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="2"
                 Grid.Row="4"
-                x:Name="threeButton"
+                x:Name="UIThreeButton"
                 Content="3"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="3"
                 Grid.Row="4"
-                x:Name="plusButton"
+                x:Name="UIPlusButton"
                 Content="+"
                 Margin="5"
-                Click="operatorButton_Click" />
+                Click="UIOperatorButton_Click" />
         <!--0 . = -->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="5"
-                x:Name="zeroButton"
+                x:Name="UIZeroButton"
                 Content="0"
                 Margin="5"
-                Click="numberButton_Click" />
+                Click="UINumberButton_Click" />
         <Button Grid.Column="2"
                 Grid.Row="5"
-                x:Name="pointButton"
+                x:Name="UIPointButton"
                 Content="."
                 Margin="5"
-                Click="pointButton_Click" />
+                Click="UIPointButton_Click" />
         <Button Grid.Column="3"
                 Grid.Row="5"
-                x:Name="equalButton"
+                x:Name="UIEqualButton"
                 Content="="
                 Margin="5"
-                Click="equalButton_Click" />
+                Click="UIEqualButton_Click" />
+        <DockPanel Grid.Row="0"
+                   Grid.RowSpan="6"
+                   Grid.Column="4"
+                   Visibility="Visible"
+                   LastChildFill="True">
+            <ScrollViewer x:Name="UIDetailsScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          Background="Transparent">
+                <RichTextBox x:Name="UIdetailsTextBox"
+                             BorderBrush="LightGray"
+                             BorderThickness="1 0 0 0"
+                             Background="Transparent"
+                             Foreground="LightGreen"
+                             FontWeight="Bold"
+                             TextChanged="UIDetailsTextBox_TextChanged"
+                             FontSize="18"
+                             ScrollViewer.CanContentScroll="True"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Padding="15"
+                             Margin="15 15 0 15">
+                    <FlowDocument x:Name="UIDetailsFlowDoc"
+                        LineHeight="1">
+                    </FlowDocument>
+                </RichTextBox>
+            </ScrollViewer>
+        </DockPanel>
+
     </Grid>
 </Window>
