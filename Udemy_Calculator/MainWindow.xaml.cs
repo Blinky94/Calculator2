@@ -155,16 +155,16 @@ namespace Udemy_Calculator
                     switch (mSelectedOperator)
                     {
                         case SelectedOperator.Addition:
-                            UIResultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
+                            UIResultLabel.Content = MathCompute.Add(mLastNumber, lNewNumber);
                             break;
                         case SelectedOperator.Substraction:
-                            UIResultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
+                            UIResultLabel.Content = MathCompute.Substract(mLastNumber, lNewNumber);
                             break;
                         case SelectedOperator.Multiplication:
-                            UIResultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
+                            UIResultLabel.Content = MathCompute.Multiply(mLastNumber, lNewNumber);
                             break;
                         case SelectedOperator.Division:
-                            UIResultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
+                            UIResultLabel.Content = MathCompute.Divide(mLastNumber, lNewNumber);
                             break;
                     }
 

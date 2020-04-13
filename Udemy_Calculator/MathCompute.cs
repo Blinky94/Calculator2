@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Udemy_Calculator
 {
-    public class SimpleMath
+    public class MathCompute
     {
         public static decimal Add(decimal p1, decimal p2)
         {
