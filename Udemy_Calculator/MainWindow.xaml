@@ -167,24 +167,23 @@
                    Grid.Column="4"
                    Visibility="Visible"
                    LastChildFill="True">
-            <ScrollViewer x:Name="UIDetailsScrollViewer"
+            <ScrollViewer x:Name="UIHistoryScrollViewer"
                           VerticalScrollBarVisibility="Auto"
                           Background="Transparent">
-                <RichTextBox x:Name="UIdetailsTextBox"
+                <RichTextBox x:Name="UIHistoryTextBox"
                              BorderBrush="LightGray"
                              BorderThickness="1 0 0 0"
                              Background="Transparent"
                              Foreground="LightGreen"
                              FontWeight="Bold"
-                             TextChanged="UIDetailsTextBox_TextChanged"
                              FontSize="18"
                              ScrollViewer.CanContentScroll="True"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch"
                              Padding="15"
                              Margin="15 15 0 15">
-                    <FlowDocument x:Name="UIDetailsFlowDoc"
-                        LineHeight="1">
+                    <FlowDocument x:Name="UIHistoryFlowDoc"
+                                  LineHeight="1">
                     </FlowDocument>
                 </RichTextBox>
             </ScrollViewer>

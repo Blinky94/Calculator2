@@ -4,24 +4,24 @@ namespace Udemy_Calculator
 {
     public class SimpleMath
     {
-        public static double Add(double p1, double p2)
+        public static decimal Add(decimal p1, decimal p2)
         {
             return p1 + p2;
         }
 
-        public static double Substract(double p1, double p2)
+        public static decimal Substract(decimal p1, decimal p2)
         {
             return p1 - p2;
         }
 
-        public static double Multiply(double p1, double p2)
+        public static decimal Multiply(decimal p1, decimal p2)
         {
             return p1 * p2;
         }
 
-        public static double Divide(double p1, double p2)
+        public static decimal Divide(decimal p1, decimal p2)
         { 
-            if (double.IsInfinity(p1 / p2))
+            if (p2 == 0)
             {
                 MessageBox.Show("Invalid operation", "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return 0;

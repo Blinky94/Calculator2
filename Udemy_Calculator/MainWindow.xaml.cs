@@ -17,61 +17,19 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private decimal mLastNumber;
+        private SelectedOperator mSelectedOperator;
+        private string mSpecialSymbols = "×÷+-";
+        private bool mIsResult = false;
+        private DisplayHistory mDisplayHistory;
+
         public MainWindow()
         {
             InitializeComponent();
-            AddNewDetails();
+
+            mDisplayHistory = new DisplayHistory();
         }
 
-        private double mLastNumber;
-        private SelectedOperator mSelectedOperator;
-        private string mSpecialSymbols = "×÷+-";
-        private Paragraph mParagraph;
-        private bool mIsResult = false;
-
-        private void AddNewDetails()
-        {
-            mParagraph = new Paragraph();
-        }
-
-        private Block AppendDetails(string pText)
-        {
-            pText = pText.Replace(',', '.');
-            mParagraph.Inlines.Add(new Run(pText));
-            UIDetailsFlowDoc.Blocks.Add(mParagraph);
-            UIdetailsTextBox.Document = UIDetailsFlowDoc;
-
-            return UIdetailsTextBox.Document.Blocks.LastOrDefault();
-        }
-
-        private void AppendDetailsResult(string pText)
-        {
-            Block lCurrentBlock = AppendDetails(pText);
-            lCurrentBlock.TextAlignment = TextAlignment.Right;
-            lCurrentBlock.Foreground = Brushes.LightSalmon;
-        }
-
-        private void RemoveDetailsFormula()
-        {
-            int lNbr = UIResultLabel.Content.ToString().Length;
-            var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
-
-            string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - lNbr);
-            mParagraph.Inlines.Clear();
-            mParagraph.Inlines.Add(new Run(lOutput));
-        }
-
-        private void AppendDetailsFormula(string pText)
-        {
-            if (mIsResult)
-            {
-                pText = $"{mLastNumber}{pText}";
-            }
-
-            Block lCurrentBlock = AppendDetails(pText);
-            lCurrentBlock.TextAlignment = TextAlignment.Left;
-            lCurrentBlock.Foreground = Brushes.LightGreen;
-        }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
@@ -88,25 +46,25 @@ namespace Udemy_Calculator
                 UIResultLabel.Content = $"{UIResultLabel.Content}{lNumber}";
             }
 
-            AppendDetailsFormula(lNumber.ToString());
+            mDisplayHistory.AppendHistoryFormula(lNumber.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
         }
 
         private void UIPointButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!UIResultLabel.Content.ToString().Contains('.'))
+            if (!UIResultLabel.Content.ToString().Replace(',', '.').Contains('.'))
             {
                 UIResultLabel.Content = $"{UIResultLabel.Content}.";
-                AppendDetailsFormula((e.Source as Button).Content.ToString());
+                mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
             }
         }
 
         private void UIACButton_Click(object sender, RoutedEventArgs e)
         {
             UIResultLabel.Content = "0";
-            AddNewDetails();
+            mDisplayHistory.AddNewHistory();
         }
 
-        private double TransformCoef(string pButtonPressed)
+        private decimal TransformCoef(string pButtonPressed)
         {
             switch (pButtonPressed)
             {
@@ -114,7 +72,7 @@ namespace Udemy_Calculator
                     return -1;
 
                 case "%":
-                    return 0.01;
+                    return 0.01m;
             }
 
             return default;
@@ -122,16 +80,14 @@ namespace Udemy_Calculator
 
         private void UIMultiplyCoefButton_Click(object sender, RoutedEventArgs e)
         {
-            double lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
-            double lResult;
+            decimal lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
+            decimal lResult;
 
-            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
+            if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
             {
-                var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
-
                 if (!mIsResult)
                 {
-                    RemoveDetailsFormula();
+                    mDisplayHistory.RemoveHistoryFormula(UIResultLabel.Content.ToString().Length);
                     UIResultLabel.Content = lResult * lTransformCoef;
                 }
                 else
@@ -140,67 +96,73 @@ namespace Udemy_Calculator
                     UIResultLabel.Content = mLastNumber * lTransformCoef;
                 }
 
-                AppendDetailsFormula(UIResultLabel.Content.ToString());
+                mDisplayHistory.AppendHistoryFormula(UIResultLabel.Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
             }
         }
 
         private void UIOperatorButton_Click(object sender, RoutedEventArgs e)
         {
-            AppendDetailsFormula((e.Source as Button).Content.ToString());
+            if (!mSpecialSymbols.Contains(UIResultLabel.Content.ToString().LastOrDefault()))
+            {
+                mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
 
-            double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-            UIResultLabel.Content = (e.Source as Button).Content.ToString();
+                decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                UIResultLabel.Content = (e.Source as Button).Content.ToString();
 
-            if (sender == UIPlusButton)
-            {
-                mSelectedOperator = SelectedOperator.Addition;
-            }
-            else if (sender == UIMinusButton)
-            {
-                mSelectedOperator = SelectedOperator.Substraction;
-            }
-            else if (sender == UIMultiplyButton)
-            {
-                mSelectedOperator = SelectedOperator.Multiplication;
-            }
-            else if (sender == UIDivideButton)
-            {
-                mSelectedOperator = SelectedOperator.Division;
+                if (sender == UIPlusButton)
+                {
+                    mSelectedOperator = SelectedOperator.Addition;
+                }
+                else if (sender == UIMinusButton)
+                {
+                    mSelectedOperator = SelectedOperator.Substraction;
+                }
+                else if (sender == UIMultiplyButton)
+                {
+                    mSelectedOperator = SelectedOperator.Multiplication;
+                }
+                else if (sender == UIDivideButton)
+                {
+                    mSelectedOperator = SelectedOperator.Division;
+                }
             }
         }
 
         private void UIEqualButton_Click(object sender, RoutedEventArgs e)
         {
-            double lNewNumber;
-            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
+            if (!mIsResult)
             {
-                switch (mSelectedOperator)
+                decimal lNewNumber;
+                if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
                 {
-                    case SelectedOperator.Addition:
-                        UIResultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
-                        break;
-                    case SelectedOperator.Substraction:
-                        UIResultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
-                        break;
-                    case SelectedOperator.Multiplication:
-                        UIResultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
-                        break;
-                    case SelectedOperator.Division:
-                        UIResultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
-                        break;
-                }
+                    switch (mSelectedOperator)
+                    {
+                        case SelectedOperator.Addition:
+                            UIResultLabel.Content = SimpleMath.Add(mLastNumber, lNewNumber);
+                            break;
+                        case SelectedOperator.Substraction:
+                            UIResultLabel.Content = SimpleMath.Substract(mLastNumber, lNewNumber);
+                            break;
+                        case SelectedOperator.Multiplication:
+                            UIResultLabel.Content = SimpleMath.Multiply(mLastNumber, lNewNumber);
+                            break;
+                        case SelectedOperator.Division:
+                            UIResultLabel.Content = SimpleMath.Divide(mLastNumber, lNewNumber);
+                            break;
+                    }
 
-                mIsResult = true;
-                AddNewDetails();
-                double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                AppendDetailsResult(UIResultLabel.Content.ToString());
-                AddNewDetails();
+                    mIsResult = true;
+                    mDisplayHistory.AddNewHistory();
+                    decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                    mDisplayHistory.AppendHistoryResult(UIResultLabel.Content.ToString(), UIHistoryTextBox);
+                    mDisplayHistory.AddNewHistory();
+                }
             }
         }
 
         private void UIDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UIDetailsScrollViewer.ScrollToEnd();
+            UIHistoryScrollViewer.ScrollToEnd();
         }
     }
 
