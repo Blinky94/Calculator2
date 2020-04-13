@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -48,20 +51,18 @@ namespace Udemy_Calculator
             lCurrentBlock.Foreground = Brushes.LightSalmon;
         }
 
-        private void AppendDetailsFormula(string pText)
+        private void RemoveDetailsFormula()
         {
-            if (mIsResult)
-            {
-                pText = $"{mLastNumber}{pText}";
-            }
+            int lNbr = UIResultLabel.Content.ToString().Length;
+            var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
 
-            Block lCurrentBlock = AppendDetails(pText);
-            lCurrentBlock.TextAlignment = TextAlignment.Left;
-            lCurrentBlock.Foreground = Brushes.LightGreen;
+            string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - lNbr);
+            mParagraph.Inlines.Clear();
+            mParagraph.Inlines.Add(new Run(lOutput));
         }
 
-        private void ReplaceDetailsFormula(string pText)
-        {           
+        private void AppendDetailsFormula(string pText)
+        {
             if (mIsResult)
             {
                 pText = $"{mLastNumber}{pText}";
@@ -126,8 +127,20 @@ namespace Udemy_Calculator
 
             if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
             {
-                UIResultLabel.Content = lResult * lTransformCoef;
-                ReplaceDetailsFormula(UIResultLabel.Content.ToString());
+                var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
+
+                if (!mIsResult)
+                {
+                    RemoveDetailsFormula();
+                    UIResultLabel.Content = lResult * lTransformCoef;
+                }
+                else
+                {
+                    mIsResult = false;
+                    UIResultLabel.Content = mLastNumber * lTransformCoef;
+                }
+
+                AppendDetailsFormula(UIResultLabel.Content.ToString());
             }
         }
 
