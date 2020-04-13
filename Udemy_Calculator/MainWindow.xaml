@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
         Title="Caluculator"
-        Height="500"
+        Height="390"
         Width="650">
+    <!--Main Container Grid-->
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
@@ -22,9 +23,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="Auto"
+                              Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*" />
@@ -34,186 +34,255 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--Calul Area-->
-        <Viewbox Grid.Column="0"
-                 Grid.Row="0"
-                 Grid.ColumnSpan="4"
-                 HorizontalAlignment="Right">
-            <Label x:Name="UIResultLabel"
-                   HorizontalContentAlignment="Right"
-                   VerticalContentAlignment="Bottom"
-                   Content="0" />
-        </Viewbox>
-        <!--AC +/1 % /-->
-        <Button Grid.Column="0"
-                Grid.Row="1"
-                x:Name="UIACButton"
-                Content="AC"
-                Margin="5"
-                Click="UIACButton_Click" />
-        <Button Grid.Column="1"
-                Grid.Row="1"
-                x:Name="UINegativeButton"
-                Content="+/1"
-                Margin="5"
-                Click="UIMultiplyCoefButton_Click" />
-        <Button Grid.Column="2"
-                Grid.Row="1"
-                x:Name="UIPercentButton"
-                Content="%"
-                Margin="5"
-                Click="UIMultiplyCoefButton_Click" />
-        <Button Grid.Column="3"
-                Grid.Row="1"
-                x:Name="UIDivideButton"
-                Content="÷"
-                Margin="5"
-                Click="UIOperatorButton_Click" />
-        <!--7 8 9 *-->
-        <Button Grid.Column="0"
-                Grid.Row="2"
-                x:Name="UISevenButton"
-                Content="7"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="1"
-                Grid.Row="2"
-                x:Name="UIHeightButton"
-                Content="8"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="2"
-                Grid.Row="2"
-                x:Name="UINineButton"
-                Content="9"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="3"
-                Grid.Row="2"
-                x:Name="UIMultiplyButton"
-                Content="×"
-                Margin="5"
-                Click="UIOperatorButton_Click" />
-        <!--4 5 6 - -->
-        <Button Grid.Column="0"
-                Grid.Row="3"
-                x:Name="UIFourButton"
-                Content="4"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="1"
-                Grid.Row="3"
-                x:Name="UIFiveButton"
-                Content="5"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="2"
-                Grid.Row="3"
-                x:Name="UISixButton"
-                Content="6"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="3"
-                Grid.Row="3"
-                x:Name="UIMinusButton"
-                Content="-"
-                Margin="5"
-                Click="UIOperatorButton_Click" />
-        <!--1 2 3 + -->
-        <Button Grid.Column="0"
-                Grid.Row="4"
-                x:Name="UIOneButton"
-                Content="1"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="1"
-                Grid.Row="4"
-                x:Name="UITwoButton"
-                Content="2"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="2"
-                Grid.Row="4"
-                x:Name="UIThreeButton"
-                Content="3"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="3"
-                Grid.Row="4"
-                x:Name="UIPlusButton"
-                Content="+"
-                Margin="5"
-                Click="UIOperatorButton_Click" />
-        <!--0 . = -->
-        <Button Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Grid.Row="5"
-                x:Name="UIZeroButton"
-                Content="0"
-                Margin="5"
-                Click="UINumberButton_Click" />
-        <Button Grid.Column="2"
-                Grid.Row="5"
-                x:Name="UIPointButton"
-                Content="."
-                Margin="5"
-                Click="UIPointButton_Click" />
-        <Button Grid.Column="3"
-                Grid.Row="5"
-                x:Name="UIEqualButton"
-                Content="="
-                Margin="5"
-                Click="UIEqualButton_Click" />
 
+        <!--Extended Function Grid-->
         <Grid Grid.Row="0"
-              Grid.RowSpan="6"
-              Grid.Column="4">
+              Grid.Column="0"
+              Grid.RowSpan="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*" />
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <!--Square-->
+            <!--1/x-->
+            <!--x2-->
+            <!--x3-->
+            <!--xy-->
+            <!--|x|-->
+            <!--Pi-->
+            <!--exposant-->
+            <!--exponential-->
+            <!--(-->
+            <!--)-->
+            <!--n!-->
+            <!--mod-->
+            <!--10x-->
+            <!--log-->
+            <!--ln-->
+            <!--sin-->
+            <!--sin-1-->
+            <!--cos-->
+            <!--cos-1-->
+            <!--tan-->
+            <!--tan-1-->
+            <!--hyp-->
+            <!--sec-->
+            <!--sec-1-->
+            <!--csc-->
+            <!--csc-1-->
+            <!--cot-->
+            <!--cot-1-->
+            <!--->deg-->
+            <!--->dms : Degrees, minutes, seconds-->
 
-            <ScrollViewer x:Name="UIHistoryScrollViewer"
-                          Grid.Row="0"
-                          VerticalScrollBarVisibility="Auto"
-                          Background="Transparent"
-                          Visibility="Visible"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch">
-                <RichTextBox x:Name="UIHistoryTextBox"
-                             IsReadOnly="True"
-                             BorderBrush="LightGray"
-                             BorderThickness="1 0 0 0"
-                             Background="Transparent"
-                             Foreground="LightGreen"
-                             FontWeight="Bold"
-                             FontSize="18"
-                             ScrollViewer.CanContentScroll="True"
-                             Padding="15"
-                             Margin="15 15 0 5"
-                             TextChanged="UIHistoryTextBox_TextChanged">
-                    <FlowDocument x:Name="UIHistoryFlowDoc"
-                                  LineHeight="1">
-                    </FlowDocument>
-                </RichTextBox>
-            </ScrollViewer>
-
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        Margin="20 0 0 0"
-                        DockPanel.Dock="Bottom">
-                <Button x:Name="UICleaner"
-                        Background="White"
-                        Width="25"
-                        Height="25"
-                        Click="UICleaner_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Cleaner_icon.png" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
         </Grid>
+        <!--Calcul Grid-->
+        <Grid Grid.Column="1"
+              Grid.Row="0"
+              Grid.RowSpan="6">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin"
+                            Value="1" />
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Calul Area-->
+            <Viewbox HorizontalAlignment="Right"
+                     Grid.Column="0"
+                     Grid.Row="0"
+                     Grid.ColumnSpan="4">
+                <Label x:Name="UIResultLabel"
+                       HorizontalContentAlignment="Right"
+                       VerticalContentAlignment="Top"
+                       Content="0" />
+            </Viewbox>
+            <!--AC +/1 % /-->
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    x:Name="UIACButton"
+                    Content="AC"
+                    Click="UIACButton_Click" />
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    x:Name="UINegativeButton"
+                    Content="+/1"
+                    Click="UIMultiplyCoefButton_Click" />
+            <Button Grid.Row="1"
+                    Grid.Column="2"
+                    x:Name="UIPercentButton"
+                    Content="%"
+                    Click="UIMultiplyCoefButton_Click" />
+            <Button Grid.Row="1"
+                    Grid.Column="3"
+                    x:Name="UIDivideButton"
+                    Content="÷"
+                    Click="UIOperatorButton_Click" />
+            <!--7 8 9 *-->
+            <Button Grid.Row="2"
+                    Grid.Column="0"
+                    x:Name="UISevenButton"
+                    Content="7"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="2"
+                    Grid.Column="1"
+                    x:Name="UIHeightButton"
+                    Content="8"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="2"
+                    Grid.Column="2"
+                    x:Name="UINineButton"
+                    Content="9"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="2"
+                    Grid.Column="3"
+                    x:Name="UIMultiplyButton"
+                    Content="×"
+                    Click="UIOperatorButton_Click" />
+            <!--4 5 6 - -->
+            <Button Grid.Row="3"
+                    Grid.Column="0"
+                    x:Name="UIFourButton"
+                    Content="4"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    x:Name="UIFiveButton"
+                    Content="5"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="3"
+                    Grid.Column="2"
+                    x:Name="UISixButton"
+                    Content="6"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    x:Name="UIMinusButton"
+                    Content="-"
+                    Click="UIOperatorButton_Click" />
+            <!--1 2 3 + -->
+            <Button Grid.Row="4"
+                    Grid.Column="0"
+                    x:Name="UIOneButton"
+                    Content="1"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="4"
+                    Grid.Column="1"
+                    x:Name="UITwoButton"
+                    Content="2"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="4"
+                    Grid.Column="2"
+                    x:Name="UIThreeButton"
+                    Content="3"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="4"
+                    Grid.Column="3"
+                    x:Name="UIPlusButton"
+                    Content="+"
+                    Click="UIOperatorButton_Click" />
+            <!--0 . = -->
+            <Button Grid.ColumnSpan="2"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    x:Name="UIZeroButton"
+                    Content="0"
+                    Click="UINumberButton_Click" />
+            <Button Grid.Row="5"
+                    Grid.Column="2"
+                    x:Name="UIPointButton"
+                    Content="."
+                    Click="UIPointButton_Click" />
+            <Button Grid.Row="5"
+                    Grid.Column="3"
+                    x:Name="UIEqualButton"
+                    Content="="
+                    Click="UIEqualButton_Click" />
+        </Grid>
+        <!--History Grid-->
+        <Expander Grid.Row="0"
+                  Grid.Column="2"
+                  Grid.RowSpan="6"
+                  ExpandDirection="Right"
+                  IsExpanded="False"
+                  Header="History"
+                  Background="Transparent"
+                  Expanded="UIHistoryExpander_Expanded"
+                  Collapsed="UIHistoryExpander_Collapsed">
+            <Expander.Content>
+                <Grid Name="HistoryGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
+                    <ScrollViewer x:Name="UIHistoryScrollViewer"
+                                  Grid.Row="0"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Background="Transparent"
+                                  Visibility="Visible"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
+                        <RichTextBox x:Name="UIHistoryTextBox"
+                                     IsReadOnly="True"
+                                     BorderBrush="LightGray"
+                                     BorderThickness="0 0 0 0"
+                                     Background="Transparent"
+                                     Foreground="LightGreen"
+                                     FontWeight="Bold"
+                                     FontSize="18"
+                                     ScrollViewer.CanContentScroll="True"
+                                     Padding="15"
+                                     Margin="15 15 0 5"
+                                     TextChanged="UIHistoryTextBox_TextChanged">
+                            <FlowDocument x:Name="UIHistoryFlowDoc"
+                                          LineHeight="1">
+                            </FlowDocument>
+                        </RichTextBox>
+                    </ScrollViewer>
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Margin="20 0 0 0"
+                                DockPanel.Dock="Bottom">
+                        <Button x:Name="UICleaner"
+                                Background="White"
+                                Width="25"
+                                Height="25"
+                                Click="UICleaner_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Cleaner_icon.png" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Expander.Content>
+
+
+        </Expander>
     </Grid>
 </Window>

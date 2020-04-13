@@ -22,6 +22,7 @@ namespace Udemy_Calculator
         private string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
+        private GridLength mExpandedWidth = new GridLength(250, GridUnitType.Pixel);
 
         public MainWindow()
         {
@@ -30,6 +31,20 @@ namespace Udemy_Calculator
             mDisplayHistory = new DisplayHistory();
         }
 
+        private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Width = 850;
+            UIHistoryExpanderColumn.Width = mExpandedWidth;
+            HistoryGrid.Visibility = Visibility.Visible;
+        }
+
+        private void UIHistoryExpander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Width = 650;
+            mExpandedWidth = UIHistoryExpanderColumn.Width;
+            UIHistoryExpanderColumn.Width = GridLength.Auto;
+            HistoryGrid.Visibility = Visibility.Collapsed;
+        }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
