@@ -164,14 +164,22 @@
                 Content="="
                 Margin="5"
                 Click="UIEqualButton_Click" />
-        <DockPanel Grid.Row="0"
-                   Grid.RowSpan="6"
-                   Grid.Column="4"
-                   Visibility="Visible"
-                   LastChildFill="True">
+
+        <Grid Grid.Row="0"
+              Grid.RowSpan="6"
+              Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
             <ScrollViewer x:Name="UIHistoryScrollViewer"
+                          Grid.Row="0"
                           VerticalScrollBarVisibility="Auto"
-                          Background="Transparent">
+                          Background="Transparent"
+                          Visibility="Visible"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
                 <RichTextBox x:Name="UIHistoryTextBox"
                              BorderBrush="LightGray"
                              BorderThickness="1 0 0 0"
@@ -180,16 +188,29 @@
                              FontWeight="Bold"
                              FontSize="18"
                              ScrollViewer.CanContentScroll="True"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
                              Padding="15"
-                             Margin="15 15 0 15">
+                             Margin="15 15 0 5"
+                             TextChanged="UIHistoryTextBox_TextChanged">
                     <FlowDocument x:Name="UIHistoryFlowDoc"
                                   LineHeight="1">
                     </FlowDocument>
                 </RichTextBox>
             </ScrollViewer>
-        </DockPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1"
+                        Margin="20 0 0 0"
+                        DockPanel.Dock="Bottom">
+                <Button x:Name="UICleaner"
+                        Width="25"
+                        Height="25"
+                        Click="UICleaner_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/Cleaner_icon.png" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </Window>

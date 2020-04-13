@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -60,6 +61,13 @@ namespace Udemy_Calculator
         public void AddNewHistory()
         {
             mParagraph = new Paragraph();
+        }
+
+        internal void CleanHistory(ref RichTextBox pUI)
+        {
+            pUI.Document.Blocks.Clear();
+            mFlowDocument = new FlowDocument();
+            AddNewHistory();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Udemy_Calculator
     public partial class MainWindow : Window
     {
         private decimal mLastNumber;
-        private SelectedOperator mSelectedOperator;
+        private SelectedOperator mSelectedOperator = SelectedOperator.None;
         private string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
@@ -57,7 +57,7 @@ namespace Udemy_Calculator
                 mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
             }
         }
-        
+
         private void UIACButton_Click(object sender, RoutedEventArgs e)
         {
             UIResultLabel.Content = "0";
@@ -160,9 +160,14 @@ namespace Udemy_Calculator
             }
         }
 
-        private void UIDetailsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void UIHistoryTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UIHistoryScrollViewer.ScrollToEnd();
+        }
+
+        private void UICleaner_Click(object sender, RoutedEventArgs e)
+        {
+            mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
         }
     }
 
@@ -171,6 +176,7 @@ namespace Udemy_Calculator
         Addition,
         Substraction,
         Multiplication,
-        Division
+        Division,
+        None
     }
 }
