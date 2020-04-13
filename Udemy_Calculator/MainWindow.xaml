@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
         Title="Caluculator"
+        ResizeMode="NoResize"
         Height="390"
-        Width="650">
+        Width="280">
     <!--Main Container Grid-->
     <Grid>
         <Grid.Resources>
@@ -17,13 +18,13 @@
             </Style>
             <Style TargetType="Label">
                 <Setter Property="FontSize"
-                        Value="40" />
+                        Value="25" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto"
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*"
                               Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -233,7 +234,16 @@
                   Expanded="UIHistoryExpander_Expanded"
                   Collapsed="UIHistoryExpander_Collapsed">
             <Expander.Content>
-                <Grid Name="HistoryGrid">
+                <Grid Name="HistoryGrid"
+                      Background="Transparent">
+                    <Grid.Resources>
+                        <Style TargetType="RichTextBox">
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="FontWeight"
+                                    Value="Bold" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10*" />
                         <RowDefinition Height="*" />
@@ -242,21 +252,15 @@
                     <ScrollViewer x:Name="UIHistoryScrollViewer"
                                   Grid.Row="0"
                                   VerticalScrollBarVisibility="Auto"
-                                  Background="Transparent"
-                                  Visibility="Visible"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch">
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent">
                         <RichTextBox x:Name="UIHistoryTextBox"
                                      IsReadOnly="True"
                                      BorderBrush="LightGray"
                                      BorderThickness="0 0 0 0"
-                                     Background="Transparent"
-                                     Foreground="LightGreen"
-                                     FontWeight="Bold"
-                                     FontSize="18"
                                      ScrollViewer.CanContentScroll="True"
-                                     Padding="15"
-                                     Margin="15 15 0 5"
+                                     Padding="0"
+                                     Margin="15 15 15 0"
                                      TextChanged="UIHistoryTextBox_TextChanged">
                             <FlowDocument x:Name="UIHistoryFlowDoc"
                                           LineHeight="1">
@@ -265,9 +269,10 @@
                     </ScrollViewer>
 
                     <StackPanel Orientation="Horizontal"
+                                Background="Transparent"
                                 Grid.Row="1"
-                                HorizontalAlignment="Center"
-                                Margin="20 0 0 0"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 15 0"
                                 DockPanel.Dock="Bottom">
                         <Button x:Name="UICleaner"
                                 Background="White"
