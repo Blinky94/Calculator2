@@ -35,13 +35,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Calul Area-->
-        <Label x:Name="UIResultLabel"
-               Grid.Column="0"
-               Grid.Row="0"
-               Grid.ColumnSpan="4"
-               HorizontalContentAlignment="Right"
-               VerticalContentAlignment="Bottom"
-               Content="0" />
+        <Viewbox Grid.Column="0"
+                 Grid.Row="0"
+                 Grid.ColumnSpan="4"
+                 HorizontalAlignment="Right">
+            <Label x:Name="UIResultLabel"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Bottom"
+                   Content="0" />
+        </Viewbox>
         <!--AC +/1 % /-->
         <Button Grid.Column="0"
                 Grid.Row="1"
