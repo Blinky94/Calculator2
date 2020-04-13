@@ -151,6 +151,7 @@ namespace Udemy_Calculator
                             break;
                     }
 
+                    mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
                     mIsResult = true;
                     mDisplayHistory.AddNewHistory();
                     decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
