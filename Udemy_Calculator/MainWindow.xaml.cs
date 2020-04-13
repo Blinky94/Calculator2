@@ -57,7 +57,7 @@ namespace Udemy_Calculator
                 mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
             }
         }
-
+        
         private void UIACButton_Click(object sender, RoutedEventArgs e)
         {
             UIResultLabel.Content = "0";
