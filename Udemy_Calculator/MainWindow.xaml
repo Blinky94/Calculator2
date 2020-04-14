@@ -12,10 +12,6 @@
     <!--Main Container Grid-->
     <Grid>
         <Grid.Resources>
-            <Style TargetType="Button">
-                <Setter Property="FontSize"
-                        Value="20" />
-            </Style>
             <Style TargetType="Label">
                 <Setter Property="FontSize"
                         Value="25" />
@@ -92,9 +88,23 @@
               Grid.Row="0"
               Grid.RowSpan="6">
             <Grid.Resources>
-                <Style TargetType="Button">
+                <Style x:Key="BaseStyleButton" TargetType="Button">
                     <Setter Property="Margin"
                             Value="1" />
+                    <Setter Property="FontSize"
+                            Value="25" />
+                    <Setter Property="Foreground"
+                            Value="Black" />
+                    <Setter Property="Background"
+                            Value="LightGray" />
+                    <Setter Property="FontFamily"
+                            Value="{StaticResource Digital}" />
+                </Style>
+                <Style x:Key="NumberStyleButton"
+                       TargetType="Button"
+                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                    <Setter Property="Background"
+                            Value="Gray" />
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -125,84 +135,100 @@
             <Button Grid.Row="1"
                     Grid.Column="0"
                     x:Name="UIACButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="AC"
                     Click="UIACButton_Click" />
             <Button Grid.Row="1"
                     Grid.Column="1"
                     x:Name="UINegativeButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="+/1"
                     Click="UIMultiplyCoefButton_Click" />
             <Button Grid.Row="1"
                     Grid.Column="2"
                     x:Name="UIPercentButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="%"
                     Click="UIMultiplyCoefButton_Click" />
             <Button Grid.Row="1"
                     Grid.Column="3"
                     x:Name="UIDivideButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="÷"
                     Click="UIOperatorButton_Click" />
             <!--7 8 9 *-->
             <Button Grid.Row="2"
                     Grid.Column="0"
                     x:Name="UISevenButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="7"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="2"
                     Grid.Column="1"
                     x:Name="UIHeightButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="8"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="2"
                     Grid.Column="2"
                     x:Name="UINineButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="9"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="2"
                     Grid.Column="3"
                     x:Name="UIMultiplyButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="×"
                     Click="UIOperatorButton_Click" />
             <!--4 5 6 - -->
             <Button Grid.Row="3"
                     Grid.Column="0"
                     x:Name="UIFourButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="4"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="3"
                     Grid.Column="1"
                     x:Name="UIFiveButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="5"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="3"
                     Grid.Column="2"
                     x:Name="UISixButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="6"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="3"
                     Grid.Column="3"
                     x:Name="UIMinusButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="-"
                     Click="UIOperatorButton_Click" />
             <!--1 2 3 + -->
             <Button Grid.Row="4"
                     Grid.Column="0"
                     x:Name="UIOneButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="1"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="4"
                     Grid.Column="1"
                     x:Name="UITwoButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="2"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="4"
                     Grid.Column="2"
                     x:Name="UIThreeButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="3"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="4"
                     Grid.Column="3"
                     x:Name="UIPlusButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="+"
                     Click="UIOperatorButton_Click" />
             <!--0 . = -->
@@ -210,16 +236,19 @@
                     Grid.Row="5"
                     Grid.Column="0"
                     x:Name="UIZeroButton"
+                    Style="{StaticResource NumberStyleButton}"
                     Content="0"
                     Click="UINumberButton_Click" />
             <Button Grid.Row="5"
                     Grid.Column="2"
                     x:Name="UIPointButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="."
                     Click="UIPointButton_Click" />
             <Button Grid.Row="5"
                     Grid.Column="3"
                     x:Name="UIEqualButton"
+                    Style="{StaticResource BaseStyleButton}"
                     Content="="
                     Click="UIEqualButton_Click" />
         </Grid>
@@ -286,8 +315,6 @@
                     </StackPanel>
                 </Grid>
             </Expander.Content>
-
-
         </Expander>
     </Grid>
 </Window>
