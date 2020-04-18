@@ -53,9 +53,12 @@ namespace Udemy_Calculator
         {
             var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
 
-            string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - pUILength);
-            mParagraph.Inlines.Clear();
-            mParagraph.Inlines.Add(new Run(lOutput));
+            if (!textRange.IsEmpty)
+            {
+                string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - pUILength);
+                mParagraph.Inlines.Clear();
+                mParagraph.Inlines.Add(new Run(lOutput));
+            }
         }
 
         public void AddNewHistory()

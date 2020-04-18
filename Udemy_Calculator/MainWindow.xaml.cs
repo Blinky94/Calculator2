@@ -72,6 +72,7 @@ namespace Udemy_Calculator
             {
                 UIResultLabel.Content = $"{UIResultLabel.Content}.";
                 mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+                mIsResult = false;
             }
         }
 
@@ -79,6 +80,8 @@ namespace Udemy_Calculator
         {
             UIResultLabel.Content = "0";
             mDisplayHistory.AddNewHistory();
+            mLastNumber = 0;
+            mDisplayHistory.AppendHistoryFormula(string.Empty, UIHistoryTextBox);
         }
 
         private decimal TransformCoef(string pButtonPressed)
