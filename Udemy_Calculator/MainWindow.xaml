@@ -10,7 +10,7 @@
         Height="390"
         Width="265">
     <Window.Resources>
-        <!-- Simple Expander Template-->
+        <!--Expander Template-->
         <ControlTemplate x:Key="SimpleExpanderTemp"
                          TargetType="{x:Type Expander}">
             <DockPanel>
@@ -53,7 +53,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="220" />
-            <ColumnDefinition Width="*"
+            <ColumnDefinition Width="auto"
                               Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
