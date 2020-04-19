@@ -107,7 +107,10 @@
     <Resource Include="Calculator_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\History.png" />
+    <Resource Include="Images\History_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Scientific_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,7 +21,7 @@
                               HorizontalAlignment="Left"
                               Checked="UIHistoryExpander_Expanded"
                               Unchecked="UIHistoryExpander_Collapsed">
-                    <Image Source="Images/History.png"
+                    <Image Source="Images/History_icon.png"
                            Width="22"
                            Height="22" />
                 </ToggleButton>
