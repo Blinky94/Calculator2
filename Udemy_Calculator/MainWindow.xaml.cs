@@ -23,7 +23,8 @@ namespace Udemy_Calculator
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
         private static double mHistoryWidth = 200d;
-        private const double mMainWindowWidth = 265d;
+        private static double mScientificWidth = 100d;
+        private const double mMainWindowWidth = 283d;
         private const double mMainWindowHeight = 390d;
         private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
 
@@ -56,7 +57,29 @@ namespace Udemy_Calculator
                 HistoryGrid.Visibility = Visibility.Collapsed;
                 UICleaner.Visibility = Visibility.Collapsed;
             }
+        }
 
+        private void UIScientificExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Width = mMainWindowWidth + mScientificWidth;
+            UIExtendExpanderColumn.Width = mExpandedWidth;
+    
+            if (ScientificGrid != null)
+            {
+                ScientificGrid.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void UIScientificExpander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Width = mMainWindowWidth;
+            mExpandedWidth = UIExtendExpanderColumn.Width;
+            UIExtendExpanderColumn.Width = GridLength.Auto;
+
+            if (ScientificGrid != null)
+            {
+                ScientificGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)

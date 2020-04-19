@@ -110,6 +110,15 @@
     <Resource Include="Images\History_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Programmer_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Graph_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calendar_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\Scientific_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
