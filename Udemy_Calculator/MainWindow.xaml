@@ -8,7 +8,7 @@
         Title="Caluculator"
         ResizeMode="NoResize"
         Height="390"
-        Width="280">
+        Width="265">
     <Window.Resources>
         <!-- Simple Expander Template-->
         <ControlTemplate x:Key="SimpleExpanderTemp"
@@ -46,8 +46,6 @@
             <Style TargetType="Label">
                 <Setter Property="FontSize"
                         Value="25" />
-            </Style>
-            <Style TargetType="Label">
                 <Setter Property="FontFamily"
                         Value="{StaticResource Digital}" />
             </Style>

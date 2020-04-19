@@ -27,7 +27,7 @@ namespace Udemy_Calculator
             mFlowDocument.Blocks.Add(mParagraph);
             pUITextBox.Document = mFlowDocument;
 
-            return pUITextBox.Document.Blocks.LastOrDefault(); 
+            return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
         public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, decimal pLastNumber = default)

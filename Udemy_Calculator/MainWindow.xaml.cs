@@ -23,7 +23,7 @@ namespace Udemy_Calculator
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
         private static double mHistoryWidth = 200d;
-        private const double mMainWindowWidth = 280d;
+        private const double mMainWindowWidth = 265d;
         private const double mMainWindowHeight = 390d;
         private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
 

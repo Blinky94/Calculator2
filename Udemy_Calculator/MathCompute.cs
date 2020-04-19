@@ -39,7 +39,7 @@ namespace Udemy_Calculator
             {
                 return p1 * p2;
             }
-            catch(OverflowException e)
+            catch (OverflowException e)
             {
                 MessageBox.Show(e.Message.ToString(), "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -58,7 +58,7 @@ namespace Udemy_Calculator
                 MessageBox.Show(e.Message.ToString(), "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            return 0;          
+            return 0;
         }
     }
 }
