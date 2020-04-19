@@ -37,7 +37,12 @@ namespace Udemy_Calculator
         {
             Application.Current.MainWindow.Width = mMainWindowWidth + mHistoryWidth;
             UIHistoryExpanderColumn.Width = mExpandedWidth;
-            HistoryGrid.Visibility = Visibility.Visible;
+
+            if (HistoryGrid != null)
+            {
+                HistoryGrid.Visibility = Visibility.Visible;
+                UICleaner.Visibility = Visibility.Visible;
+            }
         }
 
         private void UIHistoryExpander_Collapsed(object sender, RoutedEventArgs e)
@@ -45,7 +50,13 @@ namespace Udemy_Calculator
             Application.Current.MainWindow.Width = mMainWindowWidth;
             mExpandedWidth = UIHistoryExpanderColumn.Width;
             UIHistoryExpanderColumn.Width = GridLength.Auto;
-            HistoryGrid.Visibility = Visibility.Collapsed;
+
+            if (HistoryGrid != null)
+            {
+                HistoryGrid.Visibility = Visibility.Collapsed;
+                UICleaner.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
