@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Udemy_Calculator
 {
@@ -23,15 +25,43 @@ namespace Udemy_Calculator
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
         private static double mHistoryWidth = 200d;
-        private static double mScientificWidth = 100d;
-        private const double mMainWindowWidth = 283d;
+        private const double mMainWindowWidth = 360d;
         private const double mMainWindowHeight = 390d;
         private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
+        private DispatcherTimer mTimer;
+        private double mPanelWidth;
+        private bool mHidden;
 
         public MainWindow()
         {
             InitializeComponent();
             mDisplayHistory = new DisplayHistory();
+            mTimer = new DispatcherTimer();
+            mTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            mTimer.Tick += Timer_Tick;
+            mPanelWidth = MenuSidePanel.Width;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (mHidden)
+            {
+                MenuSidePanel.Width += 1;
+                if (MenuSidePanel.Width >= mPanelWidth)
+                {
+                    mTimer.Stop();
+                    mHidden = false;
+                }
+            }
+            else
+            {
+                MenuSidePanel.Width -= 1;
+                if (MenuSidePanel.Width <= 35)
+                {
+                    mTimer.Stop();
+                    mHidden = true;
+                }
+            }
         }
 
         private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
@@ -56,29 +86,6 @@ namespace Udemy_Calculator
             {
                 HistoryGrid.Visibility = Visibility.Collapsed;
                 UICleaner.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void UIScientificExpander_Expanded(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.Width = mMainWindowWidth + mScientificWidth;
-            UIExtendExpanderColumn.Width = mExpandedWidth;
-    
-            if (ScientificGrid != null)
-            {
-                ScientificGrid.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void UIScientificExpander_Collapsed(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.Width = mMainWindowWidth;
-            mExpandedWidth = UIExtendExpanderColumn.Width;
-            UIExtendExpanderColumn.Width = GridLength.Auto;
-
-            if (ScientificGrid != null)
-            {
-                ScientificGrid.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -223,6 +230,11 @@ namespace Udemy_Calculator
         private void UICleaner_Click(object sender, RoutedEventArgs e)
         {
             mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
+        }
+
+        private void MenuSideButton_Click(object sender, RoutedEventArgs e)
+        {
+            mTimer.Start();
         }
     }
 

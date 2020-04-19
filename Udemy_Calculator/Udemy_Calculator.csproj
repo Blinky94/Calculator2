@@ -101,25 +101,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Cleaner_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Calculator_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\History_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Programmer_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Graph_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Binary_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Options_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Calendar_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Scientific_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Standard_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Menu_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\History_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cleaner_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

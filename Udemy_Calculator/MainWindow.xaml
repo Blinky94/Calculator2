@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Calculator"
         ResizeMode="NoResize"
-        Height="390"
-        Width="283">
+        Height="450"
+        Width="360">
     <Window.Resources>
         <!--UI History Expander Template-->
         <ControlTemplate x:Key="UIHistoryExpander"
@@ -39,48 +39,8 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-
-        <!--UI Scientific Expander Template-->
-        <ControlTemplate x:Key="UIScientificExpander"                      
-                         TargetType="{x:Type Expander}">
-            <DockPanel>
-                <ToggleButton x:Name="ExpanderButton"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              DockPanel.Dock="Top"
-                              VerticalAlignment="Top"
-                              HorizontalAlignment="Right"
-                              ToolTip="Scientific"
-                              Checked="UIScientificExpander_Expanded"
-                              Unchecked="UIScientificExpander_Collapsed">
-                    <Image Source="Images/Scientific_icon.png"
-                           Width="22"
-                           Height="22" />
-                </ToggleButton>
-            </DockPanel>
-        </ControlTemplate>
-
-        <!--UI Programmer Expander Template-->
-        <ControlTemplate x:Key="UIProgrammerExpander"
-                         TargetType="{x:Type Expander}">
-            <DockPanel>
-                <ToggleButton x:Name="ExpanderButton"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              DockPanel.Dock="Top"
-                              VerticalAlignment="Top"
-                              HorizontalAlignment="Right"
-                              ToolTip="Programmer"
-                              Checked="UIScientificExpander_Expanded"
-                              Unchecked="UIScientificExpander_Collapsed">
-                    <Image Source="Images/Programmer_icon.png"
-                           Width="21"
-                           Height="21" />
-                </ToggleButton>
-            </DockPanel>
-        </ControlTemplate>
     </Window.Resources>
-  
+
     <!--Main Container Grid-->
     <Grid>
         <Grid.Resources>
@@ -92,14 +52,12 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"
-                              Name="UIExtendExpanderColumn" />
+            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="220" />
             <ColumnDefinition Width="auto"
                               Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -108,155 +66,114 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.RowSpan="6"
-                    Background="Transparent">
-           
-            <!--Scientific Function Grid-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Expander Grid.Row="0"
-                          Grid.Column="3"
-                          Grid.RowSpan="6"
-                          ExpandDirection="Left"
-                          IsExpanded="True"
-                          Template="{StaticResource ResourceKey=UIScientificExpander}"
-                          OverridesDefaultStyle="True">
-                    <Expander.Content>
-                        <Grid Name="ScientificGrid"
-                              Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
+        <!--Menu Header-->
+        <Grid Grid.Column="0"
+              Grid.Row="0">
+            <Button x:Name="MenuSideButton"
+                    HorizontalAlignment="Right"
+                    Height="25"
+                    Width="25"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="MenuSideButton_Click">
+                <Image Source="Images/Menu_icon.png" />
+            </Button>
+        </Grid>
 
+        <Grid  x:Name="MenuSidePanel"
+               Grid.Row="1"
+               Grid.Column="0"
+               Grid.RowSpan="6"
+               Background="Gray">
+            <!--Main Menu-->
+            <StackPanel Orientation="Vertical">
+                <ListView Background="Gray"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          BorderThickness="0">
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal"
+                                    Background="Gray">
+                            <Button>
+                                <Image Source="Images/Standard_icon.png"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Height="20" />
+                            </Button>
+                            <TextBlock Margin="10 0 0 0"
+                                       Background="Gray"
+                                       Foreground="White"
+                                       Text="Standard" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <Image Source="Images/Scientific_icon.png"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Height="20" />
+                            </Button>
 
-                <!--Square-->
-                <!--1/x-->
-                <!--x2-->
-                <!--x3-->
-                <!--xy-->
-                <!--|x|-->
-                <!--Pi-->
-                <!--exposant-->
-                <!--exponential-->
-                <!--(-->
-                <!--)-->
-                <!--n!-->
-                <!--mod-->
-                <!--10x-->
-                <!--log-->
-                <!--ln-->
-                <!--sin-->
-                <!--sin-1-->
-                <!--cos-->
-                <!--cos-1-->
-                <!--tan-->
-                <!--tan-1-->
-                <!--hyp-->
-                <!--sec-->
-                <!--sec-1-->
-                <!--csc-->
-                <!--csc-1-->
-                <!--cot-->
-                <!--cot-1-->
-                <!--->deg-->
-                <!--->dms : Degrees, minutes, seconds-->
+                            <TextBlock Margin="10 0 0 0"
+                                       Background="Gray"
+                                       Foreground="White"
+                                       Text="Scientific" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <Image Source="Images/Binary_icon.png"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Height="20"
+                                       Width="20" />
+                            </Button>
 
-            </Grid>
-           
-            <!--Programmer Function Grid-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Expander Grid.Row="0"
-                          Grid.Column="3"
-                          Grid.RowSpan="6"
-                          ExpandDirection="Left"
-                          IsExpanded="True"
-                          Template="{StaticResource ResourceKey=UIProgrammerExpander}"
-                          OverridesDefaultStyle="True">
-                    <Expander.Content>
-                        <Grid Name="ProgrammerGrid"
-                              Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
+                            <TextBlock Margin="10 0 0 0"
+                                       Background="Gray"
+                                       Foreground="White"
+                                       Text="Binary" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <Image Source="Images/Calendar_icon.png"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Height="20" />
+                            </Button>
 
+                            <TextBlock Margin="10 0 0 0"
+                                       Background="Gray"
+                                       Foreground="White"
+                                       Text="Calendar" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <Image Source="Images/Options_icon.png"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Height="20" />
+                            </Button>
 
-                <!--Square-->
-                <!--1/x-->
-                <!--x2-->
-                <!--x3-->
-                <!--xy-->
-                <!--|x|-->
-                <!--Pi-->
-                <!--exposant-->
-                <!--exponential-->
-                <!--(-->
-                <!--)-->
-                <!--n!-->
-                <!--mod-->
-                <!--10x-->
-                <!--log-->
-                <!--ln-->
-                <!--sin-->
-                <!--sin-1-->
-                <!--cos-->
-                <!--cos-1-->
-                <!--tan-->
-                <!--tan-1-->
-                <!--hyp-->
-                <!--sec-->
-                <!--sec-1-->
-                <!--csc-->
-                <!--csc-1-->
-                <!--cot-->
-                <!--cot-1-->
-                <!--->deg-->
-                <!--->dms : Degrees, minutes, seconds-->
-
-            </Grid>
-
-        </StackPanel>
+                            <TextBlock Margin="10 0 0 0"
+                                       Background="Gray"
+                                       Foreground="White"
+                                       Text="Options" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
 
         <!--Calcul Grid-->
         <Grid Grid.Column="1"
-              Grid.Row="1"
+              Grid.Row="0"
               Grid.RowSpan="6">
             <Grid.Resources>
                 <Style x:Key="BaseStyleButton"
@@ -424,7 +341,7 @@
                     Content="="
                     Click="UIEqualButton_Click" />
         </Grid>
-        
+
         <!--History Grid-->
         <Expander Grid.Row="0"
                   Grid.Column="2"
