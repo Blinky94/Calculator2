@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Calculator"
         ResizeMode="NoResize"
-        Height="450"
-        Width="360">
+        Height="410"
+        Width="300">
     <Window.Resources>
         <!--UI History Expander Template-->
         <ControlTemplate x:Key="UIHistoryExpander"
@@ -52,7 +52,7 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="220" />
             <ColumnDefinition Width="auto"
                               Name="UIHistoryExpanderColumn" />
@@ -68,107 +68,138 @@
 
         <!--Menu Header-->
         <Grid Grid.Column="0"
-              Grid.Row="0">
-            <Button x:Name="MenuSideButton"
-                    HorizontalAlignment="Right"
-                    Height="25"
-                    Width="25"
-                    VerticalAlignment="Top"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Click="MenuSideButton_Click">
-                <Image Source="Images/Menu_icon.png" />
-            </Button>
-        </Grid>
+              Grid.Row="0"
+              Width="30">
 
-        <Grid  x:Name="MenuSidePanel"
-               Grid.Row="1"
-               Grid.Column="0"
-               Grid.RowSpan="6"
-               Background="Gray">
-            <!--Main Menu-->
-            <StackPanel Orientation="Vertical">
-                <ListView Background="Gray"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          BorderThickness="0">
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal"
-                                    Background="Gray">
-                            <Button>
-                                <Image Source="Images/Standard_icon.png"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Height="20" />
-                            </Button>
-                            <TextBlock Margin="10 0 0 0"
-                                       Background="Gray"
-                                       Foreground="White"
-                                       Text="Standard" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Button>
-                                <Image Source="Images/Scientific_icon.png"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Height="20" />
-                            </Button>
+            <Menu x:Name="MenuSideButton"
+                  HorizontalAlignment="Left"
+                  Background="Transparent"
+                  Height="25"
+                  Width="25"
+                  VerticalAlignment="Top"
+                  BorderBrush="Transparent">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <Image Source="Images/Menu_icon.png" />
+                    </MenuItem.Header>
+                    <MenuItem Header="_Standard">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Standard_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Scientific">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Scientific_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Binary">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Binary_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Calendar">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Calendar_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Graph">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Graph_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Converter...">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Conversion_icon.png" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="_Area">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Area_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Electronic">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Electronic_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Energy">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Energy_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Flow">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Flow_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Force">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Force_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Length">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Length_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Power">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Power_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Pressure">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Pressure_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Speed">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Speed_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Temperature">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Temperature_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Time">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Time_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Volume">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Volume_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Weight">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Weight_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Data">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Data_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Angle">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Angle_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Currency">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Currency_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Options">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Options_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
 
-                            <TextBlock Margin="10 0 0 0"
-                                       Background="Gray"
-                                       Foreground="White"
-                                       Text="Scientific" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Button>
-                                <Image Source="Images/Binary_icon.png"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Height="20"
-                                       Width="20" />
-                            </Button>
-
-                            <TextBlock Margin="10 0 0 0"
-                                       Background="Gray"
-                                       Foreground="White"
-                                       Text="Binary" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Button>
-                                <Image Source="Images/Calendar_icon.png"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Height="20" />
-                            </Button>
-
-                            <TextBlock Margin="10 0 0 0"
-                                       Background="Gray"
-                                       Foreground="White"
-                                       Text="Calendar" />
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <Button>
-                                <Image Source="Images/Options_icon.png"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Height="20" />
-                            </Button>
-
-                            <TextBlock Margin="10 0 0 0"
-                                       Background="Gray"
-                                       Foreground="White"
-                                       Text="Options" />
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
-            </StackPanel>
         </Grid>
 
         <!--Calcul Grid-->

@@ -104,9 +104,6 @@
     <Resource Include="Calculator_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Graph_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Binary_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +126,60 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cleaner_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Conversion_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Area_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Electronic_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Energy_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Flow_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Force_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Length_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Power_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pressure_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Speed_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Temperature_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Time_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Volume_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weight_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Data_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Angle_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Currency_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Graph_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

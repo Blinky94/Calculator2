@@ -25,44 +25,15 @@ namespace Udemy_Calculator
         private bool mIsResult = false;
         private DisplayHistory mDisplayHistory;
         private static double mHistoryWidth = 200d;
-        private const double mMainWindowWidth = 360d;
+        private const double mMainWindowWidth = 300d;
         private const double mMainWindowHeight = 390d;
         private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
-        private DispatcherTimer mTimer;
-        private double mPanelWidth;
-        private bool mHidden;
 
         public MainWindow()
         {
             InitializeComponent();
             mDisplayHistory = new DisplayHistory();
-            mTimer = new DispatcherTimer();
-            mTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            mTimer.Tick += Timer_Tick;
-            mPanelWidth = MenuSidePanel.Width;
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (mHidden)
-            {
-                MenuSidePanel.Width += 1;
-                if (MenuSidePanel.Width >= mPanelWidth)
-                {
-                    mTimer.Stop();
-                    mHidden = false;
-                }
-            }
-            else
-            {
-                MenuSidePanel.Width -= 1;
-                if (MenuSidePanel.Width <= 35)
-                {
-                    mTimer.Stop();
-                    mHidden = true;
-                }
-            }
-        }
+        }  
 
         private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
         {
@@ -230,11 +201,6 @@ namespace Udemy_Calculator
         private void UICleaner_Click(object sender, RoutedEventArgs e)
         {
             mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
-        }
-
-        private void MenuSideButton_Click(object sender, RoutedEventArgs e)
-        {
-            mTimer.Start();
         }
     }
 
