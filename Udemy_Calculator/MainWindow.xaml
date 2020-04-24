@@ -25,7 +25,7 @@
                    TargetType="Label"
                    BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
                 <Setter Property="FontSize"
-                        Value="15" />
+                        Value="13.5" />
                 <Setter Property="FontFamily"
                         Value="Courrier" />
                 <Setter Property="Foreground"
