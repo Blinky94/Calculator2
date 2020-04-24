@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Calculator"
         ResizeMode="NoResize"
-        Height="410"
-        Width="300">
+        Height="400"
+        Width="280">
     <Window.Resources>
         <!--UI History Expander Template-->
         <ControlTemplate x:Key="UIHistoryExpander"
@@ -44,7 +44,8 @@
     <!--Main Container Grid-->
     <Grid>
         <Grid.Resources>
-            <Style TargetType="Label">
+            <Style x:Key="BaseStyleLabel"
+                   TargetType="Label">
                 <Setter Property="FontSize"
                         Value="25" />
                 <Setter Property="FontFamily"
@@ -53,25 +54,17 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="210" />
             <ColumnDefinition Width="auto"
                               Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <!--Menu Header-->
+        <!--Menu Left Header-->
         <Grid Grid.Column="0"
               Grid.Row="0"
-              Width="30">
+              Width="Auto">
 
-            <Menu x:Name="MenuSideButton"
+            <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
                   Background="Transparent"
                   Height="25"
@@ -102,11 +95,11 @@
                             <Image Source="Images/Calendar_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Graph">
+                    <!--<MenuItem Header="_Graph">
                         <MenuItem.Icon>
                             <Image Source="Images/Graph_icon.png" />
                         </MenuItem.Icon>
-                    </MenuItem>
+                    </MenuItem>-->
                     <MenuItem Header="_Converter...">
                         <MenuItem.Icon>
                             <Image Source="Images/Conversion_icon.png" />
@@ -210,7 +203,7 @@
                 <Style x:Key="BaseStyleButton"
                        TargetType="Button">
                     <Setter Property="Margin"
-                            Value="1" />
+                            Value="1 1 1 1" />
                     <Setter Property="FontSize"
                             Value="25" />
                     <Setter Property="Foreground"
@@ -219,158 +212,171 @@
                             Value="LightGray" />
                     <Setter Property="FontFamily"
                             Value="{StaticResource Digital}" />
+                    <Setter Property="Width"
+                            Value="50" />
+                    <Setter Property="Height"
+                            Value="50" />
+                    <Setter Property="BorderBrush"
+                            Value="Black" />
+                    <Setter Property="BorderThickness"
+                            Value="1.5" />
                 </Style>
+
+                <Style x:Key="CalculatorSelectionLabel"
+                       TargetType="Label"
+                       BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
+                    <Setter Property="FontSize"
+                            Value="15" />
+                    <Setter Property="FontFamily"
+                            Value="Courrier" />
+                    <Setter Property="Foreground"
+                            Value="Gray" />
+                </Style>
+
                 <Style x:Key="NumberStyleButton"
                        TargetType="Button"
                        BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
                     <Setter Property="Background"
                             Value="Gray" />
                 </Style>
+
+                <Style TargetType="StackPanel">
+                    <Setter Property="HorizontalAlignment"
+                            Value="Center" />
+                    <Setter Property="VerticalAlignment"
+                            Value="Center" />
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="1.5*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+
             <!--Calul Area-->
+            <Label x:Name="UICalculatorSelectionLabel"
+                   Content="Test"
+                   Grid.Row="0"
+                   Style="{StaticResource CalculatorSelectionLabel}"/>
             <Viewbox HorizontalAlignment="Right"
-                     Grid.Column="0"
-                     Grid.Row="0"
-                     Grid.ColumnSpan="4">
+                     Grid.Row="1" Stretch="Uniform">
                 <Label x:Name="UIResultLabel"
                        HorizontalContentAlignment="Right"
                        VerticalContentAlignment="Top"
                        Content="0" />
             </Viewbox>
+
             <!--AC +/1 % /-->
-            <Button Grid.Row="1"
-                    Grid.Column="0"
-                    x:Name="UIACButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="AC"
-                    Click="UIACButton_Click" />
-            <Button Grid.Row="1"
-                    Grid.Column="1"
-                    x:Name="UINegativeButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="+/1"
-                    Click="UIMultiplyCoefButton_Click" />
-            <Button Grid.Row="1"
-                    Grid.Column="2"
-                    x:Name="UIPercentButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="%"
-                    Click="UIMultiplyCoefButton_Click" />
-            <Button Grid.Row="1"
-                    Grid.Column="3"
-                    x:Name="UIDivideButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="÷"
-                    Click="UIOperatorButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="2">
+                <Button x:Name="UIACButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="AC"
+                        Click="UIACButton_Click" />
+                <Button x:Name="UINegativeButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="+/1"
+                        Click="UIMultiplyCoefButton_Click" />
+                <Button x:Name="UIPercentButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="%"
+                        Click="UIMultiplyCoefButton_Click" />
+                <Button x:Name="UIDivideButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="÷"
+                        Click="UIOperatorButton_Click" />
+            </StackPanel>
+
             <!--7 8 9 *-->
-            <Button Grid.Row="2"
-                    Grid.Column="0"
-                    x:Name="UISevenButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="7"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="2"
-                    Grid.Column="1"
-                    x:Name="UIHeightButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="8"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="2"
-                    Grid.Column="2"
-                    x:Name="UINineButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="9"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="2"
-                    Grid.Column="3"
-                    x:Name="UIMultiplyButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="×"
-                    Click="UIOperatorButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="3">
+                <Button x:Name="UISevenButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="7"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIHeightButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="8"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UINineButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="9"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIMultiplyButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="×"
+                        Click="UIOperatorButton_Click" />
+            </StackPanel>
+
             <!--4 5 6 - -->
-            <Button Grid.Row="3"
-                    Grid.Column="0"
-                    x:Name="UIFourButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="4"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="3"
-                    Grid.Column="1"
-                    x:Name="UIFiveButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="5"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="3"
-                    Grid.Column="2"
-                    x:Name="UISixButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="6"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="3"
-                    Grid.Column="3"
-                    x:Name="UIMinusButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="-"
-                    Click="UIOperatorButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="4">
+                <Button x:Name="UIFourButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="4"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIFiveButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="5"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UISixButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="6"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIMinusButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="-"
+                        Click="UIOperatorButton_Click" />
+            </StackPanel>
+
             <!--1 2 3 + -->
-            <Button Grid.Row="4"
-                    Grid.Column="0"
-                    x:Name="UIOneButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="1"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="4"
-                    Grid.Column="1"
-                    x:Name="UITwoButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="2"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="4"
-                    Grid.Column="2"
-                    x:Name="UIThreeButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="3"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="4"
-                    Grid.Column="3"
-                    x:Name="UIPlusButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="+"
-                    Click="UIOperatorButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="5">
+                <Button x:Name="UIOneButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="1"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UITwoButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="2"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIThreeButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="3"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIPlusButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="+"
+                        Click="UIOperatorButton_Click" />
+            </StackPanel>
+
             <!--0 . = -->
-            <Button Grid.ColumnSpan="2"
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    x:Name="UIZeroButton"
-                    Style="{StaticResource NumberStyleButton}"
-                    Content="0"
-                    Click="UINumberButton_Click" />
-            <Button Grid.Row="5"
-                    Grid.Column="2"
-                    x:Name="UIPointButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="."
-                    Click="UIPointButton_Click" />
-            <Button Grid.Row="5"
-                    Grid.Column="3"
-                    x:Name="UIEqualButton"
-                    Style="{StaticResource BaseStyleButton}"
-                    Content="="
-                    Click="UIEqualButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="6">
+                <Button x:Name="UIZeroButton"
+                        Style="{StaticResource NumberStyleButton}"
+                        Content="0"
+                        Click="UINumberButton_Click" />
+                <Button x:Name="UIPointButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="."
+                        Click="UIPointButton_Click" />
+                <Button x:Name="UIEqualButton"
+                        Style="{StaticResource BaseStyleButton}"
+                        Content="="
+                        Width="102"
+                        Click="UIEqualButton_Click" />
+            </StackPanel>
+
         </Grid>
 
         <!--History Grid-->
