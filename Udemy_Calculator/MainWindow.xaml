@@ -9,40 +9,10 @@
         ResizeMode="NoResize"
         Height="400"
         Width="280">
-    <Window.Resources>
-        <!--UI History Expander Template-->
-        <ControlTemplate x:Key="UIHistoryExpander"
-                         TargetType="{x:Type Expander}">
-            <DockPanel>
-                <ToggleButton x:Name="ExpanderButton"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              DockPanel.Dock="Top"
-                              HorizontalAlignment="Left"
-                              Checked="UIHistoryExpander_Expanded"
-                              Unchecked="UIHistoryExpander_Collapsed">
-                    <Image Source="Images/History_icon.png"
-                           Width="22"
-                           Height="22" />
-                </ToggleButton>
-                <ContentPresenter x:Name="ExpanderContent"
-                                  Grid.Column="1"
-                                  Visibility="Visible"
-                                  DockPanel.Dock="Bottom" />
-            </DockPanel>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsExpanded"
-                         Value="True">
-                    <Setter TargetName="ExpanderContent"
-                            Property="Visibility"
-                            Value="Visible" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </Window.Resources>
 
     <!--Main Container Grid-->
-    <Grid>
+    <Grid x:Name="MainGrid"
+          Background="Transparent">
         <Grid.Resources>
             <Style x:Key="BaseStyleLabel"
                    TargetType="Label">
@@ -64,13 +34,11 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="210" />
-            <ColumnDefinition Width="auto"
-                              Name="UIHistoryExpanderColumn" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -90,22 +58,26 @@
                     <MenuItem.Header>
                         <Image Source="Images/Menu_icon.png" />
                     </MenuItem.Header>
-                    <MenuItem Header="_Standard">
+                    <MenuItem Header="_Standard"
+                              Click="MenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Standard_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Scientific">
+                    <MenuItem Header="_Scientific"
+                              Click="MenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Scientific_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Binary">
+                    <MenuItem Header="_Binary"
+                              Click="MenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Binary_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Calendar">
+                    <MenuItem Header="_Calendar"
+                              Click="MenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Calendar_icon.png" />
                         </MenuItem.Icon>
@@ -119,88 +91,105 @@
                         <MenuItem.Icon>
                             <Image Source="Images/Conversion_icon.png" />
                         </MenuItem.Icon>
-                        <MenuItem Header="_Area">
+                        <MenuItem Header="_Area"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Area_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Electronic">
+                        <MenuItem Header="_Electronic"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Electronic_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Energy">
+                        <MenuItem Header="_Energy"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Energy_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Flow">
+                        <MenuItem Header="_Flow"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Flow_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Force">
+                        <MenuItem Header="_Force"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Force_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Length">
+                        <MenuItem Header="_Length"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Length_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Power">
+                        <MenuItem Header="_Power"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Power_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Pressure">
+                        <MenuItem Header="_Pressure"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Pressure_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Speed">
+                        <MenuItem Header="_Speed"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Speed_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Temperature">
+                        <MenuItem Header="_Temperature"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Temperature_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Time">
+                        <MenuItem Header="_Time"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Time_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Volume">
+                        <MenuItem Header="_Volume"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Volume_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Weight">
+                        <MenuItem Header="_Weight"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Weight_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Data">
+                        <MenuItem Header="_Data"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Data_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Angle">
+                        <MenuItem Header="_Angle"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Angle_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Currency">
+                        <MenuItem Header="_Currency"
+                                  Click="MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Images/Currency_icon.png" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="_Options">
+                    <MenuItem Header="_Options"
+                              Click="MenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Options_icon.png" />
                         </MenuItem.Icon>
@@ -217,238 +206,5 @@
                Grid.Column="1"
                Style="{StaticResource CalculatorSelectionLabel}" />
 
-        <!--Standard Calculator-->
-        <Grid Grid.Column="1"
-              Grid.Row="0"
-              Grid.RowSpan="6">
-            <Grid.Resources>
-                <Style x:Key="BaseStyleButton"
-                       TargetType="Button">
-                    <Setter Property="Margin"
-                            Value="1 1 1 1" />
-                    <Setter Property="FontSize"
-                            Value="25" />
-                    <Setter Property="Foreground"
-                            Value="Black" />
-                    <Setter Property="Background"
-                            Value="LightGray" />
-                    <Setter Property="FontFamily"
-                            Value="{StaticResource Digital}" />
-                    <Setter Property="Width"
-                            Value="50" />
-                    <Setter Property="Height"
-                            Value="50" />
-                    <Setter Property="BorderBrush"
-                            Value="Black" />
-                    <Setter Property="BorderThickness"
-                            Value="1.5" />
-                </Style>
-
-                <Style x:Key="NumberStyleButton"
-                       TargetType="Button"
-                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
-                    <Setter Property="Background"
-                            Value="Gray" />
-                </Style>
-
-                <Style TargetType="StackPanel">
-                    <Setter Property="HorizontalAlignment"
-                            Value="Center" />
-                    <Setter Property="VerticalAlignment"
-                            Value="Center" />
-                    <Setter Property="Background"
-                            Value="Transparent" />
-                </Style>
-            </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1.5*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <!--Calul Area-->        
-            <Viewbox HorizontalAlignment="Right"
-                     Grid.Row="1" Stretch="Uniform">
-                <Label x:Name="UIResultLabel"
-                       HorizontalContentAlignment="Right"
-                       VerticalContentAlignment="Top"
-                       Content="0" />
-            </Viewbox>
-
-            <!--AC +/1 % /-->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="2">
-                <Button x:Name="UIACButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="AC"
-                        Click="UIACButton_Click" />
-                <Button x:Name="UINegativeButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="+/1"
-                        Click="UIMultiplyCoefButton_Click" />
-                <Button x:Name="UIPercentButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="%"
-                        Click="UIMultiplyCoefButton_Click" />
-                <Button x:Name="UIDivideButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="÷"
-                        Click="UIOperatorButton_Click" />
-            </StackPanel>
-
-            <!--7 8 9 *-->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="3">
-                <Button x:Name="UISevenButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="7"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIHeightButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="8"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UINineButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="9"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIMultiplyButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="×"
-                        Click="UIOperatorButton_Click" />
-            </StackPanel>
-
-            <!--4 5 6 - -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="4">
-                <Button x:Name="UIFourButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="4"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIFiveButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="5"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UISixButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="6"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIMinusButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="-"
-                        Click="UIOperatorButton_Click" />
-            </StackPanel>
-
-            <!--1 2 3 + -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="5">
-                <Button x:Name="UIOneButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="1"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UITwoButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="2"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIThreeButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="3"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIPlusButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="+"
-                        Click="UIOperatorButton_Click" />
-            </StackPanel>
-
-            <!--0 . = -->
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="6">
-                <Button x:Name="UIZeroButton"
-                        Style="{StaticResource NumberStyleButton}"
-                        Content="0"
-                        Click="UINumberButton_Click" />
-                <Button x:Name="UIPointButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="."
-                        Click="UIPointButton_Click" />
-                <Button x:Name="UIEqualButton"
-                        Style="{StaticResource BaseStyleButton}"
-                        Content="="
-                        Width="102"
-                        Click="UIEqualButton_Click" />
-            </StackPanel>
-
-        </Grid>
-
-        <!--History Grid-->
-        <Expander Grid.Row="0"
-                  Grid.Column="2"
-                  Grid.RowSpan="7"
-                  ExpandDirection="Right"
-                  IsExpanded="False"
-                  Template="{StaticResource ResourceKey=UIHistoryExpander}"
-                  OverridesDefaultStyle="True"
-                  Background="Transparent">
-            <Expander.Content>
-                <Grid Name="HistoryGrid"
-                      Background="Transparent">
-                    <Grid.Resources>
-                        <Style TargetType="RichTextBox">
-                            <Setter Property="FontSize"
-                                    Value="16" />
-                            <Setter Property="FontWeight"
-                                    Value="Bold" />
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer x:Name="UIHistoryScrollViewer"
-                                  Grid.Row="0"
-                                  VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Disabled"
-                                  Background="Transparent">
-                        <RichTextBox x:Name="UIHistoryTextBox"
-                                     IsReadOnly="True"
-                                     BorderBrush="LightGray"
-                                     BorderThickness="0 0 0 0"
-                                     Margin="35 0 15 0"
-                                     ScrollViewer.CanContentScroll="True"
-                                     Padding="0"
-                                     TextChanged="UIHistoryTextBox_TextChanged">
-                            <FlowDocument x:Name="UIHistoryFlowDoc"
-                                          LineHeight="1">
-                            </FlowDocument>
-                        </RichTextBox>
-                    </ScrollViewer>
-
-                    <StackPanel Orientation="Horizontal"
-                                Background="Transparent"
-                                Grid.Row="1"
-                                HorizontalAlignment="Right"
-                                Margin="0 0 15 0"
-                                DockPanel.Dock="Bottom">
-                        <Button x:Name="UICleaner"
-                                Background="White"
-                                Visibility="Hidden"
-                                Width="25"
-                                Height="25"
-                                Click="UICleaner_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/Cleaner_icon.png" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Expander.Content>
-        </Expander>
     </Grid>
 </Window>

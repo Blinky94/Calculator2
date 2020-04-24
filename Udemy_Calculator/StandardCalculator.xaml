@@ -1,12 +1,280 @@
 ﻿<UserControl x:Class="Udemy_Calculator.StandardCalculator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Udemy_Calculator"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             mc:Ignorable="d"
+             d:DesignHeight="400"
+             d:DesignWidth="250">
+
+    <UserControl.Resources>
+        <!--UI History Expander Template-->
+        <ControlTemplate x:Key="UIHistoryExpander"
+                         TargetType="{x:Type Expander}">
+            <DockPanel>
+                <ToggleButton x:Name="ExpanderButton"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              DockPanel.Dock="Top"
+                              HorizontalAlignment="Left"
+                              Checked="UIHistoryExpander_Expanded"
+                              Unchecked="UIHistoryExpander_Collapsed">
+                    <Image Source="Images/History_icon.png"
+                           Width="22"
+                           Height="22" />
+                </ToggleButton>
+                <ContentPresenter x:Name="ExpanderContent"
+                                  Grid.Column="1"
+                                  Visibility="Visible"
+                                  DockPanel.Dock="Bottom" />
+            </DockPanel>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsExpanded"
+                         Value="True">
+                    <Setter TargetName="ExpanderContent"
+                            Property="Visibility"
+                            Value="Visible" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <!--Standard Calculator-->
+    <Grid Background="White">
+        <Grid.Resources>
+            <Style x:Key="BaseStyleButton"
+                   TargetType="Button">
+                <Setter Property="Margin"
+                        Value="1 1 1 1" />
+                <Setter Property="FontSize"
+                        Value="25" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+                <Setter Property="Background"
+                        Value="LightGray" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource Digital}" />
+                <Setter Property="Width"
+                        Value="50" />
+                <Setter Property="Height"
+                        Value="50" />
+                <Setter Property="BorderBrush"
+                        Value="Black" />
+                <Setter Property="BorderThickness"
+                        Value="1.5" />
+            </Style>
+
+            <Style x:Key="NumberStyleButton"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                <Setter Property="Background"
+                        Value="Gray" />
+            </Style>
+
+            <Style TargetType="StackPanel">
+                <Setter Property="HorizontalAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto"
+                              Name="UIHistoryExpanderColumn" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--Calul Area-->
+        <Viewbox HorizontalAlignment="Right"
+                 Grid.Row="1"
+                 Stretch="Uniform">
+            <Label x:Name="UIResultLabel"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Top"
+                   Content="0" />
+        </Viewbox>
+
+        <!--AC +/1 % /-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2">
+            <Button x:Name="UIACButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="AC"
+                    Click="UIACButton_Click" />
+            <Button x:Name="UINegativeButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="+/1"
+                    Click="UIMultiplyCoefButton_Click" />
+            <Button x:Name="UIPercentButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="%"
+                    Click="UIMultiplyCoefButton_Click" />
+            <Button x:Name="UIDivideButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="÷"
+                    Click="UIOperatorButton_Click" />
+        </StackPanel>
+
+        <!--7 8 9 *-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3">
+            <Button x:Name="UISevenButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="7"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIHeightButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="8"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UINineButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="9"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIMultiplyButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="×"
+                    Click="UIOperatorButton_Click" />
+        </StackPanel>
+
+        <!--4 5 6 - -->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="4">
+            <Button x:Name="UIFourButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="4"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIFiveButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="5"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UISixButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="6"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIMinusButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="-"
+                    Click="UIOperatorButton_Click" />
+        </StackPanel>
+
+        <!--1 2 3 + -->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="5">
+            <Button x:Name="UIOneButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="1"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UITwoButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="2"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIThreeButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="3"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIPlusButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="+"
+                    Click="UIOperatorButton_Click" />
+        </StackPanel>
+
+        <!--0 . = -->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="6">
+            <Button x:Name="UIZeroButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="0"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIPointButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="."
+                    Click="UIPointButton_Click" />
+            <Button x:Name="UIEqualButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="="
+                    Width="102"
+                    Click="UIEqualButton_Click" />
+        </StackPanel>
+
+        <!--History Grid-->
+        <Expander Grid.Row="0"
+                  Grid.Column="2"
+                  Grid.ColumnSpan="6"
+                  Grid.RowSpan="7"
+                  Margin="0 -25 0 0"
+                  Width="220"
+                  ExpandDirection="Right"
+                  IsExpanded="False"
+                  Template="{StaticResource ResourceKey=UIHistoryExpander}"
+                  OverridesDefaultStyle="True">
+            <Expander.Content>
+                <Grid Name="HistoryGrid"
+                      Background="Transparent">
+                    <Grid.Resources>
+                        <Style TargetType="RichTextBox">
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="FontWeight"
+                                    Value="Bold" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer x:Name="UIHistoryScrollViewer"
+                                  Grid.Row="0"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent">
+                        <RichTextBox x:Name="UIHistoryTextBox"
+                                     IsReadOnly="True"
+                                     BorderBrush="LightGray"
+                                     BorderThickness="0 0 0 0"
+                                     Margin="35 0 15 0"
+                                     ScrollViewer.CanContentScroll="True"
+                                     Padding="0"
+                                     TextChanged="UIHistoryTextBox_TextChanged">
+                            <FlowDocument x:Name="UIHistoryFlowDoc"
+                                          LineHeight="1">
+                            </FlowDocument>
+                        </RichTextBox>
+                    </ScrollViewer>
+
+                    <StackPanel Orientation="Horizontal"
+                                Background="Transparent"
+                                Grid.Row="1"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 15 0"
+                                DockPanel.Dock="Bottom">
+                        <Button x:Name="UICleaner"
+                                Background="White"
+                                Visibility="Hidden"
+                                Width="25"
+                                Height="25"
+                                Click="UICleaner_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Cleaner_icon.png" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Expander.Content>
+        </Expander>
+
     </Grid>
 </UserControl>
