@@ -51,6 +51,16 @@
                 <Setter Property="FontFamily"
                         Value="{StaticResource Digital}" />
             </Style>
+            <Style x:Key="CalculatorSelectionLabel"
+                   TargetType="Label"
+                   BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="FontFamily"
+                        Value="Courrier" />
+                <Setter Property="Foreground"
+                        Value="Gray" />
+            </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -58,6 +68,11 @@
             <ColumnDefinition Width="auto"
                               Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <!--Menu Left Header-->
         <Grid Grid.Column="0"
@@ -195,7 +210,14 @@
 
         </Grid>
 
-        <!--Calcul Grid-->
+        <!--Calculator Section Label-->
+        <Label x:Name="UICalculatorSelectionLabel"
+               Content="Test"
+               Grid.Row="0"
+               Grid.Column="1"
+               Style="{StaticResource CalculatorSelectionLabel}" />
+
+        <!--Standard Calculator-->
         <Grid Grid.Column="1"
               Grid.Row="0"
               Grid.RowSpan="6">
@@ -220,17 +242,6 @@
                             Value="Black" />
                     <Setter Property="BorderThickness"
                             Value="1.5" />
-                </Style>
-
-                <Style x:Key="CalculatorSelectionLabel"
-                       TargetType="Label"
-                       BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
-                    <Setter Property="FontSize"
-                            Value="15" />
-                    <Setter Property="FontFamily"
-                            Value="Courrier" />
-                    <Setter Property="Foreground"
-                            Value="Gray" />
                 </Style>
 
                 <Style x:Key="NumberStyleButton"
@@ -262,11 +273,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!--Calul Area-->
-            <Label x:Name="UICalculatorSelectionLabel"
-                   Content="Test"
-                   Grid.Row="0"
-                   Style="{StaticResource CalculatorSelectionLabel}"/>
+            <!--Calul Area-->        
             <Viewbox HorizontalAlignment="Right"
                      Grid.Row="1" Stretch="Uniform">
                 <Label x:Name="UIResultLabel"
