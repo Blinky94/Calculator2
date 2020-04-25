@@ -12,6 +12,9 @@ namespace Udemy_Calculator
         FlowDocument mFlowDocument;
         private float mLineHeight = 1;
 
+        public string FormulaStr { get; private set; }
+        public string ResultStr { get; private set; }
+
         public DisplayHistory()
         {
             mFlowDocument = new FlowDocument();
@@ -26,6 +29,7 @@ namespace Udemy_Calculator
             mFlowDocument.Blocks.Add(mParagraph);
             pUITextBox.Document = mFlowDocument;
 
+            FormulaStr += pText;
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
@@ -57,12 +61,15 @@ namespace Udemy_Calculator
                 string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - pUILength);
                 mParagraph.Inlines.Clear();
                 mParagraph.Inlines.Add(new Run(lOutput));
+
+                FormulaStr += lOutput;
             }
         }
 
         public void AddNewHistory()
         {
             mParagraph = new Paragraph();
+            FormulaStr = string.Empty;
         }
 
         internal void CleanHistory(ref RichTextBox pUI)
@@ -70,6 +77,7 @@ namespace Udemy_Calculator
             pUI.Document.Blocks.Clear();
             mFlowDocument = new FlowDocument();
             AddNewHistory();
+            FormulaStr = string.Empty;
         }
     }
 }

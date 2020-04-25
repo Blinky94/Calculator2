@@ -11,7 +11,6 @@ namespace Udemy_Calculator
     public partial class StandardCalculator : UserControl
     {
         private decimal mLastNumber;
-        private SelectedOperator mSelectedOperator = SelectedOperator.None;
         private string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
         private History mHistory;
@@ -107,24 +106,7 @@ namespace Udemy_Calculator
                 mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
                 decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                UIResultLabel.Content = (e.Source as Button).Content.ToString();
-
-                if (sender == UIPlusButton)
-                {
-                    mSelectedOperator = SelectedOperator.Addition;
-                }
-                else if (sender == UIMinusButton)
-                {
-                    mSelectedOperator = SelectedOperator.Substraction;
-                }
-                else if (sender == UIMultiplyButton)
-                {
-                    mSelectedOperator = SelectedOperator.Multiplication;
-                }
-                else if (sender == UIDivideButton)
-                {
-                    mSelectedOperator = SelectedOperator.Division;
-                }
+                UIResultLabel.Content = (e.Source as Button).Content.ToString();           
             }
         }
 
@@ -132,44 +114,25 @@ namespace Udemy_Calculator
         {
             if (!mIsResult)
             {
+                string lFormula = mHistory.ReturnFormula();
                 decimal lNewNumber;
                 if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
                 {
-                    switch (mSelectedOperator)
+                    decimal lResult = default;
+                    if(MathCompute.SetCalculus(lFormula, out lResult) != false)
                     {
-                        case SelectedOperator.Addition:
-                            UIResultLabel.Content = MathCompute.Add(mLastNumber, lNewNumber);
-                            break;
-                        case SelectedOperator.Substraction:
-                            UIResultLabel.Content = MathCompute.Substract(mLastNumber, lNewNumber);
-                            break;
-                        case SelectedOperator.Multiplication:
-                            UIResultLabel.Content = MathCompute.Multiply(mLastNumber, lNewNumber);
-                            break;
-                        case SelectedOperator.Division:
-                            UIResultLabel.Content = MathCompute.Divide(mLastNumber, lNewNumber);
-                            break;
-                    }
+                        UIResultLabel.Content = lResult;
+                        mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
-                    mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
+                        mIsResult = true;
 
-                    mIsResult = true;
-
-                    mHistory.NewElement();
-                    decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                    mHistory.AppendElement(UIResultLabel.Content.ToString(), true);
-                    mHistory.NewElement();
+                        mHistory.NewElement();
+                        decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                        mHistory.AppendElement(lResult.ToString(), true);
+                        mHistory.NewElement();
+                    }             
                 }
             }
         }
-    }
-
-    public enum SelectedOperator
-    {
-        Addition,
-        Substraction,
-        Multiplication,
-        Division,
-        None
     }
 }

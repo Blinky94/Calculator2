@@ -19,9 +19,9 @@ namespace Udemy_Calculator
             mDisplayHistory = new DisplayHistory();
         }
 
-        private void UIHistoryTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public string ReturnFormula()
         {
-            UIHistoryScrollViewer.ScrollToEnd();
+            return mDisplayHistory.FormulaStr;
         }
 
         private void UICleaner_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace Udemy_Calculator
         {
             if (!pIsResult)
             {
-            mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum);
+                mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum);
             }
             else
             {
@@ -75,6 +75,11 @@ namespace Udemy_Calculator
         internal void RemoveElement(int pLength)
         {
             mDisplayHistory.RemoveHistoryFormula(pLength);
+        }
+
+        private void UIHistoryTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UIHistoryScrollViewer.ScrollToEnd();
         }
     }
 }
