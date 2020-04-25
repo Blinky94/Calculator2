@@ -8,40 +8,9 @@
              d:DesignHeight="400"
              d:DesignWidth="250">
 
-    <UserControl.Resources>
-        <!--UI History Expander Template-->
-        <ControlTemplate x:Key="UIHistoryExpander"
-                         TargetType="{x:Type Expander}">
-            <DockPanel>
-                <ToggleButton x:Name="ExpanderButton"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              DockPanel.Dock="Top"
-                              HorizontalAlignment="Left"
-                              Checked="UIHistoryExpander_Expanded"
-                              Unchecked="UIHistoryExpander_Collapsed">
-                    <Image Source="Images/History_icon.png"
-                           Width="22"
-                           Height="22" />
-                </ToggleButton>
-                <ContentPresenter x:Name="ExpanderContent"
-                                  Grid.Column="1"
-                                  Visibility="Visible"
-                                  DockPanel.Dock="Bottom" />
-            </DockPanel>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsExpanded"
-                         Value="True">
-                    <Setter TargetName="ExpanderContent"
-                            Property="Visibility"
-                            Value="Visible" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </UserControl.Resources>
-
     <!--Standard Calculator-->
-    <Grid Background="White">
+    <Grid x:Name="UIStandardCalculator"
+          Background="White">
         <Grid.Resources>
             <Style x:Key="BaseStyleButton"
                    TargetType="Button">
@@ -84,8 +53,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto"
-                              Name="UIHistoryExpanderColumn" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -208,73 +176,6 @@
                     Width="102"
                     Click="UIEqualButton_Click" />
         </StackPanel>
-
-        <!--History Grid-->
-        <Expander Grid.Row="0"
-                  Grid.Column="2"
-                  Grid.ColumnSpan="6"
-                  Grid.RowSpan="7"
-                  Margin="0 -25 0 0"
-                  Width="220"
-                  ExpandDirection="Right"
-                  IsExpanded="False"
-                  Template="{StaticResource ResourceKey=UIHistoryExpander}"
-                  OverridesDefaultStyle="True">
-            <Expander.Content>
-                <Grid Name="HistoryGrid"
-                      Background="Transparent">
-                    <Grid.Resources>
-                        <Style TargetType="RichTextBox">
-                            <Setter Property="FontSize"
-                                    Value="16" />
-                            <Setter Property="FontWeight"
-                                    Value="Bold" />
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer x:Name="UIHistoryScrollViewer"
-                                  Grid.Row="0"
-                                  VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Disabled"
-                                  Background="Transparent">
-                        <RichTextBox x:Name="UIHistoryTextBox"
-                                     IsReadOnly="True"
-                                     BorderBrush="LightGray"
-                                     BorderThickness="0 0 0 0"
-                                     Margin="35 0 15 0"
-                                     ScrollViewer.CanContentScroll="True"
-                                     Padding="0"
-                                     TextChanged="UIHistoryTextBox_TextChanged">
-                            <FlowDocument x:Name="UIHistoryFlowDoc"
-                                          LineHeight="1">
-                            </FlowDocument>
-                        </RichTextBox>
-                    </ScrollViewer>
-
-                    <StackPanel Orientation="Horizontal"
-                                Background="Transparent"
-                                Grid.Row="1"
-                                HorizontalAlignment="Right"
-                                Margin="0 0 15 0"
-                                DockPanel.Dock="Bottom">
-                        <Button x:Name="UICleaner"
-                                Background="White"
-                                Visibility="Hidden"
-                                Width="25"
-                                Height="25"
-                                Click="UICleaner_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/Cleaner_icon.png" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Expander.Content>
-        </Expander>
 
     </Grid>
 </UserControl>

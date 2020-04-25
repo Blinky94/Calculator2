@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Udemy_Calculator
 {
@@ -25,16 +14,19 @@ namespace Udemy_Calculator
         private SelectedOperator mSelectedOperator = SelectedOperator.None;
         private string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
-        private DisplayHistory mDisplayHistory;
-        private static double mHistoryWidth = 200d;
-        private const double mMainWindowWidth = 280d;
-        private const double mMainWindowHeight = 390d;
-        private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
+        private History mHistory;
 
         public StandardCalculator()
         {
             InitializeComponent();
-            mDisplayHistory = new DisplayHistory();
+            
+            mHistory = new History();
+            mHistory.SetValue(Grid.RowProperty, 1);
+            mHistory.SetValue(Grid.ColumnProperty, 1);
+            mHistory.SetValue(Grid.ColumnSpanProperty, 6);
+            mHistory.SetValue(Grid.RowSpanProperty, 7);
+            mHistory.SetValue(Grid.MarginProperty, new Thickness(0, -25, 0, 0));
+            UIStandardCalculator.Children.Add(mHistory);
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
@@ -52,7 +44,7 @@ namespace Udemy_Calculator
                 UIResultLabel.Content = $"{UIResultLabel.Content}{lNumber}";
             }
 
-            mDisplayHistory.AppendHistoryFormula(lNumber.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+            mHistory.AppendElement(lNumber.ToString(), mIsResult, mLastNumber);
         }
 
         private void UIPointButton_Click(object sender, RoutedEventArgs e)
@@ -60,7 +52,7 @@ namespace Udemy_Calculator
             if (!UIResultLabel.Content.ToString().Replace(',', '.').Contains('.'))
             {
                 UIResultLabel.Content = $"{UIResultLabel.Content}.";
-                mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+                mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
                 mIsResult = false;
             }
         }
@@ -68,9 +60,8 @@ namespace Udemy_Calculator
         private void UIACButton_Click(object sender, RoutedEventArgs e)
         {
             UIResultLabel.Content = "0";
-            mDisplayHistory.AddNewHistory();
             mLastNumber = 0;
-            mDisplayHistory.AppendHistoryFormula(string.Empty, UIHistoryTextBox);
+            mHistory.AppendElement(string.Empty);
         }
 
         private decimal TransformCoef(string pButtonPressed)
@@ -96,7 +87,7 @@ namespace Udemy_Calculator
             {
                 if (!mIsResult)
                 {
-                    mDisplayHistory.RemoveHistoryFormula(UIResultLabel.Content.ToString().Length);
+                    mHistory.RemoveElement(UIResultLabel.Content.ToString().Length);
                     UIResultLabel.Content = lResult * lTransformCoef;
                 }
                 else
@@ -105,7 +96,7 @@ namespace Udemy_Calculator
                     UIResultLabel.Content = mLastNumber * lTransformCoef;
                 }
 
-                mDisplayHistory.AppendHistoryFormula(UIResultLabel.Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+                mHistory.AppendElement(UIResultLabel.Content.ToString(), mIsResult, mLastNumber);
             }
         }
 
@@ -113,7 +104,7 @@ namespace Udemy_Calculator
         {
             if (!mSpecialSymbols.Contains(UIResultLabel.Content.ToString().LastOrDefault()))
             {
-                mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+                mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
                 decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
                 UIResultLabel.Content = (e.Source as Button).Content.ToString();
@@ -160,49 +151,16 @@ namespace Udemy_Calculator
                             break;
                     }
 
-                    mDisplayHistory.AppendHistoryFormula((e.Source as Button).Content.ToString(), UIHistoryTextBox, mIsResult, mLastNumber);
+                    mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
+
                     mIsResult = true;
-                    mDisplayHistory.AddNewHistory();
+
+                    mHistory.NewElement();
                     decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                    mDisplayHistory.AppendHistoryResult(UIResultLabel.Content.ToString(), UIHistoryTextBox);
-                    mDisplayHistory.AddNewHistory();
+                    mHistory.AppendElement(UIResultLabel.Content.ToString(), true);
+                    mHistory.NewElement();
                 }
             }
-        }
-
-        private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.Width = mMainWindowWidth + mHistoryWidth;
-            UIHistoryExpanderColumn.Width = mExpandedWidth;
-
-            if (HistoryGrid != null)
-            {
-                HistoryGrid.Visibility = Visibility.Visible;
-                UICleaner.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void UIHistoryExpander_Collapsed(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.Width = mMainWindowWidth;
-            mExpandedWidth = UIHistoryExpanderColumn.Width;
-            UIHistoryExpanderColumn.Width = GridLength.Auto;
-
-            if (HistoryGrid != null)
-            {
-                HistoryGrid.Visibility = Visibility.Collapsed;
-                UICleaner.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void UIHistoryTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UIHistoryScrollViewer.ScrollToEnd();
-        }
-
-        private void UICleaner_Click(object sender, RoutedEventArgs e)
-        {
-            mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
         }
     }
 

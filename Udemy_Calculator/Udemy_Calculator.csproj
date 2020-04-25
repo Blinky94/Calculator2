@@ -59,10 +59,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DisplayHistory.cs" />
+    <Compile Include="History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MathCompute.cs" />
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
+    <Page Include="History.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

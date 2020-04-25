@@ -8,7 +8,7 @@
         Title="Calculator"
         ResizeMode="NoResize"
         Height="400"
-        Width="280">
+        Width="275">
 
     <!--Main Container Grid-->
     <Grid x:Name="MainGrid"
