@@ -18,7 +18,7 @@ namespace Udemy_Calculator
         public StandardCalculator()
         {
             InitializeComponent();
-            
+
             mHistory = new History();
             mHistory.SetValue(Grid.RowProperty, 1);
             mHistory.SetValue(Grid.ColumnProperty, 1);
@@ -106,7 +106,7 @@ namespace Udemy_Calculator
                 mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
                 decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                UIResultLabel.Content = (e.Source as Button).Content.ToString();           
+                UIResultLabel.Content = (e.Source as Button).Content.ToString();
             }
         }
 
@@ -119,18 +119,16 @@ namespace Udemy_Calculator
                 if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
                 {
                     decimal lResult = default;
-                    if(MathCompute.SetCalculus(lFormula, out lResult) != false)
-                    {
-                        UIResultLabel.Content = lResult;
-                        mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
-                        mIsResult = true;
+                    UIResultLabel.Content = lResult;
+                    mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
-                        mHistory.NewElement();
-                        decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                        mHistory.AppendElement(lResult.ToString(), true);
-                        mHistory.NewElement();
-                    }             
+                    mIsResult = true;
+
+                    mHistory.NewElement();
+                    decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                    mHistory.AppendElement(lResult.ToString(), true);
+                    mHistory.NewElement();
                 }
             }
         }

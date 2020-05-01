@@ -62,7 +62,8 @@
     <Compile Include="History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MathCompute.cs" />
+    <Compile Include="MathOperation.cs" />
+    <Compile Include="PEMDAS.cs" />
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
