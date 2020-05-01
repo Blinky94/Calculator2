@@ -2,4 +2,6 @@
 *.exe
 Udemy_Calculator/bin/
 Udemy_Calculator/obj/
+Udemy_Calculator_Tests/bin/
+Udemy_Calculator_Tests/obj/
 .vs/
