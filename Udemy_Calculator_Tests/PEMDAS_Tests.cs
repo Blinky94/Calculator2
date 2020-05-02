@@ -11,7 +11,7 @@ namespace Udemy_Calculator_Tests
 {
 
     [TestClass]
-    public class Arithmetics_Tests
+    public class PEMDAS_Tests
     {
 
         #region Test on Constructor PEMDAS
