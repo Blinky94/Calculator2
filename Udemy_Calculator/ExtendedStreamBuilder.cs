@@ -8,8 +8,6 @@ namespace Udemy_Calculator
 {
     public static class ExtendedStreamBuilder
     {
-        private static char[] items;
-
         public static bool Contains(this StringBuilder pSb, char[] pTab)
         {
             bool lIsSbContains = false;

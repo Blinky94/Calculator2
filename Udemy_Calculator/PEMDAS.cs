@@ -159,52 +159,105 @@ namespace Udemy_Calculator
             }
         }
 
-        internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
+        /// <summary>
+        /// Delete everything after the '(' && ')' exponent
+        /// </summary>
+        /// <param name="pSbChunk"></param>
+        /// <param name="pStartIndex"></param>
+        internal void EraseLeftElementsFromExponent(ref StringBuilder pSbChunk, ref int pStartIndex)
         {
-            for (int i = 0; i < pSbChunk.Length; i++)
+            // Get LEFT start index number from ^
+            for (int i = pStartIndex - 1; i >= 0; i--)
             {
-                if (pSbChunk[i] == '^')
+                if (!char.IsNumber(pSbChunk[i]))
                 {
-                    StringBuilder lSb = pSbChunk;
+                    pSbChunk.Remove(0, i + 1);
+                    pStartIndex -= i;
+                    break;
+                }
+            }
+        }
 
-                    while (i > 0)
+        /// <summary>
+        /// Delete everything before the exponent decimal
+        /// </summary>
+        /// <param name="pSbChunk"></param>
+        /// <param name="pStartIndex"></param>
+        internal void EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
+        {
+            Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
+
+            // Get RIGHT from '(' to ')' index from ^
+            for (int i = pStartIndex; i < pSbChunk.Length; i++)
+            {
+                if (pSbChunk[i] == '(')
+                {
+                    lStackOpenedIndexParenthesis.Push(i);
+                }
+                else if (pSbChunk[i] == ')')
+                {
+                    if (lStackOpenedIndexParenthesis.Count() > 0)
                     {
-                        i--;
-                        
-                        if(!char.IsNumber(pSbChunk[i]))
+                        int lClosedIndex = lStackOpenedIndexParenthesis.Pop();
+                        if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
-                            pSbChunk.Remove(i, 1);
+                            pSbChunk.Remove(i++, pSbChunk.Length - i++);
+                            break;
                         }
-        
                     }
                 }
             }
         }
 
-        #endregion
+        internal int IndexOfFirstSymbol(StringBuilder pSbChunk, char pSymb)
+        {
+            for (int i = 0; i < pSbChunk.Length; i++)
+            {
+                if (pSbChunk[i] == pSymb)
+                {
+                    return i;
+                }
+            }
 
-        #region Multiplication
+            return default;
+        }
 
-
-
-        #endregion
-
-        #region Division
-
-
-
-        #endregion
-
-        #region Addition
-
-
-
-        #endregion
-
-        #region Substraction
-
-
-
-        #endregion
+        /// <summary>
+        /// Get index from the exponent symbol ('^'), from left to right
+        /// </summary>
+        /// <param name="pSbChunk"></param>
+        internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
+        {
+            int lStartIndex = IndexOfFirstSymbol(pSbChunk, '^');
+            EraseLeftElementsFromExponent(ref pSbChunk, ref lStartIndex);
+            EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
+        }
     }
+
+    #endregion
+
+    #region Multiplication
+
+
+
+    #endregion
+
+    #region Division
+
+
+
+    #endregion
+
+    #region Addition
+
+
+
+    #endregion
+
+    #region Substraction
+
+
+
+    #endregion
 }
+
