@@ -66,7 +66,7 @@ namespace Udemy_Calculator
         /// </summary>
         internal void ComputeParenthesis()
         {
-            if (ParenthesisAreEquivalent())
+            if (ParenthesisAreEquivalent(mFormula))
             {
                 for (int i = 0; i < mSb.Length; i++)
                 {
@@ -99,10 +99,10 @@ namespace Udemy_Calculator
         /// <summary>
         /// Compare the number of '(' and ')'
         /// </summary>
-        public bool ParenthesisAreEquivalent()
+        public bool ParenthesisAreEquivalent(string pFormula)
         {
-            int lOpenedParenthesis = mFormula.Count(c => c == '(');
-            int lClosedParenthesis = mFormula.Count(c => c == ')');
+            int lOpenedParenthesis = pFormula.Count(c => c == '(');
+            int lClosedParenthesis = pFormula.Count(c => c == ')');
 
             return lOpenedParenthesis == lClosedParenthesis;
         }
@@ -113,22 +113,71 @@ namespace Udemy_Calculator
 
         internal void ComputeExponent()
         {
-            // compute chunk if not empty
-            if (mChunk.Count() != 0)
+            // compute chunk formula if not empty
+            if (mChunk.Count() > 0)
             {
                 StringBuilder lSbChunk = new StringBuilder(new string(mChunk)); // Convert chunk array to streambuilder object
 
-                for (int i = 0; i < lSbChunk.Length; i++)
+                // Number of parenthesis are equivalent ex : (5+6^(2)) or 6^(2)
+                if (ParenthesisAreEquivalent(lSbChunk.ToString()))
                 {
-                    if(lSbChunk[i] == '^')
-                    {
+                    // get chunk of exponent
+                    GetChunkOfExponent(ref lSbChunk);
 
+                    // if parenthesis contains () or ^, or */, or +-, compute
+
+                    // compute Math.pow(num, exponent)
+
+                    // Replace result in mFomula
+
+                    for (int i = 0; i < lSbChunk.Length; i++)
+                    {
+                        if (IsRealOpenedParenthesis(i)) // If '(' not preceed exponent symbol
+                        {
+                            if (!mStackOfOpenedParenthesisIndex.Contains(i)) // index not already in
+                            {
+                                mStackOfOpenedParenthesisIndex.Push(i); // Add index
+                            }
+                        }
+                        else if (lSbChunk[i] == ')')
+                        {
+                            if (mStackOfOpenedParenthesisIndex.Count() > 0)
+                            {
+                                int lOpIndex = mStackOfOpenedParenthesisIndex.Pop(); // Pop index
+                                lOpIndex++; // Adjust the index number from 1 to ...
+
+                                mChunk = new char[i - lOpIndex];
+                                lSbChunk.CopyTo(lOpIndex, mChunk, 0, i - lOpIndex);
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    throw new ArithmeticException("The number of opened parenthesis and closed parenthesis are not the same !!!");
+                }
             }
-            else // compute formula
-            {
+        }
 
+        internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
+        {
+            for (int i = 0; i < pSbChunk.Length; i++)
+            {
+                if (pSbChunk[i] == '^')
+                {
+                    StringBuilder lSb = pSbChunk;
+
+                    while (i > 0)
+                    {
+                        i--;
+                        
+                        if(!char.IsNumber(pSbChunk[i]))
+                        {
+                            pSbChunk.Remove(i, 1);
+                        }
+        
+                    }
+                }
             }
         }
 
