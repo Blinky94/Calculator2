@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace Udemy_Calculator
 {
-    public class MathOperation
+    public static class MathOperation
     {
-        internal double Add(double p1, double p2)
+        public static double Add(double p1, double p2)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Udemy_Calculator
             return default;
         }
 
-        internal double Substract(double p1, double p2)
+        public static double Substract(double p1, double p2)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace Udemy_Calculator
             return default;
         }
 
-        internal double Multiply(double p1, double p2)
+        public static double Multiply(double p1, double p2)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Udemy_Calculator
             return default;
         }
 
-        internal double Divide(double p1, double p2)
+        public static double Divide(double p1, double p2)
         {
             try
             {
@@ -61,11 +61,25 @@ namespace Udemy_Calculator
             return default;
         }
 
-        internal double Exponent(double p1, double p2)
+        public static double Exponent(double p1, double p2)
         {
             try
             {
                 return Math.Pow(p1, p2);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error !!!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return default;
+        }
+
+        public static double Square(double p)
+        {
+            try
+            {
+                return Math.Sqrt(p);
             }
             catch (Exception e)
             {

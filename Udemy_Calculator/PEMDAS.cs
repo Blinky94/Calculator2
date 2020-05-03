@@ -6,6 +6,18 @@ using System.Threading.Tasks;
 
 namespace Udemy_Calculator
 {
+    /// <summary>
+    /// Chunk of fomula
+    /// </summary>
+    public static class Chunk
+    {
+        public static StringBuilder SB { get; set; }
+        public static int StartIndex { get; set; }
+        public static int Length { get; set; }
+    }
+
+    public enum Operand { Multiplication, Division, Addition, Substraction, Square, Exponent }
+
     public class PEMDAS
     {
         #region Fields
@@ -24,7 +36,7 @@ namespace Udemy_Calculator
         {
             mFormula = pFormula;
             mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
-            mSb = new StringBuilder(mFormula);
+            mSb = new StringBuilder(mFormula);           
         }
 
         /// <summary>
@@ -37,8 +49,8 @@ namespace Udemy_Calculator
             {
                 ComputeParenthesis();
                 ComputeExponent();
-                // ComputeMultiplicationOrDivision();
-                // ComputeAdditionOrSubstraction();
+                ComputeMultiplicationOrDivision();
+                ComputeAdditionOrSubstraction();
             }
 
             pResult = mSb.ToString();
@@ -228,32 +240,61 @@ namespace Udemy_Calculator
             EraseLeftElementsFromExponent(ref pSbChunk, ref lStartIndex);
             int lClosedIndex = EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
         }
+
+        #endregion
+
+        #region Multiplication & Division
+
+        private void ComputeMultiplicationOrDivision()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Addition & Substraction
+
+        private void ComputeAdditionOrSubstraction()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Maths compute operation
+
+        internal double DoCompute()
+        {
+            double lResult = default;
+            double a = 0;
+            double b = 0;
+
+            switch (mOperand)
+            {
+                case Operand.Multiplication:
+                    lResult = MathOperation.Multiply(a, b);
+                    break;
+                case Operand.Division:
+                    lResult = MathOperation.Divide(a, b);
+                    break;
+                case Operand.Addition:
+                    lResult = MathOperation.Add(a, b);
+                    break;
+                case Operand.Substraction:
+                    lResult = MathOperation.Substract(a, b);
+                    break;
+                case Operand.Square:
+                    lResult = MathOperation.Square(a);
+                    break;
+                case Operand.Exponent:
+                    lResult = MathOperation.Exponent(a, b);
+                    break;
+            }
+
+            return lResult;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Multiplication
-
-
-
-    #endregion
-
-    #region Division
-
-
-
-    #endregion
-
-    #region Addition
-
-
-
-    #endregion
-
-    #region Substraction
-
-
-
-    #endregion
 }
 
