@@ -1,7 +1,7 @@
 *.suo
 *.exe
-bin
-obj
+bin/
+obj/
 .vs/
 *.dll
 *.cache
