@@ -215,15 +215,14 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Delete everything before the exponent decimal
+        /// Delete everything after the last exponent parenthesis
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
         /// <returns>The ended index</returns>
-        internal int EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
+        internal void EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
         {
             Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
-            int lClosedIndex = 0;
 
             // Get RIGHT from '(' to ')' index from ^
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
@@ -236,30 +235,16 @@ namespace Udemy_Calculator
                 {
                     if (lStackOpenedIndexParenthesis.Count() > 0)
                     {
-                        lClosedIndex = lStackOpenedIndexParenthesis.Pop();
+                        lStackOpenedIndexParenthesis.Pop();
                         if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
-                            pSbChunk.Remove(i++, pSbChunk.Length - i++);
+                            i++;
+                            pSbChunk.Remove(i, pSbChunk.Length - i);
                             break;
                         }
                     }
                 }
             }
-
-            return lClosedIndex;
-        }
-
-        internal int IndexOfFirstSymbol(StringBuilder pSbChunk, char pSymb)
-        {
-            for (int i = 0; i < pSbChunk.Length; i++)
-            {
-                if (pSbChunk[i] == pSymb)
-                {
-                    return i;
-                }
-            }
-
-            return default;
         }
 
         /// <summary>
@@ -268,9 +253,9 @@ namespace Udemy_Calculator
         /// <param name="pSbChunk"></param>
         internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
         {
-            int lStartIndex = IndexOfFirstSymbol(pSbChunk, '^');
+            int lStartIndex = pSbChunk.IndexOf('^');
             EraseLeftElementsFromExponent(ref pSbChunk, ref lStartIndex);
-            int lClosedIndex = EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
+            EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
         }
 
         #endregion

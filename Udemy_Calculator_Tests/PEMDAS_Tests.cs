@@ -235,7 +235,7 @@ namespace Udemy_Calculator_Tests
         public void EraseRightElementsFromExponent_CaseRightDecimalUnderParenthesis_ReturnsRightChunk()
         {
             // Arrange
-            string lFormula = "(51^(5))";
+            string lFormula = "(51^(5))+5/3";
             int lIndex = 3;
 
             // Act
@@ -283,7 +283,7 @@ namespace Udemy_Calculator_Tests
         public void EraseRightElementsFromExponent_CaseRightDecimalWithMultipleOperatorsAfter_ReturnsRightChunk()
         {
             // Arrange
-            string lFormula = "5*(2+(5^(5/3)))";
+            string lFormula = "5*(2+(5^(5/3)))*7";
             int lIndex = 7;
 
             // Act
@@ -309,55 +309,6 @@ namespace Udemy_Calculator_Tests
 
             // Assert
             Assert.AreEqual("2^(5^(3/2))", lSb.ToString());
-        }
-
-        #endregion
-
-        #region IndexOfFirstSymbol
-
-        [TestMethod]
-        public void IndexOfFirstSymbol_OneExponent_ReturnsIndex()
-        {
-            // Arrange
-            string lFormula = "2^(5)";
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            int lResult = lPEMDAS.IndexOfFirstSymbol(lSb, '^');
-
-            // Assert
-            Assert.AreEqual(1, lResult);
-        }
-
-        [TestMethod]
-        public void IndexOfFirstSymbol_MultipleExponents_ReturnsIndex()
-        {
-            // Arrange
-            string lFormula = "2^(5^(3/2))+5^(2)";
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            int lResult = lPEMDAS.IndexOfFirstSymbol(lSb, '^');
-
-            // Assert
-            Assert.AreEqual(1, lResult);
-        }
-
-        [TestMethod]
-        public void IndexOfFirstSymbol_NoExponents_ReturnsIndex()
-        {
-            // Arrange
-            string lFormula = "2+3*(5/2)";
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            int lResult = lPEMDAS.IndexOfFirstSymbol(lSb, '^');
-
-            // Assert
-            Assert.AreEqual(0, lResult);
         }
 
         #endregion
