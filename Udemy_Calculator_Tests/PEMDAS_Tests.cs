@@ -14,11 +14,12 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void Constructor_ComputeFormula_ReturnsStreamBuilder()
         {
+            Assert.Inconclusive();
             string lFormula = "4*((5/2)";
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.AreEqual(lFormula, lPEMDAS.mSb.ToString());
+            Assert.AreEqual(lFormula, lPEMDAS.mChunk.ToString());
         }
 
         #endregion
@@ -55,7 +56,9 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(0, lFormula)); // GOOD '('
+            lPEMDAS.mChunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
+
+            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.mChunk)); // GOOD '('
         }
 
         [TestMethod]
@@ -64,8 +67,9 @@ namespace Udemy_Calculator_Tests
             string lFormula = "4*((5/2))";
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
+            lPEMDAS.mChunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
 
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(2, lFormula)); // GOOD '('
+            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.mChunk)); // GOOD '('
         }
 
         [TestMethod]
@@ -74,8 +78,9 @@ namespace Udemy_Calculator_Tests
             string lFormula = "4*((5/2))";
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
+            lPEMDAS.mChunk = new Chunk(new StringBuilder(lFormula), 7, lFormula.Length);
 
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(7, lFormula)); // BAD ')'
+            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.mChunk)); // BAD ')'
         }
 
         [TestMethod]
@@ -84,8 +89,9 @@ namespace Udemy_Calculator_Tests
             string lFormula = "2^(5/3)+4*((5/2))";
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
+            lPEMDAS.mChunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
 
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(2, lFormula)); // BAD '^('
+            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.mChunk)); // BAD '^('
         }
 
         [TestMethod]
@@ -95,9 +101,11 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
+            lPEMDAS.mChunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
+
             lPEMDAS.ComputeParenthesis();
 
-            Assert.AreEqual("(5/2)", new string(lPEMDAS.mChunkParenthesis));
+            Assert.AreEqual("(5/2)", lPEMDAS.mChunk.SB.ToString());
         }
 
         #endregion
