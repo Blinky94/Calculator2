@@ -62,7 +62,7 @@ namespace Udemy_Calculator
             mChunk = new Chunk(new StringBuilder(mFormula), 0, mFormula.Length);
             StringBuilder lSb = new StringBuilder(mFormula);
 
-            while (lSb.Contains(mTabOperators))
+            while (lSb.ContainsAny(mTabOperators))
             {
                 ComputeParenthesis();
                 ComputeExponent();
@@ -143,27 +143,13 @@ namespace Udemy_Calculator
 
         internal void ComputeExponent()
         {
-            // compute chunk formula if not empty
-            //if (mChunk.SB.Length > 0)
-            //{
+            if (mChunk.Length > 0 && mChunk.SB.Contains('^'))
+            {
 
-            //    // Number of parenthesis are equivalent ex : (5+6^(2)) or 6^(2)
-            //    if (ParenthesisAreEquivalent(lSbChunkOfExponent.ToString()))
-            //    {
-            //        // get chunk of exponent
-            //        GetChunkOfExponent(ref lSbChunkOfExponent);
 
-            //        // if parenthesis contains () or ^, or */, or +-, compute
-
-            //        // compute Math.pow(num, exponent)
-
-            //        // Replace result in mFomula                
-            //    }
-            //    else
-            //    {
-            //        throw new ArithmeticException("The number of opened parenthesis and closed parenthesis are not the same !!!");
-            //    }
-            //}
+                // Add operand type exponent
+                mOperand = Operand.Exponent;
+            }
         }
 
         /// <summary>

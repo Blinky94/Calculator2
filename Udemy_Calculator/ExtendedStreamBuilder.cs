@@ -9,12 +9,12 @@ namespace Udemy_Calculator
     public static class ExtendedStreamBuilder
     {
         /// <summary>
-        /// Check if Sb contains specific chars
+        /// Check if Sb contains specific string
         /// </summary>
         /// <param name="pSb"></param>
         /// <param name="pTab"></param>
         /// <returns></returns>
-        public static bool Contains(this StringBuilder pSb, char[] pTab)
+        public static bool ContainsAny(this StringBuilder pSb, char[] pTab)
         {
             bool lIsSbContains = false;
 
@@ -27,6 +27,49 @@ namespace Udemy_Calculator
             }
 
             return lIsSbContains;
+        }
+
+        /// <summary>
+        /// Check if Sb contains specific char
+        /// </summary>
+        /// <param name="pSb"></param>
+        /// <param name="pTab"></param>
+        /// <returns></returns>
+        public static bool Contains(this StringBuilder pSb, char pChar)
+        {
+            return pSb.ToString().Contains(pChar);
+        }
+
+        /// <summary>
+        /// Get the first occurence index of a char in the Sb
+        /// </summary>
+        /// <param name="pSb"></param>
+        /// <param name="pChar"></param>
+        /// <returns></returns>
+        public static int IndexOf(this StringBuilder pSb, char pChar)
+        {
+            return pSb.ToString().IndexOf(pChar);
+        }
+
+        /// <summary>
+        /// Get all the occurence index of a char in the Sb
+        /// </summary>
+        /// <param name="pSb"></param>
+        /// <param name="pChar"></param>
+        /// <returns></returns>
+        public static int[] IndexOfAny(this StringBuilder pSb, char pChar)
+        {
+            List<int> lList = new List<int>();
+
+            for (int i = 0; i < pSb.Length; i++)
+            {
+                if (pSb[i] == pChar)
+                {
+                    lList.Add(i);
+                }
+            }
+
+            return lList.ToArray();
         }
 
         /// <summary>
@@ -43,7 +86,7 @@ namespace Udemy_Calculator
             pSb.CopyTo(pStartIndex, mNewStr, 0, pLength);
             string lval = new string(mNewStr);
 
-            return pSb.Replace(pSb.ToString(), lval); 
+            return pSb.Replace(pSb.ToString(), lval);
         }
     }
 }
