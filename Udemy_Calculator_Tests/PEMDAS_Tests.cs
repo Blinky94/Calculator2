@@ -55,7 +55,7 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(0)); // GOOD '('
+            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(0, lFormula)); // GOOD '('
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(2)); // GOOD '('
+            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(2, lFormula)); // GOOD '('
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(7)); // BAD ')'
+            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(7, lFormula)); // BAD ')'
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Udemy_Calculator_Tests
 
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
 
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(2)); // BAD '^('
+            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(2, lFormula)); // BAD '^('
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace Udemy_Calculator_Tests
 
             lPEMDAS.ComputeParenthesis();
 
-            Assert.AreEqual("(5/2)", new string(lPEMDAS.mChunk));
+            Assert.AreEqual("(5/2)", new string(lPEMDAS.mChunkParenthesis));
         }
 
         #endregion

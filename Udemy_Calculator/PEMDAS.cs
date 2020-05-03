@@ -37,7 +37,8 @@ namespace Udemy_Calculator
             {
                 ComputeParenthesis();
                 ComputeExponent();
-
+                // ComputeMultiplicationOrDivision();
+                // ComputeAdditionOrSubstraction();
             }
 
             pResult = mSb.ToString();
@@ -47,30 +48,42 @@ namespace Udemy_Calculator
 
         private Stack<int> mStackOfOpenedParenthesisIndex = new Stack<int>();
 
-        internal bool IsRealOpenedParenthesis(int pIndex)
+        internal bool IsRealOpenedParenthesis(int pIndex, string pStr)
         {
             if (pIndex > 0)
             {
-                return mSb[pIndex] == '(' && (mSb[pIndex - 1] != '^');
+                return pStr[pIndex] == '(' && (pStr[pIndex - 1] != '^');
             }
             else
             {
-                return mSb[pIndex] == '(';
+                return pStr[pIndex] == '(';
             }
         }
 
-        internal char[] mChunk;
+        internal char[] mChunkParenthesis;
+        internal char[] mChunkExponent;
 
         /// <summary>
         /// Main method to compute all parenthesis in a formula
         /// </summary>
         internal void ComputeParenthesis()
         {
-            if (ParenthesisAreEquivalent(mFormula))
+            string lCurrentChunk;
+
+            if (mChunkExponent != null)
+            {
+                lCurrentChunk = mChunkExponent.ToString();
+            }
+            else
+            {
+                lCurrentChunk = mFormula;
+            }
+
+            if (ParenthesisAreEquivalent(lCurrentChunk))
             {
                 for (int i = 0; i < mSb.Length; i++)
                 {
-                    if (IsRealOpenedParenthesis(i)) // If '(' not preceed exponent symbol
+                    if (IsRealOpenedParenthesis(i, lCurrentChunk)) // If '(' not preceed exponent symbol
                     {
                         if (!mStackOfOpenedParenthesisIndex.Contains(i)) // index not already in
                         {
@@ -84,8 +97,8 @@ namespace Udemy_Calculator
                             int lOpIndex = mStackOfOpenedParenthesisIndex.Pop(); // Pop index
                             lOpIndex++; // Adjust the index number from 1 to ...
 
-                            mChunk = new char[i - lOpIndex];
-                            mSb.CopyTo(lOpIndex, mChunk, 0, i - lOpIndex);
+                            mChunkParenthesis = new char[i - lOpIndex];
+                            mSb.CopyTo(lOpIndex, mChunkParenthesis, 0, i - lOpIndex);
                         }
                     }
                 }
@@ -114,43 +127,21 @@ namespace Udemy_Calculator
         internal void ComputeExponent()
         {
             // compute chunk formula if not empty
-            if (mChunk.Count() > 0)
+            if (mChunkParenthesis.Count() > 0)
             {
-                StringBuilder lSbChunk = new StringBuilder(new string(mChunk)); // Convert chunk array to streambuilder object
+                StringBuilder lSbChunkOfExponent = new StringBuilder(new string(mChunkParenthesis)); // Convert chunk array to streambuilder object
 
                 // Number of parenthesis are equivalent ex : (5+6^(2)) or 6^(2)
-                if (ParenthesisAreEquivalent(lSbChunk.ToString()))
+                if (ParenthesisAreEquivalent(lSbChunkOfExponent.ToString()))
                 {
                     // get chunk of exponent
-                    GetChunkOfExponent(ref lSbChunk);
+                    GetChunkOfExponent(ref lSbChunkOfExponent);
 
                     // if parenthesis contains () or ^, or */, or +-, compute
 
                     // compute Math.pow(num, exponent)
 
-                    // Replace result in mFomula
-
-                    for (int i = 0; i < lSbChunk.Length; i++)
-                    {
-                        if (IsRealOpenedParenthesis(i)) // If '(' not preceed exponent symbol
-                        {
-                            if (!mStackOfOpenedParenthesisIndex.Contains(i)) // index not already in
-                            {
-                                mStackOfOpenedParenthesisIndex.Push(i); // Add index
-                            }
-                        }
-                        else if (lSbChunk[i] == ')')
-                        {
-                            if (mStackOfOpenedParenthesisIndex.Count() > 0)
-                            {
-                                int lOpIndex = mStackOfOpenedParenthesisIndex.Pop(); // Pop index
-                                lOpIndex++; // Adjust the index number from 1 to ...
-
-                                mChunk = new char[i - lOpIndex];
-                                lSbChunk.CopyTo(lOpIndex, mChunk, 0, i - lOpIndex);
-                            }
-                        }
-                    }
+                    // Replace result in mFomula                
                 }
                 else
                 {
@@ -204,6 +195,7 @@ namespace Udemy_Calculator
                         if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
                             pSbChunk.Remove(i++, pSbChunk.Length - i++);
+                            mChunkExponent = pSbChunk.ToString().ToCharArray();
                             break;
                         }
                     }
