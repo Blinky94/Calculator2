@@ -95,7 +95,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void ComputeParenthesis_PutFormulaWithParenthesis_ReturnsChunkWithParenthesis()
+        public void ComputeParenthesis_PutFormulaWithParenthesis_ReturnsChunkWithTheSmallerParenthesis()
         {
             string lFormula = "2^(5/3)+4*((5/2))";
 
@@ -106,7 +106,7 @@ namespace Udemy_Calculator_Tests
             lPEMDAS.ComputeParenthesis();
 
             Assert.AreEqual("(5/2)", lPEMDAS.mChunk.SB.ToString());
-        }
+        }      
 
         #endregion
 

@@ -118,7 +118,7 @@ namespace Udemy_Calculator
                         {
                             int lStartIndex = mStackOfOpenedParenthesisIndex.Pop(); // Pop index
 
-                            // Make new chunk of formula from the '(' to the ')'
+                            // Get new chunk of formula from the '(' to the ')'
                             mChunk.SB.GetChunk(lStartIndex, i - lStartIndex);
                         }
                     }
