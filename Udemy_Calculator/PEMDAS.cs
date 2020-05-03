@@ -14,17 +14,11 @@ namespace Udemy_Calculator
         public StringBuilder SB { get; set; }
         public int StartIndex { get; set; }
 
-        private int mLength = 0;
-        public int Length 
-        { 
-            get 
-            { 
-                return mLength; 
-            } 
-            set 
-            {
-                mLength = SB.Length - StartIndex;
-            } 
+        private int mLength;
+        public int Length
+        {
+            get { return mLength; }
+            set { mLength = SB.Length; }
         }
 
         public Chunk(StringBuilder pSb, int pStartIndex, int pLength)
@@ -99,7 +93,7 @@ namespace Udemy_Calculator
         /// Main method to compute all parenthesis in a formula
         /// </summary>
         internal void ComputeParenthesis()
-        {        
+        {
             if (ParenthesisAreEquivalent(mChunk.SB.ToString()))
             {
                 for (int i = 0; i < mChunk.SB.Length; i++)
@@ -120,6 +114,8 @@ namespace Udemy_Calculator
 
                             // Get new chunk of formula from the '(' to the ')'
                             mChunk.SB.GetChunk(lStartIndex, i - lStartIndex);
+                            mChunk.StartIndex = lStartIndex;
+                            mChunk.Length = i - lStartIndex++;
                         }
                     }
                 }
@@ -150,7 +146,7 @@ namespace Udemy_Calculator
             // compute chunk formula if not empty
             //if (mChunk.SB.Length > 0)
             //{
-               
+
             //    // Number of parenthesis are equivalent ex : (5+6^(2)) or 6^(2)
             //    if (ParenthesisAreEquivalent(lSbChunkOfExponent.ToString()))
             //    {
@@ -215,7 +211,7 @@ namespace Udemy_Calculator
                         if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
                             pSbChunk.Remove(i++, pSbChunk.Length - i++);
-                           // mChunkExponent = pSbChunk.ToString().ToCharArray();
+                            // mChunkExponent = pSbChunk.ToString().ToCharArray();
                             break;
                         }
                     }
