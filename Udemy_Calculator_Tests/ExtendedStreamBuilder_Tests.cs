@@ -40,16 +40,20 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ContainsAny_StringBuilderContainsAnyofChar_ReturnsTrue()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)");
 
+            // Act/Assert
             Assert.IsTrue(lSb.ContainsAny(new char[] { '*', '^' }));
         }
 
         [TestMethod]
         public void ContainsAny_StringBuilderNOTContainsAnyofChar_ReturnsFalse()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)");
 
+            // Act/Assert
             Assert.IsFalse(lSb.ContainsAny(new char[] { '/', 'y' }));
         }
 
@@ -60,17 +64,27 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void Contains_StringBuilderContainsChar_ReturnsTrue()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)");
 
-            Assert.IsTrue(lSb.Contains('^'));
+            // Act
+            bool lResult = lSb.Contains('^');
+
+            // Assert
+            Assert.IsTrue(lResult);
         }
 
         [TestMethod]
         public void Contains_StringBuilderNOTContainsChar_ReturnsFalse()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)");
 
-            Assert.IsFalse(lSb.Contains('y'));
+            // Act
+            bool lResult = lSb.Contains('y');
+
+            // Assert
+            Assert.IsFalse(lResult);
         }
 
         #endregion
@@ -82,38 +96,56 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void IndexOf_StringBuilderContainsOneChar_ReturnsIndexOfThisChar()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)");
 
-            Assert.AreEqual(5, lSb.IndexOf('^'));
+            // Act
+            int lResult = lSb.IndexOf('^');
+
+            // Assert
+            Assert.AreEqual(5, lResult);
         }
 
         [TestMethod]
         public void IndexOf_StringBuilderContainsManySameChar_ReturnsIndexOfTheFirstChar()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
-            Assert.AreEqual(5, lSb.IndexOf('^'));
+            // Act
+            int lResult = lSb.IndexOf('^');
+
+            // Assert
+            Assert.AreEqual(5, lResult);
         }
 
         [TestMethod]
         public void IndexOf_StringBuilderNOTContainsChar_ReturnsNothing()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
-            Assert.AreEqual(-1, lSb.IndexOf('y'));
+            // Act
+            int lResult = lSb.IndexOf('y');
+
+            // Assert
+            Assert.AreEqual(-1, lResult);
         }
 
         #endregion
 
         #region IndexOfAnyChar
 
-        // public static int[] IndexOfAny(this StringBuilder pSb, char pChar)
         [TestMethod]
         public void IndexOfAnyChar_StringBuilderContainsChar_ReturnsTabIndex()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
+            // Act
             int[] lResult = lSb.IndexOfAnyChar('^');
+
+            // Assert
             Assert.IsTrue(Enumerable.SequenceEqual(new int[] { 5, 11, 14 }, lResult));
         }
 
@@ -124,18 +156,26 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void IndexOfAnyString_StringBuilderContainsString_ReturnsTabIndex()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
+            // Act
             int[] lResult = lSb.IndexOfAnyString("^(");
+
+            // Assert
             Assert.IsTrue(Enumerable.SequenceEqual(new int[] { 5, 11, 14 }, lResult));
         }
 
         [TestMethod]
         public void IndexOfAnyString_StringBuilderNOTContainsString_ReturnsNothing()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
+            // Act
             int[] lResult = lSb.IndexOfAnyString("*(");
+
+            // Assert
             Assert.IsTrue(lResult.Count() == 0);
         }
 
@@ -146,10 +186,13 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void GetChunk_EnterIndexAndLengthOfAnExistingSequence_ReturnsTheSequence()
         {
+            // Arrange
             StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
 
+            // Act
             StringBuilder lSubSb = lSb.GetChunk(4, 5);
 
+            // Assert
             Assert.AreEqual("2^(3)", lSubSb.ToString());
         }
 
