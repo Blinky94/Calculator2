@@ -157,7 +157,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseLeftElementsFromExponent(ref lSb, ref lIndex);
+            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
 
             // Assert
             Assert.AreEqual("51^(5))", lSb.ToString());
@@ -173,7 +173,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseLeftElementsFromExponent(ref lSb, ref lIndex);
+            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
 
             // Assert
             Assert.AreEqual("51^(5)", lSb.ToString());
@@ -189,7 +189,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseLeftElementsFromExponent(ref lSb, ref lIndex);
+            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
 
             // Assert
             Assert.AreEqual("6^(2)", lSb.ToString());
@@ -205,7 +205,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseLeftElementsFromExponent(ref lSb, ref lIndex);
+            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
 
             // Assert
             Assert.AreEqual("5^(5/3)))", lSb.ToString());
@@ -221,7 +221,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseLeftElementsFromExponent(ref lSb, ref lIndex);
+            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
 
             // Assert
             Assert.AreEqual("2^(5^(3/2))", lSb.ToString());
@@ -241,7 +241,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseRightElementsFromExponent(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("(51^(5)", lSb.ToString());
@@ -257,7 +257,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseRightElementsFromExponent(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("51^(5)", lSb.ToString());
@@ -273,7 +273,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseRightElementsFromExponent(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("5+6^(2)", lSb.ToString());
@@ -289,7 +289,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseRightElementsFromExponent(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("5*(2+(5^(5/3)", lSb.ToString());
@@ -305,7 +305,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.EraseRightElementsFromExponent(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("2^(5^(3/2))", lSb.ToString());

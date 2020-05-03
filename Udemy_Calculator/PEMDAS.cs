@@ -193,8 +193,8 @@ namespace Udemy_Calculator
         internal void ExtractExponentChunk(ref StringBuilder pSb)
         {
             int lIndexExp = pSb.IndexOf('^');
-            EraseLeftElementsFromExponent(ref pSb, ref lIndexExp);
-            EraseRightElementsFromExponent(ref pSb, lIndexExp);
+            DeleteLeftSequence(ref pSb, ref lIndexExp);
+            DeleteRightSequence(ref pSb, lIndexExp);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
-        internal void EraseLeftElementsFromExponent(ref StringBuilder pSbChunk, ref int pStartIndex)
+        internal void DeleteLeftSequence(ref StringBuilder pSbChunk, ref int pStartIndex)
         {
             // Get LEFT start index number from ^
             for (int i = pStartIndex - 1; i >= 0; i--)
@@ -222,7 +222,7 @@ namespace Udemy_Calculator
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
         /// <returns>The ended index</returns>
-        internal void EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
+        internal void DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
         {
             Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
 
@@ -256,8 +256,8 @@ namespace Udemy_Calculator
         internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
         {
             int lStartIndex = pSbChunk.IndexOf('^');
-            EraseLeftElementsFromExponent(ref pSbChunk, ref lStartIndex);
-            EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
+            DeleteLeftSequence(ref pSbChunk, ref lStartIndex);
+            DeleteRightSequence(ref pSbChunk, lStartIndex);
         }
 
         #endregion
@@ -267,13 +267,15 @@ namespace Udemy_Calculator
         private void ComputeMultiplicationOrDivision()
         {
             // If no exponent, out
-            if (mChunk.SB.ContainsAny(new char[] { '*', '/' }))
+            if (!mChunk.SB.ContainsAny(new char[] { '*', '/' }))
             {
                 return;
             }
 
             if (mChunk.Length > 0)
             {
+                // Get '*' or '/' first and erase others
+
 
             }
         }
