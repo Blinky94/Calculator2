@@ -160,7 +160,7 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Delete everything after the '(' && ')' exponent
+        /// Delete everything after the '(' && ')' exponent, modify the startIndex parameter following the begining of the current exponent value
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
@@ -183,9 +183,11 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
-        internal void EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
+        /// <returns>The ended index</returns>
+        internal int EraseRightElementsFromExponent(ref StringBuilder pSbChunk, int pStartIndex)
         {
             Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
+            int lClosedIndex = 0;
 
             // Get RIGHT from '(' to ')' index from ^
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
@@ -198,7 +200,7 @@ namespace Udemy_Calculator
                 {
                     if (lStackOpenedIndexParenthesis.Count() > 0)
                     {
-                        int lClosedIndex = lStackOpenedIndexParenthesis.Pop();
+                        lClosedIndex = lStackOpenedIndexParenthesis.Pop();
                         if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
                             pSbChunk.Remove(i++, pSbChunk.Length - i++);
@@ -207,6 +209,8 @@ namespace Udemy_Calculator
                     }
                 }
             }
+
+            return lClosedIndex;
         }
 
         internal int IndexOfFirstSymbol(StringBuilder pSbChunk, char pSymb)
@@ -230,7 +234,7 @@ namespace Udemy_Calculator
         {
             int lStartIndex = IndexOfFirstSymbol(pSbChunk, '^');
             EraseLeftElementsFromExponent(ref pSbChunk, ref lStartIndex);
-            EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
+            int lClosedIndex = EraseRightElementsFromExponent(ref pSbChunk, lStartIndex);
         }
     }
 
