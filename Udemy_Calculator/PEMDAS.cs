@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 namespace Udemy_Calculator
 {
     /// <summary>
-    /// Chunk of fomula
+    /// Chunk of formula
     /// </summary>
     public class Chunk
     {
+        private StringBuilder mFormula;
+        public StringBuilder Formula
+        {
+            get { return mFormula; }
+            private set { mFormula = value; }
+        }
+
         public StringBuilder SB { get; set; }
+
         public int StartIndex { get; set; }
 
         private int mLength;
@@ -23,6 +31,9 @@ namespace Udemy_Calculator
 
         public Chunk(StringBuilder pSb, int pStartIndex, int pLength)
         {
+            string lFormula = pSb.ToString();
+            mFormula = new StringBuilder(lFormula);
+
             SB = pSb;
             StartIndex = pStartIndex;
             Length = pLength;
@@ -35,7 +46,6 @@ namespace Udemy_Calculator
     {
         #region Fields
 
-        private string mFormula;
         private char[] mTabOperators;
         private Operand mOperand;
         internal Chunk mChunk;
@@ -48,21 +58,18 @@ namespace Udemy_Calculator
         /// <param name="pFormula"></param>
         public PEMDAS(string pFormula)
         {
-            mFormula = pFormula;
             mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
+            // Initialize the chunk formula with the complete formula
+            mChunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
         }
 
         /// <summary>
         /// Main function to compute formula input and returns out parameter result
         /// </summary>
         /// <param name="pResult"></param>
-        public void ComputeFormula(out string pResult)
+        public string ComputeFormula()
         {
-            // Initialize the chunk formula with the complete formula
-            mChunk = new Chunk(new StringBuilder(mFormula), 0, mFormula.Length);
-            StringBuilder lSb = new StringBuilder(mFormula);
-
-            while (lSb.ContainsAny(mTabOperators))
+            while (mChunk.SB.ContainsAny(mTabOperators))
             {
                 ComputeParenthesis();
                 ComputeExponent();
@@ -70,12 +77,12 @@ namespace Udemy_Calculator
                 ComputeAdditionOrSubstraction();
             }
 
-            pResult = lSb.ToString();
+            return mChunk.SB.ToString();
         }
 
         #region Parenthesis
 
-        private Stack<int> mStackOfOpenedParenthesisIndex = new Stack<int>();
+        private Stack<int> mStack = new Stack<int>();
 
         internal bool IsRealOpenedParenthesis(Chunk pCkunk)
         {
@@ -94,23 +101,31 @@ namespace Udemy_Calculator
         /// </summary>
         internal void ComputeParenthesis()
         {
-            if (ParenthesisAreEquivalent(mChunk.SB.ToString()))
+            // If no parenthesis, out
+            if (mChunk.SB.IndexOf('(') == -1)
+            {
+                return;
+            }
+
+            mStack.Clear();
+
+            if (ParenthesisAreEquivalent(mChunk.SB))
             {
                 for (int i = 0; i < mChunk.SB.Length; i++)
                 {
                     mChunk.StartIndex = i;
                     if (IsRealOpenedParenthesis(mChunk)) // If '(' not preceed exponent symbol
                     {
-                        if (!mStackOfOpenedParenthesisIndex.Contains(i)) // index not already in
+                        if (!mStack.Contains(i)) // index not already in
                         {
-                            mStackOfOpenedParenthesisIndex.Push(i); // Add index
+                            mStack.Push(i); // Add index
                         }
                     }
                     else if (mChunk.SB[i] == ')')
                     {
-                        if (mStackOfOpenedParenthesisIndex.Count() > 0)
+                        if (mStack.Count() > 0)
                         {
-                            int lStartIndex = mStackOfOpenedParenthesisIndex.Pop(); // Pop index
+                            int lStartIndex = mStack.Pop(); // Pop index
 
                             // Get new chunk of formula from the '(' to the ')'
                             mChunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
@@ -129,10 +144,10 @@ namespace Udemy_Calculator
         /// <summary>
         /// Compare the number of '(' and ')'
         /// </summary>
-        public bool ParenthesisAreEquivalent(string pFormula)
+        public bool ParenthesisAreEquivalent(StringBuilder pFormula)
         {
-            int lOpenedParenthesis = pFormula.Count(c => c == '(');
-            int lClosedParenthesis = pFormula.Count(c => c == ')');
+            int lOpenedParenthesis = pFormula.ToString().Count(c => c == '(');
+            int lClosedParenthesis = pFormula.ToString().Count(c => c == ')');
 
             return lOpenedParenthesis == lClosedParenthesis;
         }
@@ -143,13 +158,41 @@ namespace Udemy_Calculator
 
         internal void ComputeExponent()
         {
-            if (mChunk.Length > 0 && mChunk.SB.Contains('^'))
+            // If no exponent, out
+            if (mChunk.SB.IndexOf('^') == -1)
             {
+                return;
+            }
 
+            if (mChunk.Length > 0)
+            {
+                while (mChunk.SB.ToString().Count(p => p == '^') > 1)
+                {
+                    StringBuilder lSb = mChunk.SB;
+                    ExtractExponentChunk(ref lSb);
+
+                    int lOpened = lSb.IndexOf('(');
+                    int lClosed = lSb.ToString().LastIndexOf(')');
+
+                    lSb.GetChunk(lOpened, lClosed - lOpened + 1);
+                    mChunk.StartIndex = mChunk.Formula.IndexOf(lSb[0]);
+                    mChunk.Length = lSb.Length;
+                }
 
                 // Add operand type exponent
                 mOperand = Operand.Exponent;
             }
+        }
+
+        /// <summary>
+        /// Get the exponent chunk from the main formula
+        /// </summary>
+        /// <param name="pSb"></param>
+        internal void ExtractExponentChunk(ref StringBuilder pSb)
+        {
+            int lIndexExp = pSb.IndexOf('^');
+            EraseLeftElementsFromExponent(ref pSb, ref lIndexExp);
+            EraseRightElementsFromExponent(ref pSb, lIndexExp);
         }
 
         /// <summary>
@@ -197,7 +240,6 @@ namespace Udemy_Calculator
                         if (lStackOpenedIndexParenthesis.Count() == 0)
                         {
                             pSbChunk.Remove(i++, pSbChunk.Length - i++);
-                            // mChunkExponent = pSbChunk.ToString().ToCharArray();
                             break;
                         }
                     }
@@ -274,7 +316,7 @@ namespace Udemy_Calculator
                     lResult = MathOperation.Substract(a, b);
                     break;
                 case Operand.Square:
-                    lResult = MathOperation.Square(a);
+                    lResult = MathOperation.Sqrt(a);
                     break;
                 case Operand.Exponent:
                     lResult = MathOperation.Exponent(a, b);

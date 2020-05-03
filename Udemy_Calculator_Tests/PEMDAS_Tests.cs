@@ -14,12 +14,12 @@ namespace Udemy_Calculator_Tests
         public void ParenthesisEquivalence_BadNumberParenthesisOpenedAndClosed_ReturnsNotCompleted()
         {
             // Arrange
-            string lFormula = "4*((5/2)";
+            StringBuilder lFormula = new StringBuilder("4*((5/2)");
 
             // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
+            PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
             bool lboolParenthesis = lPEMDAS.ParenthesisAreEquivalent(lFormula);
-            
+
             // Assert
             Assert.IsFalse(lboolParenthesis);
         }
@@ -28,10 +28,10 @@ namespace Udemy_Calculator_Tests
         public void ParenthesisEquivalence_GoodNumberParenthesisOpenedAndClosed_ReturnsCompleted()
         {
             // Arrange
-            string lFormula = "4*((5/2))";
+            StringBuilder lFormula = new StringBuilder("4*((5/2))");
 
             // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
+            PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
             bool lboolParenthesis = lPEMDAS.ParenthesisAreEquivalent(lFormula);
 
             // Assert
@@ -107,11 +107,43 @@ namespace Udemy_Calculator_Tests
 
             // Assert
             Assert.AreEqual("(5/2)", lPEMDAS.mChunk.SB.ToString());
-        }      
+        }
 
         #endregion
 
         #region Tests on exponents
+
+        #region ComputeExponent
+
+        [TestMethod]
+        public void ComputeExponent_WithFormula_ReturnsLastChunk()
+        {
+            PEMDAS lPemdas = new PEMDAS("5+7^(3^(5/2))");
+
+            lPemdas.ComputeExponent();
+
+            Assert.AreEqual(4, lPemdas.mChunk.StartIndex);
+            Assert.AreEqual("(3^(5/2))", lPemdas.mChunk.SB.ToString());
+            Assert.AreEqual(9, lPemdas.mChunk.Length);
+        }
+
+        #endregion
+
+        #region ExtractExponentChunk
+
+        [TestMethod]
+        public void ExtractExponentChunk_WithCompleteFormula_ReturnsChunk()
+        {
+            PEMDAS lPemdas = new PEMDAS("5+7^(3^(5/2))");
+
+            StringBuilder lSb = lPemdas.mChunk.SB;
+
+            lPemdas.ExtractExponentChunk(ref lSb);
+
+            Assert.AreEqual("7^(3^(5/2))", lSb.ToString());
+        }
+
+        #endregion
 
         #region EraseLeftElementsFromExponent
 

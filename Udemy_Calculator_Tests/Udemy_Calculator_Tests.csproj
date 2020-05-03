@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtendedStreamBuilder_Tests.cs" />
+    <Compile Include="MathOperation_Tests.cs" />
     <Compile Include="PEMDAS_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
