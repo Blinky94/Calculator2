@@ -57,7 +57,7 @@ namespace Udemy_Calculator
         /// <param name="pSb"></param>
         /// <param name="pChar"></param>
         /// <returns></returns>
-        public static int[] IndexOfAny(this StringBuilder pSb, char pChar)
+        public static int[] IndexOfAnyChar(this StringBuilder pSb, char pChar)
         {
             List<int> lList = new List<int>();
 
@@ -73,6 +73,36 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Get all the occurence index of a string in the Sb
+        /// </summary>
+        /// <param name="pSb"></param>
+        /// <param name="pChar"></param>
+        /// <returns></returns>
+        public static int[] IndexOfAnyString(this StringBuilder pSb, String pStr)
+        {
+            List<int> lList = new List<int>();
+
+            StringBuilder lStr = pSb;
+
+            while (lStr.ContainsAny(pStr.ToCharArray()))
+            {
+                int lIndex = lStr.ToString().IndexOf(pStr);
+
+                if(lIndex != -1)
+                {
+                    lList.Add(lIndex);
+                    lStr.Replace(pStr, new string('#', pStr.Length), lIndex, pStr.Length);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return lList.ToArray();
+        }
+
+        /// <summary>
         /// Get specific chunk of a formula from start index and length, in the current Sb
         /// </summary>
         /// <param name="pSb"></param>
@@ -81,7 +111,6 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public static StringBuilder GetChunk(this StringBuilder pSb, int pStartIndex, int pLength)
         {
-            pLength++;
             char[] mNewStr = new char[pLength];
             pSb.CopyTo(pStartIndex, mNewStr, 0, pLength);
             string lval = new string(mNewStr);
