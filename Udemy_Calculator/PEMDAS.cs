@@ -75,6 +75,8 @@ namespace Udemy_Calculator
                 ComputeExponent();
                 ComputeMultiplicationOrDivision();
                 ComputeAdditionOrSubstraction();
+                DoCompute();
+                DoReplaceWithResult();
             }
 
             return mChunk.SB.ToString();
@@ -264,7 +266,16 @@ namespace Udemy_Calculator
 
         private void ComputeMultiplicationOrDivision()
         {
-            throw new NotImplementedException();
+            // If no exponent, out
+            if (mChunk.SB.ContainsAny(new char[] { '*', '/' }))
+            {
+                return;
+            }
+
+            if (mChunk.Length > 0)
+            {
+
+            }
         }
 
         #endregion
@@ -279,6 +290,11 @@ namespace Udemy_Calculator
         #endregion
 
         #region Maths compute operation
+
+        private void DoReplaceWithResult()
+        {
+            throw new NotImplementedException();
+        }
 
         internal double DoCompute()
         {

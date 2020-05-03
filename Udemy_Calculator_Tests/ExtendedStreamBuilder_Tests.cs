@@ -48,6 +48,16 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
+        public void ContainsAny_StringBuilderContainsOneOfTwo_ReturnsTrue()
+        {
+            // Arrange
+            StringBuilder lSb = new StringBuilder("5*7+2/(3)");
+
+            // Act/Assert
+            Assert.IsTrue(lSb.ContainsAny(new char[] { '*', '^' }));
+        }
+
+        [TestMethod]
         public void ContainsAny_StringBuilderNOTContainsAnyofChar_ReturnsFalse()
         {
             // Arrange
