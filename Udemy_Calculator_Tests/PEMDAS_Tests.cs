@@ -354,7 +354,7 @@ namespace Udemy_Calculator_Tests
         // internal void DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
 
         [TestMethod]
-        public void DeleteRightSequence_WithFormula_ReeturnsLeftSequence()
+        public void DeleteRightSequence_WithFormula_ReturnsLeftSequence()
         {
             PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
 
@@ -365,7 +365,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void DeleteRightSequence_WithFormula2_ReeturnsLeftSequence()
+        public void DeleteRightSequence_WithFormula2_ReturnsLeftSequence()
         {
             PEMDAS lPemdas = new PEMDAS("8+(5*3.5/2)");
 
@@ -376,7 +376,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void DeleteLeftSequence_WithFormula_ReeturnsLeftSequence()
+        public void DeleteLeftSequence_WithFormula_ReturnsLeftSequence()
         {
             PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
 
@@ -388,7 +388,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void DeleteLeftSequence_WithFormula2_ReeturnsLeftSequence()
+        public void DeleteLeftSequence_WithFormula2_ReturnsLeftSequence()
         {
             PEMDAS lPemdas = new PEMDAS("8+(5.62*3.5/2)");
 
