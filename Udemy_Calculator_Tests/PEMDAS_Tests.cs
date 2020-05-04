@@ -241,7 +241,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequenceWithParenthesis(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("(51^(5)", lSb.ToString());
@@ -257,7 +257,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequenceWithParenthesis(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("51^(5)", lSb.ToString());
@@ -273,7 +273,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequenceWithParenthesis(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("5+6^(2)", lSb.ToString());
@@ -289,7 +289,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequenceWithParenthesis(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("5*(2+(5^(5/3)", lSb.ToString());
@@ -305,7 +305,7 @@ namespace Udemy_Calculator_Tests
             // Act
             StringBuilder lSb = new StringBuilder(lFormula);
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteRightSequence(ref lSb, lIndex);
+            lPEMDAS.DeleteRightSequenceWithParenthesis(ref lSb, lIndex);
 
             // Assert
             Assert.AreEqual("2^(5^(3/2))", lSb.ToString());
@@ -346,6 +346,64 @@ namespace Udemy_Calculator_Tests
         }
 
         #endregion
+
+        #endregion
+
+        #region Tests on Multiplication or Division
+
+        // internal void DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
+
+        [TestMethod]
+        public void DeleteRightSequence_WithFormula_ReeturnsLeftSequence()
+        {
+            PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
+
+            StringBuilder lSb = lPemdas.mChunk.SB;
+            lPemdas.DeleteRightSequence(ref lSb, 4);
+
+            Assert.AreEqual("8+(5*3", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void DeleteRightSequence_WithFormula2_ReeturnsLeftSequence()
+        {
+            PEMDAS lPemdas = new PEMDAS("8+(5*3.5/2)");
+
+            StringBuilder lSb = lPemdas.mChunk.SB;
+            lPemdas.DeleteRightSequence(ref lSb, 4);
+
+            Assert.AreEqual("8+(5*3.5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void DeleteLeftSequence_WithFormula_ReeturnsLeftSequence()
+        {
+            PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
+
+            StringBuilder lSb = lPemdas.mChunk.SB;
+            int lIndex = 4;
+            lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
+
+            Assert.AreEqual("5*3/2)", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void DeleteLeftSequence_WithFormula2_ReeturnsLeftSequence()
+        {
+            PEMDAS lPemdas = new PEMDAS("8+(5.62*3.5/2)");
+
+            StringBuilder lSb = lPemdas.mChunk.SB;
+            int lIndex = 4;
+            lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
+
+            Assert.AreEqual("5.62*3.5/2)", lPemdas.mChunk.SB.ToString());
+        }
+
+        #endregion
+
+        #region Tests on Addition or Substraction
+
+
 
         #endregion
     }

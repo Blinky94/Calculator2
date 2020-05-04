@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 
 namespace Udemy_Calculator
@@ -24,32 +25,32 @@ namespace Udemy_Calculator
 
         public static double Add(double p1, double p2)
         {
-            return ComputeOperation(p1 + p2, "Add");
+            return ComputeOperation(p1 + p2, MethodBase.GetCurrentMethod().Name);
         }
 
         public static double Substract(double p1, double p2)
         {
-            return ComputeOperation(p1 - p2, "Substract");
+            return ComputeOperation(p1 - p2, MethodBase.GetCurrentMethod().Name);
         }
 
         public static double Multiply(double p1, double p2)
         {
-            return ComputeOperation(p1 * p2, "Multiply");
+            return ComputeOperation(p1 * p2, MethodBase.GetCurrentMethod().Name);
         }
 
         public static double Divide(double p1, double p2)
         {
-            return ComputeOperation(p1 / p2, "Divide");
+            return ComputeOperation(p1 / p2, MethodBase.GetCurrentMethod().Name);
         }
 
         public static double Exponent(double p1, double p2)
         {
-            return ComputeOperation(Math.Pow(p1, p2), "Exponent");
+            return ComputeOperation(Math.Pow(p1, p2), MethodBase.GetCurrentMethod().Name);
         }
 
         public static double Sqrt(double p)
         {
-            return ComputeOperation(Math.Sqrt(p), "Sqrt");
+            return ComputeOperation(Math.Sqrt(p), MethodBase.GetCurrentMethod().Name);
         }
     }
 }

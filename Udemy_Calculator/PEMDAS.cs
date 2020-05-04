@@ -194,7 +194,7 @@ namespace Udemy_Calculator
         {
             int lIndexExp = pSb.IndexOf('^');
             DeleteLeftSequence(ref pSb, ref lIndexExp);
-            DeleteRightSequence(ref pSb, lIndexExp);
+            DeleteRightSequenceWithParenthesis(ref pSb, lIndexExp);
         }
 
         /// <summary>
@@ -217,12 +217,32 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Delete everything after the last exponent parenthesis
+        /// Delete everything after char 
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
         /// <returns>The ended index</returns>
         internal void DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
+        {
+            pStartIndex++;
+            // Get RIGHT
+            for (int i = pStartIndex; i < pSbChunk.Length; i++)
+            {
+                if (mTabOperators.Contains(pSbChunk[i]))
+                {         
+                    pSbChunk.Remove(i, pSbChunk.Length - i);
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete everything after the last exponent parenthesis
+        /// </summary>
+        /// <param name="pSbChunk"></param>
+        /// <param name="pStartIndex"></param>
+        /// <returns>The ended index</returns>
+        internal void DeleteRightSequenceWithParenthesis(ref StringBuilder pSbChunk, int pStartIndex)
         {
             Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
 
@@ -257,7 +277,7 @@ namespace Udemy_Calculator
         {
             int lStartIndex = pSbChunk.IndexOf('^');
             DeleteLeftSequence(ref pSbChunk, ref lStartIndex);
-            DeleteRightSequence(ref pSbChunk, lStartIndex);
+            DeleteRightSequenceWithParenthesis(ref pSbChunk, lStartIndex);
         }
 
         #endregion
@@ -275,8 +295,32 @@ namespace Udemy_Calculator
             if (mChunk.Length > 0)
             {
                 // Get '*' or '/' first and erase others
+                int lIndexOfMult = mChunk.SB.IndexOf('*');
+                int lIndexOfDiv = mChunk.SB.IndexOf('/');
 
+                int lIndex = -1;
 
+                if (lIndexOfMult != -1)
+                {
+                    if (lIndexOfDiv != -1)
+                    {
+                        if (lIndexOfMult < lIndexOfDiv)
+                        {
+                            // Treating multiplication
+                            lIndex = lIndexOfMult;
+                        }
+                        else
+                        {
+                            // // Treating division
+                            lIndex = lIndexOfDiv;
+                        }
+                    }
+                }
+
+                // Delete left and from formula
+                StringBuilder lSb = mChunk.SB;
+                DeleteLeftSequence(ref lSb, ref lIndex);
+                DeleteRightSequence(ref lSb, lIndex);
             }
         }
 
