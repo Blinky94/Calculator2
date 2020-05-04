@@ -515,6 +515,32 @@ namespace Udemy_Calculator_Tests
             Assert.AreEqual("8/5", lPemdas.mChunk.SB.ToString());
         }
 
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithMultiplicationFirstAndDivisionAndParenthesis_ReturnsMultiplicationChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-(3*2/5)+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("3*2", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithDivisionFirstAndMultiplicationAndParenthesis_ReturnsDivisionChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-(3/2*5)+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("3/2", lPemdas.mChunk.SB.ToString());
+        }
+
         #endregion
 
         #region Tests on Addition or Substraction

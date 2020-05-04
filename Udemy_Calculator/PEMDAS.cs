@@ -321,6 +321,9 @@ namespace Udemy_Calculator
                     StringBuilder lSb = mChunk.SB;
                     DeleteLeftSequence(ref lSb, ref lIndex);
                     DeleteRightSequence(ref lSb, lIndex);
+
+                    // Ajouter l'indexStart
+                    // Ajouter le Length
                 }
             }
         }
