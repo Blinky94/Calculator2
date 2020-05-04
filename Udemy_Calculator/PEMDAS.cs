@@ -229,7 +229,7 @@ namespace Udemy_Calculator
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
             {
                 if (mTabOperators.Contains(pSbChunk[i]))
-                {         
+                {
                     pSbChunk.Remove(i, pSbChunk.Length - i);
                     break;
                 }
@@ -284,9 +284,9 @@ namespace Udemy_Calculator
 
         #region Multiplication & Division
 
-        private void ComputeMultiplicationOrDivision()
+        internal void ComputeMultiplicationOrDivision()
         {
-            // If no exponent, out
+            // If no multiply or divide symbol, out
             if (!mChunk.SB.ContainsAny(new char[] { '*', '/' }))
             {
                 return;
@@ -294,33 +294,34 @@ namespace Udemy_Calculator
 
             if (mChunk.Length > 0)
             {
-                // Get '*' or '/' first and erase others
-                int lIndexOfMult = mChunk.SB.IndexOf('*');
-                int lIndexOfDiv = mChunk.SB.IndexOf('/');
+                // Get first '*' or '/'
+                int lIndex = mChunk.SB.IndexOf('*');
 
-                int lIndex = -1;
-
-                if (lIndexOfMult != -1)
+                if (lIndex != -1)
                 {
+                    int lIndexOfDiv = mChunk.SB.IndexOf('/');
+
+                    if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
+                    {
+                        lIndex = lIndexOfDiv;
+                    }
+                }
+                else
+                {
+                    int lIndexOfDiv = mChunk.SB.IndexOf('/');
                     if (lIndexOfDiv != -1)
                     {
-                        if (lIndexOfMult < lIndexOfDiv)
-                        {
-                            // Treating multiplication
-                            lIndex = lIndexOfMult;
-                        }
-                        else
-                        {
-                            // // Treating division
-                            lIndex = lIndexOfDiv;
-                        }
+                        lIndex = lIndexOfDiv;
                     }
                 }
 
-                // Delete left and from formula
-                StringBuilder lSb = mChunk.SB;
-                DeleteLeftSequence(ref lSb, ref lIndex);
-                DeleteRightSequence(ref lSb, lIndex);
+                if (lIndex != -1)
+                {
+                    // Delete left and from formula
+                    StringBuilder lSb = mChunk.SB;
+                    DeleteLeftSequence(ref lSb, ref lIndex);
+                    DeleteRightSequence(ref lSb, lIndex);
+                }
             }
         }
 

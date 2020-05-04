@@ -356,47 +356,163 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DeleteRightSequence_WithFormula_ReturnsLeftSequence()
         {
+            // Arrange
             PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
 
+            // Act
             StringBuilder lSb = lPemdas.mChunk.SB;
             lPemdas.DeleteRightSequence(ref lSb, 4);
 
+            // Assert
             Assert.AreEqual("8+(5*3", lPemdas.mChunk.SB.ToString());
         }
 
         [TestMethod]
         public void DeleteRightSequence_WithFormula2_ReturnsLeftSequence()
         {
+            // Arrange
             PEMDAS lPemdas = new PEMDAS("8+(5*3.5/2)");
 
+            // Act
             StringBuilder lSb = lPemdas.mChunk.SB;
             lPemdas.DeleteRightSequence(ref lSb, 4);
 
+            // Assert
             Assert.AreEqual("8+(5*3.5", lPemdas.mChunk.SB.ToString());
         }
 
         [TestMethod]
         public void DeleteLeftSequence_WithFormula_ReturnsLeftSequence()
         {
+            // Arrange
             PEMDAS lPemdas = new PEMDAS("8+(5*3/2)");
 
+            // Act
             StringBuilder lSb = lPemdas.mChunk.SB;
             int lIndex = 4;
             lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
 
+            // Assert
             Assert.AreEqual("5*3/2)", lPemdas.mChunk.SB.ToString());
         }
 
         [TestMethod]
         public void DeleteLeftSequence_WithFormula2_ReturnsLeftSequence()
         {
+            // Arrange
             PEMDAS lPemdas = new PEMDAS("8+(5.62*3.5/2)");
 
+            // Act
             StringBuilder lSb = lPemdas.mChunk.SB;
             int lIndex = 4;
             lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
 
+            // Assert
             Assert.AreEqual("5.62*3.5/2)", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithMultiply_ReturnsMultiplicationChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("8*5+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8*5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithMultiply2_ReturnsMultiplicationChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-8*5+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8*5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithDivide_ReturnsDivideChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("8/5+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8/5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithDivide2_ReturnsDivideChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-8/5+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8/5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithMultiplyFirstAndDivision_ReturnsMultiplicationChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("8*5+3/2+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8*5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithMultiplyFirstAndDivision2_ReturnsMultiplicationChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-8*5+3/2+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8*5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithDivideFirstAndMultiplication_ReturnsDivisionChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("8/5+3*2+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8/5", lPemdas.mChunk.SB.ToString());
+        }
+
+        [TestMethod]
+        public void ComputeMultiplicationOrDivision_WithDivideFirstAndMultiplication2_ReturnsDivisionChunk()
+        {
+            // Arrange
+            PEMDAS lPemdas = new PEMDAS("6+2-8/5+3*2+(5^(10))");
+
+            // Act
+            lPemdas.ComputeMultiplicationOrDivision();
+
+            // Assert
+            Assert.AreEqual("8/5", lPemdas.mChunk.SB.ToString());
         }
 
         #endregion
