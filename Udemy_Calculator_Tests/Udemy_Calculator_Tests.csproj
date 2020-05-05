@@ -55,9 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Udemy_Calculator\Udemy_Calculator.csproj">
       <Project>{ce619bd7-3012-4459-ac79-e7942b56e99a}</Project>
       <Name>Udemy_Calculator</Name>
