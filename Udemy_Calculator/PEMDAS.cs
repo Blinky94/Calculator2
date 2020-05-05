@@ -47,8 +47,16 @@ namespace Udemy_Calculator
         #region Fields
 
         private char[] mTabOperators;
-        private Operand mOperand;
-        internal Chunk mChunk;
+
+        /// <summary>
+        /// Enum of operand (multiply, divide, add, substract...)
+        /// </summary>
+        public Operand Operand { get; set; }
+
+        /// <summary>
+        /// Chunk of a formula
+        /// </summary>
+        public Chunk Chunk { get; set; }
 
         #endregion
 
@@ -60,7 +68,7 @@ namespace Udemy_Calculator
         {
             mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
             // Initialize the chunk formula with the complete formula
-            mChunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
+            Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
         }
 
         /// <summary>
@@ -69,7 +77,7 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (mChunk.SB.ContainsAny(mTabOperators))
+            while (Chunk.SB.ContainsAny(mTabOperators))
             {
                 ComputeParenthesis();
                 ComputeExponent();
@@ -79,7 +87,7 @@ namespace Udemy_Calculator
                 DoReplaceWithResult();
             }
 
-            return mChunk.SB.ToString();
+            return Chunk.SB.ToString();
         }
 
         #region Parenthesis
@@ -104,35 +112,35 @@ namespace Udemy_Calculator
         internal void ComputeParenthesis()
         {
             // If no parenthesis, out
-            if (mChunk.SB.IndexOf('(') == -1)
+            if (Chunk.SB.IndexOf('(') == -1)
             {
                 return;
             }
 
             mStack.Clear();
 
-            if (ParenthesisAreEquivalent(mChunk.SB))
+            if (ParenthesisAreEquivalent(Chunk.SB))
             {
-                for (int i = 0; i < mChunk.SB.Length; i++)
+                for (int i = 0; i < Chunk.SB.Length; i++)
                 {
-                    mChunk.StartIndex = i;
-                    if (IsRealOpenedParenthesis(mChunk)) // If '(' not preceed exponent symbol
+                    Chunk.StartIndex = i;
+                    if (IsRealOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
                     {
                         if (!mStack.Contains(i)) // index not already in
                         {
                             mStack.Push(i); // Add index
                         }
                     }
-                    else if (mChunk.SB[i] == ')')
+                    else if (Chunk.SB[i] == ')')
                     {
                         if (mStack.Count() > 0)
                         {
                             int lStartIndex = mStack.Pop(); // Pop index
 
                             // Get new chunk of formula from the '(' to the ')'
-                            mChunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
-                            mChunk.StartIndex = lStartIndex;
-                            mChunk.Length = i - lStartIndex++;
+                            Chunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
+                            Chunk.StartIndex = lStartIndex;
+                            Chunk.Length = i - lStartIndex++;
                         }
                     }
                 }
@@ -161,28 +169,28 @@ namespace Udemy_Calculator
         internal void ComputeExponent()
         {
             // If no exponent, out
-            if (mChunk.SB.IndexOf('^') == -1)
+            if (Chunk.SB.IndexOf('^') == -1)
             {
                 return;
             }
 
-            if (mChunk.Length > 0)
+            if (Chunk.Length > 0)
             {
-                while (mChunk.SB.ToString().Count(p => p == '^') > 1)
+                while (Chunk.SB.ToString().Count(p => p == '^') > 1)
                 {
-                    StringBuilder lSb = mChunk.SB;
+                    StringBuilder lSb = Chunk.SB;
                     ExtractExponentChunk(ref lSb);
 
                     int lOpened = lSb.IndexOf('(');
                     int lClosed = lSb.ToString().LastIndexOf(')');
 
                     lSb.GetChunk(lOpened, lClosed - lOpened + 1);
-                    mChunk.StartIndex = mChunk.Formula.IndexOf(lSb[0]);
-                    mChunk.Length = lSb.Length;
+                    Chunk.StartIndex = Chunk.Formula.IndexOf(lSb[0]);
+                    Chunk.Length = lSb.Length;
                 }
 
                 // Add operand type exponent
-                mOperand = Operand.Exponent;
+                Operand = Operand.Exponent;
             }
         }
 
@@ -202,18 +210,22 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
-        internal void DeleteLeftSequence(ref StringBuilder pSbChunk, ref int pStartIndex)
+        internal int DeleteLeftSequence(ref StringBuilder pSbChunk, ref int pStartIndex)
         {
+            int lIndex = -1;
             // Get LEFT start index number from ^
             for (int i = pStartIndex - 1; i >= 0; i--)
             {
                 if (!char.IsNumber(pSbChunk[i]))
                 {
+                    lIndex = i + 1;
                     pSbChunk.Remove(0, i + 1);
                     pStartIndex -= i;
                     break;
                 }
             }
+
+            return lIndex;
         }
 
         /// <summary>
@@ -222,18 +234,22 @@ namespace Udemy_Calculator
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
         /// <returns>The ended index</returns>
-        internal void DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
+        internal int DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
         {
+            int lIndex = -1;
             pStartIndex++;
             // Get RIGHT
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
             {
                 if (mTabOperators.Contains(pSbChunk[i]))
                 {
+                    lIndex = i + 1;
                     pSbChunk.Remove(i, pSbChunk.Length - i);
                     break;
                 }
             }
+
+            return lIndex;
         }
 
         /// <summary>
@@ -269,17 +285,6 @@ namespace Udemy_Calculator
             }
         }
 
-        /// <summary>
-        /// Get index from the exponent symbol ('^'), from left to right
-        /// </summary>
-        /// <param name="pSbChunk"></param>
-        internal void GetChunkOfExponent(ref StringBuilder pSbChunk)
-        {
-            int lStartIndex = pSbChunk.IndexOf('^');
-            DeleteLeftSequence(ref pSbChunk, ref lStartIndex);
-            DeleteRightSequenceWithParenthesis(ref pSbChunk, lStartIndex);
-        }
-
         #endregion
 
         #region Multiplication & Division
@@ -287,30 +292,34 @@ namespace Udemy_Calculator
         internal void ComputeMultiplicationOrDivision()
         {
             // If no multiply or divide symbol, out
-            if (!mChunk.SB.ContainsAny(new char[] { '*', '/' }))
+            if (!Chunk.SB.ContainsAny(new char[] { '*', '/' }))
             {
                 return;
             }
 
-            if (mChunk.Length > 0)
+            if (Chunk.Length > 0)
             {
                 // Get first '*' or '/'
-                int lIndex = mChunk.SB.IndexOf('*');
+                int lIndex = Chunk.SB.IndexOf('*');
 
                 if (lIndex != -1)
                 {
-                    int lIndexOfDiv = mChunk.SB.IndexOf('/');
+                    Operand = Operand.Multiplication;
+
+                    int lIndexOfDiv = Chunk.SB.IndexOf('/');
 
                     if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
                     {
+                        Operand = Operand.Division;
                         lIndex = lIndexOfDiv;
                     }
                 }
                 else
                 {
-                    int lIndexOfDiv = mChunk.SB.IndexOf('/');
+                    int lIndexOfDiv = Chunk.SB.IndexOf('/');
                     if (lIndexOfDiv != -1)
                     {
+                        Operand = Operand.Division;
                         lIndex = lIndexOfDiv;
                     }
                 }
@@ -318,12 +327,15 @@ namespace Udemy_Calculator
                 if (lIndex != -1)
                 {
                     // Delete left and from formula
-                    StringBuilder lSb = mChunk.SB;
-                    DeleteLeftSequence(ref lSb, ref lIndex);
-                    DeleteRightSequence(ref lSb, lIndex);
+                    StringBuilder lSb = Chunk.SB;
+                    int lBeginIndex = DeleteLeftSequence(ref lSb, ref lIndex);
+                    int lEndIndex = DeleteRightSequence(ref lSb, lIndex);
 
                     // Ajouter l'indexStart
+                    Chunk.StartIndex = lBeginIndex;
+
                     // Ajouter le Length
+                    Chunk.Length = lEndIndex - lBeginIndex;
                 }
             }
         }
@@ -332,9 +344,55 @@ namespace Udemy_Calculator
 
         #region Addition & Substraction
 
-        private void ComputeAdditionOrSubstraction()
+        public void ComputeAdditionOrSubstraction()
         {
-            throw new NotImplementedException();
+            // If no multiply or divide symbol, out
+            if (!Chunk.SB.ContainsAny(new char[] { '+', '-' }))
+            {
+                return;
+            }
+
+            if (Chunk.Length > 0)
+            {
+                // Get first '+' or '-'
+                int lIndex = Chunk.SB.IndexOf('+');
+
+                if (lIndex != -1)
+                {
+                    Operand = Operand.Addition;
+
+                    int lIndexOfDiv = Chunk.SB.IndexOf('-');
+
+                    if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
+                    {
+                        Operand = Operand.Substraction;
+                        lIndex = lIndexOfDiv;
+                    }
+                }
+                else
+                {
+                    int lIndexOfDiv = Chunk.SB.IndexOf('-');
+                    if (lIndexOfDiv != -1)
+                    {
+                        Operand = Operand.Substraction;
+                        lIndex = lIndexOfDiv;
+                    }
+                }
+
+                if (lIndex != -1)
+                {
+                    // Delete left and from formula
+                    StringBuilder lSb = Chunk.SB;
+                    int lBeginIndex = DeleteLeftSequence(ref lSb, ref lIndex);
+                    int lEndIndex = DeleteRightSequence(ref lSb, lIndex);
+
+                    // Ajouter l'indexStart
+                    Chunk.StartIndex = lBeginIndex;
+
+                    // Ajouter le Length
+                    Chunk.Length = lEndIndex - lBeginIndex;
+                }
+            }
         }
 
         #endregion
@@ -352,7 +410,7 @@ namespace Udemy_Calculator
             double a = 0;
             double b = 0;
 
-            switch (mOperand)
+            switch (Operand)
             {
                 case Operand.Multiplication:
                     lResult = MathOperation.Multiply(a, b);
