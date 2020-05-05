@@ -410,6 +410,9 @@ namespace Udemy_Calculator
             double a = 0;
             double b = 0;
 
+            // Extraction units from formula
+            
+
             switch (Operand)
             {
                 case Operand.Multiplication:
