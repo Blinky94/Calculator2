@@ -6,51 +6,39 @@ namespace Udemy_Calculator
 {
     public static class MathOperation
     {
-        /// <summary>
-        /// Get the result of the operation or throw exception
-        /// </summary>
-        /// <param name="pResult"></param>
-        /// <param name="pMethodName"></param>
-        /// <param name="pAdditionnalInfo"></param>
-        /// <returns></returns>
-        internal static double ComputeOperation(double pResult, string pMethodName, string pAdditionnalInfo = default)
+        public static decimal Add(decimal p1, decimal p2)
         {
-            if (double.IsInfinity(pResult) || double.IsNaN(pResult))
+            return p1 + p2;
+        }
+
+        public static decimal Substract(decimal p1, decimal p2)
+        {
+            return p1 - p2;
+        }
+
+        public static decimal Multiply(decimal p1, decimal p2)
+        {
+            return p1 * p2;
+        }
+
+        public static decimal Divide(decimal p1, decimal p2)
+        {
+            if(p2 == 0)
             {
-                throw new Exception($"The {pMethodName} operation failed !!! " + pAdditionnalInfo);
+                throw new DivideByZeroException("The division by zero is forbidden !!!");
             }
 
-            return pResult;
+            return p1 / p2;
         }
 
-        public static double Add(double p1, double p2)
+        public static decimal Exponent(decimal p1, decimal p2)
         {
-            return ComputeOperation(p1 + p2, MethodBase.GetCurrentMethod().Name);
+            return Convert.ToDecimal(Math.Pow(Convert.ToDouble(p1), Convert.ToDouble(p2)));
         }
 
-        public static double Substract(double p1, double p2)
+        public static decimal Sqrt(decimal p)
         {
-            return ComputeOperation(p1 - p2, MethodBase.GetCurrentMethod().Name);
-        }
-
-        public static double Multiply(double p1, double p2)
-        {
-            return ComputeOperation(p1 * p2, MethodBase.GetCurrentMethod().Name);
-        }
-
-        public static double Divide(double p1, double p2)
-        {
-            return ComputeOperation(p1 / p2, MethodBase.GetCurrentMethod().Name);
-        }
-
-        public static double Exponent(double p1, double p2)
-        {
-            return ComputeOperation(Math.Pow(p1, p2), MethodBase.GetCurrentMethod().Name);
-        }
-
-        public static double Sqrt(double p)
-        {
-            return ComputeOperation(Math.Sqrt(p), MethodBase.GetCurrentMethod().Name);
+            return Convert.ToDecimal(Math.Sqrt(Convert.ToDouble(p)));
         }
     }
 }

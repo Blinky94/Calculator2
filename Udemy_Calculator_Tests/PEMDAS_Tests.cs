@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Text;
 using Udemy_Calculator;
 
@@ -711,7 +712,182 @@ namespace Udemy_Calculator_Tests
             Assert.AreEqual(3, lPemdas.Chunk.Length);
         }
 
+        #endregion
+
+        #region Test ExtractOperands
+
+        [TestMethod]
+        public void ExtractOperands_SetSimpleMultiplicationFormula_ReturnsOperands()
+        {
+            PEMDAS lPemdas = new PEMDAS("(40.56*15)");
+
+            decimal a;
+            decimal b;
+            lPemdas.ExtractOperands(out a, out b);
+
+            Assert.AreEqual(40.56m, a);
+            Assert.AreEqual(15, b);
+        }
+
+        [TestMethod]
+        public void ExtractOperands_SetSimpleMultiplicationFormula2_ReturnsOperands()
+        {
+            PEMDAS lPemdas = new PEMDAS("(40,56*15)");
+
+            decimal a;
+            decimal b;
+            lPemdas.ExtractOperands(out a, out b);
+
+            Assert.AreEqual(40.56m, a);
+            Assert.AreEqual(15, b);
+        }
+
+        [TestMethod]
+        public void ExtractOperands_SetSimpleDivisionFormula_ReturnsOperands()
+        {
+            PEMDAS lPemdas = new PEMDAS("(40/15)");
+
+            decimal a;
+            decimal b;
+            lPemdas.ExtractOperands(out a, out b);
+
+            Assert.AreEqual(40, a);
+            Assert.AreEqual(15, b);
+        }
 
         #endregion
+
+        #region  GetNumberFromChunk
+
+        [TestMethod]
+        public void GetNumberFromChunk_SetSimpleFormula_ReturnsLeftOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5+56");
+
+            string lChunk = string.Empty;
+
+            lPemdas.GetNumberFromChunk(ref lChunk);
+
+            Assert.AreEqual("16.5", lChunk);
+        }
+
+        [TestMethod]
+        public void GetNumberFromChunk_SetSimpleFormula2_ReturnsRightOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5+56");
+
+            string lChunk = string.Empty;
+
+            lPemdas.GetNumberFromChunk(ref lChunk, 5);
+
+            Assert.AreEqual("56", lChunk);
+        }
+
+        #endregion
+
+        #region  GetIndexOperator
+
+        [TestMethod]
+        public void GetIndexOperator_WithAddition_ReturnsIndex()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5+56");
+
+            string lChunk = string.Empty;
+
+            int lIndex = lPemdas.GetIndexOperator();
+
+            Assert.AreEqual(4, lIndex);
+        }
+
+        [TestMethod]
+        public void GetIndexOperator_WithSubstraction_ReturnsIndex()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5-56");
+
+            string lChunk = string.Empty;
+
+            int lIndex = lPemdas.GetIndexOperator();
+
+            Assert.AreEqual(4, lIndex);
+        }
+
+        [TestMethod]
+        public void GetIndexOperator_WithMultiplication_ReturnsIndex()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5*56");
+
+            string lChunk = string.Empty;
+
+            int lIndex = lPemdas.GetIndexOperator();
+
+            Assert.AreEqual(4, lIndex);
+        }
+
+        [TestMethod]
+        public void GetIndexOperator_WitDivision_ReturnsIndex()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.5/56");
+
+            string lChunk = string.Empty;
+
+            int lIndex = lPemdas.GetIndexOperator();
+
+            Assert.AreEqual(4, lIndex);
+        }
+
+        #endregion
+
+        #region DoCompute
+
+        [TestMethod]
+        public void DoCompute_WitAddition_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15+16");
+            lPemdas.Operand = Operand.Addition;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("31", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WitAddition2_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15.67+16.20");
+            lPemdas.Operand = Operand.Addition;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("31,87", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WitSubstraction_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15-16");
+            lPemdas.Operand = Operand.Substraction;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("-1", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WitSubstraction2_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15.67-16.20");
+            lPemdas.Operand = Operand.Substraction;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("-0,53", lResult.ToString());
+        }
+
+        #endregion
+
     }
 }

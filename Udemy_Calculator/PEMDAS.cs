@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Udemy_Calculator
@@ -47,6 +50,8 @@ namespace Udemy_Calculator
         #region Fields
 
         private char[] mTabOperators;
+        private char[] mPattern1;
+        private char[] mPattern2;
 
         /// <summary>
         /// Enum of operand (multiply, divide, add, substract...)
@@ -67,6 +72,9 @@ namespace Udemy_Calculator
         public PEMDAS(string pFormula)
         {
             mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
+            mPattern1 = new char[] { '+', '-', '*', '/' };
+            mPattern2 = new char[] { '.', ',' };
+
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
         }
@@ -83,8 +91,6 @@ namespace Udemy_Calculator
                 ComputeExponent();
                 ComputeMultiplicationOrDivision();
                 ComputeAdditionOrSubstraction();
-                DoCompute();
-                DoReplaceWithResult();
             }
 
             return Chunk.SB.ToString();
@@ -399,43 +405,100 @@ namespace Udemy_Calculator
 
         #region Maths compute operation
 
-        private void DoReplaceWithResult()
+        /// <summary>
+        /// Extract a sequence number from a chunk formula starting with index
+        /// </summary>
+        /// <param name="pStartIndex"></param>
+        /// <param name="pStr"></param>
+        internal void GetNumberFromChunk(ref string pStr, int pStartIndex = 0)
         {
-            throw new NotImplementedException();
+            for (int i = pStartIndex; i < Chunk.SB.Length; i++)
+            {
+                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mPattern2) != -1)
+                {
+                    pStr += Chunk.SB[i];
+                }
+                else if (Chunk.SB[i].ToString().IndexOfAny(mPattern1) != -1)
+                {
+                    break;
+                }
+            }
         }
 
-        internal double DoCompute()
+        /// <summary>
+        /// Return the index of an operator (+,-,*,/) from a sequence of the chunk formula
+        /// </summary>
+        /// <returns></returns>
+        internal int GetIndexOperator()
         {
-            double lResult = default;
-            double a = 0;
-            double b = 0;
+            return Chunk.SB.ToString().IndexOfAny(mPattern1);
+        }
+
+        /// <summary>
+        /// Extract operands to compute
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        internal void ExtractOperands(out decimal a, out decimal b)
+        {
+            a = 0;
+            b = 0;
+
+            string lA = string.Empty;
+            string lB = string.Empty;
+
+            GetNumberFromChunk(ref lA);
+
+            int lIndex = GetIndexOperator();
+            lIndex++;
+            GetNumberFromChunk(ref lB, lIndex);
+
+            decimal.TryParse(lA.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out a);
+            decimal.TryParse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out b);
+        }
+
+        /// <summary>
+        /// Compute the chunk formula from a chunk sequence
+        /// </summary>
+        internal void DoCompute(out decimal pResult)
+        {
+            pResult = default;
+            decimal a;
+            decimal b;
 
             // Extraction units from formula
-            
+            ExtractOperands(out a, out b);
 
             switch (Operand)
             {
                 case Operand.Multiplication:
-                    lResult = MathOperation.Multiply(a, b);
+                    pResult = MathOperation.Multiply(a, b);
                     break;
                 case Operand.Division:
-                    lResult = MathOperation.Divide(a, b);
+                    pResult = MathOperation.Divide(a, b);
                     break;
                 case Operand.Addition:
-                    lResult = MathOperation.Add(a, b);
+                    pResult = MathOperation.Add(a, b);
                     break;
                 case Operand.Substraction:
-                    lResult = MathOperation.Substract(a, b);
+                    pResult = MathOperation.Substract(a, b);
                     break;
                 case Operand.Square:
-                    lResult = MathOperation.Sqrt(a);
+                    pResult = MathOperation.Sqrt(a);
                     break;
                 case Operand.Exponent:
-                    lResult = MathOperation.Exponent(a, b);
+                    pResult = MathOperation.Exponent(a, b);
                     break;
             }
+        }
 
-            return lResult;
+        /// <summary>
+        /// Replace the chunk sequence by the result into the main formula
+        /// </summary>
+        /// <param name="lResult"></param>
+        private void DoReplaceByResult(double pResult)
+        {
+
         }
 
         #endregion
