@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Text;
 using Udemy_Calculator;
 
@@ -839,8 +838,10 @@ namespace Udemy_Calculator_Tests
 
         #region DoCompute
 
+        #region Addition
+
         [TestMethod]
-        public void DoCompute_WitAddition_ReturnsResult()
+        public void DoCompute_WithAddition_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15+16");
             lPemdas.Operand = Operand.Addition;
@@ -852,7 +853,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void DoCompute_WitAddition2_ReturnsResult()
+        public void DoCompute_WithAddition2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67+16.20");
             lPemdas.Operand = Operand.Addition;
@@ -863,8 +864,12 @@ namespace Udemy_Calculator_Tests
             Assert.AreEqual("31,87", lResult.ToString());
         }
 
+        #endregion
+
+        #region Substraction
+
         [TestMethod]
-        public void DoCompute_WitSubstraction_ReturnsResult()
+        public void DoCompute_WithSubstraction_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15-16");
             lPemdas.Operand = Operand.Substraction;
@@ -876,7 +881,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void DoCompute_WitSubstraction2_ReturnsResult()
+        public void DoCompute_WithSubstraction2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67-16.20");
             lPemdas.Operand = Operand.Substraction;
@@ -886,6 +891,55 @@ namespace Udemy_Calculator_Tests
 
             Assert.AreEqual("-0,53", lResult.ToString());
         }
+
+        #endregion
+
+        #region Multiplication
+
+        [TestMethod]
+        public void DoCompute_WithMultiplication_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15*16");
+            lPemdas.Operand = Operand.Multiplication;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("240", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithMultiplication2_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15.67*16.20");
+            lPemdas.Operand = Operand.Multiplication;
+            decimal lResult = default;
+
+            lPemdas.DoCompute(out lResult);
+
+            Assert.AreEqual("253,8540", lResult.ToString());
+        }
+
+        #endregion
+
+        #region Division
+
+
+
+        #endregion
+
+        #region Exponent
+
+
+
+        #endregion
+
+
+        #region Square
+
+
+
+        #endregion
 
         #endregion
 
