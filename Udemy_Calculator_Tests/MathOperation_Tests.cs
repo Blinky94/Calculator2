@@ -95,7 +95,7 @@ namespace Udemy_Calculator_Tests
             catch (Exception e)
             {
                 // Assert
-                Assert.AreEqual("The division by zero is forbidden !!!", e.Message);
+                Assert.AreEqual("Tentative de division par zéro.", e.Message);
             }
         }
 

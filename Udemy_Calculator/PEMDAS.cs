@@ -69,7 +69,7 @@ namespace Udemy_Calculator
         public PEMDAS(string pFormula)
         {
             mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
-            mPattern1 = new char[] { '+', '-', '*', '/' };
+            mPattern1 = new char[] { '+', '-', '*', '/', '^' };
             mPattern2 = new char[] { '.', ',' };
 
             // Initialize the chunk formula with the complete formula
@@ -432,15 +432,28 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Remove the exceedent of a string to limit the length for decimal number
+        /// Use to avoid the rounded effect in the Decimal.tryParse
+        /// </summary>
+        /// <param name="pStr"></param>
+        /// <returns></returns>
+        internal string TrimLengthString(string pStr)
+        {
+            int lMaxi = Decimal.MaxValue.ToString().Length;
+            if (pStr.Length > lMaxi)
+            {
+                pStr = pStr.Remove(lMaxi);
+            }
+            return pStr;
+        }
+
+        /// <summary>
         /// Extract operands to compute
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         internal void ExtractOperands(out decimal a, out decimal b)
         {
-            a = 0;
-            b = 0;
-
             string lA = string.Empty;
             string lB = string.Empty;
 
@@ -450,8 +463,11 @@ namespace Udemy_Calculator
             lIndex++;
             GetNumberFromChunk(ref lB, lIndex);
 
-            decimal.TryParse(lA.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out a);
-            decimal.TryParse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out b);
+            lA = TrimLengthString(lA);
+            lB = TrimLengthString(lB);
+
+            a = decimal.Parse(lA.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
+            b = decimal.Parse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);         
         }
 
         /// <summary>
@@ -460,11 +476,9 @@ namespace Udemy_Calculator
         internal void DoCompute(out decimal pResult)
         {
             pResult = default;
-            decimal a;
-            decimal b;
 
             // Extraction units from formula
-            ExtractOperands(out a, out b);
+            ExtractOperands(out decimal a, out decimal b);
 
             switch (Operand)
             {

@@ -23,17 +23,34 @@ namespace Udemy_Calculator
 
         public static decimal Divide(decimal p1, decimal p2)
         {
-            if(p2 == 0)
-            {
-                throw new DivideByZeroException("The division by zero is forbidden !!!");
-            }
+            decimal lResult = default;
 
-            return p1 / p2;
+            try
+            {
+                lResult = p1 / p2;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
+
+            return lResult;
         }
 
         public static decimal Exponent(decimal p1, decimal p2)
         {
-            return Convert.ToDecimal(Math.Pow(Convert.ToDouble(p1), Convert.ToDouble(p2)));
+            decimal lResult;
+
+            try
+            {
+                lResult = Convert.ToDecimal(Math.Pow(Convert.ToDouble(p1), Convert.ToDouble(p2)));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
         }
 
         public static decimal Sqrt(decimal p)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Text;
 using Udemy_Calculator;
 
@@ -332,7 +333,7 @@ namespace Udemy_Calculator_Tests
         #endregion
 
         #region Tests on Multiplication or Division
-       
+
         [TestMethod]
         public void DeleteRightSequence_WithFormula_ReturnsLeftSequence()
         {
@@ -720,9 +721,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40.56*15)");
 
-            decimal a;
-            decimal b;
-            lPemdas.ExtractOperands(out a, out b);
+            lPemdas.ExtractOperands(out decimal a, out decimal b);
 
             Assert.AreEqual(40.56m, a);
             Assert.AreEqual(15, b);
@@ -733,9 +732,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40,56*15)");
 
-            decimal a;
-            decimal b;
-            lPemdas.ExtractOperands(out a, out b);
+            lPemdas.ExtractOperands(out decimal a, out decimal b);
 
             Assert.AreEqual(40.56m, a);
             Assert.AreEqual(15, b);
@@ -746,9 +743,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40/15)");
 
-            decimal a;
-            decimal b;
-            lPemdas.ExtractOperands(out a, out b);
+            lPemdas.ExtractOperands(out decimal a, out decimal b);
 
             Assert.AreEqual(40, a);
             Assert.AreEqual(15, b);
@@ -845,9 +840,8 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15+16");
             lPemdas.Operand = Operand.Addition;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("31", lResult.ToString());
         }
@@ -857,11 +851,29 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15.67+16.20");
             lPemdas.Operand = Operand.Addition;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("31,87", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithAddition3_ReturnsException()
+        {
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("0+999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
+                lPemdas.Operand = Operand.Addition;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
         }
 
         #endregion
@@ -873,9 +885,8 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15-16");
             lPemdas.Operand = Operand.Substraction;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("-1", lResult.ToString());
         }
@@ -885,11 +896,29 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15.67-16.20");
             lPemdas.Operand = Operand.Substraction;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("-0,53", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithSubstraction3_ReturnsException()
+        {
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("0-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
+                lPemdas.Operand = Operand.Substraction;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
         }
 
         #endregion
@@ -901,9 +930,8 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15*16");
             lPemdas.Operand = Operand.Multiplication;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("240", lResult.ToString());
         }
@@ -913,35 +941,183 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("15.67*16.20");
             lPemdas.Operand = Operand.Multiplication;
-            decimal lResult = default;
 
-            lPemdas.DoCompute(out lResult);
+            lPemdas.DoCompute(out decimal lResult);
 
             Assert.AreEqual("253,8540", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithMultiplication3_ReturnsException()
+        {
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("156700000000000000000000000000000000000000000000000000000000000000*1600000000000000000000000000000000000000000000000000000000000000020");
+                lPemdas.Operand = Operand.Multiplication;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
         }
 
         #endregion
 
         #region Division
 
+        [TestMethod]
+        public void DoCompute_WithDivision_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15/16");
+            lPemdas.Operand = Operand.Division;
 
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("0,9375", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithDivision2_ReturnsException()
+        {
+            PEMDAS lPemdas = new PEMDAS("15.67/16.20");
+            lPemdas.Operand = Operand.Division;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("0,9672839506172839506172839506", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithDivision3_ReturnsException()
+        {
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("15.67/0");
+                lPemdas.Operand = Operand.Division;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("Tentative de division par zéro.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
+        }
+
+        [TestMethod]
+        public void DoCompute_WithDivision4_ReturnsException()
+        {
+            PEMDAS lPemdas = new PEMDAS("1/0.99999999999999999999999999999999999999999999999999999999999999999999999999999");
+            lPemdas.Operand = Operand.Division;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("1,000000000000000000000000001", lResult.ToString());
+        }
 
         #endregion
 
         #region Exponent
 
+        [TestMethod]
+        public void DoCompute_WithExponent_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15^2");
+            lPemdas.Operand = Operand.Exponent;
 
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("225", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithExponent2_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15^16");
+            lPemdas.Operand = Operand.Exponent;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("6568408355712890000", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithExponent3_ReturnsException()
+        {
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("150^1000");
+                lPemdas.Operand = Operand.Exponent;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
+        }
 
         #endregion
 
-
         #region Square
 
+        [TestMethod]
+        public void DoCompute_WithRootSquare_ReturnsResult()
+        {
+            Assert.Inconclusive();
+            PEMDAS lPemdas = new PEMDAS("√81");
+            lPemdas.Operand = Operand.Square;
 
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("225", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithRootSquare2_ReturnsResult()
+        {
+            Assert.Inconclusive();
+            PEMDAS lPemdas = new PEMDAS("√15");
+            lPemdas.Operand = Operand.Square;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("6568408355712890000", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_WithRootSquare3_ReturnsException()
+        {
+            Assert.Inconclusive();
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS("√-1");
+                lPemdas.Operand = Operand.Square;
+
+                lPemdas.DoCompute(out decimal lResult);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("TODO", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
+        }
 
         #endregion
 
         #endregion
 
     }
-}
+    }
