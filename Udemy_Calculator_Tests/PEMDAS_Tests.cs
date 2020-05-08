@@ -1240,5 +1240,19 @@ namespace Udemy_Calculator_Tests
         }
 
         #endregion
+
+        #region DoReplaceByResult
+
+        [TestMethod]
+        public void DoReplaceByResult_SimplyOperation_ReturnsNewFormulaWithResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("5*7");
+
+            lPemdas.DoReplaceByResult(35m);
+
+            Assert.AreEqual("35", lPemdas.Chunk.SB.ToString());
+        }
+
+        #endregion
     }
 }

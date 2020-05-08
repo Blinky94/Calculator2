@@ -484,7 +484,11 @@ namespace Udemy_Calculator
         /// <param name="lResult"></param>
         internal void DoReplaceByResult(decimal pResult)
         {
+            int lStartIndex = Chunk.StartIndex;
+            int lLength = Chunk.Length;
 
+            Chunk.SB.Remove(lStartIndex, lLength);
+            Chunk.SB.Insert(lStartIndex, pResult.ToString());
         }
 
         #endregion

@@ -115,8 +115,8 @@ namespace Udemy_Calculator
             if (!mIsResult)
             {
                 string lFormula = mHistory.ReturnFormula();
-                decimal lNewNumber;
-                if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNewNumber))
+
+                if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal lNewNumber))
                 {
                     decimal lResult = default;
 
