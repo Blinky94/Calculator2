@@ -40,20 +40,20 @@ namespace Udemy_Calculator
         }
     }
 
-    public enum Operand { Multiplication, Division, Addition, Substraction, Square, Exponent }
+    public enum Operator { Multiplication, Division, Addition, Substraction, Square, Exponent }
 
     public class PEMDAS
     {
         #region Fields
 
-        private char[] mTabOperators;
-        private char[] mPattern1;
-        private char[] mPattern2;
+        private char[] mParenthesis;
+        private char[] mOperators;
+        private char[] mComa;
 
         /// <summary>
-        /// Enum of operand (multiply, divide, add, substract...)
+        /// Enum of operators (multiply, divide, add, substract...)
         /// </summary>
-        public Operand Operand { get; set; }
+        public Operator Operator { get; set; }
 
         /// <summary>
         /// Chunk of a formula
@@ -68,9 +68,9 @@ namespace Udemy_Calculator
         /// <param name="pFormula"></param>
         public PEMDAS(string pFormula)
         {
-            mTabOperators = new char[] { '(', ')', '^', '*', '/', '+', '-' };
-            mPattern1 = new char[] { '+', '-', '*', '/', '^' };
-            mPattern2 = new char[] { '.', ',' };
+            mParenthesis = new char[] { '(', ')' };
+            mOperators = new char[] { '+', '-', '*', '/', '^', '√' };
+            mComa = new char[] { '.', ',' };
 
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
@@ -82,12 +82,12 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (Chunk.SB.ContainsAny(mTabOperators))
+            while (Chunk.SB.ContainsAny(mOperators.Concat(mParenthesis).ToArray()))
             {
                 ComputeParenthesis();
                 ComputeExponent();
-                ComputeMultiplicationOrDivision();
-                ComputeAdditionOrSubstraction();
+                ComputeOperand(new char[] { '*', '/' });
+                ComputeOperand(new char[] { '+', '-' });
             }
 
             return Chunk.SB.ToString();
@@ -193,7 +193,7 @@ namespace Udemy_Calculator
                 }
 
                 // Add operand type exponent
-                Operand = Operand.Exponent;
+                Operator = Operator.Exponent;
             }
         }
 
@@ -244,7 +244,7 @@ namespace Udemy_Calculator
             // Get RIGHT
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
             {
-                if (mTabOperators.Contains(pSbChunk[i]))
+                if (mParenthesis.Concat(mOperators).ToArray().Contains(pSbChunk[i]))
                 {
                     lIndex = i + 1;
                     pSbChunk.Remove(i, pSbChunk.Length - i);
@@ -290,94 +290,34 @@ namespace Udemy_Calculator
 
         #endregion
 
-        #region Multiplication & Division
+        #region Addition, Substraction, multiplication, division
 
-        internal void ComputeMultiplicationOrDivision()
+
+        internal void ComputeOperand(char[] pLstOperands)
         {
-            // If no multiply or divide symbol, out
-            if (!Chunk.SB.ContainsAny(new char[] { '*', '/' }))
+            if (!Chunk.SB.ContainsAny(pLstOperands))
             {
                 return;
             }
 
             if (Chunk.Length > 0)
             {
-                // Get first '*' or '/'
-                int lIndex = Chunk.SB.IndexOf('*');
+                int lIndex = Chunk.SB.IndexOf(pLstOperands[0]);
 
                 if (lIndex != -1)
                 {
-                    Operand = Operand.Multiplication;
-
-                    int lIndexOfDiv = Chunk.SB.IndexOf('/');
+                    int lIndexOfDiv = Chunk.SB.IndexOf(pLstOperands[1]);
 
                     if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
                     {
-                        Operand = Operand.Division;
                         lIndex = lIndexOfDiv;
                     }
                 }
                 else
                 {
-                    int lIndexOfDiv = Chunk.SB.IndexOf('/');
+                    int lIndexOfDiv = Chunk.SB.IndexOf(pLstOperands[1]);
                     if (lIndexOfDiv != -1)
                     {
-                        Operand = Operand.Division;
-                        lIndex = lIndexOfDiv;
-                    }
-                }
-
-                if (lIndex != -1)
-                {
-                    // Delete left and from formula
-                    StringBuilder lSb = Chunk.SB;
-                    int lBeginIndex = DeleteLeftSequence(ref lSb, ref lIndex);
-                    int lEndIndex = DeleteRightSequence(ref lSb, lIndex);
-
-                    // Ajouter l'indexStart
-                    Chunk.StartIndex = lBeginIndex;
-
-                    // Ajouter le Length
-                    Chunk.Length = lEndIndex - lBeginIndex;
-                }
-            }
-        }
-
-        #endregion
-
-        #region Addition & Substraction
-
-        public void ComputeAdditionOrSubstraction()
-        {
-            // If no multiply or divide symbol, out
-            if (!Chunk.SB.ContainsAny(new char[] { '+', '-' }))
-            {
-                return;
-            }
-
-            if (Chunk.Length > 0)
-            {
-                // Get first '+' or '-'
-                int lIndex = Chunk.SB.IndexOf('+');
-
-                if (lIndex != -1)
-                {
-                    Operand = Operand.Addition;
-
-                    int lIndexOfDiv = Chunk.SB.IndexOf('-');
-
-                    if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
-                    {
-                        Operand = Operand.Substraction;
-                        lIndex = lIndexOfDiv;
-                    }
-                }
-                else
-                {
-                    int lIndexOfDiv = Chunk.SB.IndexOf('-');
-                    if (lIndexOfDiv != -1)
-                    {
-                        Operand = Operand.Substraction;
                         lIndex = lIndexOfDiv;
                     }
                 }
@@ -411,11 +351,11 @@ namespace Udemy_Calculator
         {
             for (int i = pStartIndex; i < Chunk.SB.Length; i++)
             {
-                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mPattern2) != -1)
+                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1)
                 {
                     pStr += Chunk.SB[i];
                 }
-                else if (Chunk.SB[i].ToString().IndexOfAny(mPattern1) != -1)
+                else if (Chunk.SB[i].ToString().IndexOfAny(mOperators) != -1)
                 {
                     break;
                 }
@@ -428,7 +368,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         internal int GetIndexOperator()
         {
-            return Chunk.SB.ToString().IndexOfAny(mPattern1);
+            return Chunk.SB.ToString().IndexOfAny(mOperators);
         }
 
         /// <summary>
@@ -467,7 +407,7 @@ namespace Udemy_Calculator
             lB = TrimLengthString(lB);
 
             a = decimal.Parse(lA.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
-            b = decimal.Parse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);         
+            b = decimal.Parse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -480,25 +420,59 @@ namespace Udemy_Calculator
             // Extraction units from formula
             ExtractOperands(out decimal a, out decimal b);
 
-            switch (Operand)
+            // Extract the operator
+            GetOperator();
+
+            switch (Operator)
             {
-                case Operand.Multiplication:
+                case Operator.Multiplication:
                     pResult = MathOperation.Multiply(a, b);
                     break;
-                case Operand.Division:
+                case Operator.Division:
                     pResult = MathOperation.Divide(a, b);
                     break;
-                case Operand.Addition:
+                case Operator.Addition:
                     pResult = MathOperation.Add(a, b);
                     break;
-                case Operand.Substraction:
+                case Operator.Substraction:
                     pResult = MathOperation.Substract(a, b);
                     break;
-                case Operand.Square:
+                case Operator.Square:
                     pResult = MathOperation.Sqrt(a);
                     break;
-                case Operand.Exponent:
+                case Operator.Exponent:
                     pResult = MathOperation.Exponent(a, b);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Extract the operator from the Chunk
+        /// </summary>
+        internal void GetOperator()
+        {
+            int lIndex = Chunk.SB.ToString().IndexOfAny(mOperators);
+            char lOperator = Chunk.SB[lIndex];
+
+            switch (lOperator)
+            {
+                case '^':
+                    Operator = Operator.Exponent;
+                    break;
+                case '*':
+                    Operator = Operator.Multiplication;
+                    break;
+                case '/':
+                    Operator = Operator.Division;
+                    break;
+                case '+':
+                    Operator = Operator.Addition;
+                    break;
+                case '-':
+                    Operator = Operator.Substraction;
+                    break;
+                case '√':
+                    Operator = Operator.Square;
                     break;
             }
         }
