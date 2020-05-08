@@ -88,6 +88,8 @@ namespace Udemy_Calculator
                 ComputeExponent();
                 ComputeOperand(new char[] { '*', '/' });
                 ComputeOperand(new char[] { '+', '-' });
+                DoCompute(out decimal lResult);
+                DoReplaceByResult(lResult);
             }
 
             return Chunk.SB.ToString();
@@ -292,7 +294,6 @@ namespace Udemy_Calculator
 
         #region Addition, Substraction, multiplication, division
 
-
         internal void ComputeOperand(char[] pLstOperands)
         {
             if (!Chunk.SB.ContainsAny(pLstOperands))
@@ -481,7 +482,7 @@ namespace Udemy_Calculator
         /// Replace the chunk sequence by the result into the main formula
         /// </summary>
         /// <param name="lResult"></param>
-        private void DoReplaceByResult(double pResult)
+        internal void DoReplaceByResult(decimal pResult)
         {
 
         }
