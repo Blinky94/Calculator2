@@ -8,7 +8,18 @@ namespace Udemy_Calculator
     {
         public static decimal Add(decimal p1, decimal p2)
         {
-            return p1 + p2;
+            decimal lResult;
+
+            try
+            {
+                lResult = p1 + p2;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
         }
 
         public static decimal Substract(decimal p1, decimal p2)
@@ -23,7 +34,7 @@ namespace Udemy_Calculator
 
         public static decimal Divide(decimal p1, decimal p2)
         {
-            decimal lResult = default;
+            decimal lResult;
 
             try
             {

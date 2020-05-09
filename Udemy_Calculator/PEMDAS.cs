@@ -49,6 +49,7 @@ namespace Udemy_Calculator
         private char[] mParenthesis;
         private char[] mOperators;
         private char[] mComa;
+        private string[] mSpecials;
 
         /// <summary>
         /// Enum of operators (multiply, divide, add, substract...)
@@ -71,9 +72,28 @@ namespace Udemy_Calculator
             mParenthesis = new char[] { '(', ')' };
             mOperators = new char[] { '+', '-', '*', '/', '^', '√' };
             mComa = new char[] { '.', ',' };
+            mSpecials = new string[] { "E+" };
 
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
+        }
+
+        /// <summary>
+        /// Check if the compute formula is finish or not by containing any operator symbols or parenthesis
+        /// </summary>
+        /// <returns></returns>
+        internal bool FormulaContainsOperatorsYet(string pChunk)
+        {
+            var lArray = mOperators.Concat(mParenthesis).ToArray();
+            foreach (var pDigit in pChunk)
+            {
+                if (lArray.Contains(pDigit))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -82,7 +102,7 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (Chunk.SB.ContainsAny(mOperators.Concat(mParenthesis).ToArray()))
+            while (FormulaContainsOperatorsYet(Chunk.SB.ToString()))
             {
                 ComputeParenthesis();
                 ComputeExponent();
@@ -217,11 +237,13 @@ namespace Udemy_Calculator
         /// <param name="pStartIndex"></param>
         internal int DeleteLeftSequence(ref StringBuilder pSbChunk, ref int pStartIndex)
         {
-            int lIndex = -1;
-            // Get LEFT start index number from ^
+            int lIndex = 0;
+
+            // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
+            // GET LEFT side of the chunk formula
             for (int i = pStartIndex - 1; i >= 0; i--)
             {
-                if (!char.IsNumber(pSbChunk[i]))
+                if (mParenthesis.Concat(mOperators).ToArray().Contains(pSbChunk[i]))
                 {
                     lIndex = i + 1;
                     pSbChunk.Remove(0, i + 1);
@@ -241,9 +263,11 @@ namespace Udemy_Calculator
         /// <returns>The ended index</returns>
         internal int DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
         {
-            int lIndex = -1;
+            int lIndex = 0;
             pStartIndex++;
-            // Get RIGHT
+
+            // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
+            // Get RIGHT side of the chunk formula
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
             {
                 if (mParenthesis.Concat(mOperators).ToArray().Contains(pSbChunk[i]))
@@ -484,6 +508,14 @@ namespace Udemy_Calculator
         /// <param name="lResult"></param>
         internal void DoReplaceByResult(decimal pResult)
         {
+            // Check if compute if finish, return if yes
+            if (!FormulaContainsOperatorsYet(pResult.ToString()))
+            {
+                Chunk.SB.Clear();
+                Chunk.SB.Append(pResult.ToString());
+                return;
+            }
+
             int lStartIndex = Chunk.StartIndex;
             int lLength = Chunk.Length;
 

@@ -1254,5 +1254,150 @@ namespace Udemy_Calculator_Tests
         }
 
         #endregion
+
+        #region ComputeFormula
+
+        #region Addition
+
+        [TestMethod]
+        public void ComputeFormula_SimpleAdditionFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("5+7");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("12", lResult);
+        }
+
+        [TestMethod]
+        public void ComputeFormula_MaxIntegerAdditionFormula_ReturnsResult()
+        {
+            string lBig1 = Int64.MaxValue.ToString();
+            string lBig2 = Int64.MaxValue.ToString();
+            PEMDAS lPemdas = new PEMDAS($"{lBig1}+{lBig2}");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("18446744073709551614", lResult);
+        }
+
+        [TestMethod]
+        public void ComputeFormula_MaxDecimalAdditionFormula_ReturnsException()
+        {
+            try
+            {
+                string lBig = Decimal.MaxValue.ToString();
+
+                PEMDAS lPemdas = new PEMDAS($"{lBig}+{lBig}");
+                var lResult = lPemdas.ComputeFormula();
+
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");         
+        }
+
+        [TestMethod]
+        public void ComputeFormula_SimpleAdditionFormulaWithComa_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("5.5+7.15");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("12,65", lResult);
+        }
+
+        [TestMethod]
+        public void ComputeFormula_SimpleFloatAdditionFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("5.591112+7.158165555");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("12,749277555", lResult);
+        }
+
+        [TestMethod]
+        public void ComputeFormula_MaxFloatAdditionFormula_ReturnsResult()
+        {
+            string lBig = float.MaxValue.ToString();
+
+            PEMDAS lPemdas = new PEMDAS($"{lBig}+{lBig}");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("12,749277555", lResult);
+        }
+
+        #endregion
+
+        #region Substraction
+
+        [TestMethod]
+        public void ComputeFormula_SimpleSubstractionFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("7-5");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("2", lResult);
+        }
+
+
+
+        #endregion
+
+        #region Division
+
+        [TestMethod]
+        public void ComputeFormula_SimpleDivisionFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("8/2");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("4", lResult);
+        }
+
+        #endregion
+
+        #region Multiplication
+
+        [TestMethod]
+        public void ComputeFormula_SimpleMultiplicationFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("7*5");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("35", lResult);
+        }
+
+        #endregion
+
+        #region Exponent
+
+        [TestMethod]
+        public void ComputeFormula_SimpleExponentFormula_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("8^2");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("64", lResult);
+        }
+
+        #endregion
+
+        #region Root Square
+
+        [TestMethod]
+        public void ComputeFormula_SimpleRootSquareFormula_ReturnsResult()
+        {
+            Assert.Inconclusive();
+            PEMDAS lPemdas = new PEMDAS("√64");
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("8", lResult);
+        }
+
+        #endregion
+
+        #endregion
     }
 }
