@@ -12,7 +12,7 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = p1 + p2;
+                lResult = decimal.Add(p1, p2);
             }
             catch (Exception e)
             {
@@ -24,12 +24,34 @@ namespace Udemy_Calculator
 
         public static decimal Substract(decimal p1, decimal p2)
         {
-            return p1 - p2;
+            decimal lResult;
+
+            try
+            {
+                lResult = decimal.Subtract(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
         }
 
         public static decimal Multiply(decimal p1, decimal p2)
         {
-            return p1 * p2;
+            decimal lResult;
+
+            try
+            {
+                lResult = decimal.Multiply(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
         }
 
         public static decimal Divide(decimal p1, decimal p2)
@@ -38,12 +60,12 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = p1 / p2;
+                lResult = decimal.Divide(p1, p2);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }  
+            }
 
             return lResult;
         }
@@ -66,7 +88,18 @@ namespace Udemy_Calculator
 
         public static decimal Sqrt(decimal p)
         {
-            return Convert.ToDecimal(Math.Sqrt(Convert.ToDouble(p)));
+            decimal lResult;
+
+            try
+            {
+                lResult = Convert.ToDecimal(Math.Sqrt(Convert.ToDouble(p)));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
         }
     }
 }

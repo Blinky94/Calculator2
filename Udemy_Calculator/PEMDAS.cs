@@ -227,7 +227,7 @@ namespace Udemy_Calculator
         {
             int lIndexExp = pSb.IndexOf('^');
             DeleteLeftSequence(ref pSb, ref lIndexExp);
-            DeleteRightSequenceWithParenthesis(ref pSb, lIndexExp);
+            DeleteFromExponentOverParenthesis(ref pSb, lIndexExp);
         }
 
         /// <summary>
@@ -241,9 +241,11 @@ namespace Udemy_Calculator
 
             // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
             // GET LEFT side of the chunk formula
+            char[] lLstOperators = mParenthesis.Concat(mOperators).ToArray();
+
             for (int i = pStartIndex - 1; i >= 0; i--)
             {
-                if (mParenthesis.Concat(mOperators).ToArray().Contains(pSbChunk[i]))
+                if (lLstOperators.Contains(pSbChunk[i]))
                 {
                     lIndex = i + 1;
                     pSbChunk.Remove(0, i + 1);
@@ -268,9 +270,11 @@ namespace Udemy_Calculator
 
             // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
             // Get RIGHT side of the chunk formula
+            char[] lLstOperators = mParenthesis.Concat(mOperators).ToArray();
+
             for (int i = pStartIndex; i < pSbChunk.Length; i++)
             {
-                if (mParenthesis.Concat(mOperators).ToArray().Contains(pSbChunk[i]))
+                if (lLstOperators.Contains(pSbChunk[i]))
                 {
                     lIndex = i + 1;
                     pSbChunk.Remove(i, pSbChunk.Length - i);
@@ -287,7 +291,7 @@ namespace Udemy_Calculator
         /// <param name="pSbChunk"></param>
         /// <param name="pStartIndex"></param>
         /// <returns>The ended index</returns>
-        internal void DeleteRightSequenceWithParenthesis(ref StringBuilder pSbChunk, int pStartIndex)
+        internal void DeleteFromExponentOverParenthesis(ref StringBuilder pSbChunk, int pStartIndex)
         {
             Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
 
@@ -349,15 +353,15 @@ namespace Udemy_Calculator
 
                 if (lIndex != -1)
                 {
-                    // Delete left and from formula
+                    // Delete left and right from formula
                     StringBuilder lSb = Chunk.SB;
                     int lBeginIndex = DeleteLeftSequence(ref lSb, ref lIndex);
                     int lEndIndex = DeleteRightSequence(ref lSb, lIndex);
 
-                    // Ajouter l'indexStart
+                    // Add indexStart to the Chunk
                     Chunk.StartIndex = lBeginIndex;
 
-                    // Ajouter le Length
+                    // Add Length to the Chunk
                     Chunk.Length = lEndIndex - lBeginIndex;
                 }
             }
