@@ -41,27 +41,27 @@ namespace Udemy_Calculator_Tests
         public void ContainsAny_StringBuilderContainsAnyofChar_ReturnsTrue()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)");
 
             // Act/Assert
-            Assert.IsTrue(lSb.ContainsAny(new char[] { '*', '^' }));
+            Assert.IsTrue(lSb.ContainsAny(new char[] { '×', '^' }));
         }
 
         [TestMethod]
         public void ContainsAny_StringBuilderContainsOneOfTwo_ReturnsTrue()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2/(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2/(3)");
 
             // Act/Assert
-            Assert.IsTrue(lSb.ContainsAny(new char[] { '*', '^' }));
+            Assert.IsTrue(lSb.ContainsAny(new char[] { '×', '^' }));
         }
 
         [TestMethod]
         public void ContainsAny_StringBuilderNOTContainsAnyofChar_ReturnsFalse()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)");
 
             // Act/Assert
             Assert.IsFalse(lSb.ContainsAny(new char[] { '/', 'y' }));
@@ -75,7 +75,7 @@ namespace Udemy_Calculator_Tests
         public void Contains_StringBuilderContainsChar_ReturnsTrue()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)");
 
             // Act
             bool lResult = lSb.Contains('^');
@@ -88,7 +88,7 @@ namespace Udemy_Calculator_Tests
         public void Contains_StringBuilderNOTContainsChar_ReturnsFalse()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)");
 
             // Act
             bool lResult = lSb.Contains('y');
@@ -107,7 +107,7 @@ namespace Udemy_Calculator_Tests
         public void IndexOf_StringBuilderContainsOneChar_ReturnsIndexOfThisChar()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)");
 
             // Act
             int lResult = lSb.IndexOf('^');
@@ -120,7 +120,7 @@ namespace Udemy_Calculator_Tests
         public void IndexOf_StringBuilderContainsManySameChar_ReturnsIndexOfTheFirstChar()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
             int lResult = lSb.IndexOf('^');
@@ -133,7 +133,7 @@ namespace Udemy_Calculator_Tests
         public void IndexOf_StringBuilderNOTContainsChar_ReturnsNothing()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
             int lResult = lSb.IndexOf('y');
@@ -150,7 +150,7 @@ namespace Udemy_Calculator_Tests
         public void IndexOfAnyChar_StringBuilderContainsChar_ReturnsTabIndex()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
             int[] lResult = lSb.IndexOfAnyChar('^');
@@ -167,7 +167,7 @@ namespace Udemy_Calculator_Tests
         public void IndexOfAnyString_StringBuilderContainsString_ReturnsTabIndex()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
             int[] lResult = lSb.IndexOfAnyString("^(");
@@ -180,10 +180,10 @@ namespace Udemy_Calculator_Tests
         public void IndexOfAnyString_StringBuilderNOTContainsString_ReturnsNothing()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
-            int[] lResult = lSb.IndexOfAnyString("*(");
+            int[] lResult = lSb.IndexOfAnyString("×(");
 
             // Assert
             Assert.IsTrue(lResult.Count() == 0);
@@ -197,7 +197,7 @@ namespace Udemy_Calculator_Tests
         public void GetChunk_EnterIndexAndLengthOfAnExistingSequence_ReturnsTheSequence()
         {
             // Arrange
-            StringBuilder lSb = new StringBuilder("5*7+2^(3)+5^(6^(2/3))");
+            StringBuilder lSb = new StringBuilder("5×7+2^(3)+5^(6^(2/3))");
 
             // Act
             StringBuilder lSubSb = lSb.GetChunk(4, 5);

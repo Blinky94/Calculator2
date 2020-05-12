@@ -57,7 +57,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="1.5×" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -96,7 +96,7 @@
                     Click="UIOperatorButton_Click" />
         </StackPanel>
 
-        <!--7 8 9 *-->
+        <!--7 8 9 ×-->
         <StackPanel Orientation="Horizontal"
                     Grid.Row="3">
             <Button x:Name="UISevenButton"

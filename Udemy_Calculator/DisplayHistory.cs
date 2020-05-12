@@ -33,7 +33,7 @@ namespace Udemy_Calculator
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
-        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, decimal pLastNumber = default)
+        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, double pLastNumber = default)
         {
             if (pIsResult)
             {
@@ -62,7 +62,7 @@ namespace Udemy_Calculator
                 mParagraph.Inlines.Clear();
                 mParagraph.Inlines.Add(new Run(lOutput));
 
-                FormulaStr += lOutput;
+                FormulaStr = lOutput;
             }
         }
 

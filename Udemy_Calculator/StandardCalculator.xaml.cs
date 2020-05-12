@@ -10,10 +10,11 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class StandardCalculator : UserControl
     {
-        private decimal mLastNumber;
+        private double mLastNumber;
         private string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
         private History mHistory;
+        private PEMDAS mPemdas;
 
         public StandardCalculator()
         {
@@ -63,7 +64,7 @@ namespace Udemy_Calculator
             mHistory.AppendElement(string.Empty);
         }
 
-        private decimal TransformCoef(string pButtonPressed)
+        private double TransformCoef(string pButtonPressed)
         {
             switch (pButtonPressed)
             {
@@ -71,7 +72,7 @@ namespace Udemy_Calculator
                     return -1;
 
                 case "%":
-                    return 0.01m;
+                    return 0.01;
             }
 
             return default;
@@ -79,10 +80,10 @@ namespace Udemy_Calculator
 
         private void UIMultiplyCoefButton_Click(object sender, RoutedEventArgs e)
         {
-            decimal lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
-            decimal lResult;
+            double lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
+            double lResult;
 
-            if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
+            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
             {
                 if (!mIsResult)
                 {
@@ -105,7 +106,7 @@ namespace Udemy_Calculator
             {
                 mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
-                decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
                 UIResultLabel.Content = (e.Source as Button).Content.ToString();
             }
         }
@@ -116,9 +117,12 @@ namespace Udemy_Calculator
             {
                 string lFormula = mHistory.ReturnFormula();
 
-                if (decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal lNewNumber))
+                if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
                 {
-                    decimal lResult = default;
+                    // Ici PEMDAS
+                    string lResult;
+                    mPemdas = new PEMDAS(lFormula);
+                    lResult = mPemdas.ComputeFormula();
 
                     UIResultLabel.Content = lResult;
                     mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
@@ -126,7 +130,7 @@ namespace Udemy_Calculator
                     mIsResult = true;
 
                     mHistory.NewElement();
-                    decimal.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                    double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
                     mHistory.AppendElement(lResult.ToString(), true);
                     mHistory.NewElement();
                 }

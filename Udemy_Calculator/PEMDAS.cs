@@ -70,7 +70,7 @@ namespace Udemy_Calculator
         public PEMDAS(string pFormula)
         {
             mParenthesis = new char[] { '(', ')' };
-            mOperators = new char[] { '+', '-', '*', '/', '^', '√' };
+            mOperators = new char[] { '+', '-', '×', '÷', '^', '√' };
             mComa = new char[] { '.', ',' };
             mSpecials = new string[] { "E+" };
 
@@ -102,11 +102,11 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (FormulaContainsOperatorsYet(Chunk.SB.ToString()))
+            while (FormulaContainsOperatorsYet(Chunk.Formula.ToString()))
             {
                 ComputeParenthesis();
                 ComputeExponent();
-                ComputeOperand(new char[] { '*', '/' });
+                ComputeOperand(new char[] { '×', '÷' });
                 ComputeOperand(new char[] { '+', '-' });
                 DoCompute(out decimal lResult);
                 DoReplaceByResult(lResult);
@@ -392,7 +392,7 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Return the index of an operator (+,-,*,/) from a sequence of the chunk formula
+        /// Return the index of an operator (+,-,×,/) from a sequence of the chunk formula
         /// </summary>
         /// <returns></returns>
         internal int GetIndexOperator()
@@ -488,10 +488,10 @@ namespace Udemy_Calculator
                 case '^':
                     Operator = Operator.Exponent;
                     break;
-                case '*':
+                case '×':
                     Operator = Operator.Multiplication;
                     break;
-                case '/':
+                case '÷':
                     Operator = Operator.Division;
                     break;
                 case '+':
@@ -515,8 +515,9 @@ namespace Udemy_Calculator
             // Check if compute if finish, return if yes
             if (!FormulaContainsOperatorsYet(pResult.ToString()))
             {
-                Chunk.SB.Clear();
-                Chunk.SB.Append(pResult.ToString());
+                Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
+                Chunk.Formula.Insert(Chunk.StartIndex, pResult);
+                Chunk.SB = Chunk.Formula;
                 return;
             }
 
