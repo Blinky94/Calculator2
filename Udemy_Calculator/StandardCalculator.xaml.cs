@@ -96,6 +96,7 @@ namespace Udemy_Calculator
                     UIResultLabel.Content = mLastNumber * lTransformCoef;
                 }
 
+                UIResultLabel.Content = UIResultLabel.Content.ToString().Replace('-', '─');
                 mHistory.AppendElement(UIResultLabel.Content.ToString(), mIsResult, mLastNumber);
             }
         }
@@ -117,7 +118,11 @@ namespace Udemy_Calculator
             {
                 string lFormula = mHistory.ReturnFormula();
 
-                if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
+                string lResultContent = UIResultLabel.Content.ToString();
+                lResultContent = lResultContent.Replace(',', '.');
+                lResultContent = lResultContent.Replace('─', '-');
+
+                if (double.TryParse(lResultContent, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
                 {
                     // Ici PEMDAS
                     string lResult;

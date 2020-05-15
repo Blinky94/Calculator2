@@ -85,6 +85,7 @@ namespace Udemy_Calculator
         internal bool FormulaContainsOperatorsYet(string pChunk)
         {
             var lArray = mOperators.Concat(mParenthesis).ToArray();
+
             foreach (var pDigit in pChunk)
             {
                 if (lArray.Contains(pDigit))
@@ -102,7 +103,7 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (FormulaContainsOperatorsYet(Chunk.Formula.ToString()))
+            while (!decimal.TryParse(Chunk.Formula.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal _))
             {
                 ComputeParenthesis();
                 ComputeExponent();
@@ -372,7 +373,7 @@ namespace Udemy_Calculator
         #region Maths compute operation
 
         /// <summary>
-        /// Extract a sequence number from a chunk formula starting with index
+        /// Extract a sequence number from a chunk formula starting with index left (index = 0) or right (index != 0)
         /// </summary>
         /// <param name="pStartIndex"></param>
         /// <param name="pStr"></param>
@@ -380,7 +381,7 @@ namespace Udemy_Calculator
         {
             for (int i = pStartIndex; i < Chunk.SB.Length; i++)
             {
-                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1)
+                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1 || Chunk.SB[i].ToString() == "─")
                 {
                     pStr += Chunk.SB[i];
                 }
@@ -434,9 +435,12 @@ namespace Udemy_Calculator
 
             lA = TrimLengthString(lA);
             lB = TrimLengthString(lB);
-
-            a = decimal.Parse(lA.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
-            b = decimal.Parse(lB.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture);
+            lA = lA.Replace(',', '.');
+            lB = lB.Replace(',', '.');
+            lA = lA.Replace('─', '-');
+            lB = lB.Replace('─', '-');
+            a = decimal.Parse(lA, NumberStyles.Any, CultureInfo.InvariantCulture);
+            b = decimal.Parse(lB, NumberStyles.Any, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -513,10 +517,10 @@ namespace Udemy_Calculator
         internal void DoReplaceByResult(decimal pResult)
         {
             // Check if compute if finish, return if yes
-            if (!FormulaContainsOperatorsYet(pResult.ToString()))
+            if (double.TryParse(pResult.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
                 Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
-                Chunk.Formula.Insert(Chunk.StartIndex, pResult);
+                Chunk.Formula.Insert(Chunk.StartIndex, lResult);
                 Chunk.SB = Chunk.Formula;
                 return;
             }
