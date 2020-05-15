@@ -64,8 +64,8 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10×" />
-                        <RowDefinition Height="×" />
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <ScrollViewer x:Name="UIHistoryScrollViewer"

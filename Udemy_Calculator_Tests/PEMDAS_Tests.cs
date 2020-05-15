@@ -890,6 +890,28 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
+        public void DoCompute_AdditionWithNegativeNumberBeforeOperator_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("(-)15+16");
+            lPemdas.Operator = Operator.Addition;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("1", lResult.ToString());
+        }
+
+        [TestMethod]
+        public void DoCompute_AdditionWithNegativeNumberAfterOperator_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("15+(-)16");
+            lPemdas.Operator = Operator.Addition;
+
+            lPemdas.DoCompute(out decimal lResult);
+
+            Assert.AreEqual("(-)1", lResult.ToString());
+        }
+
+        [TestMethod]
         public void DoCompute_WithAddition3_ReturnsException()
         {
             try

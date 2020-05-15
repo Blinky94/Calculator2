@@ -1,4 +1,3 @@
-D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.csproj.CoreCompileInputs.cache
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -12,6 +11,7 @@ D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Udemy_Calculator.ex
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.csprojAssemblyReference.cache
+D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.csproj.CoreCompileInputs.cache
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.csproj.CopyComplete
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.dll
 D:\Dev WPF\Udemy_Calculator\Udemy_Calculator_Tests\obj\Debug\Udemy_Calculator_Tests.pdb

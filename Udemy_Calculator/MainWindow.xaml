@@ -39,7 +39,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="×" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--Menu Left Header-->
