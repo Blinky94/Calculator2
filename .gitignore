@@ -1,7 +1,9 @@
 *.suo
 *.exe
-bin/
-obj/
+Udemy_Calculator_Tests/bin/
+Udemy_Calculator/bin/
+Udemy_Calculator_Tests/obj/
+Udemy_Calculator/obj/
 .vs/
 *.dll
 *.cache
