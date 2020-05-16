@@ -1,8 +1,8 @@
 *.suo
 *.exe
-**/.bin/
-**/.obj/
+.bin/
+.obj/
 .vs/
 *.dll
 *.cache
-**/.Debug/
+.Debug/
