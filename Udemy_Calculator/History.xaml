@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="280">
+             d:DesignWidth="260">
 
     <Grid>
         <Grid.Resources>
@@ -23,7 +23,7 @@
                                   Unchecked="UIHistoryExpander_Collapsed">
                         <Image Source="Images/History_icon.png"
                                Width="22"
-                               Height="22" />
+                               Height="22" Margin="-10 0 0 0" />
                     </ToggleButton>
                     <ContentPresenter x:Name="ExpanderContent"
                                       Grid.Column="1"

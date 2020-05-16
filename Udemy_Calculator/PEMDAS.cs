@@ -516,20 +516,19 @@ namespace Udemy_Calculator
         /// <param name="lResult"></param>
         internal void DoReplaceByResult(decimal pResult)
         {
+            // pResult = pResult.ToString().Replace('.', ',');
             // Check if compute if finish, return if yes
-            if (double.TryParse(pResult.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
+            if (Chunk.SB.CountChar(mOperators) == 1)
             {
                 Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
-                Chunk.Formula.Insert(Chunk.StartIndex, lResult);
-                Chunk.SB = Chunk.Formula;
+                Chunk.Formula.Insert(Chunk.StartIndex, pResult);
+                string lTmp = Chunk.Formula.ToString();
+                Chunk.SB = new StringBuilder(lTmp);
                 return;
             }
 
-            int lStartIndex = Chunk.StartIndex;
-            int lLength = Chunk.Length;
-
-            Chunk.SB.Remove(lStartIndex, lLength);
-            Chunk.SB.Insert(lStartIndex, pResult.ToString());
+            Chunk.SB.Remove(Chunk.StartIndex, Chunk.Length);
+            Chunk.SB.Insert(Chunk.StartIndex, pResult.ToString());
         }
 
         #endregion

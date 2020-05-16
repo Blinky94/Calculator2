@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="400"
-             d:DesignWidth="250">
+             d:DesignWidth="230">
 
     <!--Standard Calculator-->
     <Grid x:Name="UIStandardCalculator"
-          Background="White">
+          Background="White" Margin="-8.5 0 0 0">
         <Grid.Resources>
             <Style x:Key="BaseStyleButton"
                    TargetType="Button">
@@ -52,12 +52,12 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
