@@ -142,6 +142,45 @@ namespace Udemy_Calculator_Tests
             Assert.AreEqual(-1, lResult);
         }
 
+        [TestMethod]
+        public void CountChar_WithChar_ReturnsNumberOfOccurences()
+        {
+            // Arrange
+            StringBuilder lSb = new StringBuilder("6+5+1+2");
+
+            // Act
+            int lResult = lSb.CountChar('+');
+
+            // Assert
+            Assert.AreEqual(3, lResult);
+        }
+
+        [TestMethod]
+        public void CountChar_WithArrayChar_ReturnsNumberOfOccurences()
+        {
+            // Arrange
+            StringBuilder lSb = new StringBuilder("5+6+8-9+6-1-3");
+
+            // Act
+            int lResult = lSb.CountChar(new char[] { '+', '-' });
+
+            // Assert
+            Assert.AreEqual(6, lResult);
+        }
+
+        [TestMethod]
+        public void CountChar_WithString_ReturnsNumberOfOccurences()
+        {
+            // Arrange
+            StringBuilder lSb = new StringBuilder("261+598261-3261");
+
+            // Act
+            int lResult = lSb.CountOccurences("261");
+
+            // Assert
+            Assert.AreEqual(3, lResult);
+        }
+
         #endregion
 
         #region IndexOfAnyChar

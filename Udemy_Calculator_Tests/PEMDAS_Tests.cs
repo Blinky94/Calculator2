@@ -1225,13 +1225,13 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithRootSquare_ReturnsResult()
         {
-            Assert.Inconclusive();
+            //Assert.Inconclusive();
             PEMDAS lPemdas = new PEMDAS("√81");
             lPemdas.Operator = Operator.Square;
 
             lPemdas.DoCompute(out decimal lResult);
 
-            Assert.AreEqual("225", lResult.ToString());
+            Assert.AreEqual("9", lResult.ToString());
         }
 
         [TestMethod]
@@ -1421,6 +1421,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_MaxIntegerAdditionFormula_ReturnsResult()
         {
+            // 9223372036854775807
             string lBig1 = Int64.MaxValue.ToString();
             string lBig2 = Int64.MaxValue.ToString();
             PEMDAS lPemdas = new PEMDAS($"{lBig1}+{lBig2}");
@@ -1573,6 +1574,17 @@ namespace Udemy_Calculator_Tests
             var lResult = lPemdas.ComputeFormula();
 
             Assert.AreEqual("1,2621774483536342087562403992417e-28", lResult);
+        }
+
+        [TestMethod]
+        public void ComputeFormula_DivisionComplexeFormula1_ReturnsException()
+        {
+            string lFormula = "8÷3×240÷2×3-1";
+
+            PEMDAS lPemdas = new PEMDAS(lFormula);
+            var lResult = lPemdas.ComputeFormula();
+
+            Assert.AreEqual("958,9999999999999999999999997", lResult);
         }
 
         #endregion
