@@ -85,11 +85,11 @@
             <Button x:Name="UINegativeButton"
                     Style="{StaticResource BaseStyleButton}"
                     Content="+/1"
-                    Click="UIMultiplyCoefButton_Click" />
+                    Click="UISignOrUnSignButton_Click" />
             <Button x:Name="UIPercentButton"
                     Style="{StaticResource BaseStyleButton}"
                     Content="%"
-                    Click="UIMultiplyCoefButton_Click" />
+                    Click="UIPercentageButton_Click" />
             <Button x:Name="UIDivideButton"
                     Style="{StaticResource BaseStyleButton}"
                     Content="÷"

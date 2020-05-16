@@ -67,9 +67,15 @@ namespace Udemy_Calculator
             }
             else
             {
-                mDisplayHistory.AppendHistoryResult(pStr, UIHistoryTextBox);
+                if(pNum != default)
+                {
+                    mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum);
+                }
+                else
+                {
+                    mDisplayHistory.AppendHistoryResult(pStr, UIHistoryTextBox);
+                }
             }
-
         }
 
         internal void RemoveElement(int pLength)

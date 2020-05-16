@@ -31,8 +31,9 @@ namespace Udemy_Calculator
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
-            double lNumber;
-            double.TryParse((e.Source as Button).Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lNumber);
+            string lInput = (e.Source as Button).Content.ToString().Replace(',', '.').Replace('─', '-');
+
+            double.TryParse(lInput, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumber);
 
             if (UIResultLabel.Content.ToString() == "0" || mSpecialSymbols.Contains(UIResultLabel.Content.ToString()) || mIsResult)
             {
@@ -44,12 +45,15 @@ namespace Udemy_Calculator
                 UIResultLabel.Content = $"{UIResultLabel.Content}{lNumber}";
             }
 
-            mHistory.AppendElement(lNumber.ToString(), mIsResult, mLastNumber);
+            lInput = lNumber.ToString().Replace(',', '.').Replace('-', '─');
+            mHistory.AppendElement(lInput, mIsResult, mLastNumber);
         }
 
         private void UIPointButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!UIResultLabel.Content.ToString().Replace(',', '.').Contains('.'))
+            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+
+            if (!UIResultLabel.Content.ToString().Contains('.'))
             {
                 UIResultLabel.Content = $"{UIResultLabel.Content}.";
                 mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
@@ -64,41 +68,30 @@ namespace Udemy_Calculator
             mHistory.AppendElement(string.Empty);
         }
 
-        private double TransformCoef(string pButtonPressed)
+        private void UISignOrUnSignButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (pButtonPressed)
-            {
-                case "+/1":
-                    return -1;
+            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
 
-                case "%":
-                    return 0.01;
-            }
-
-            return default;
-        }
-
-        private void UIMultiplyCoefButton_Click(object sender, RoutedEventArgs e)
-        {
-            double lTransformCoef = TransformCoef((e.Source as Button).Content.ToString());
-            double lResult;
-
-            if (double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out lResult))
+            if (double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
                 if (!mIsResult)
                 {
                     mHistory.RemoveElement(UIResultLabel.Content.ToString().Length);
-                    UIResultLabel.Content = lResult * lTransformCoef;
+                    UIResultLabel.Content = (lResult * (-1)).ToString().Replace(',', '.').Replace('-', '─');
                 }
                 else
                 {
                     mIsResult = false;
-                    UIResultLabel.Content = mLastNumber * lTransformCoef;
+                    UIResultLabel.Content = (mLastNumber * (-1)).ToString().Replace(',', '.').Replace('-', '─');
                 }
 
-                UIResultLabel.Content = UIResultLabel.Content.ToString().Replace('-', '─');
                 mHistory.AppendElement(UIResultLabel.Content.ToString(), mIsResult, mLastNumber);
             }
+        }
+
+        private void UIPercentageButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void UIOperatorButton_Click(object sender, RoutedEventArgs e)
@@ -107,7 +100,9 @@ namespace Udemy_Calculator
             {
                 mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber);
 
-                double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+
+                double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
                 UIResultLabel.Content = (e.Source as Button).Content.ToString();
             }
         }
@@ -119,8 +114,7 @@ namespace Udemy_Calculator
                 string lFormula = mHistory.ReturnFormula();
 
                 string lResultContent = UIResultLabel.Content.ToString();
-                lResultContent = lResultContent.Replace(',', '.');
-                lResultContent = lResultContent.Replace('─', '-');
+                lResultContent = lResultContent.Replace(',', '.').Replace('─', '-');
 
                 if (double.TryParse(lResultContent, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
                 {
@@ -135,8 +129,10 @@ namespace Udemy_Calculator
                     mIsResult = true;
 
                     mHistory.NewElement();
-                    double.TryParse(UIResultLabel.Content.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                    mHistory.AppendElement(lResult.ToString(), true);
+                    UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('-', '─');
+
+                    double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
+                    mHistory.AppendElement(lResult.ToString().Replace(',', '.').Replace('-', '─'), true);
                     mHistory.NewElement();
                 }
             }
