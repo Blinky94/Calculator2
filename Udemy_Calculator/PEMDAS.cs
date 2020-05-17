@@ -381,7 +381,7 @@ namespace Udemy_Calculator
         {
             for (int i = pStartIndex; i < Chunk.SB.Length; i++)
             {
-                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1 || Chunk.SB[i].ToString() == "─")
+                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1 || (Chunk.SB[i].ToString() == "─" && Chunk.SB[i - 1].ToString().IndexOfAny(mOperators) != -1))
                 {
                     pStr += Chunk.SB[i];
                 }

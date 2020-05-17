@@ -59,7 +59,7 @@ namespace Udemy_Calculator
             mDisplayHistory.AddNewHistory();
         }
 
-        internal void AppendElement(string pStr, bool pIsResult = false, double pNum = default)
+        internal void AppendElement(string pStr, bool pIsResult = false, string pNum = default)
         {
             if (!pIsResult)
             {
