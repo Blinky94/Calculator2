@@ -31,7 +31,7 @@ namespace Udemy_Calculator
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
-            string lInput = (e.Source as Button).Content.ToString().Replace(',', '.').Replace('─', '-');
+            string lInput = (e.Source as Button).Content.ToString().Replace(',', '.');
 
             double.TryParse(lInput, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumber);
 
@@ -45,18 +45,18 @@ namespace Udemy_Calculator
                 UIResultLabel.Content = $"{UIResultLabel.Content}{lNumber}";
             }
 
-            lInput = lNumber.ToString().Replace(',', '.').Replace('-', '─');
-            mHistory.AppendElement(lInput, mIsResult, mLastNumber.ToString().Replace(',', '.').Replace('-', '─'));
+            lInput = lNumber.ToString().Replace(',', '.');
+            mHistory.AppendElement(lInput, mIsResult, mLastNumber.ToString().Replace(',', '.'));
         }
 
         private void UIPointButton_Click(object sender, RoutedEventArgs e)
         {
-            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.');
 
             if (!UIResultLabel.Content.ToString().Contains('.'))
             {
                 UIResultLabel.Content = $"{UIResultLabel.Content}.";
-                mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber.ToString().Replace(',', '.').Replace('-', '─'));
+                mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber.ToString().Replace(',', '.'));
                 mIsResult = false;
             }
         }
@@ -70,22 +70,31 @@ namespace Udemy_Calculator
 
         private void UISignOrUnSignButton_Click(object sender, RoutedEventArgs e)
         {
-            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.');
 
             if (double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
                 if (!mIsResult)
                 {
                     mHistory.RemoveElement(UIResultLabel.Content.ToString().Length);
-                    UIResultLabel.Content = (lResult * (-1)).ToString().Replace(',', '.').Replace('-', '─');
+                    UIResultLabel.Content = (lResult * (-1)).ToString().Replace(',', '.');
                 }
                 else
                 {
                     mIsResult = false;
-                    UIResultLabel.Content = (mLastNumber * (-1)).ToString().Replace(',', '.').Replace('-', '─');
+                    UIResultLabel.Content = (mLastNumber * (-1)).ToString().Replace(',', '.');
                 }
 
-                mHistory.AppendElement(UIResultLabel.Content.ToString(), mIsResult, mLastNumber.ToString().Replace(',', '.').Replace('-', '─'));
+
+                string lConcateSign = UIResultLabel.Content.ToString();
+                
+                if(lConcateSign.IndexOf('-') != -1)
+                {
+                    lConcateSign = lConcateSign.Trim('-');
+                    lConcateSign = $"({lConcateSign})";
+                }
+
+                mHistory.AppendElement(lConcateSign, mIsResult, mLastNumber.ToString().Replace(',', '.'));
             }
         }
 
@@ -98,12 +107,12 @@ namespace Udemy_Calculator
         {
             if (!mSpecialSymbols.Contains(UIResultLabel.Content.ToString().LastOrDefault()))
             {
-                mHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.').Replace('-', '─'), mIsResult, mLastNumber.ToString().Replace(',', '.').Replace('-', '─'));
+                mHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, mLastNumber.ToString().Replace(',', '.'));
 
-                UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+                UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.');
 
                 double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                UIResultLabel.Content = (e.Source as Button).Content.ToString().Replace(',', '.').Replace('-', '─');
+                UIResultLabel.Content = (e.Source as Button).Content.ToString().Replace(',', '.');
             }
         }
 
@@ -114,7 +123,7 @@ namespace Udemy_Calculator
                 string lFormula = mHistory.ReturnFormula();
 
                 string lResultContent = UIResultLabel.Content.ToString();
-                lResultContent = lResultContent.Replace(',', '.').Replace('─', '-');
+                lResultContent = lResultContent.Replace(',', '.');
 
                 if (double.TryParse(lResultContent, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
                 {
@@ -124,15 +133,15 @@ namespace Udemy_Calculator
                     lResult = mPemdas.ComputeFormula();
 
                     UIResultLabel.Content = lResult;
-                    mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber.ToString().Replace(',', '.').Replace('-', '─'));
+                    mHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, mLastNumber.ToString().Replace(',', '.'));
 
                     mIsResult = true;
 
                     mHistory.NewElement();
-                    UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.').Replace('─', '-');
+                    UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.');
 
                     double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out mLastNumber);
-                    mHistory.AppendElement(lResult.ToString().Replace(',', '.').Replace('-', '─'), true);
+                    mHistory.AppendElement(lResult.ToString().Replace(',', '.'), true);
                     mHistory.NewElement();
                 }
             }

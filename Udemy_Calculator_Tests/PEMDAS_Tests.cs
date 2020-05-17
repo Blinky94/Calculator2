@@ -783,83 +783,173 @@ namespace Udemy_Calculator_Tests
 
         #endregion
 
-        #region  GetNumberFromChunk
+        #region  GetChunkPart
+
+        #region Addition
 
         [TestMethod]
-        public void GetNumberFromChunk_SetSimpleFormula_ReturnsLeftOperand()
+        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsLeftOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16+15");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
+
+            Assert.AreEqual("16", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsLeftOperand()
         {
             PEMDAS lPemdas = new PEMDAS("16.5+56");
 
-            string lChunk = string.Empty;
-
-            lPemdas.GetNumberFromChunk(ref lChunk);
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
 
             Assert.AreEqual("16.5", lChunk);
         }
 
         [TestMethod]
-        public void GetNumberFromChunk_SetSimpleFormula2_ReturnsRightOperand()
+        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsRightOperand()
         {
             PEMDAS lPemdas = new PEMDAS("16.5+56");
 
-            string lChunk = string.Empty;
-
-            lPemdas.GetNumberFromChunk(ref lChunk, 5);
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
 
             Assert.AreEqual("56", lChunk);
         }
 
-        #endregion
-
-        #region  GetIndexOperator
-
         [TestMethod]
-        public void GetIndexOperator_WithAddition_ReturnsIndex()
+        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsRightOperand()
         {
-            PEMDAS lPemdas = new PEMDAS("16.5+56");
+            PEMDAS lPemdas = new PEMDAS("16.5+56.6");
 
-            string lChunk = string.Empty;
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
 
-            int lIndex = lPemdas.GetIndexOperator();
-
-            Assert.AreEqual(4, lIndex);
+            Assert.AreEqual("56.6", lChunk);
         }
 
         [TestMethod]
-        public void GetIndexOperator_WithSubstraction_ReturnsIndex()
+        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsAllOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16+56");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
+
+            Assert.AreEqual("16+56", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsAllOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16.52+56.22");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
+
+            Assert.AreEqual("16.52+56.22", lChunk);
+        }
+
+        #endregion
+
+        #region Substraction
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsLeftOperand()
         {
             PEMDAS lPemdas = new PEMDAS("16.5-56");
 
-            string lChunk = string.Empty;
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
 
-            int lIndex = lPemdas.GetIndexOperator();
-
-            Assert.AreEqual(4, lIndex);
+            Assert.AreEqual("16.5", lChunk);
         }
 
         [TestMethod]
-        public void GetIndexOperator_WithMultiplication_ReturnsIndex()
+        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsRightOperand()
         {
-            PEMDAS lPemdas = new PEMDAS("16.5×56");
+            PEMDAS lPemdas = new PEMDAS("16.5-56.6");
 
-            string lChunk = string.Empty;
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
 
-            int lIndex = lPemdas.GetIndexOperator();
-
-            Assert.AreEqual(4, lIndex);
+            Assert.AreEqual("56.6", lChunk);
         }
 
         [TestMethod]
-        public void GetIndexOperator_WitDivision_ReturnsIndex()
+        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsAllOperand()
         {
-            PEMDAS lPemdas = new PEMDAS("16.5÷56");
+            PEMDAS lPemdas = new PEMDAS("16.5-56");
 
-            string lChunk = string.Empty;
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
 
-            int lIndex = lPemdas.GetIndexOperator();
-
-            Assert.AreEqual(4, lIndex);
+            Assert.AreEqual("16.5-56", lChunk);
         }
+
+        #endregion
+
+        #region Multiplication
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsLeftOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16×4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
+
+            Assert.AreEqual("16", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsRightOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16×4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
+
+            Assert.AreEqual("4", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsAllOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16×4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
+
+            Assert.AreEqual("16×4", lChunk);
+        }
+
+        #endregion
+
+        #region Division
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsLeftOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16÷4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
+
+            Assert.AreEqual("16", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsRightOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16÷4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
+
+            Assert.AreEqual("4", lChunk);
+        }
+
+        [TestMethod]
+        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsAllOperand()
+        {
+            PEMDAS lPemdas = new PEMDAS("16÷4");
+
+            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
+
+            Assert.AreEqual("16÷4", lChunk);
+        }
+
+        #endregion
 
         #endregion
 
@@ -892,7 +982,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_AdditionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15+16");
+            PEMDAS lPemdas = new PEMDAS("(15)+16");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -906,7 +996,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_AdditionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15+─16");
+            PEMDAS lPemdas = new PEMDAS("15+(16)");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -981,7 +1071,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_SubstactionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15-16");
+            PEMDAS lPemdas = new PEMDAS("(15)-16");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -992,7 +1082,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_SubstactionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15-─16");
+            PEMDAS lPemdas = new PEMDAS("(15)-(16)");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1051,7 +1141,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_MultiplicationWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15×16");
+            PEMDAS lPemdas = new PEMDAS("(15)×16");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1062,7 +1152,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_MultiplicationWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15×─16");
+            PEMDAS lPemdas = new PEMDAS("(15)×(16)");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1132,7 +1222,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_DivisionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─15÷16");
+            PEMDAS lPemdas = new PEMDAS("(15)÷16");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1143,7 +1233,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_DivisionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15÷─16");
+            PEMDAS lPemdas = new PEMDAS("15÷(16)");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1199,7 +1289,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_ExponentWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("─5^2");
+            PEMDAS lPemdas = new PEMDAS("(5)^2");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1210,7 +1300,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_ExponentWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("5^─2");
+            PEMDAS lPemdas = new PEMDAS("5^(2)");
             lPemdas.Operator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
@@ -1225,7 +1315,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithRootSquare_ReturnsResult()
         {
-            //Assert.Inconclusive();
+            Assert.Inconclusive();
             PEMDAS lPemdas = new PEMDAS("√81");
             lPemdas.Operator = Operator.Square;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Udemy_Calculator
 {
@@ -12,6 +13,7 @@ namespace Udemy_Calculator
     public class Chunk
     {
         private StringBuilder mFormula;
+
         public StringBuilder Formula
         {
             get { return mFormula; }
@@ -124,7 +126,9 @@ namespace Udemy_Calculator
         {
             if (pCkunk.StartIndex > 0)
             {
-                return pCkunk.SB[pCkunk.StartIndex] == '(' && (pCkunk.SB[pCkunk.StartIndex - 1] != '^');
+                return pCkunk.SB[pCkunk.StartIndex] == '('
+                    && (pCkunk.SB[pCkunk.StartIndex - 1] != '^')
+                    && (pCkunk.SB[pCkunk.StartIndex + 1] != '-');
             }
             else
             {
@@ -372,33 +376,30 @@ namespace Udemy_Calculator
 
         #region Maths compute operation
 
+        // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
+        private string mRegexSplitGroup = @"(^\(?-?\d*[.,]?[\d*]*[\)]?)[+-÷×]?(\(?-?\d*[.,]?[\d*]*[\)]?)";
+
+        internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
+
         /// <summary>
         /// Extract a sequence number from a chunk formula starting with index left (index = 0) or right (index != 0)
         /// </summary>
         /// <param name="pStartIndex"></param>
         /// <param name="pStr"></param>
-        internal void GetNumberFromChunk(ref string pStr, int pStartIndex = 0)
+        internal void GetChunkPart(out string pStr, eFormulaPart pFPart)
         {
-            for (int i = pStartIndex; i < Chunk.SB.Length; i++)
-            {
-                if (Char.IsDigit(Chunk.SB[i]) || Chunk.SB[i].ToString().IndexOfAny(mComa) != -1 || (Chunk.SB[i].ToString() == "─" && Chunk.SB[i - 1].ToString().IndexOfAny(mOperators) != -1))
-                {
-                    pStr += Chunk.SB[i];
-                }
-                else if (Chunk.SB[i].ToString().IndexOfAny(mOperators) != -1)
-                {
-                    break;
-                }
-            }
-        }
+            var lRegex = new Regex(mRegexSplitGroup);
+            Match match = lRegex.Match(Chunk.SB.ToString());
 
-        /// <summary>
-        /// Return the index of an operator (+,-,×,/) from a sequence of the chunk formula
-        /// </summary>
-        /// <returns></returns>
-        internal int GetIndexOperator()
-        {
-            return Chunk.SB.ToString().IndexOfAny(mOperators);
+            string lGroup = match.Groups[(int)pFPart].Value;
+
+            // Reajust the group without parentesis if inequals count are detected (ex : (40 OR 50))
+            if (!ParenthesisAreEquivalent(new StringBuilder(lGroup)))
+            {
+                lGroup = lGroup.Trim(mParenthesis);
+            }
+
+            pStr = lGroup;
         }
 
         /// <summary>
@@ -424,23 +425,18 @@ namespace Udemy_Calculator
         /// <param name="b"></param>
         internal void ExtractOperands(out decimal a, out decimal b)
         {
-            string lA = string.Empty;
-            string lB = string.Empty;
-
-            GetNumberFromChunk(ref lA);
-
-            int lIndex = GetIndexOperator();
-            lIndex++;
-            GetNumberFromChunk(ref lB, lIndex);
+            GetChunkPart(out string lA, eFormulaPart.Left);
+            GetChunkPart(out string lB, eFormulaPart.Right);
 
             lA = TrimLengthString(lA);
             lB = TrimLengthString(lB);
             lA = lA.Replace(',', '.');
             lB = lB.Replace(',', '.');
-            lA = lA.Replace('─', '-');
-            lB = lB.Replace('─', '-');
-            a = decimal.Parse(lA, NumberStyles.Any, CultureInfo.InvariantCulture);
-            b = decimal.Parse(lB, NumberStyles.Any, CultureInfo.InvariantCulture);
+
+            NumberStyles lStyle = NumberStyles.Number | NumberStyles.AllowParentheses | NumberStyles.AllowTrailingSign | NumberStyles.AllowLeadingSign;
+
+            a = decimal.Parse(lA, lStyle, CultureInfo.InvariantCulture);
+            b = decimal.Parse(lB, lStyle, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
