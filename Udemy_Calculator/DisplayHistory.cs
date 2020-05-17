@@ -33,7 +33,7 @@ namespace Udemy_Calculator
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
-        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, double pLastNumber = default)
+        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, string pLastNumber = default)
         {
             if (pIsResult)
             {
@@ -42,14 +42,14 @@ namespace Udemy_Calculator
 
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
             lCurrentBlock.TextAlignment = TextAlignment.Left;
-            lCurrentBlock.Foreground = Brushes.LightGreen;
+            lCurrentBlock.Foreground = Brushes.Black;
         }
 
         public void AppendHistoryResult(string pText, RichTextBox pUITextBox)
         {
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
             lCurrentBlock.TextAlignment = TextAlignment.Right;
-            lCurrentBlock.Foreground = Brushes.LightSalmon;
+            lCurrentBlock.Foreground = Brushes.Blue;
         }
 
         public void RemoveHistoryFormula(int pUILength)
