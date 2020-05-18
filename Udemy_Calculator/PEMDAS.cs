@@ -126,19 +126,18 @@ namespace Udemy_Calculator
 
         private Stack<int> mStack = new Stack<int>();
 
-        internal bool IsRealOpenedParenthesis(Chunk pCkunk)
+        internal bool HasOpenedParenthesis(Chunk pCkunk)
         {
-            // Faire une regex pour ne séléctionner que les vraies parentheses
-            if (pCkunk.StartIndex > 0)
+            // Select valid opened '(' (Exclude (-N) or N^(...))
+            string lPattern = @"^([\(][\d√])";
+            Regex lRegex = new Regex(lPattern);
+
+            if (lRegex.IsMatch(pCkunk.SB.ToString()))
             {
-                return pCkunk.SB[pCkunk.StartIndex] == '('
-                    && (pCkunk.SB[pCkunk.StartIndex - 1] != '^')
-                    && (pCkunk.SB[pCkunk.StartIndex + 1] != '-');
+                return true;
             }
-            else
-            {
-                return pCkunk.SB[pCkunk.StartIndex] == '(';
-            }
+
+            return false;          
         }
 
         /// <summary>
@@ -153,7 +152,7 @@ namespace Udemy_Calculator
             }
 
             // No parenthesis in the chunk, out
-            if(pCount == 0)
+            if (pCount == 0)
             {
                 return;
             }
@@ -163,7 +162,7 @@ namespace Udemy_Calculator
             for (int i = 0; i < Chunk.SB.Length; i++)
             {
                 Chunk.StartIndex = i;
-                if (IsRealOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
+                if (HasOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
                 {
                     if (!mStack.Contains(i)) // index not already in
                     {
