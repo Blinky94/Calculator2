@@ -128,6 +128,7 @@ namespace Udemy_Calculator
 
         internal bool IsRealOpenedParenthesis(Chunk pCkunk)
         {
+            // Faire une regex pour ne séléctionner que les vraies parentheses
             if (pCkunk.StartIndex > 0)
             {
                 return pCkunk.SB[pCkunk.StartIndex] == '('
