@@ -52,6 +52,10 @@ namespace Udemy_Calculator
         private char[] mOperators;
         private char[] mComa;
         private string[] mSpecials;
+        // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
+        private string mRegexSplitGroup = @"^([\(]*[-]*\d*[.,]*[\d*]*[\)]*)([+-×÷])([\(]*[-]*\d*[.,]*[\d*]*[\)]*)$";
+        // Enum to select which part of a chunk
+        internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
         /// <summary>
         /// Enum of operators (multiply, divide, add, substract...)
@@ -107,6 +111,7 @@ namespace Udemy_Calculator
         {
             while (!decimal.TryParse(Chunk.Formula.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal _))
             {
+                string vvv = Chunk.SB.ToString();
                 ComputeParenthesis();
                 ComputeExponent();
                 ComputeOperand(new char[] { '×', '÷' });
@@ -375,11 +380,6 @@ namespace Udemy_Calculator
         #endregion
 
         #region Maths compute operation
-
-        // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
-        private string mRegexSplitGroup = @"(^\(?-?\d*[.,]?[\d*]*[\)]?)[+-÷×]?(\(?-?\d*[.,]?[\d*]*[\)]?)";
-
-        internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
         /// <summary>
         /// Extract a sequence number from a chunk formula starting with index left (index = 0) or right (index != 0)

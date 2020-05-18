@@ -90,7 +90,7 @@ namespace Udemy_Calculator
                 
                 if(lConcateSign.IndexOf('-') != -1)
                 {
-                    lConcateSign = lConcateSign.Trim('-');
+                    // lConcateSign = lConcateSign.Trim('-');
                     lConcateSign = $"({lConcateSign})";
                 }
 
