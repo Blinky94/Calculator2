@@ -19,7 +19,7 @@ namespace Udemy_Calculator_Tests
 
             // Act
             PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
-            bool lboolParenthesis = lPEMDAS.ParenthesisAreEquivalent(lFormula);
+            bool lboolParenthesis = lPEMDAS.ParenthesisConsistency(lFormula, out int lCount);
 
             // Assert
             Assert.IsFalse(lboolParenthesis);
@@ -33,10 +33,11 @@ namespace Udemy_Calculator_Tests
 
             // Act
             PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
-            bool lboolParenthesis = lPEMDAS.ParenthesisAreEquivalent(lFormula);
+            bool lboolParenthesis = lPEMDAS.ParenthesisConsistency(lFormula, out int lCount);
 
             // Assert
             Assert.IsTrue(lboolParenthesis);
+            Assert.AreEqual(2, lCount);
         }
 
         [TestMethod]

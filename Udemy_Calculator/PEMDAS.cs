@@ -111,7 +111,6 @@ namespace Udemy_Calculator
         {
             while (!decimal.TryParse(Chunk.Formula.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal _))
             {
-                string vvv = Chunk.SB.ToString();
                 ComputeParenthesis();
                 ComputeExponent();
                 ComputeOperand(new char[] { '×', '÷' });
@@ -146,55 +145,54 @@ namespace Udemy_Calculator
         /// </summary>
         internal void ComputeParenthesis()
         {
-            // If no parenthesis, out
-            if (Chunk.SB.IndexOf('(') == -1)
+            // Number of equivalent parenthesis not consistent
+            if (!ParenthesisConsistency(Chunk.SB, out int pCount))
+            {
+                throw new ArithmeticException("The number of opened parenthesis and closed parenthesis are not the same !!!");
+            }
+
+            // No parenthesis in the chunk, out
+            if(pCount == 0)
             {
                 return;
             }
 
             mStack.Clear();
 
-            if (ParenthesisAreEquivalent(Chunk.SB))
+            for (int i = 0; i < Chunk.SB.Length; i++)
             {
-                for (int i = 0; i < Chunk.SB.Length; i++)
+                Chunk.StartIndex = i;
+                if (IsRealOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
                 {
-                    Chunk.StartIndex = i;
-                    if (IsRealOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
+                    if (!mStack.Contains(i)) // index not already in
                     {
-                        if (!mStack.Contains(i)) // index not already in
-                        {
-                            mStack.Push(i); // Add index
-                        }
-                    }
-                    else if (Chunk.SB[i] == ')')
-                    {
-                        if (mStack.Count() > 0)
-                        {
-                            int lStartIndex = mStack.Pop(); // Pop index
-
-                            // Get new chunk of formula from the '(' to the ')'
-                            Chunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
-                            Chunk.StartIndex = lStartIndex;
-                            Chunk.Length = i - lStartIndex++;
-                        }
+                        mStack.Push(i); // Add index
                     }
                 }
-            }
-            else
-            {
-                throw new ArithmeticException("The number of opened parenthesis and closed parenthesis are not the same !!!");
+                else if (Chunk.SB[i] == ')')
+                {
+                    if (mStack.Count() > 0)
+                    {
+                        int lStartIndex = mStack.Pop(); // Pop index
+
+                        // Get new chunk of formula from the '(' to the ')'
+                        Chunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
+                        Chunk.StartIndex = lStartIndex;
+                        Chunk.Length = i - lStartIndex++;
+                    }
+                }
             }
         }
 
         /// <summary>
         /// Compare the number of '(' and ')'
         /// </summary>
-        public bool ParenthesisAreEquivalent(StringBuilder pFormula)
+        public bool ParenthesisConsistency(StringBuilder pFormula, out int pCount)
         {
-            int lOpenedParenthesis = pFormula.ToString().Count(c => c == '(');
+            pCount = pFormula.ToString().Count(c => c == '(');
             int lClosedParenthesis = pFormula.ToString().Count(c => c == ')');
 
-            return lOpenedParenthesis == lClosedParenthesis;
+            return pCount == lClosedParenthesis;
         }
 
         #endregion
@@ -394,7 +392,7 @@ namespace Udemy_Calculator
             string lGroup = match.Groups[(int)pFPart].Value;
 
             // Reajust the group without parentesis if inequals count are detected (ex : (40 OR 50))
-            if (!ParenthesisAreEquivalent(new StringBuilder(lGroup)))
+            if (!ParenthesisConsistency(new StringBuilder(lGroup), out int lCount))
             {
                 lGroup = lGroup.Trim(mParenthesis);
             }
