@@ -53,7 +53,7 @@ namespace Udemy_Calculator
         private char[] mComa;
         private string[] mSpecials;
         // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
-        private string mRegexSplitGroup = @"^([\(]*[-]*\d*[.,]*[\d*]*[\)]*)([+-×÷])([\(]*[-]*\d*[.,]*[\d*]*[\)]*)$";
+        private string mRegexSplitGroup = @"^([\(]?[-]*\d*[.,]*[\d*]*[\)]*)([+-×÷])([\(]*[-]*\d*[.,]*[\d*]*[\)]?)$";
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
