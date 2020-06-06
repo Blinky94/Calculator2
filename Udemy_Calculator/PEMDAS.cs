@@ -54,7 +54,7 @@ namespace Udemy_Calculator
         private char[] mComa;
         private string[] mSpecials;
         // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
-        private string mRegParenthesis = @"[(](?(?=[(][-])[(][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×x*])(?(?=[(][-])[(]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)]+?";
+        private string mRegParenthesis = @"[(](?(?=[(][-])[(][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×x*X])(?(?=[(][-])[(]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)]+?";
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
@@ -77,9 +77,9 @@ namespace Udemy_Calculator
         public PEMDAS(string pFormula)
         {
             mParenthesis = new char[] { '(', ')' };
-            mOperators = new char[] { '+', '-', '×', '÷', '^', '√' };
+            mOperators = new char[] { '+', '-', '×', 'x', 'X', '/', '÷', '^', '√' };
             mComa = new char[] { '.', ',' };
-            mSpecials = new string[] { "E+" };
+            mSpecials = new string[] { "E+", "e+" };
 
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
@@ -178,7 +178,7 @@ namespace Udemy_Calculator
                     var lGroup = lMatch.Groups["LeftOperand"].Value;
                     var lOperator = lMatch.Groups["Operator"].Value;
                     int lLength = lMatch.Length;
-                   // Regex.Match()
+                    // Regex.Match()
                     Debug.Print(lMatch.ToString());
 
                 }
