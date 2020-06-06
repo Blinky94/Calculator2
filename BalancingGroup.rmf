@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rxm:regexmagic xmlns:rxm="http://www.regexmagic.com/regexmagic24.xsd" version="2.4">
+	<formula>
+		<samples scope="line">
+			<sample name="Sample 1">
+				<string><![CDATA[(((((5+9)))
+(((((5+9))))))))))
+()]]></string>
+			</sample>
+		</samples>
+		<match validation="strict">
+			<field>
+				<regex flavor="dotnet">(?:[^()]|(?&lt;Open>[(])|(?&lt;-Open>[)]))*(?(Open)(?!))</regex>
+			</field>
+		</match>
+		<action/>
+	</formula>
+</rxm:regexmagic>
