@@ -54,19 +54,6 @@ namespace Udemy_Calculator
         private char[] mComa;
         private string[] mSpecials;
 
-        // Regex to select all parenthesis groups
-        private string mRegParenthesis = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
-
-        // Regex to select all exponents groups
-        private string mRegExponent = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
-
-        // Regex to select all multiplication and division groups
-        private string mRegMultiAndDivide = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
-
-        // Regex to select all addition and substraction groups
-        private string mRegAddAndSub = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
-
-
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
@@ -89,7 +76,7 @@ namespace Udemy_Calculator
         public PEMDAS(string pFormula)
         {
             mParenthesis = new char[] { '(', ')', '{', '}', '[', ']' };
-            mOperators = new char[] { '+', '-', '×', 'x', 'X', '/', '÷', '^', '√' };
+            mOperators = new char[] { '+', '-', '×', 'x', 'X', '*', '/', '÷', '^', '√' };
             mComa = new char[] { '.', ',' };
             mSpecials = new string[] { "E+", "e+" };
 
@@ -126,8 +113,8 @@ namespace Udemy_Calculator
             {
                 ComputeParenthesis();
                 ComputeExponent();
-                ComputeOperand(new char[] { '×', '÷' });
-                ComputeOperand(new char[] { '+', '-' });
+                ComputeMultAndDiv();
+                ComputeAddAndSub();
                 DoCompute(out decimal lResult);
                 DoReplaceByResult(lResult);
             }
@@ -137,100 +124,12 @@ namespace Udemy_Calculator
 
         #region Parenthesis
 
-        private Stack<int> mStack = new Stack<int>();
-
-        internal bool HasOpenedParenthesis(Chunk pCkunk)
-        {
-            // Select valid opened '(' (Exclude (-N) or N^(...))
-            string lPattern = @"^([\(][\d√])";
-            Regex lRegex = new Regex(lPattern);
-
-            if (lRegex.IsMatch(pCkunk.SB.ToString()))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Main method to compute all parenthesis in a formula
-        /// </summary>
         internal void ComputeParenthesis()
         {
-            // Number of equivalent parenthesis not consistent
-            if (!ParenthesisConsistency(Chunk.SB, out int pCount))
-            {
-                throw new ArithmeticException("The number of opened parenthesis and closed parenthesis are not the same !!!");
-            }
-
-            // No parenthesis in the chunk, out
-            if (pCount == 0)
-            {
-                return;
-            }
-
-            mStack.Clear();
-
-            // Regex to match every parenthesis in the formula if exists
-            // (?<=[(](?!\-))(?<LeftOperand>[√]?\(?\-?[0-9]+\.?[0-9]*E?\+?[0-9]*\)?)(?<Extended>(?<Operator>[+÷\-×])+(?<RightOperand>[√]?\(?\-?[0-9]+\.?[0-9]*E?\+?[0-9]*\)?))+(?=[)])
-
-            string lPattern = @"(?<=[(](?!\-))(?<LeftOperand>[√]?\(?\-?[0-9]+\.?[0-9]*\)?(E\+)?[0-9]*)(?<Extended>(?<Operator>[+÷\-×])+(?<RightOperand>[√]?\(?\-?[0-9]+\.?[0-9]*\)?(E\+)?[0-9]*)[^\)]?)+(?=[)])";
-
-            Regex lRegex = new Regex(lPattern);
-
-            var lMatches = lRegex.Matches(Chunk.SB.ToString());
+            // Regex to select all parenthesis groups
+            string lRegParenthesis = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
 
-            if (lMatches.Count > 0)
-            {
-                foreach (Match lMatch in lMatches)
-                {
-                    int lIndex = lMatch.Index;
-                    var lGroup = lMatch.Groups["LeftOperand"].Value;
-                    var lOperator = lMatch.Groups["Operator"].Value;
-                    int lLength = lMatch.Length;
-                    // Regex.Match()
-                    Debug.Print(lMatch.ToString());
-
-                }
-            }
-
-
-            for (int i = 0; i < Chunk.SB.Length; i++)
-            {
-                Chunk.StartIndex = i;
-                if (HasOpenedParenthesis(Chunk)) // If '(' not preceed exponent symbol
-                {
-                    if (!mStack.Contains(i)) // index not already in
-                    {
-                        mStack.Push(i); // Add index
-                    }
-                }
-                else if (Chunk.SB[i] == ')')
-                {
-                    if (mStack.Count() > 0)
-                    {
-                        int lStartIndex = mStack.Pop(); // Pop index
-
-                        // Get new chunk of formula from the '(' to the ')'
-                        Chunk.SB.GetChunk(lStartIndex, i - lStartIndex + 1);
-                        Chunk.StartIndex = lStartIndex;
-                        Chunk.Length = i - lStartIndex++;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compare the number of '(' and ')'
-        /// </summary>
-        public bool ParenthesisConsistency(StringBuilder pFormula, out int pCount)
-        {
-            pCount = pFormula.ToString().Count(c => c == '(');
-            int lClosedParenthesis = pFormula.ToString().Count(c => c == ')');
-
-            return pCount == lClosedParenthesis;
         }
 
         #endregion
@@ -239,241 +138,41 @@ namespace Udemy_Calculator
 
         internal void ComputeExponent()
         {
-            // If no exponent, out
-            if (Chunk.SB.IndexOf('^') == -1)
-            {
-                return;
-            }
+            // Regex to select all exponents groups
+            string mRegExponent = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
 
-            if (Chunk.Length > 0)
-            {
-                while (Chunk.SB.ToString().Count(p => p == '^') > 1)
-                {
-                    StringBuilder lSb = Chunk.SB;
-                    ExtractExponentChunk(ref lSb);
 
-                    int lOpened = lSb.IndexOf('(');
-                    int lClosed = lSb.ToString().LastIndexOf(')');
 
-                    lSb.GetChunk(lOpened, lClosed - lOpened + 1);
-                    Chunk.StartIndex = Chunk.Formula.IndexOf(lSb[0]);
-                    Chunk.Length = lSb.Length;
-                }
-
-                // Add operand type exponent
-                Operator = Operator.Exponent;
-            }
-        }
-
-        /// <summary>
-        /// Get the exponent chunk from the main formula
-        /// </summary>
-        /// <param name="pSb"></param>
-        internal void ExtractExponentChunk(ref StringBuilder pSb)
-        {
-            int lIndexExp = pSb.IndexOf('^');
-            DeleteLeftSequence(ref pSb, ref lIndexExp);
-            DeleteFromExponentOverParenthesis(ref pSb, lIndexExp);
-        }
-
-        /// <summary>
-        /// Delete everything after the '(' && ')' exponent, modify the startIndex parameter following the begining of the current exponent value
-        /// </summary>
-        /// <param name="pSbChunk"></param>
-        /// <param name="pStartIndex"></param>
-        internal int DeleteLeftSequence(ref StringBuilder pSbChunk, ref int pStartIndex)
-        {
-            int lIndex = 0;
-
-            // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
-            // GET LEFT side of the chunk formula
-            char[] lLstOperators = mParenthesis.Concat(mOperators).ToArray();
-
-            for (int i = pStartIndex - 1; i >= 0; i--)
-            {
-                if (lLstOperators.Contains(pSbChunk[i]))
-                {
-                    lIndex = i + 1;
-                    pSbChunk.Remove(0, i + 1);
-                    pStartIndex -= i;
-                    break;
-                }
-            }
-
-            return lIndex;
-        }
-
-        /// <summary>
-        /// Delete everything after char 
-        /// </summary>
-        /// <param name="pSbChunk"></param>
-        /// <param name="pStartIndex"></param>
-        /// <returns>The ended index</returns>
-        internal int DeleteRightSequence(ref StringBuilder pSbChunk, int pStartIndex)
-        {
-            int lIndex = 0;
-            pStartIndex++;
-
-            // Voir pour verifier si la séquence contient E+, si oui, ne pas supprimer
-            // Get RIGHT side of the chunk formula
-            char[] lLstOperators = mParenthesis.Concat(mOperators).ToArray();
-
-            for (int i = pStartIndex; i < pSbChunk.Length; i++)
-            {
-                if (lLstOperators.Contains(pSbChunk[i]))
-                {
-                    lIndex = i + 1;
-                    pSbChunk.Remove(i, pSbChunk.Length - i);
-                    break;
-                }
-            }
-
-            return lIndex;
-        }
-
-        /// <summary>
-        /// Delete everything after the last exponent parenthesis
-        /// </summary>
-        /// <param name="pSbChunk"></param>
-        /// <param name="pStartIndex"></param>
-        /// <returns>The ended index</returns>
-        internal void DeleteFromExponentOverParenthesis(ref StringBuilder pSbChunk, int pStartIndex)
-        {
-            Stack<int> lStackOpenedIndexParenthesis = new Stack<int>();
-
-            // Get RIGHT from '(' to ')' index from ^
-            for (int i = pStartIndex; i < pSbChunk.Length; i++)
-            {
-                if (pSbChunk[i] == '(')
-                {
-                    lStackOpenedIndexParenthesis.Push(i);
-                }
-                else if (pSbChunk[i] == ')')
-                {
-                    if (lStackOpenedIndexParenthesis.Count() > 0)
-                    {
-                        lStackOpenedIndexParenthesis.Pop();
-                        if (lStackOpenedIndexParenthesis.Count() == 0)
-                        {
-                            i++;
-                            pSbChunk.Remove(i, pSbChunk.Length - i);
-                            break;
-                        }
-                    }
-                }
-            }
         }
 
         #endregion
 
-        #region Addition, Substraction, multiplication, division
+        #region Multiplication/Division
 
-        internal void ComputeOperand(char[] pLstOperands)
+        internal void ComputeMultAndDiv()
         {
-            if (!Chunk.SB.ContainsAny(pLstOperands))
-            {
-                return;
-            }
+            // Regex to select all multiplication and division groups
+            string mRegMultiAndDivide = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-            if (Chunk.Length > 0)
-            {
-                int lIndex = Chunk.SB.IndexOf(pLstOperands[0]);
 
-                if (lIndex != -1)
-                {
-                    int lIndexOfDiv = Chunk.SB.IndexOf(pLstOperands[1]);
+        }
 
-                    if (lIndexOfDiv != -1 && lIndexOfDiv < lIndex)
-                    {
-                        lIndex = lIndexOfDiv;
-                    }
-                }
-                else
-                {
-                    int lIndexOfDiv = Chunk.SB.IndexOf(pLstOperands[1]);
-                    if (lIndexOfDiv != -1)
-                    {
-                        lIndex = lIndexOfDiv;
-                    }
-                }
+        #endregion
 
-                if (lIndex != -1)
-                {
-                    // Delete left and right from formula
-                    StringBuilder lSb = Chunk.SB;
-                    int lBeginIndex = DeleteLeftSequence(ref lSb, ref lIndex);
-                    int lEndIndex = DeleteRightSequence(ref lSb, lIndex);
+        #region Addition/Substraction 
 
-                    // Add indexStart to the Chunk
-                    Chunk.StartIndex = lBeginIndex;
+        internal void ComputeAddAndSub()
+        {
+            // Regex to select all addition and substraction groups
+            string mRegAddAndSub = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-                    // Add Length to the Chunk
-                    Chunk.Length = lEndIndex - lBeginIndex;
-                }
-            }
+
+
         }
 
         #endregion
 
         #region Maths compute operation
-
-        /// <summary>
-        /// Extract a sequence number from a chunk formula starting with index left (index = 0) or right (index != 0)
-        /// </summary>
-        /// <param name="pStartIndex"></param>
-        /// <param name="pStr"></param>
-        internal void GetChunkPart(out string pStr, eFormulaPart pFPart)
-        {
-            var lRegex = new Regex(mRegParenthesis);
-            Match match = lRegex.Match(Chunk.SB.ToString());
-
-            string lGroup = match.Groups[(int)pFPart].Value;
-
-            // Reajust the group without parentesis if inequals count are detected (ex : (40 OR 50))
-            if (!ParenthesisConsistency(new StringBuilder(lGroup), out int lCount))
-            {
-                lGroup = lGroup.Trim(mParenthesis);
-            }
-
-            pStr = lGroup;
-        }
-
-        /// <summary>
-        /// Remove the exceedent of a string to limit the length for decimal number
-        /// Use to avoid the rounded effect in the Decimal.tryParse
-        /// </summary>
-        /// <param name="pStr"></param>
-        /// <returns></returns>
-        internal string TrimLengthString(string pStr)
-        {
-            int lMaxi = Decimal.MaxValue.ToString().Length;
-            if (pStr.Length > lMaxi)
-            {
-                pStr = pStr.Remove(lMaxi);
-            }
-            return pStr;
-        }
-
-        /// <summary>
-        /// Extract operands to compute
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        internal void ExtractOperands(out decimal a, out decimal b)
-        {
-            GetChunkPart(out string lA, eFormulaPart.Left);
-            GetChunkPart(out string lB, eFormulaPart.Right);
-
-            lA = TrimLengthString(lA);
-            lB = TrimLengthString(lB);
-            lA = lA.Replace(',', '.');
-            lB = lB.Replace(',', '.');
-
-            NumberStyles lStyle = NumberStyles.Number | NumberStyles.AllowParentheses | NumberStyles.AllowTrailingSign | NumberStyles.AllowLeadingSign;
-
-            a = decimal.Parse(lA, lStyle, CultureInfo.InvariantCulture);
-            b = decimal.Parse(lB, lStyle, CultureInfo.InvariantCulture);
-        }
 
         /// <summary>
         /// Compute the chunk formula from a chunk sequence
@@ -483,7 +182,8 @@ namespace Udemy_Calculator
             pResult = default;
 
             // Extraction units from formula
-            ExtractOperands(out decimal a, out decimal b);
+            decimal a = 0;
+            decimal b = 0;
 
             // Extract the operator
             GetOperator();
@@ -516,27 +216,32 @@ namespace Udemy_Calculator
         /// </summary>
         internal void GetOperator()
         {
-            int lIndex = Chunk.SB.ToString().IndexOfAny(mOperators);
-            char lOperator = Chunk.SB[lIndex];
+            string lOperator = string.Empty;
 
             switch (lOperator)
             {
-                case '^':
+                case "^":
+                case "Exp":
                     Operator = Operator.Exponent;
                     break;
-                case '×':
+                case "×":
+                case "x":
+                case "X":
+                case "*":
                     Operator = Operator.Multiplication;
                     break;
-                case '÷':
+                case "÷":
+                case "/":
                     Operator = Operator.Division;
                     break;
-                case '+':
+                case "+":
                     Operator = Operator.Addition;
                     break;
-                case '-':
+                case "-":
                     Operator = Operator.Substraction;
                     break;
-                case '√':
+                case "√":
+                case "Sqrt":
                     Operator = Operator.Square;
                     break;
             }
