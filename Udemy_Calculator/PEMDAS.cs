@@ -76,7 +76,7 @@ namespace Udemy_Calculator
         /// <param name="pFormula"></param>
         public PEMDAS(string pFormula)
         {
-            mParenthesis = new char[] { '(', ')' };
+            mParenthesis = new char[] { '(', ')', '{', '}', '[', ']' };
             mOperators = new char[] { '+', '-', '×', 'x', 'X', '/', '÷', '^', '√' };
             mComa = new char[] { '.', ',' };
             mSpecials = new string[] { "E+", "e+" };
