@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using System.Windows;
 
 namespace Udemy_Calculator
 {

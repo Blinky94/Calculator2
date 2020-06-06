@@ -67,7 +67,7 @@ namespace Udemy_Calculator
             }
             else
             {
-                if(pNum != default)
+                if (pNum != default)
                 {
                     mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum);
                 }

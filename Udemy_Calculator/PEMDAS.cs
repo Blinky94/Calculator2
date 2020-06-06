@@ -53,8 +53,20 @@ namespace Udemy_Calculator
         private char[] mOperators;
         private char[] mComa;
         private string[] mSpecials;
-        // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
-        private string mRegParenthesis = @"[(](?(?=[(][-])[(][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×x*X])(?(?=[(][-])[(]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)]+?";
+
+        // Regex to select all parenthesis groups
+        private string mRegParenthesis = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
+
+        // Regex to select all exponents groups
+        private string mRegExponent = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
+
+        // Regex to select all multiplication and division groups
+        private string mRegMultiAndDivide = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
+
+        // Regex to select all addition and substraction groups
+        private string mRegAddAndSub = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
+
+
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 

@@ -87,8 +87,8 @@ namespace Udemy_Calculator
 
 
                 string lConcateSign = UIResultLabel.Content.ToString();
-                
-                if(lConcateSign.IndexOf('-') != -1)
+
+                if (lConcateSign.IndexOf('-') != -1)
                 {
                     // lConcateSign = lConcateSign.Trim('-');
                     lConcateSign = $"({lConcateSign})";
