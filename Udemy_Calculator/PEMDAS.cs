@@ -43,7 +43,7 @@ namespace Udemy_Calculator
         }
     }
 
-    public enum Operator { Multiplication, Division, Addition, Substraction, Square, Exponent }
+    public enum Operator { Unknown, Multiplication, Division, Addition, Substraction, Square, Exponent }
 
     public class PEMDAS
     {
@@ -56,11 +56,6 @@ namespace Udemy_Calculator
 
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
-
-        /// <summary>
-        /// Enum of operators (multiply, divide, add, substract...)
-        /// </summary>
-        public Operator Operator { get; set; }
 
         /// <summary>
         /// Chunk of a formula
@@ -111,7 +106,7 @@ namespace Udemy_Calculator
         {
             while (!decimal.TryParse(Chunk.Formula.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal _))
             {
-                ComputeParenthesis();
+                ExtractParenthesis();
                 ComputeExponent();
                 ComputeMultAndDiv();
                 ComputeAddAndSub();
@@ -122,14 +117,40 @@ namespace Udemy_Calculator
             return Chunk.SB.ToString();
         }
 
+        #region Extract Parenthesis, Exponent, Multiplication/Division, Addition/Substraction
+
+        /// <summary>
+        /// Method to apply regular expression pattern on chunk
+        /// Apply the new chunk, the index of the chunk in the formula and the length of the chunk
+        /// </summary>
+        /// <param name="pPattern"></param>
+        private void ArrangeChunkOfFormula(string pPattern)
+        {
+            Regex regex = new Regex(pPattern);
+
+            Match lMatch = regex.Match(Chunk.SB.ToString());
+
+            if (!lMatch.Success)
+            {
+                return;
+            }
+
+            int lIndex = lMatch.Groups[0].Index;
+            int lLength = lMatch.Groups[0].Length;
+
+            Chunk.SB.GetChunk(lIndex, lLength);
+            Chunk.StartIndex = lIndex;
+            Chunk.Length = lLength;
+        }
+
         #region Parenthesis
 
-        internal void ComputeParenthesis()
+        internal void ExtractParenthesis()
         {
             // Regex to select all parenthesis groups
             string lPattern = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
-
+            ArrangeChunkOfFormula(lPattern);
         }
 
         #endregion
@@ -141,8 +162,7 @@ namespace Udemy_Calculator
             // Regex to select all exponents groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
 
-
-
+            ArrangeChunkOfFormula(lPattern);
         }
 
         #endregion
@@ -154,7 +174,7 @@ namespace Udemy_Calculator
             // Regex to select all multiplication and division groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-
+            ArrangeChunkOfFormula(lPattern);
         }
 
         #endregion
@@ -166,11 +186,12 @@ namespace Udemy_Calculator
             // Regex to select all addition and substraction groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-
-
+            ArrangeChunkOfFormula(lPattern);
         }
 
         #endregion
+
+        #endregion 
 
         #region ExtractOperands
 
@@ -229,9 +250,9 @@ namespace Udemy_Calculator
             decimal b = 0;
 
             // Extract the operator
-            GetOperator();
+            var lOperator = WhatOperator;
 
-            switch (Operator)
+            switch (lOperator)
             {
                 case Operator.Multiplication:
                     pResult = MathOperation.Multiply(a, b);
@@ -254,39 +275,51 @@ namespace Udemy_Calculator
             }
         }
 
-        /// <summary>
-        /// Extract the operator from the Chunk
-        /// </summary>
-        internal void GetOperator()
-        {
-            string lOperator = string.Empty;
+        private Operator mOperator = 0;
 
-            switch (lOperator)
+        /// <summary>
+        /// Property to get or set the current operator used in the chunk
+        /// </summary>
+        internal Operator WhatOperator
+        {
+            get
             {
-                case "^":
-                case "Exp":
-                    Operator = Operator.Exponent;
-                    break;
-                case "×":
-                case "x":
-                case "X":
-                case "*":
-                    Operator = Operator.Multiplication;
-                    break;
-                case "÷":
-                case "/":
-                    Operator = Operator.Division;
-                    break;
-                case "+":
-                    Operator = Operator.Addition;
-                    break;
-                case "-":
-                    Operator = Operator.Substraction;
-                    break;
-                case "√":
-                case "Sqrt":
-                    Operator = Operator.Square;
-                    break;
+                ExtractArithmeticsGroups(out decimal a, out decimal b, out char lOperator);
+
+                switch (lOperator)
+                {
+                    case '^':
+                        mOperator = Operator.Exponent;
+                        break;
+                    case '×':
+                    case 'x':
+                    case 'X':
+                    case '*':
+                        mOperator = Operator.Multiplication;
+                        break;
+                    case '÷':
+                    case '/':
+                        mOperator = Operator.Division;
+                        break;
+                    case '+':
+                        mOperator = Operator.Addition;
+                        break;
+                    case '-':
+                        mOperator = Operator.Substraction;
+                        break;
+                    case '√':
+                        mOperator = Operator.Square;
+                        break;
+                    default:
+                        mOperator = Operator.Unknown;
+                        break;
+                }
+
+                return mOperator;
+            }
+            set
+            {
+                mOperator = value;
             }
         }
 

@@ -20,27 +20,13 @@ namespace Udemy_Calculator_Tests
             // Act
             PEMDAS lPEMDAS = new PEMDAS(lFormula);
             lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
-            lPEMDAS.ComputeParenthesis();
+            lPEMDAS.ExtractParenthesis();
 
             // Assert
-            Assert.AreEqual("(5÷2)", lPEMDAS.Chunk.SB.ToString());
-        }
-
-        [TestMethod]
-        public void ComputeParenthesis_PutFormulaWithParenthesis_ReturnsStartIndexAndLength()
-        {
-            // Arrange
-            string lFormula = "2^(5÷3)+4×((5÷2))";
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
-            lPEMDAS.ComputeParenthesis();
-
-            // Assert
-            Assert.AreEqual(11, lPEMDAS.Chunk.StartIndex);
+            Assert.AreEqual("(5÷3)", lPEMDAS.Chunk.SB.ToString());
+            Assert.AreEqual(2, lPEMDAS.Chunk.StartIndex);
             Assert.AreEqual(5, lPEMDAS.Chunk.Length);
-        }
+        }    
 
         #endregion
 
@@ -51,13 +37,13 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeExponent_WithFormula_ReturnsLastChunk()
         {
-            PEMDAS lPemdas = new PEMDAS("5+7^(3^(5÷2))");
+            PEMDAS lPemdas = new PEMDAS("5+7^(3^(2))");
 
             lPemdas.ComputeExponent();
 
-            Assert.AreEqual(4, lPemdas.Chunk.StartIndex);
-            Assert.AreEqual("(3^(5÷2))", lPemdas.Chunk.SB.ToString());
-            Assert.AreEqual(9, lPemdas.Chunk.Length);
+            Assert.AreEqual("3^(2)", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
+            Assert.AreEqual(5, lPemdas.Chunk.Length);
         }
 
         #endregion
@@ -138,15 +124,14 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeMultiplicationOrDivision_MultiplicationWithSigned_ReturnsMultiplicationChunk()
         {
-            Assert.Inconclusive();
             // Arrange
-            PEMDAS lPemdas = new PEMDAS("6+2-(-3×2÷5)+(5^(10))");
+            PEMDAS lPemdas = new PEMDAS("6+2-((-3)×2÷5)+(5^(10))");
 
             // Act
             lPemdas.ComputeMultAndDiv();
 
             // Assert
-            Assert.AreEqual("-3×2", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual("(-3)×2", lPemdas.Chunk.SB.ToString());
         }
 
         #endregion
@@ -460,23 +445,68 @@ namespace Udemy_Calculator_Tests
 
         #region Addition
 
-      
+        [TestMethod]
+        public void ComputeAddAndSub_SetSimpleFormula_ReturnsAddition()
+        {
+            PEMDAS lPemdas = new PEMDAS("3*40+15");
+
+            lPemdas.ComputeAddAndSub();
+
+            Assert.AreEqual("40+15", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual(2, lPemdas.Chunk.StartIndex);
+            Assert.AreEqual(5, lPemdas.Chunk.Length);
+        }
+
+        [TestMethod]
+        public void ComputeAddAndSub_SetSimpleFormula2_ReturnsAddition()
+        {
+            PEMDAS lPemdas = new PEMDAS("3*40/15+2.53");
+
+            lPemdas.ComputeAddAndSub();
+
+            Assert.AreEqual("15+2.53", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
+            Assert.AreEqual(7, lPemdas.Chunk.Length);
+        }
+
         #endregion
 
         #region Substraction
 
-        
+        [TestMethod]
+        public void ComputeAddAndSub_SetSimpleFormula_ReturnsSubstraction()
+        {
+            PEMDAS lPemdas = new PEMDAS("3*40-15");
+
+            lPemdas.ComputeAddAndSub();
+
+            Assert.AreEqual("40-15", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual(2, lPemdas.Chunk.StartIndex);
+            Assert.AreEqual(5, lPemdas.Chunk.Length);
+        }
+
+        [TestMethod]
+        public void ComputeAddAndSub_SetSimpleFormula2_ReturnsSubstraction()
+        {
+            PEMDAS lPemdas = new PEMDAS("3*40/15-2.53");
+
+            lPemdas.ComputeAddAndSub();
+
+            Assert.AreEqual("15-2.53", lPemdas.Chunk.SB.ToString());
+            Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
+            Assert.AreEqual(7, lPemdas.Chunk.Length);
+        }
 
         #endregion
 
         #region Multiplication
 
-     
+
         #endregion
 
         #region Division
 
-       
+
         #endregion
 
         #endregion
@@ -489,7 +519,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithAddition_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15+16");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -500,7 +530,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithAddition2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67+16.20");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -511,7 +541,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_AdditionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)+16");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -525,7 +555,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_AdditionWithNegativeNumberAfterOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15+(16)");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -538,7 +568,7 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("0+999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
-                lPemdas.Operator = Operator.Addition;
+                lPemdas.WhatOperator = Operator.Addition;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -559,7 +589,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithSubstraction_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15-16");
-            lPemdas.Operator = Operator.Substraction;
+            lPemdas.WhatOperator = Operator.Substraction;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -570,7 +600,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithSubstraction2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67-16.20");
-            lPemdas.Operator = Operator.Substraction;
+            lPemdas.WhatOperator = Operator.Substraction;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -583,7 +613,7 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("0-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
-                lPemdas.Operator = Operator.Substraction;
+                lPemdas.WhatOperator = Operator.Substraction;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -600,7 +630,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_SubstactionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)-16");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -611,7 +641,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_SubstactionWithNegativeNumberAfterOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)-(16)");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -626,7 +656,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithMultiplication_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15×16");
-            lPemdas.Operator = Operator.Multiplication;
+            lPemdas.WhatOperator = Operator.Multiplication;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -637,7 +667,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithMultiplication2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67×16.20");
-            lPemdas.Operator = Operator.Multiplication;
+            lPemdas.WhatOperator = Operator.Multiplication;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -650,7 +680,7 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("156700000000000000000000000000000000000000000000000000000000000000×1600000000000000000000000000000000000000000000000000000000000000020");
-                lPemdas.Operator = Operator.Multiplication;
+                lPemdas.WhatOperator = Operator.Multiplication;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -670,7 +700,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_MultiplicationWithNegativeNumberBeforeOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)×16");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -681,7 +711,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_MultiplicationWithNegativeNumberAfterOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)×(16)");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -696,7 +726,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15÷16");
-            lPemdas.Operator = Operator.Division;
+            lPemdas.WhatOperator = Operator.Division;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -707,7 +737,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision2_ReturnsException()
         {
             PEMDAS lPemdas = new PEMDAS("15.67÷16.20");
-            lPemdas.Operator = Operator.Division;
+            lPemdas.WhatOperator = Operator.Division;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -720,7 +750,7 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("15.67÷0");
-                lPemdas.Operator = Operator.Division;
+                lPemdas.WhatOperator = Operator.Division;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -737,7 +767,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision4_ReturnsException()
         {
             PEMDAS lPemdas = new PEMDAS("1÷0.99999999999999999999999999999999999999999999999999999999999999999999999999999");
-            lPemdas.Operator = Operator.Division;
+            lPemdas.WhatOperator = Operator.Division;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -751,7 +781,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_DivisionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(15)÷16");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -762,7 +792,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_DivisionWithNegativeNumberAfterOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15÷(16)");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Addition;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -776,8 +806,8 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithExponent_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15^2");
-            lPemdas.Operator = Operator.Exponent;
+            PEMDAS lPemdas = new PEMDAS("15^(2)");
+            lPemdas.WhatOperator = Operator.Exponent;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -787,8 +817,8 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithExponent2_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15^16");
-            lPemdas.Operator = Operator.Exponent;
+            PEMDAS lPemdas = new PEMDAS("15^(16)");
+            lPemdas.WhatOperator = Operator.Exponent;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -800,8 +830,8 @@ namespace Udemy_Calculator_Tests
         {
             try
             {
-                PEMDAS lPemdas = new PEMDAS("150^1000");
-                lPemdas.Operator = Operator.Exponent;
+                PEMDAS lPemdas = new PEMDAS("150^(1000)");
+                lPemdas.WhatOperator = Operator.Exponent;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -817,8 +847,8 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_ExponentWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(5)^2");
-            lPemdas.Operator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-5)^(2)");
+            lPemdas.WhatOperator = Operator.Exponent;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -829,7 +859,7 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_ExponentWithNegativeNumberAfterOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("5^(2)");
-            lPemdas.Operator = Operator.Addition;
+            lPemdas.WhatOperator = Operator.Exponent;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -844,8 +874,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithRootSquare_ReturnsResult()
         {
             Assert.Inconclusive();
-            PEMDAS lPemdas = new PEMDAS("√81");
-            lPemdas.Operator = Operator.Square;
+            PEMDAS lPemdas = new PEMDAS("√(81)");
+            lPemdas.WhatOperator = Operator.Square;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -856,8 +886,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithRootSquare2_ReturnsResult()
         {
             Assert.Inconclusive();
-            PEMDAS lPemdas = new PEMDAS("√15");
-            lPemdas.Operator = Operator.Square;
+            PEMDAS lPemdas = new PEMDAS("√(15)");
+            lPemdas.WhatOperator = Operator.Square;
 
             lPemdas.DoCompute(out decimal lResult);
 
@@ -869,8 +899,8 @@ namespace Udemy_Calculator_Tests
         {
             try
             {
-                PEMDAS lPemdas = new PEMDAS("√─1");
-                lPemdas.Operator = Operator.Square;
+                PEMDAS lPemdas = new PEMDAS("√(─1)");
+                lPemdas.WhatOperator = Operator.Square;
 
                 lPemdas.DoCompute(out decimal lResult);
             }
@@ -944,12 +974,10 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void GetOperator_ChunkWithExponent_ReturnsExponent()
         {
-            string lStr = "5^12";
-            PEMDAS lPemdas = new PEMDAS(lStr);
+            string lStr = "5^(12)";
+            PEMDAS lPemdas = new PEMDAS(lStr);         
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Exponent, lPemdas.Operator);
+            Assert.AreEqual(Operator.Exponent, lPemdas.WhatOperator);
         }
 
         [TestMethod]
@@ -958,9 +986,7 @@ namespace Udemy_Calculator_Tests
             string lStr = "5×12";
             PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Multiplication, lPemdas.Operator);
+            Assert.AreEqual(Operator.Multiplication, lPemdas.WhatOperator);
         }
 
         [TestMethod]
@@ -969,9 +995,7 @@ namespace Udemy_Calculator_Tests
             string lStr = "5÷12";
             PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Division, lPemdas.Operator);
+            Assert.AreEqual(Operator.Division, lPemdas.WhatOperator);
         }
 
         [TestMethod]
@@ -980,9 +1004,7 @@ namespace Udemy_Calculator_Tests
             string lStr = "5+12";
             PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Addition, lPemdas.Operator);
+            Assert.AreEqual(Operator.Addition, lPemdas.WhatOperator);
         }
 
         [TestMethod]
@@ -991,20 +1013,16 @@ namespace Udemy_Calculator_Tests
             string lStr = "5-12";
             PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Substraction, lPemdas.Operator);
+            Assert.AreEqual(Operator.Substraction, lPemdas.WhatOperator);
         }
 
         [TestMethod]
         public void GetOperator_ChunkWithRootSquare_ReturnsSquare()
         {
-            string lStr = "√12";
+            string lStr = "√(12+2)";
             PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lPemdas.GetOperator();
-
-            Assert.AreEqual(Operator.Square, lPemdas.Operator);
+            Assert.AreEqual(Operator.Square, lPemdas.WhatOperator);
         }
 
         #endregion
