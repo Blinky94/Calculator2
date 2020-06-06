@@ -10,92 +10,7 @@ namespace Udemy_Calculator_Tests
     public class PEMDAS_Tests
     {
         #region Test on parenthesis
-
-        [TestMethod]
-        public void ParenthesisEquivalence_BadNumberParenthesisOpenedAndClosed_ReturnsNotCompleted()
-        {
-            // Arrange
-            StringBuilder lFormula = new StringBuilder("4×((5÷2)");
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
-            bool lboolParenthesis = lPEMDAS.ParenthesisConsistency(lFormula, out int lCount);
-
-            // Assert
-            Assert.IsFalse(lboolParenthesis);
-        }
-
-        [TestMethod]
-        public void ParenthesisEquivalence_GoodNumberParenthesisOpenedAndClosed_ReturnsCompleted()
-        {
-            // Arrange
-            StringBuilder lFormula = new StringBuilder("4×((5÷2))");
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula.ToString());
-            bool lboolParenthesis = lPEMDAS.ParenthesisConsistency(lFormula, out int lCount);
-
-            // Assert
-            Assert.IsTrue(lboolParenthesis);
-            Assert.AreEqual(2, lCount);
-        }
-
-        [TestMethod]
-        public void HasOpenedParenthesis_NotOpenedParenthesis_ReturnsTrue()
-        {
-            // Arrange
-            string lFormula = "(5+2)";
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
-
-            // Assert
-            Assert.IsTrue(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
-        }
-
-        [TestMethod]
-        public void HasOpenedParenthesis_RealOpenedParenthesis_ReturnsTrue()
-        {
-            // Arrange
-            string lFormula = "4×((5÷2))";
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
-
-            // Assert
-            Assert.IsTrue(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
-        }
-
-        [TestMethod]
-        public void HasOpenedParenthesis_ClosedParenthesis_ReturnsFalse()
-        {
-            // Arrange
-            string lFormula = "4×((5÷2))";
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 7, lFormula.Length);
-
-            // Assert
-            Assert.IsFalse(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // BAD ')'
-        }
-
-        [TestMethod]
-        public void HasOpenedParenthesis_ParenthesisPreceedByExponentSymbol_ReturnsFalse()
-        {
-            // Arrange
-            string lFormula = "2^(5÷3)+4×((5÷2))";
-
-            // Act
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
-
-            // Assert
-            Assert.IsFalse(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // BAD '^('
-        }
-
+   
         [TestMethod]
         public void ComputeParenthesis_PutFormulaWithParenthesis_ReturnsChunkWithTheSmallerParenthesis()
         {
@@ -147,256 +62,10 @@ namespace Udemy_Calculator_Tests
 
         #endregion
 
-        #region ExtractExponentChunk
-
-        [TestMethod]
-        public void ExtractExponentChunk_WithCompleteFormula_ReturnsChunk()
-        {
-            PEMDAS lPemdas = new PEMDAS("5+7^(3^(5÷2))");
-
-            StringBuilder lSb = lPemdas.Chunk.SB;
-
-            lPemdas.ExtractExponentChunk(ref lSb);
-
-            Assert.AreEqual("7^(3^(5÷2))", lSb.ToString());
-        }
-
-        #endregion
-
-        #region EraseLeftElementsFromExponent
-
-        [TestMethod]
-        public void EraseLeftElementsFromExponent_CaseLeftDecimalUnderParenthesis_ReturnsLeftChunk()
-        {
-            // Arrange
-            string lFormula = "(51^(5))";
-            int lIndex = 3;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("51^(5))", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseLeftElementsFromExponent_CaseLeftDecimalWithNoParenthesis_ReturnsLeftChunk()
-        {
-            // Arrange
-            string lFormula = "51^(5)";
-            int lIndex = 2;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("51^(5)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseLeftElementsFromExponent_CaseLeftDecimalWithOperatorBefore_ReturnsLeftChunk()
-        {
-            // Arrange
-            string lFormula = "5+6^(2)";
-            int lIndex = 3;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("6^(2)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseLeftElementsFromExponent_CaseLeftDecimalWithMultipleOperatorsBefore_ReturnsLeftChunk()
-        {
-            // Arrange
-            string lFormula = "5×(2+(5^(5÷3)))";
-            int lIndex = 7;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("5^(5÷3)))", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseLeftElementsFromExponent_CaseLeftDecimalWithOtherExponents_ReturnsLeftChunk()
-        {
-            // Arrange
-            string lFormula = "2^(5^(3÷2))";
-            int lIndex = 1;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("2^(5^(3÷2))", lSb.ToString());
-        }
-
-        #endregion
-
-        #region EraseRightElementsFromExponent
-
-        [TestMethod]
-        public void EraseRightElementsFromExponent_CaseRightDecimalUnderParenthesis_ReturnsRightChunk()
-        {
-            // Arrange
-            string lFormula = "(51^(5))+5÷3";
-            int lIndex = 3;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteFromExponentOverParenthesis(ref lSb, lIndex);
-
-            // Assert
-            Assert.AreEqual("(51^(5)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseRightElementsFromExponent_CaseRightDecimalWithNoParenthesis_ReturnsRightChunk()
-        {
-            // Arrange
-            string lFormula = "51^(5)";
-            int lIndex = 2;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteFromExponentOverParenthesis(ref lSb, lIndex);
-
-            // Assert
-            Assert.AreEqual("51^(5)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseRightElementsFromExponent_CaseRightDecimalWithOperatorAfter_ReturnsRightChunk()
-        {
-            // Arrange
-            string lFormula = "5+6^(2)";
-            int lIndex = 3;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteFromExponentOverParenthesis(ref lSb, lIndex);
-
-            // Assert
-            Assert.AreEqual("5+6^(2)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseRightElementsFromExponent_CaseRightDecimalWithMultipleOperatorsAfter_ReturnsRightChunk()
-        {
-            // Arrange
-            string lFormula = "5×(2+(5^(5÷3)))×7";
-            int lIndex = 7;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteFromExponentOverParenthesis(ref lSb, lIndex);
-
-            // Assert
-            Assert.AreEqual("5×(2+(5^(5÷3)", lSb.ToString());
-        }
-
-        [TestMethod]
-        public void EraseRightElementsFromExponent_CaseRightDecimalWithOtherExponents_ReturnsRightChunk()
-        {
-            // Arrange
-            string lFormula = "2^(5^(3÷2))+5^(2)";
-            int lIndex = 1;
-
-            // Act
-            StringBuilder lSb = new StringBuilder(lFormula);
-            PEMDAS lPEMDAS = new PEMDAS(lFormula);
-            lPEMDAS.DeleteFromExponentOverParenthesis(ref lSb, lIndex);
-
-            // Assert
-            Assert.AreEqual("2^(5^(3÷2))", lSb.ToString());
-        }
-
-        #endregion
-
         #endregion
 
         #region Tests on Multiplication or Division
 
-        #region Delete Sequences
-
-        [TestMethod]
-        public void DeleteRightSequence_WithFormula_ReturnsLeftSequence()
-        {
-            // Arrange
-            PEMDAS lPemdas = new PEMDAS("8+(5×3÷2)");
-
-            // Act
-            StringBuilder lSb = lPemdas.Chunk.SB;
-            lPemdas.DeleteRightSequence(ref lSb, 4);
-
-            // Assert
-            Assert.AreEqual("8+(5×3", lPemdas.Chunk.SB.ToString());
-        }
-
-        [TestMethod]
-        public void DeleteRightSequence_WithFormula2_ReturnsLeftSequence()
-        {
-            // Arrange
-            PEMDAS lPemdas = new PEMDAS("8+(5×3.5÷2)");
-
-            // Act
-            StringBuilder lSb = lPemdas.Chunk.SB;
-            lPemdas.DeleteRightSequence(ref lSb, 4);
-
-            // Assert
-            Assert.AreEqual("8+(5×3.5", lPemdas.Chunk.SB.ToString());
-        }
-
-        [TestMethod]
-        public void DeleteLeftSequence_WithFormula_ReturnsLeftSequence()
-        {
-            // Arrange
-            PEMDAS lPemdas = new PEMDAS("8+(5×3÷2)");
-
-            // Act
-            StringBuilder lSb = lPemdas.Chunk.SB;
-            int lIndex = 4;
-            lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("5×3÷2)", lPemdas.Chunk.SB.ToString());
-        }
-
-        [TestMethod]
-        public void DeleteLeftSequence_WithFormula2_ReturnsLeftSequence()
-        {
-            // Arrange
-            PEMDAS lPemdas = new PEMDAS("8+(5.62×3.5÷2)");
-
-            // Act
-            StringBuilder lSb = lPemdas.Chunk.SB;
-            int lIndex = 4;
-            lPemdas.DeleteLeftSequence(ref lSb, ref lIndex);
-
-            // Assert
-            Assert.AreEqual("5.62×3.5÷2)", lPemdas.Chunk.SB.ToString());
-        }
-
-
-        #endregion
 
         #region Multiplication
 
@@ -407,7 +76,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8×5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8×5", lPemdas.Chunk.SB.ToString());
@@ -420,7 +89,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-8×5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8×5", lPemdas.Chunk.SB.ToString());
@@ -433,7 +102,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8×5+3÷2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8×5", lPemdas.Chunk.SB.ToString());
@@ -446,7 +115,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-8×5+3÷2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8×5", lPemdas.Chunk.SB.ToString());
@@ -459,7 +128,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-(3×2÷5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("3×2", lPemdas.Chunk.SB.ToString());
@@ -474,7 +143,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-(-3×2÷5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("-3×2", lPemdas.Chunk.SB.ToString());
@@ -491,7 +160,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8÷5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8÷5", lPemdas.Chunk.SB.ToString());
@@ -504,7 +173,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-8÷5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8÷5", lPemdas.Chunk.SB.ToString());
@@ -517,7 +186,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8÷5+3×2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8÷5", lPemdas.Chunk.SB.ToString());
@@ -530,7 +199,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-8÷5+3×2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("8÷5", lPemdas.Chunk.SB.ToString());
@@ -543,7 +212,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-(3÷2×5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual("3÷2", lPemdas.Chunk.SB.ToString());
@@ -560,7 +229,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-(3÷2×5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
@@ -574,7 +243,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6+2-(3×2÷5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '×', '÷' });
+            lPemdas.ComputeMultAndDiv();
 
             // Assert
             Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
@@ -594,7 +263,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8+5×(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8+5", lPemdas.Chunk.SB.ToString());
@@ -607,7 +276,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷8+5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8+5", lPemdas.Chunk.SB.ToString());
@@ -620,7 +289,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8-5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8-5", lPemdas.Chunk.SB.ToString());
@@ -633,7 +302,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷8-5+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8-5", lPemdas.Chunk.SB.ToString());
@@ -646,7 +315,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8+5-3÷2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8+5", lPemdas.Chunk.SB.ToString());
@@ -659,7 +328,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷8+5-3÷2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8+5", lPemdas.Chunk.SB.ToString());
@@ -672,7 +341,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("8-5×3+2×(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("8-5", lPemdas.Chunk.SB.ToString());
@@ -685,7 +354,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2-8+5+3×2+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("2-8", lPemdas.Chunk.SB.ToString());
@@ -698,7 +367,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷(3+2-5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("3+2", lPemdas.Chunk.SB.ToString());
@@ -711,7 +380,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷(3-2+5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual("3-2", lPemdas.Chunk.SB.ToString());
@@ -724,7 +393,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷(3-2+5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
@@ -738,7 +407,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS("6×2÷(3+2-5)+(5^(10))");
 
             // Act
-            lPemdas.ComputeOperand(new char[] { '+', '-' });
+            lPemdas.ComputeAddAndSub();
 
             // Assert
             Assert.AreEqual(5, lPemdas.Chunk.StartIndex);
@@ -754,10 +423,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40.56×15)");
 
-            lPemdas.ExtractOperands(out decimal a, out decimal b);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
 
             Assert.AreEqual(40.56m, a);
-            Assert.AreEqual(15, b);
+            Assert.AreEqual(15m, b);
+            Assert.AreEqual('×', op);
         }
 
         [TestMethod]
@@ -765,10 +435,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40,56×15)");
 
-            lPemdas.ExtractOperands(out decimal a, out decimal b);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
 
             Assert.AreEqual(40.56m, a);
-            Assert.AreEqual(15, b);
+            Assert.AreEqual(15m, b);
+            Assert.AreEqual('×', op);
         }
 
         [TestMethod]
@@ -776,10 +447,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40÷15)");
 
-            lPemdas.ExtractOperands(out decimal a, out decimal b);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
 
-            Assert.AreEqual(40, a);
-            Assert.AreEqual(15, b);
+            Assert.AreEqual(40m, a);
+            Assert.AreEqual(15m, b);
+            Assert.AreEqual('÷', op);
         }
 
         #endregion
@@ -788,168 +460,23 @@ namespace Udemy_Calculator_Tests
 
         #region Addition
 
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsLeftOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16+15");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
-
-            Assert.AreEqual("16", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsLeftOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5+56");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
-
-            Assert.AreEqual("16.5", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsRightOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5+56");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
-
-            Assert.AreEqual("56", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsRightOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5+56.6");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
-
-            Assert.AreEqual("56.6", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula1_ReturnsAllOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16+56");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
-
-            Assert.AreEqual("16+56", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleAdditionFormula2_ReturnsAllOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.52+56.22");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
-
-            Assert.AreEqual("16.52+56.22", lChunk);
-        }
-
+      
         #endregion
 
         #region Substraction
 
-        [TestMethod]
-        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsLeftOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5-56");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
-
-            Assert.AreEqual("16.5", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsRightOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5-56.6");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
-
-            Assert.AreEqual("56.6", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleSubstractionFormula_ReturnsAllOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16.5-56");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
-
-            Assert.AreEqual("16.5-56", lChunk);
-        }
+        
 
         #endregion
 
         #region Multiplication
 
-        [TestMethod]
-        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsLeftOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16×4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
-
-            Assert.AreEqual("16", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsRightOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16×4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
-
-            Assert.AreEqual("4", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleMultiplicationFormula_ReturnsAllOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16×4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
-
-            Assert.AreEqual("16×4", lChunk);
-        }
-
+     
         #endregion
 
         #region Division
 
-        [TestMethod]
-        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsLeftOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16÷4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Left);
-
-            Assert.AreEqual("16", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsRightOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16÷4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.Right);
-
-            Assert.AreEqual("4", lChunk);
-        }
-
-        [TestMethod]
-        public void GetChunkPart_SetSimpleDivisionFormula_ReturnsAllOperand()
-        {
-            PEMDAS lPemdas = new PEMDAS("16÷4");
-
-            lPemdas.GetChunkPart(out string lChunk, PEMDAS.eFormulaPart.All);
-
-            Assert.AreEqual("16÷4", lChunk);
-        }
-
+       
         #endregion
 
         #endregion

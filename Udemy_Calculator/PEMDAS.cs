@@ -127,7 +127,7 @@ namespace Udemy_Calculator
         internal void ComputeParenthesis()
         {
             // Regex to select all parenthesis groups
-            string lRegParenthesis = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
+            string lPattern = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
 
         }
@@ -139,7 +139,7 @@ namespace Udemy_Calculator
         internal void ComputeExponent()
         {
             // Regex to select all exponents groups
-            string mRegExponent = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
+            string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
 
 
 
@@ -152,7 +152,7 @@ namespace Udemy_Calculator
         internal void ComputeMultAndDiv()
         {
             // Regex to select all multiplication and division groups
-            string mRegMultiAndDivide = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
+            string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
 
         }
@@ -164,10 +164,53 @@ namespace Udemy_Calculator
         internal void ComputeAddAndSub()
         {
             // Regex to select all addition and substraction groups
-            string mRegAddAndSub = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
+            string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
 
 
+        }
+
+        #endregion
+
+        #region ExtractOperands
+
+        /// <summary>
+        /// Extract each part of a simple formula
+        /// </summary>
+        /// <param name="pLeftOperand"></param>
+        /// <param name="pRightOperand"></param>
+        /// <param name="pOperator"></param>
+        public void ExtractArithmeticsGroups(out decimal pLeftOperand, out decimal pRightOperand, out char pOperator)
+        {
+            string lPattern = @"(?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))(?<Operator>[+\-÷\/×xX*])(?<RightOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))";
+
+            Regex regex = new Regex(lPattern);
+
+            Match lMatch = regex.Match(Chunk.SB.ToString());
+
+            decimal.TryParse(lMatch.Groups["LeftOperand"].Value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out pLeftOperand);
+            char.TryParse(lMatch.Groups["Operator"].Value, out pOperator);
+            decimal.TryParse(lMatch.Groups["RightOperand"].Value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out pRightOperand);
+        }
+
+        #endregion
+
+        #region TrimLengthString
+
+        /// <summary>
+        /// Remove the exceedent of a string to limit the length for decimal number
+        /// Use to avoid the rounded effect in the Decimal.tryParse
+        /// </summary>
+        /// <param name="pStr"></param>
+        /// <returns></returns>
+        internal string TrimLengthString(string pStr)
+        {
+            int lMaxi = Decimal.MaxValue.ToString().Length;
+            if (pStr.Length > lMaxi)
+            {
+                pStr = pStr.Remove(lMaxi);
+            }
+            return pStr;
         }
 
         #endregion
