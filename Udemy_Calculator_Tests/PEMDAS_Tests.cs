@@ -41,7 +41,7 @@ namespace Udemy_Calculator_Tests
         }
 
         [TestMethod]
-        public void IsRealOpenedParenthesis_NotOpenedParenthesis_ReturnsTrue()
+        public void HasOpenedParenthesis_NotOpenedParenthesis_ReturnsTrue()
         {
             // Arrange
             string lFormula = "(5+2)";
@@ -51,11 +51,11 @@ namespace Udemy_Calculator_Tests
             lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 0, lFormula.Length);
 
             // Assert
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
+            Assert.IsTrue(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
         }
 
         [TestMethod]
-        public void IsRealOpenedParenthesis_RealOpenedParenthesis_ReturnsTrue()
+        public void HasOpenedParenthesis_RealOpenedParenthesis_ReturnsTrue()
         {
             // Arrange
             string lFormula = "4×((5÷2))";
@@ -65,11 +65,11 @@ namespace Udemy_Calculator_Tests
             lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
 
             // Assert
-            Assert.IsTrue(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
+            Assert.IsTrue(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // GOOD '('
         }
 
         [TestMethod]
-        public void IsRealOpenedParenthesis_ClosedParenthesis_ReturnsFalse()
+        public void HasOpenedParenthesis_ClosedParenthesis_ReturnsFalse()
         {
             // Arrange
             string lFormula = "4×((5÷2))";
@@ -79,11 +79,11 @@ namespace Udemy_Calculator_Tests
             lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 7, lFormula.Length);
 
             // Assert
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.Chunk)); // BAD ')'
+            Assert.IsFalse(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // BAD ')'
         }
 
         [TestMethod]
-        public void IsRealOpenedParenthesis_ParenthesisPreceedByExponentSymbol_ReturnsFalse()
+        public void HasOpenedParenthesis_ParenthesisPreceedByExponentSymbol_ReturnsFalse()
         {
             // Arrange
             string lFormula = "2^(5÷3)+4×((5÷2))";
@@ -93,7 +93,7 @@ namespace Udemy_Calculator_Tests
             lPEMDAS.Chunk = new Chunk(new StringBuilder(lFormula), 2, lFormula.Length);
 
             // Assert
-            Assert.IsFalse(lPEMDAS.IsRealOpenedParenthesis(lPEMDAS.Chunk)); // BAD '^('
+            Assert.IsFalse(lPEMDAS.HasOpenedParenthesis(lPEMDAS.Chunk)); // BAD '^('
         }
 
         [TestMethod]
