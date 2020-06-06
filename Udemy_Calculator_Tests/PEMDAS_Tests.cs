@@ -10,7 +10,7 @@ namespace Udemy_Calculator_Tests
     public class PEMDAS_Tests
     {
         #region Test on parenthesis
-   
+
         [TestMethod]
         public void ComputeParenthesis_PutFormulaWithParenthesis_ReturnsChunkWithTheSmallerParenthesis()
         {
@@ -26,7 +26,7 @@ namespace Udemy_Calculator_Tests
             Assert.AreEqual("(5÷3)", lPEMDAS.Chunk.SB.ToString());
             Assert.AreEqual(2, lPEMDAS.Chunk.StartIndex);
             Assert.AreEqual(5, lPEMDAS.Chunk.Length);
-        }    
+        }
 
         #endregion
 
@@ -408,11 +408,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40.56×15)");
 
-            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out Operator op);
 
             Assert.AreEqual(40.56m, a);
             Assert.AreEqual(15m, b);
-            Assert.AreEqual('×', op);
+            Assert.AreEqual(Operator.Multiplication, op);
         }
 
         [TestMethod]
@@ -420,11 +420,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40,56×15)");
 
-            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out Operator op);
 
             Assert.AreEqual(40.56m, a);
             Assert.AreEqual(15m, b);
-            Assert.AreEqual('×', op);
+            Assert.AreEqual(Operator.Multiplication, op);
         }
 
         [TestMethod]
@@ -432,11 +432,11 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40÷15)");
 
-            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out char op);
+            lPemdas.ExtractArithmeticsGroups(out decimal a, out decimal b, out Operator op);
 
             Assert.AreEqual(40m, a);
             Assert.AreEqual(15m, b);
-            Assert.AreEqual('÷', op);
+            Assert.AreEqual(Operator.Division, op);
         }
 
         #endregion
@@ -519,9 +519,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithAddition_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15+16");
-            lPemdas.WhatOperator = Operator.Addition;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("31", lResult.ToString());
         }
@@ -530,9 +529,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithAddition2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67+16.20");
-            lPemdas.WhatOperator = Operator.Addition;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("31,87", lResult.ToString());
         }
@@ -540,41 +538,36 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_AdditionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)+16");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)+16");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("1", lResult.ToString());
         }
 
-        /// <summary>
-        /// Negative sign alt + 196 (Extended ASCII)
-        /// </summary>
         [TestMethod]
         public void DoCompute_AdditionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15+(16)");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("15+(-16)");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-1", lResult.ToString());
+            Assert.AreEqual("(-1)", lResult.ToString());
         }
 
         [TestMethod]
         public void DoCompute_WithAddition3_ReturnsException()
         {
+            string lStr = "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999";
             try
             {
-                PEMDAS lPemdas = new PEMDAS("0+999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
-                lPemdas.WhatOperator = Operator.Addition;
+                PEMDAS lPemdas = new PEMDAS("0+" + lStr);
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
-                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                Assert.AreEqual($"Le format de la valeur est incorrecte ({lStr})", e.Message);
                 return;
             }
 
@@ -589,22 +582,20 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithSubstraction_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15-16");
-            lPemdas.WhatOperator = Operator.Substraction;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-1", lResult.ToString());
+            Assert.AreEqual("(-1)", lResult.ToString());
         }
 
         [TestMethod]
         public void DoCompute_WithSubstraction2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67-16.20");
-            lPemdas.WhatOperator = Operator.Substraction;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-0,53", lResult.ToString());
+            Assert.AreEqual("(-0,53)", lResult.ToString());
         }
 
         [TestMethod]
@@ -613,13 +604,12 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("0-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
-                lPemdas.WhatOperator = Operator.Substraction;
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
-                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                Assert.AreEqual("Le format de la valeur est incorrecte (999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)", e.Message);
                 return;
             }
 
@@ -629,21 +619,19 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_SubstactionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)-16");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)-16");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-31", lResult.ToString());
+            Assert.AreEqual("(-31)", lResult.ToString());
         }
 
         [TestMethod]
         public void DoCompute_SubstactionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)-(16)");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)-(-16)");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("1", lResult.ToString());
         }
@@ -656,9 +644,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithMultiplication_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15×16");
-            lPemdas.WhatOperator = Operator.Multiplication;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("240", lResult.ToString());
         }
@@ -667,9 +654,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithMultiplication2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15.67×16.20");
-            lPemdas.WhatOperator = Operator.Multiplication;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("253,8540", lResult.ToString());
         }
@@ -680,13 +666,12 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("156700000000000000000000000000000000000000000000000000000000000000×1600000000000000000000000000000000000000000000000000000000000000020");
-                lPemdas.WhatOperator = Operator.Multiplication;
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
-                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                Assert.AreEqual("Le format de la valeur est incorrecte (156700000000000000000000000000000000000000000000000000000000000000)", e.Message);
                 return;
             }
 
@@ -699,21 +684,19 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_MultiplicationWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)×16");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)×16");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-240", lResult.ToString());
+            Assert.AreEqual("(-240)", lResult.ToString());
         }
 
         [TestMethod]
         public void DoCompute_MultiplicationWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)×(16)");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)×(-16)");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("240", lResult.ToString());
         }
@@ -726,9 +709,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15÷16");
-            lPemdas.WhatOperator = Operator.Division;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("0,9375", lResult.ToString());
         }
@@ -737,9 +719,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision2_ReturnsException()
         {
             PEMDAS lPemdas = new PEMDAS("15.67÷16.20");
-            lPemdas.WhatOperator = Operator.Division;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("0,9672839506172839506172839506", lResult.ToString());
         }
@@ -750,9 +731,8 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("15.67÷0");
-                lPemdas.WhatOperator = Operator.Division;
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
@@ -767,11 +747,10 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithDivision4_ReturnsException()
         {
             PEMDAS lPemdas = new PEMDAS("1÷0.99999999999999999999999999999999999999999999999999999999999999999999999999999");
-            lPemdas.WhatOperator = Operator.Division;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("1,000000000000000000000000001", lResult.ToString());
+            Assert.AreEqual("1", lResult.ToString());
         }
 
         /// <summary>
@@ -780,23 +759,21 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_DivisionWithNegativeNumberBeforeOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("(15)÷16");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("(-15)÷16");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-0,9375", lResult.ToString());
+            Assert.AreEqual("(-0,9375)", lResult.ToString());
         }
 
         [TestMethod]
         public void DoCompute_DivisionWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("15÷(16)");
-            lPemdas.WhatOperator = Operator.Addition;
+            PEMDAS lPemdas = new PEMDAS("15÷(-16)");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("-0,9375", lResult.ToString());
+            Assert.AreEqual("(-0,9375)", lResult.ToString());
         }
 
         #endregion
@@ -807,9 +784,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithExponent_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15^(2)");
-            lPemdas.WhatOperator = Operator.Exponent;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("225", lResult.ToString());
         }
@@ -818,9 +794,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_WithExponent2_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("15^(16)");
-            lPemdas.WhatOperator = Operator.Exponent;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("6568408355712890000", lResult.ToString());
         }
@@ -831,9 +806,8 @@ namespace Udemy_Calculator_Tests
             try
             {
                 PEMDAS lPemdas = new PEMDAS("150^(1000)");
-                lPemdas.WhatOperator = Operator.Exponent;
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
@@ -848,9 +822,8 @@ namespace Udemy_Calculator_Tests
         public void DoCompute_ExponentWithNegativeNumberBeforeOperator_ReturnsResult()
         {
             PEMDAS lPemdas = new PEMDAS("(-5)^(2)");
-            lPemdas.WhatOperator = Operator.Exponent;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("25", lResult.ToString());
         }
@@ -858,10 +831,9 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_ExponentWithNegativeNumberAfterOperator_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("5^(2)");
-            lPemdas.WhatOperator = Operator.Exponent;
+            PEMDAS lPemdas = new PEMDAS("5^((-2))");
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("0,04", lResult.ToString());
         }
@@ -873,11 +845,9 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithRootSquare_ReturnsResult()
         {
-            Assert.Inconclusive();
             PEMDAS lPemdas = new PEMDAS("√(81)");
-            lPemdas.WhatOperator = Operator.Square;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
             Assert.AreEqual("9", lResult.ToString());
         }
@@ -885,13 +855,11 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void DoCompute_WithRootSquare2_ReturnsResult()
         {
-            Assert.Inconclusive();
             PEMDAS lPemdas = new PEMDAS("√(15)");
-            lPemdas.WhatOperator = Operator.Square;
 
-            lPemdas.DoCompute(out decimal lResult);
+            lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("6568408355712890000", lResult.ToString());
+            Assert.AreEqual("3,87298334620742", lResult.ToString());
         }
 
         [TestMethod]
@@ -899,14 +867,13 @@ namespace Udemy_Calculator_Tests
         {
             try
             {
-                PEMDAS lPemdas = new PEMDAS("√(─1)");
-                lPemdas.WhatOperator = Operator.Square;
+                PEMDAS lPemdas = new PEMDAS("√((-1))");
 
-                lPemdas.DoCompute(out decimal lResult);
+                lPemdas.DoCompute(out string lResult);
             }
             catch (Exception e)
             {
-                Assert.AreEqual("Le format de la chaîne d'entrée est incorrect.", e.Message);
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
                 return;
             }
 
@@ -923,106 +890,19 @@ namespace Udemy_Calculator_Tests
         public void TrimLengthString_WithNormalString_ReturnsString()
         {
             string lStr = "99999999999999999999999999999";
-            PEMDAS lPemdas = new PEMDAS(lStr);
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS(lStr);
 
-            lStr = lPemdas.TrimLengthString(lStr);
+                decimal lResult = lPemdas.GetDecimalFromString(lStr);
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual($"Le format de la valeur est incorrecte ({lStr})", e.Message);
+                return;
+            }
 
-            // 29 digits max
-            Assert.AreEqual("99999999999999999999999999999", lStr);
-        }
-
-        [TestMethod]
-        public void TrimLengthString_WithStringTooLong_ReturnsTrimedString()
-        {
-            string lStr = "99999999999999999999999999999111111";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            lStr = lPemdas.TrimLengthString(lStr);
-
-            // 29 digits max
-            Assert.AreEqual("99999999999999999999999999999", lStr);
-        }
-
-        [TestMethod]
-        public void TrimLengthString_WithComaNormalString_ReturnsString()
-        {
-            string lStr = "1.999999999999999999999999999";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            lStr = lPemdas.TrimLengthString(lStr);
-
-            // 29 digits max
-            Assert.AreEqual("1.999999999999999999999999999", lStr);
-        }
-
-        [TestMethod]
-        public void TrimLengthString_WithComaTooLongString_ReturnsTrimedString()
-        {
-            string lStr = "1.9999999999999999999999999991111111";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            lStr = lPemdas.TrimLengthString(lStr);
-
-            // 29 digits max
-            Assert.AreEqual("1.999999999999999999999999999", lStr);
-        }
-
-        #endregion
-
-        #region  GetOperator
-
-        [TestMethod]
-        public void GetOperator_ChunkWithExponent_ReturnsExponent()
-        {
-            string lStr = "5^(12)";
-            PEMDAS lPemdas = new PEMDAS(lStr);         
-
-            Assert.AreEqual(Operator.Exponent, lPemdas.WhatOperator);
-        }
-
-        [TestMethod]
-        public void GetOperator_ChunkWithMultiplication_ReturnsMultiplication()
-        {
-            string lStr = "5×12";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            Assert.AreEqual(Operator.Multiplication, lPemdas.WhatOperator);
-        }
-
-        [TestMethod]
-        public void GetOperator_ChunkWithDivision_ReturnsDivision()
-        {
-            string lStr = "5÷12";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            Assert.AreEqual(Operator.Division, lPemdas.WhatOperator);
-        }
-
-        [TestMethod]
-        public void GetOperator_ChunkWithAddition_ReturnsAddition()
-        {
-            string lStr = "5+12";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            Assert.AreEqual(Operator.Addition, lPemdas.WhatOperator);
-        }
-
-        [TestMethod]
-        public void GetOperator_ChunkWithSubstraction_ReturnsSubstraction()
-        {
-            string lStr = "5-12";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            Assert.AreEqual(Operator.Substraction, lPemdas.WhatOperator);
-        }
-
-        [TestMethod]
-        public void GetOperator_ChunkWithRootSquare_ReturnsSquare()
-        {
-            string lStr = "√(12+2)";
-            PEMDAS lPemdas = new PEMDAS(lStr);
-
-            Assert.AreEqual(Operator.Square, lPemdas.WhatOperator);
+            Assert.Fail("Exception was raised but not catched");
         }
 
         #endregion
@@ -1034,7 +914,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("5×7");
 
-            lPemdas.DoReplaceByResult(35m);
+            lPemdas.DoReplaceByResult("35");
 
             Assert.AreEqual("35", lPemdas.Chunk.SB.ToString());
         }
@@ -1107,7 +987,6 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_MaxFloatAdditionFormula_ReturnsResult()
         {
-            Assert.Inconclusive();
             // Problème avec la traduction de la notation scientifique dans la chaine de caracteres E+...
             try
             {
@@ -1150,15 +1029,29 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_MaxFloatSubstractionFormula_ReturnsResult()
         {
-            Assert.Inconclusive();
-            // Problème avec la traduction de la notation scientifique dans la chaine de caracteres E+...
-
             string lBig = float.MaxValue.ToString();
 
-            PEMDAS lPemdas = new PEMDAS($"{lBig}-{lBig}");
+            try
+            {
+                PEMDAS lPemdas = new PEMDAS($"{lBig}-{lBig}");
+                var lResult = lPemdas.ComputeFormula();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("La valeur était trop grande ou trop petite pour un Decimal.", e.Message);
+                return;
+            }
+
+            Assert.Fail("Exception was raised but not catched");
+        }
+
+        [TestMethod]
+        public void ComputeFormula_SubtractNegative_ReturnsResult()
+        {
+            PEMDAS lPemdas = new PEMDAS("7.51-(-5.6333333)");
             var lResult = lPemdas.ComputeFormula();
 
-            Assert.AreEqual("0", lResult);
+            Assert.AreEqual("13,1433333", lResult);
         }
 
         #endregion
@@ -1220,7 +1113,7 @@ namespace Udemy_Calculator_Tests
             PEMDAS lPemdas = new PEMDAS(lFormula);
             var lResult = lPemdas.ComputeFormula();
 
-            Assert.AreEqual("958,9999999999999999999999997", lResult);
+            Assert.AreEqual("959", lResult);
         }
 
         #endregion
@@ -1252,7 +1145,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_SimpleExponentFormula_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("8^2");
+            PEMDAS lPemdas = new PEMDAS("8^(2)");
             var lResult = lPemdas.ComputeFormula();
 
             Assert.AreEqual("64", lResult);
@@ -1265,8 +1158,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_SimpleRootSquareFormula_ReturnsResult()
         {
-            Assert.Inconclusive();
-            PEMDAS lPemdas = new PEMDAS("√64");
+            PEMDAS lPemdas = new PEMDAS("√(64)");
             var lResult = lPemdas.ComputeFormula();
 
             Assert.AreEqual("8", lResult);

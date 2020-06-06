@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -49,12 +47,7 @@ namespace Udemy_Calculator
     {
         #region Fields
 
-        private char[] mParenthesis;
-        private char[] mOperators;
-        private char[] mComa;
-        private string[] mSpecials;
-
-        // Enum to select which part of a chunk
+         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
         /// <summary>
@@ -70,32 +63,8 @@ namespace Udemy_Calculator
         /// <param name="pFormula"></param>
         public PEMDAS(string pFormula)
         {
-            mParenthesis = new char[] { '(', ')', '{', '}', '[', ']' };
-            mOperators = new char[] { '+', '-', '×', 'x', 'X', '*', '/', '÷', '^', '√' };
-            mComa = new char[] { '.', ',' };
-            mSpecials = new string[] { "E+", "e+" };
-
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
-        }
-
-        /// <summary>
-        /// Check if the compute formula is finish or not by containing any operator symbols or parenthesis
-        /// </summary>
-        /// <returns></returns>
-        internal bool FormulaContainsOperatorsYet(string pChunk)
-        {
-            var lArray = mOperators.Concat(mParenthesis).ToArray();
-
-            foreach (var pDigit in pChunk)
-            {
-                if (lArray.Contains(pDigit))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -110,7 +79,7 @@ namespace Udemy_Calculator
                 ComputeExponent();
                 ComputeMultAndDiv();
                 ComputeAddAndSub();
-                DoCompute(out decimal lResult);
+                DoCompute(out string lResult);
                 DoReplaceByResult(lResult);
             }
 
@@ -201,17 +170,31 @@ namespace Udemy_Calculator
         /// <param name="pLeftOperand"></param>
         /// <param name="pRightOperand"></param>
         /// <param name="pOperator"></param>
-        public void ExtractArithmeticsGroups(out decimal pLeftOperand, out decimal pRightOperand, out char pOperator)
+        public void ExtractArithmeticsGroups(out decimal pLeftOperand, out decimal pRightOperand, out Operator pOperator)
         {
-            string lPattern = @"(?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))(?<Operator>[+\-÷\/×xX*])(?<RightOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))";
+            pLeftOperand = default;
+            pRightOperand = default;
+
+            string lPattern = @"(?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*))";
 
             Regex regex = new Regex(lPattern);
 
             Match lMatch = regex.Match(Chunk.SB.ToString());
 
-            decimal.TryParse(lMatch.Groups["LeftOperand"].Value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out pLeftOperand);
-            char.TryParse(lMatch.Groups["Operator"].Value, out pOperator);
-            decimal.TryParse(lMatch.Groups["RightOperand"].Value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out pRightOperand);
+            string lLeft = lMatch.Groups["LeftOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
+            string lRight = lMatch.Groups["RightOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
+
+            if (!string.IsNullOrEmpty(lLeft))
+            {
+                pLeftOperand = GetDecimalFromString(lLeft);
+            }
+
+            if (!string.IsNullOrEmpty(lRight))
+            {
+                pRightOperand = GetDecimalFromString(lRight);
+            }
+
+            pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
         }
 
         #endregion
@@ -224,14 +207,22 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pStr"></param>
         /// <returns></returns>
-        internal string TrimLengthString(string pStr)
+        internal decimal GetDecimalFromString(string pStr)
         {
-            int lMaxi = Decimal.MaxValue.ToString().Length;
-            if (pStr.Length > lMaxi)
+            bool lHasExponential = (pStr.Contains("E") || pStr.Contains("e"));
+
+            if (lHasExponential)
             {
-                pStr = pStr.Remove(lMaxi);
+                return decimal.Parse(pStr, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
-            return pStr;
+            else if (decimal.TryParse(pStr, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal lValue))
+            {
+                return lValue;
+            }
+            else
+            {
+                throw new OverflowException($"Le format de la valeur est incorrecte ({pStr})");
+            }          
         }
 
         #endregion
@@ -241,97 +232,92 @@ namespace Udemy_Calculator
         /// <summary>
         /// Compute the chunk formula from a chunk sequence
         /// </summary>
-        internal void DoCompute(out decimal pResult)
+        internal void DoCompute(out string pResult)
         {
             pResult = default;
 
-            // Extraction units from formula
-            decimal a = 0;
-            decimal b = 0;
+            ExtractArithmeticsGroups(out decimal lLeftOperand, out decimal lRightOperand, out Operator lOperator);
 
-            // Extract the operator
-            var lOperator = WhatOperator;
+            decimal lResult = 0m;
 
             switch (lOperator)
             {
                 case Operator.Multiplication:
-                    pResult = MathOperation.Multiply(a, b);
+                    lResult = MathOperation.Multiply(lLeftOperand, lRightOperand);
                     break;
                 case Operator.Division:
-                    pResult = MathOperation.Divide(a, b);
+                    lResult = MathOperation.Divide(lLeftOperand, lRightOperand);
                     break;
                 case Operator.Addition:
-                    pResult = MathOperation.Add(a, b);
+                    lResult = MathOperation.Add(lLeftOperand, lRightOperand);
                     break;
                 case Operator.Substraction:
-                    pResult = MathOperation.Substract(a, b);
+                    lResult = MathOperation.Substract(lLeftOperand, lRightOperand);
                     break;
                 case Operator.Square:
-                    pResult = MathOperation.Sqrt(a);
+                    lResult = MathOperation.Sqrt(lRightOperand);
                     break;
                 case Operator.Exponent:
-                    pResult = MathOperation.Exponent(a, b);
+                    lResult = MathOperation.Exponent(lLeftOperand, lRightOperand);
                     break;
             }
+
+            pResult = lResult < 0 ? $"({lResult})" : lResult.ToString();
         }
 
         private Operator mOperator = 0;
 
         /// <summary>
-        /// Property to get or set the current operator used in the chunk
+        /// Get the operator from the string
         /// </summary>
-        internal Operator WhatOperator
+        internal Operator WhatOperator(char pOperator)
         {
-            get
+            switch (pOperator)
             {
-                ExtractArithmeticsGroups(out decimal a, out decimal b, out char lOperator);
-
-                switch (lOperator)
-                {
-                    case '^':
-                        mOperator = Operator.Exponent;
-                        break;
-                    case '×':
-                    case 'x':
-                    case 'X':
-                    case '*':
-                        mOperator = Operator.Multiplication;
-                        break;
-                    case '÷':
-                    case '/':
-                        mOperator = Operator.Division;
-                        break;
-                    case '+':
-                        mOperator = Operator.Addition;
-                        break;
-                    case '-':
-                        mOperator = Operator.Substraction;
-                        break;
-                    case '√':
-                        mOperator = Operator.Square;
-                        break;
-                    default:
-                        mOperator = Operator.Unknown;
-                        break;
-                }
-
-                return mOperator;
+                case '^':
+                    mOperator = Operator.Exponent;
+                    break;
+                case '×':
+                case 'x':
+                case 'X':
+                case '*':
+                    mOperator = Operator.Multiplication;
+                    break;
+                case '÷':
+                case '/':
+                    mOperator = Operator.Division;
+                    break;
+                case '+':
+                    mOperator = Operator.Addition;
+                    break;
+                case '-':
+                    mOperator = Operator.Substraction;
+                    break;
+                case '√':
+                    mOperator = Operator.Square;
+                    break;
+                default:
+                    mOperator = Operator.Unknown;
+                    break;
             }
-            set
-            {
-                mOperator = value;
-            }
+
+            return mOperator;
         }
 
         /// <summary>
         /// Replace the chunk sequence by the result into the main formula
         /// </summary>
         /// <param name="lResult"></param>
-        internal void DoReplaceByResult(decimal pResult)
+        internal void DoReplaceByResult(string pResult)
         {
-            // pResult = pResult.ToString().Replace('.', ',');
             // Check if compute if finish, return if yes
-            if (Chunk.SB.CountChar(mOperators) == 1)
+            string lPattern = @"(?<Operator>[+\-÷\/×xX*\^√])";
+
+            Regex lRegex = new Regex(lPattern);
+
+            Match lMatch = lRegex.Match(pResult);
+
+            if (!lMatch.Success)
             {
                 Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
                 Chunk.Formula.Insert(Chunk.StartIndex, pResult);
