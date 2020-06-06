@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,7 @@ namespace Udemy_Calculator
         private char[] mComa;
         private string[] mSpecials;
         // Regex to split in 3 groups a simple formula (0 => all the formula, 1 => left part before [+-÷×], 2 => right part after [+-÷×])
-        private string mRegexSplitGroup = @"^([\(]?[-]*\d*[.,]*[\d*]*[\)]*)([+-×÷])([\(]*[-]*\d*[.,]*[\d*]*[\)]?)$";
+        private string mRegParenthesis = @"[(](?(?=[(][-])[(][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×x*])(?(?=[(][-])[(]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)]+?";
         // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
@@ -137,7 +138,7 @@ namespace Udemy_Calculator
                 return true;
             }
 
-            return false;          
+            return false;
         }
 
         /// <summary>
@@ -158,6 +159,31 @@ namespace Udemy_Calculator
             }
 
             mStack.Clear();
+
+            // Regex to match every parenthesis in the formula if exists
+            // (?<=[(](?!\-))(?<LeftOperand>[√]?\(?\-?[0-9]+\.?[0-9]*E?\+?[0-9]*\)?)(?<Extended>(?<Operator>[+÷\-×])+(?<RightOperand>[√]?\(?\-?[0-9]+\.?[0-9]*E?\+?[0-9]*\)?))+(?=[)])
+
+            string lPattern = @"(?<=[(](?!\-))(?<LeftOperand>[√]?\(?\-?[0-9]+\.?[0-9]*\)?(E\+)?[0-9]*)(?<Extended>(?<Operator>[+÷\-×])+(?<RightOperand>[√]?\(?\-?[0-9]+\.?[0-9]*\)?(E\+)?[0-9]*)[^\)]?)+(?=[)])";
+
+            Regex lRegex = new Regex(lPattern);
+
+            var lMatches = lRegex.Matches(Chunk.SB.ToString());
+
+
+            if (lMatches.Count > 0)
+            {
+                foreach (Match lMatch in lMatches)
+                {
+                    int lIndex = lMatch.Index;
+                    var lGroup = lMatch.Groups["LeftOperand"].Value;
+                    var lOperator = lMatch.Groups["Operator"].Value;
+                    int lLength = lMatch.Length;
+                   // Regex.Match()
+                    Debug.Print(lMatch.ToString());
+
+                }
+            }
+
 
             for (int i = 0; i < Chunk.SB.Length; i++)
             {
@@ -386,7 +412,7 @@ namespace Udemy_Calculator
         /// <param name="pStr"></param>
         internal void GetChunkPart(out string pStr, eFormulaPart pFPart)
         {
-            var lRegex = new Regex(mRegexSplitGroup);
+            var lRegex = new Regex(mRegParenthesis);
             Match match = lRegex.Match(Chunk.SB.ToString());
 
             string lGroup = match.Groups[(int)pFPart].Value;
