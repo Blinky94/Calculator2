@@ -85,12 +85,10 @@ namespace Udemy_Calculator
                     UIResultLabel.Content = (mLastNumber * (-1)).ToString().Replace(',', '.');
                 }
 
-
                 string lConcateSign = UIResultLabel.Content.ToString();
 
                 if (lConcateSign.IndexOf('-') != -1)
                 {
-                    // lConcateSign = lConcateSign.Trim('-');
                     lConcateSign = $"({lConcateSign})";
                 }
 

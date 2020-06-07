@@ -46,8 +46,10 @@ namespace Udemy_Calculator
     public class PEMDAS
     {
         #region Fields
+        // Pattern to test if there are no operator remaining in the current formula
+        string lFinishedComputationPattern = @"(?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])";
 
-         // Enum to select which part of a chunk
+        // Enum to select which part of a chunk
         internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
 
         /// <summary>
@@ -73,7 +75,11 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            while (!decimal.TryParse(Chunk.Formula.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal _))
+            Regex lRegex = new Regex(lFinishedComputationPattern);
+
+            Match lMatch = lRegex.Match(Chunk.Formula.ToString());
+
+            while (lMatch.Success)
             {
                 ExtractParenthesis();
                 ComputeExponent();
@@ -81,6 +87,7 @@ namespace Udemy_Calculator
                 ComputeAddAndSub();
                 DoCompute(out string lResult);
                 DoReplaceByResult(lResult);
+                lMatch = lRegex.Match(Chunk.Formula.ToString());
             }
 
             return Chunk.SB.ToString();
@@ -170,7 +177,7 @@ namespace Udemy_Calculator
         /// <param name="pLeftOperand"></param>
         /// <param name="pRightOperand"></param>
         /// <param name="pOperator"></param>
-        public void ExtractArithmeticsGroups(out decimal pLeftOperand, out decimal pRightOperand, out Operator pOperator)
+        public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out Operator pOperator)
         {
             pLeftOperand = default;
             pRightOperand = default;
@@ -186,12 +193,14 @@ namespace Udemy_Calculator
 
             if (!string.IsNullOrEmpty(lLeft))
             {
-                pLeftOperand = GetDecimalFromString(lLeft);
+                //pLeftOperand = GetDecimalFromString(lLeft);
+                pLeftOperand = GetDoubleFromString(lLeft);
             }
 
             if (!string.IsNullOrEmpty(lRight))
             {
-                pRightOperand = GetDecimalFromString(lRight);
+                // pRightOperand = GetDecimalFromString(lRight);
+                pRightOperand = GetDoubleFromString(lRight);
             }
 
             pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
@@ -222,7 +231,34 @@ namespace Udemy_Calculator
             else
             {
                 throw new OverflowException($"Le format de la valeur est incorrecte ({pStr})");
-            }          
+            }
+        }
+
+        /// <summary>
+        /// Remove the exceedent of a string to limit the length for decimal number
+        /// Use to avoid the rounded effect in the Decimal.tryParse
+        /// </summary>
+        /// <param name="pStr"></param>
+        /// <returns></returns>
+        internal double GetDoubleFromString(string pStr)
+        {
+            try
+            {
+                bool lHasExponential = (pStr.Contains("E") || pStr.Contains("e"));
+
+                if (lHasExponential)
+                {
+                    return double.Parse(pStr, NumberStyles.Float, null);
+                }
+                else
+                {
+                    return double.Parse(pStr, NumberStyles.Any, CultureInfo.InvariantCulture);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         #endregion
@@ -236,9 +272,9 @@ namespace Udemy_Calculator
         {
             pResult = default;
 
-            ExtractArithmeticsGroups(out decimal lLeftOperand, out decimal lRightOperand, out Operator lOperator);
+            ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out Operator lOperator);
 
-            decimal lResult = 0m;
+            string lResult = string.Empty;
 
             switch (lOperator)
             {
@@ -262,7 +298,7 @@ namespace Udemy_Calculator
                     break;
             }
 
-            pResult = lResult < 0 ? $"({lResult})" : lResult.ToString();
+            pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult.ToString();
         }
 
         private Operator mOperator = 0;
@@ -311,9 +347,7 @@ namespace Udemy_Calculator
         internal void DoReplaceByResult(string pResult)
         {
             // Check if compute if finish, return if yes
-            string lPattern = @"(?<Operator>[+\-÷\/×xX*\^√])";
-
-            Regex lRegex = new Regex(lPattern);
+            Regex lRegex = new Regex(lFinishedComputationPattern);
 
             Match lMatch = lRegex.Match(pResult);
 

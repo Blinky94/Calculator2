@@ -10,7 +10,24 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = decimal.Add(p1, p2);
+                lResult = Decimal.Add(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
+        public static string Add(double p1, double p2)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = p1 + p2;
+                lResult = lDouble.ToString();
             }
             catch (Exception e)
             {
@@ -26,7 +43,24 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = decimal.Subtract(p1, p2);
+                lResult = Decimal.Subtract(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
+        public static string Substract(double p1, double p2)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = p1 - p2;
+                lResult = lDouble.ToString();
             }
             catch (Exception e)
             {
@@ -42,7 +76,24 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = decimal.Multiply(p1, p2);
+                lResult = Decimal.Multiply(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
+        public static string Multiply(double p1, double p2)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = p1 * p2;
+                lResult = lDouble.ToString();
             }
             catch (Exception e)
             {
@@ -58,7 +109,24 @@ namespace Udemy_Calculator
 
             try
             {
-                lResult = decimal.Divide(p1, p2);
+                lResult = Decimal.Divide(p1, p2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
+        public static string Divide(double p1, double p2)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = p1 / p2;
+                lResult = lDouble.ToString();
             }
             catch (Exception e)
             {
@@ -84,6 +152,23 @@ namespace Udemy_Calculator
             return lResult;
         }
 
+        public static string Exponent(double p1, double p2)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = Math.Pow(p1, p2);
+                lResult = lDouble.ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
         public static decimal Sqrt(decimal p)
         {
             decimal lResult;
@@ -91,6 +176,23 @@ namespace Udemy_Calculator
             try
             {
                 lResult = Convert.ToDecimal(Math.Sqrt(Convert.ToDouble(p)));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return lResult;
+        }
+
+        public static string Sqrt(double p)
+        {
+            string lResult;
+
+            try
+            {
+                double lDouble = Math.Sqrt(p);
+                lResult = lDouble.ToString();
             }
             catch (Exception e)
             {
