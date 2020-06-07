@@ -96,9 +96,18 @@ namespace Udemy_Calculator
             }
         }
 
+        // 50 + 6% (0,06) = 50,06
         private void UIPercentageButton_Click(object sender, RoutedEventArgs e)
         {
+            UIResultLabel.Content = UIResultLabel.Content.ToString().Replace(',', '.');
 
+            if (double.TryParse(UIResultLabel.Content.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
+            {
+                mHistory.RemoveElement(UIResultLabel.Content.ToString().Length);
+                UIResultLabel.Content = (lResult * (0.01)).ToString().Replace(',', '.');
+
+                mHistory.AppendElement(UIResultLabel.Content.ToString().Replace(',', '.'), false);
+            }
         }
 
         private void UIOperatorButton_Click(object sender, RoutedEventArgs e)
