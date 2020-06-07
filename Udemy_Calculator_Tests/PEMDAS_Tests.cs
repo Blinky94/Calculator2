@@ -890,7 +890,7 @@ namespace Udemy_Calculator_Tests
         [TestMethod]
         public void ComputeFormula_SimpleAdditionFormula2_ReturnsResult()
         {
-            PEMDAS lPemdas = new PEMDAS("5+.7");
+            PEMDAS lPemdas = new PEMDAS("5+0.7");
             var lResult = lPemdas.ComputeFormula();
 
             Assert.AreEqual("5,7", lResult);
