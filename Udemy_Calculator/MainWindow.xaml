@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Calculator"
         ResizeMode="NoResize"
-        Height="400"
-        Width="260">
+        Height="410"
+        Width="255">
 
     <!--Main Container Grid-->
     <Grid x:Name="MainGrid"
@@ -25,7 +25,7 @@
                    TargetType="Label"
                    BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
                 <Setter Property="FontSize"
-                        Value="13.5" />
+                        Value="12.5" />
                 <Setter Property="FontFamily"
                         Value="Courrier" />
                 <Setter Property="Foreground"
@@ -38,14 +38,14 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <!--Menu Left Header-->
         <Grid Grid.Column="0"
               Grid.Row="0"
-              Width="Auto">
+              HorizontalAlignment="Left">
 
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
@@ -203,7 +203,10 @@
         <Label x:Name="UICalculatorSelectionLabel"
                Content="Test"
                Grid.Row="0"
-               Grid.Column="1"
+               Grid.Column="0"
+               HorizontalAlignment="Center"
+               Background="Transparent"
+               Margin="25 0 0 0"
                Style="{StaticResource CalculatorSelectionLabel}" />
 
     </Grid>

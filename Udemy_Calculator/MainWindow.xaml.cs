@@ -44,19 +44,22 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private StandardCalculator mStandardCalcultator;
+        //private StandardCalculator mStandardCalcultator;
+        private Calculator mStandardCalcultator;
         private CalculatorMode eCurrentMode;
 
         public MainWindow()
         {
             InitializeComponent();
-            mStandardCalcultator = new StandardCalculator();
+            //mStandardCalcultator = new StandardCalculator();
+            mStandardCalcultator = new Calculator();
             eCurrentMode = CalculatorMode.Standard;
 
             mStandardCalcultator.SetValue(Grid.RowProperty, 1);
-            mStandardCalcultator.SetValue(Grid.ColumnProperty, 1);
+            mStandardCalcultator.SetValue(Grid.ColumnProperty, 0);
             MainGrid.Children.Add(mStandardCalcultator);
             UICalculatorSelectionLabel.Content = eCurrentMode.ToString();
+            UICalculatorSelectionLabel.HorizontalContentAlignment = HorizontalAlignment.Left;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

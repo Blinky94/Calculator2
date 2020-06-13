@@ -1,0 +1,315 @@
+﻿<UserControl x:Class="Udemy_Calculator.Calculator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Udemy_Calculator"
+             mc:Ignorable="d"
+             d:DesignHeight="345"
+             d:DesignWidth="810">
+
+    <!--Calculator-->
+    <Grid x:Name="UICalculator"
+          Background="White">
+        <Grid.Resources>
+            <Style x:Key="BaseStyleButton"
+                   TargetType="Button">
+                <Setter Property="Margin"
+                        Value="1 1 1 1" />
+                <Setter Property="FontSize"
+                        Value="25" />
+                <Setter Property="Foreground"
+                        Value="Black" />
+                <Setter Property="Background"
+                        Value="LightGray" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource Digital}" />
+                <Setter Property="Width"
+                        Value="50" />
+                <Setter Property="Height"
+                        Value="50" />
+                <Setter Property="BorderBrush"
+                        Value="Black" />
+                <Setter Property="BorderThickness"
+                        Value="1.5" />
+            </Style>
+
+            <Style x:Key="NumberStyleButton"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                <Setter Property="Background"
+                        Value="Gray" />
+            </Style>
+
+            <Style x:Key="OtherStyleButton"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                <Setter Property="Background"
+                        Value="LightGreen" />
+                <Setter Property="FontSize"
+                        Value="16" />
+            </Style>
+
+            <Style x:Key="TrigoStyleButton"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                <Setter Property="Background"
+                        Value="LightBlue" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="FontWeight"
+                        Value="ExtraBold" />
+            </Style>
+
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="53" />
+            <ColumnDefinition Width="52" />
+            <ColumnDefinition Width="160" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--Calul Area-->
+        <Viewbox HorizontalAlignment="Right"
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
+                 Stretch="Uniform">
+            <Label x:Name="UIResultLabel"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Center"
+                   Content="05555555556666666666666444444" />
+        </Viewbox>
+
+        <!--Main Panel Area-->
+        <WrapPanel x:Name="UINumericPanel"
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FlowDirection="LeftToRight"
+                   Grid.Row="1">
+            <Button x:Name="UIBackReturnButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIBackReturnButton_Click">
+                <Image Height="30"
+                       Source="Images/Forward_icon.png"
+                       Stretch="Fill"
+                       Width="25" />
+            </Button>
+            <Button x:Name="UIACButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="AC"
+                    Click="UIACButton_Click" />
+            <Button x:Name="UIPercentButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIPercentageButton_Click">
+                <Image Height="26"
+                       Source="icons8_percentage_26px.png"
+                       Stretch="Fill"
+                       Width="26" />
+            </Button>
+            <Button x:Name="UISevenButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="7"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIHeightButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="8"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UINineButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="9"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIFourButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="4"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIFiveButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="5"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UISixButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="6"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIOneButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="1"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UITwoButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="2"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIThreeButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="3"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UIZeroButton"
+                    Style="{StaticResource NumberStyleButton}"
+                    Content="0"
+                    Click="UINumberButton_Click" />
+            <Button x:Name="UINegativeButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UISignOrUnSignButton_Click">
+                <Image Height="26"
+                       Source="icons8_plus_minus_26px.png"
+                       Stretch="Fill"
+                       Width="26" />
+            </Button>
+            <Button x:Name="UIPointButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Content="."
+                    Click="UIPointButton_Click" />
+        </WrapPanel>
+
+        <!--Other Area-->
+        <WrapPanel Orientation="Horizontal"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Button x:Name="UIExpButton"
+                    Style="{StaticResource OtherStyleButton}"
+                    Content="EXP"
+                    Click="UIExpButton_Click" />
+            <Button x:Name="UISquareButton"
+                    Style="{StaticResource OtherStyleButton}"
+                    Click="UISquareButton_Click">
+                <Image Height="24"
+                       Source="icons8_square_root_24px.png"
+                       Stretch="Fill"
+                       Width="24" />
+            </Button>
+            <Button x:Name="UIOpenParenthesisButton"
+                    Style="{StaticResource OtherStyleButton}"
+                    Content="("
+                    Click="UIOpenParenthesisButton_Click" />
+            <Button x:Name="UICloseParenthesisButton"
+                    Style="{StaticResource OtherStyleButton}"
+                    Content=")"
+                    Click="UICloseParenthesisButton_Click" />
+            <Button x:Name="UIPIButton"
+                    Style="{StaticResource OtherStyleButton}"
+                    Click="UICloseParenthesisButton_Click">
+                <Image Height="26"
+                       Source="icons8_pi_26px_1.png"
+                       Stretch="Fill"
+                       Width="26" />
+            </Button>
+        </WrapPanel>
+
+        <!--Operators Area-->
+        <WrapPanel Orientation="Horizontal"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Button x:Name="UIDivideButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIOperatorButton_Click">
+                <Image Height="20"
+                       Source="icons8_divide_26px.png"
+                       Stretch="Fill"
+                       Width="20" />
+            </Button>
+            <Button x:Name="UIMultiplyButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIOperatorButton_Click">
+                <Image Height="20"
+                       Source="icons8_multiply_26px.png"
+                       Stretch="Fill"
+                       Width="20" />
+            </Button>
+            <Button x:Name="UIPlusButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIOperatorButton_Click">
+                <Image Height="20"
+                       Source="icons8_plus_math_26px.png"
+                       Stretch="Fill"
+                       Width="20" />
+            </Button>
+            <Button x:Name="UIMinusButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIOperatorButton_Click">
+                <Image Height="20"
+                       Source="icons8_subtract_26px.png"
+                       Stretch="Fill"
+                       Width="20" />
+            </Button>
+            <Button x:Name="UIEqualButton"
+                    Style="{StaticResource BaseStyleButton}"
+                    Click="UIEqualButton_Click">
+                <Image Height="20"
+                       Source="icons8_equal_sign_26px.png"
+                       Stretch="Fill"
+                       Width="20" />
+            </Button>
+        </WrapPanel>
+
+        <!--Trigonometry Area-->
+        <WrapPanel Orientation="Horizontal"
+                   Grid.Row="1"
+                   Grid.Column="3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Button x:Name="UICOSButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="COS"
+                    Click="UICOSButton_Click" />
+            <Button x:Name="UIACOSButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ACOS"
+                    Click="UIACOSButton_Click" />
+            <Button x:Name="UISINButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="SIN"
+                    Click="UISINButton_Click" />
+            <Button x:Name="UIASINButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ASIN"
+                    Click="UIASINButton_Click" />
+            <Button x:Name="UITANButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="TAN"
+                    Click="UITANButton_Click" />
+            <Button x:Name="UIATANButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ATAN"
+                    Click="UIATANButton_Click" />
+            <Button x:Name="UIHYPButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="HYP"
+                    Click="UIHYPButton_Click" />
+            <Button x:Name="UICOTButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="COT"
+                    Click="UICOTButton_Click" />
+            <Button x:Name="UIACOTButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ACOT"
+                    Click="UIACOTButton_Click" />
+            <Button x:Name="UISECButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="SEC"
+                    Click="UISECButton_Click" />
+            <Button x:Name="UIASECButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ASEC"
+                    Click="UIASECButton_Click" />
+            <Button x:Name="UICSCButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="CSC"
+                    Click="UICSCButton_Click" />
+            <Button x:Name="UIACSCButton"
+                    Style="{StaticResource TrigoStyleButton}"
+                    Content="ACSC"
+                    Click="UIACSCButton_Click" />
+        </WrapPanel>
+
+    </Grid>
+</UserControl>
