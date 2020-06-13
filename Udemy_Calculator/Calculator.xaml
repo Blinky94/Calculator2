@@ -17,7 +17,7 @@
                 <Setter Property="Margin"
                         Value="1 1 1 1" />
                 <Setter Property="FontSize"
-                        Value="25" />
+                        Value="20" />
                 <Setter Property="Foreground"
                         Value="Black" />
                 <Setter Property="Background"
@@ -32,13 +32,19 @@
                         Value="Black" />
                 <Setter Property="BorderThickness"
                         Value="1.5" />
+                <Setter Property="FontWeight"
+                        Value="ExtraBold" />
             </Style>
 
             <Style x:Key="NumberStyleButton"
                    TargetType="Button"
                    BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
                 <Setter Property="Background"
-                        Value="Gray" />
+                        Value="LightCyan" />
+                <Setter Property="FontSize"
+                        Value="25" />
+                <Setter Property="FontWeight"
+                        Value="ExtraBold" />
             </Style>
 
             <Style x:Key="OtherStyleButton"
@@ -47,7 +53,9 @@
                 <Setter Property="Background"
                         Value="LightGreen" />
                 <Setter Property="FontSize"
-                        Value="16" />
+                        Value="14" />
+                <Setter Property="FontWeight"
+                        Value="ExtraBold" />
             </Style>
 
             <Style x:Key="TrigoStyleButton"
@@ -56,7 +64,7 @@
                 <Setter Property="Background"
                         Value="LightBlue" />
                 <Setter Property="FontSize"
-                        Value="16" />
+                        Value="14" />
                 <Setter Property="FontWeight"
                         Value="ExtraBold" />
             </Style>
