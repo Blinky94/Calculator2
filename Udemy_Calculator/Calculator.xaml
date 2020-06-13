@@ -86,12 +86,12 @@
         <Viewbox HorizontalAlignment="Right"
                  Grid.Row="0"
                  Grid.Column="0"
-                 Grid.ColumnSpan="3"
+                 Grid.ColumnSpan="4"
                  Stretch="Uniform">
             <Label x:Name="UIResultLabel"
                    HorizontalContentAlignment="Right"
                    VerticalContentAlignment="Center"
-                   Content="05555555556666666666666444444" />
+                   Content="0" />
         </Viewbox>
 
         <!--Main Panel Area-->

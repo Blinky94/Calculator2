@@ -129,14 +129,13 @@ namespace Udemy_Calculator
 
         private void UIOperatorButton_Click(object sender, RoutedEventArgs e)
         {
-            var lSender = sender;
             if (!mSpecialSymbols.Contains(ResultLabel.LastOrDefault()))
             {
                 UIResultLabel.Content = ResultLabel;
 
                 LastNumber = ResultLabel;
 
-                ResultLabel = (e.Source as Button).Content.ToString() != string.Empty ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
+                ResultLabel = (e.Source as Button).Content.GetType() != typeof(System.Windows.Controls.Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
             }
         }
 
