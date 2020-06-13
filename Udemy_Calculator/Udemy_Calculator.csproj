@@ -215,34 +215,34 @@
     <Resource Include="Images\Forward_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_forward_30px.png" />
+    <Resource Include="Images\Erase_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_pi_26px.png" />
+    <Resource Include="Images\Pi_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_square_root_24px.png" />
+    <Resource Include="Images\Square_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_plus_math_26px.png" />
+    <Resource Include="Images\Plus_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_multiply_26px.png" />
+    <Resource Include="Images\Multiply_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_percentage_26px.png" />
+    <Resource Include="Images\Percentage_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_divide_26px.png" />
+    <Resource Include="Images\Divide_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_plus_minus_26px.png" />
+    <Resource Include="Images\Sign_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_equal_sign_26px.png" />
+    <Resource Include="Images\Equal_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_subtract_26px.png" />
+    <Resource Include="Images\Subtract_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
