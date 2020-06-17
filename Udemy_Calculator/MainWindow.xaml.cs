@@ -7,10 +7,22 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        public delegate void UpdateUIDisplayHandler(string pContent);
+        public event UpdateUIDisplayHandler UIDisplayValueEvent;
+
         public MainWindow()
         {
             InitializeComponent();
-            menuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
+            UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
+            UIDisplay.UIDisplayCalculus.Content = "0";
+
+            UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
+            UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
+        }
+
+        public void ModifyUIDisplay(string pContent)
+        {
+            UIDisplay.UIDisplayCalculus.Content = pContent;
         }
     }
 }

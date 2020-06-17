@@ -15,22 +15,32 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <!--Call the MenuSide User control-->
-        <local:MenuSide Grid.Column="0"
-                        Grid.Row="0"
-                        x:Name="menuSide" />
+        <local:MenuSide_Control Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="0"
+                                x:Name="UIMenuSide" />
 
-        <!--Call the calculator control-->
-        <local:Calculator Grid.Column="0"
-                          Grid.Row="1"
-                          x:Name="calculator" />
+        <!--Call the Display User control-->
+        <local:Display_Control Grid.Column="0"
+                               Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               x:Name="UIDisplay"
+                               Margin="0 0 150 0"
+                               HorizontalAlignment="Stretch" />
 
+        <!--Call the Calculator User control-->
+        <local:Calculator_Control Grid.Column="0"
+                                  Grid.Row="2"
+                                  x:Name="UICalculator" />
     </Grid>
 </Window>

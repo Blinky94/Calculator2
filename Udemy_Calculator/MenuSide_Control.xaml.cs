@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Udemy_Calculator
 {
@@ -23,6 +11,7 @@ namespace Udemy_Calculator
         Standard,
         Scientific,
         Binary,
+        Graphs,
         Calendar,
 
         /// <summary>
@@ -54,13 +43,12 @@ namespace Udemy_Calculator
     /// <summary>
     /// Interaction logic for MenuSide.xaml
     /// </summary>
-    public partial class MenuSide : UserControl
+    public partial class MenuSide_Control : UserControl
     {
-
         public static readonly DependencyProperty CurrentModeProperty =
     DependencyProperty.Register("CurrentMode",
                                 typeof(CalculatorMode),
-                                typeof(MenuSide),
+                                typeof(MenuSide_Control),
                                 new PropertyMetadata(CalculatorMode.Standard));
         public CalculatorMode CurrentMode
         {
@@ -68,7 +56,7 @@ namespace Udemy_Calculator
             set { SetValue(CurrentModeProperty, value); }
         }
 
-        public MenuSide()
+        public MenuSide_Control()
         {
             InitializeComponent();
             CurrentMode = CalculatorMode.Standard;
@@ -87,6 +75,9 @@ namespace Udemy_Calculator
                     break;
                 case "_Binary":
                     CurrentMode = CalculatorMode.Binary;
+                    break;
+                case "_Graphs":
+                    CurrentMode = CalculatorMode.Graphs;
                     break;
                 case "_Calendar":
                     CurrentMode = CalculatorMode.Calendar;
