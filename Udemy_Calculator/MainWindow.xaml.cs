@@ -14,7 +14,7 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
-            UIDisplay.UIDisplayCalculus.Content = "0";
+            UIDisplay.UIDisplayCalculus.Text = "0";
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
@@ -22,7 +22,7 @@ namespace Udemy_Calculator
 
         public void ModifyUIDisplay(string pContent)
         {
-            UIDisplay.UIDisplayCalculus.Content = pContent;
+            UIDisplay.UIDisplayCalculus.Text = pContent;
         }
     }
 }

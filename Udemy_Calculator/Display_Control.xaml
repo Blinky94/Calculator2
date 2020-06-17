@@ -7,19 +7,22 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="485">
-    <Grid Background="LightGray" Margin="0 0 0 0">
+    <Grid Background="LightGray"
+          Margin="0 0 0 0">
         <!--Calulus Area-->
-        <Viewbox Stretch="Uniform" HorizontalAlignment="Right">
-            <Label x:Name="UIDisplayCalculus"
-                   Background="Transparent"                  
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Top"
-                   FontSize="25"
-                   FontWeight="DemiBold"
-                   Content="0" 
-                   Height="175"/>
+        <Viewbox HorizontalAlignment="Right">
+            <TextBlock x:Name="UIDisplayCalculus"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Background="Transparent"
+                       Margin="5 0 5 0"
+                       FontSize="30"
+                       TextWrapping="WrapWithOverflow"
+                       FontWeight="DemiBold"
+                       Text="0"
+                       Height="175" />
         </Viewbox>
-
+       
         <!--Graph Area-->
     </Grid>
 </UserControl>
