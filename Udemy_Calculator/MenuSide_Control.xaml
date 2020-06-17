@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="200">
-    <Grid>
+    <Grid Background="White">
         <Grid.Resources>
             <Style x:Key="BaseStyleLabel"
                    TargetType="Label">
@@ -185,6 +185,8 @@
         <!--Menu Label-->
         <Label x:Name="UIMenuSelected"
                Background="Transparent"
+               HorizontalContentAlignment="Center"
+               Margin="-10 0 0 0"
                Style="{StaticResource StyleUIMenuSelected}"             
                Grid.Column="1" />
     </Grid>

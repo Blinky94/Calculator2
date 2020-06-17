@@ -6,17 +6,18 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="500">
-    <Grid Background="Transparent">
+             d:DesignWidth="485">
+    <Grid Background="LightGray" Margin="0 0 0 0">
         <!--Calulus Area-->
         <Viewbox Stretch="Uniform" HorizontalAlignment="Right">
             <Label x:Name="UIDisplayCalculus"
-                   Background="Transparent"
+                   Background="Transparent"                  
                    HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Center"
+                   VerticalContentAlignment="Top"
                    FontSize="25"
                    FontWeight="DemiBold"
-                   Content="0" />
+                   Content="0" 
+                   Height="175"/>
         </Viewbox>
 
         <!--Graph Area-->

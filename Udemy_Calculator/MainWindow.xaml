@@ -10,37 +10,36 @@
         SizeToContent="WidthAndHeight">
 
     <!--Main Container Grid-->
-    <Grid x:Name="MainGrid"
-          Background="Transparent">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+    <StackPanel Margin="10"
+                Background="Black">
+        <Grid x:Name="MainGrid"
+              Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <!--Call the MenuSide User control-->
-        <local:MenuSide_Control Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                Grid.Row="0"
-                                x:Name="UIMenuSide" />
+            <!--Call the MenuSide User control-->
+            <local:MenuSide_Control Grid.Row="0"
+                                    Margin="-7 0 0 0"
+                                    x:Name="UIMenuSide" />
 
-        <!--Call the Display User control-->
-        <local:Display_Control Grid.Column="0"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2"
-                               x:Name="UIDisplay"
-                               Margin="0 0 150 0"
-                               HorizontalAlignment="Stretch" />
+            <!--Call the Display User control-->
+            <local:Display_Control Grid.Row="1"
+                                   x:Name="UIDisplay"
+                                   BorderBrush="Black"
+                                   BorderThickness="1"
+                                   HorizontalAlignment="Stretch"
+                                   Margin="0 0 0 10"/>
 
-        <!--Call the Calculator User control-->
-        <local:Calculator_Control Grid.Column="0"
-                                  Grid.Row="2"
-                                  x:Name="UICalculator" />
-    </Grid>
+            <!--Call the Calculator User control-->
+            <local:Calculator_Control Grid.Row="2"
+                                      x:Name="UICalculator" />
+        </Grid>
+    </StackPanel>
 </Window>

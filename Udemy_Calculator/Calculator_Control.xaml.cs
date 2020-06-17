@@ -372,5 +372,10 @@ namespace Udemy_Calculator
         {
 
         }
+
+        private void UISecondFuncButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
