@@ -19,7 +19,7 @@
                 <Setter Property="Foreground"
                         Value="DarkBlue" />
                 <Setter Property="Background"
-                        Value="LightGray" />
+                        Value="Cornsilk" />
                 <Setter Property="Width"
                         Value="65" />
                 <Setter Property="Height"
@@ -39,16 +39,61 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--Scientific panel-->
-        <WrapPanel Grid.Row="0"
-                   Margin="0 0 0 5">
+        <!--Memorisation Panel-->
+        <WrapPanel Grid.Row="0" Margin="0 0 0 5" HorizontalAlignment="Right">
             <WrapPanel.Resources>
                 <Style TargetType="Button"
                        BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
                     <Setter Property="Background"
                             Value="LightBlue" />
+                    <Setter Property="FontSize"
+                            Value="12" />
+                    <Setter Property="FontWeight"
+                            Value="ExtraBold" />
+                    <Setter Property="Height"
+                            Value="30" />
+                    <Setter Property="Width"
+                            Value="60" />
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Center" />
+                    <Setter Property="Margin"
+                            Value="2" />
+                </Style>
+                <Style TargetType="Image">
+                    <Setter Property="Width"
+                            Value="18" />
+                    <Setter Property="Height"
+                            Value="18" />
+                </Style>
+            </WrapPanel.Resources>
+            <Button x:Name="UIMCButton"
+                    x:Uid="MC"
+                    Content="MC"
+                    Click="UIMCButton_Click">
+            </Button>
+            <Button x:Name="UIMemoryPlusButton"
+                    x:Uid="M+"
+                    Content="M+"
+                    Click="UIMemoryPlusButton_Click">
+            </Button>
+            <Button x:Name="UIMemoryRecallButton"
+                    x:Uid="MR"
+                    Content="MR"
+                    Click="UIMemoryRecallButton_Click">
+            </Button>
+        </WrapPanel>
+        
+        <!--Scientific panel-->
+        <WrapPanel Grid.Row="1"
+                   Margin="0 0 0 5">
+            <WrapPanel.Resources>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
+                    <Setter Property="Background"
+                            Value="LightCyan" />
                     <Setter Property="FontSize"
                             Value="12" />
                     <Setter Property="FontWeight"
@@ -73,7 +118,7 @@
             <Button x:Name="UISecondFuncButton"
                     x:Uid="2nde"
                     Content="2nde"
-                    Background="LightCoral"
+                    Background="LightGreen"
                     Click="UISecondFuncButton_Click">
             </Button>
             <Button x:Name="UIXSquareButton"
@@ -133,21 +178,6 @@
                     x:Uid="|N|"
                     Content="|N|"
                     Click="UIAbsoluteValButton_Click">
-            </Button>
-            <Button x:Name="UIMCButton"
-                    x:Uid="MC"
-                    Content="MC"
-                    Click="UIMCButton_Click">
-            </Button>
-            <Button x:Name="UIMemoryPlusButton"
-                    x:Uid="M+"
-                    Content="M+"
-                    Click="UIMemoryPlusButton_Click">
-            </Button>
-            <Button x:Name="UIMemoryRecallButton"
-                    x:Uid="MR"
-                    Content="MR"
-                    Click="UIMemoryRecallButton_Click">
             </Button>
             <!--Fourth Range-->
             <Button x:Name="UIRandomButton"
@@ -262,7 +292,7 @@
         </WrapPanel>
 
         <!--Main panel-->
-        <WrapPanel Grid.Row="1">
+        <WrapPanel Grid.Row="2">
             <WrapPanel.Resources>
                 <Style TargetType="Button"
                        BasedOn="{StaticResource ResourceKey=BaseStyleButton}">

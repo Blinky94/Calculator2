@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="200">
-    <Grid Background="White">
+    <Grid Background="Transparent">
         <Grid.Resources>
             <Style x:Key="BaseStyleLabel"
                    TargetType="Label">
@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
        <!--Menu Sidebar-->
         <Menu x:Name="MenuSideControl"
-              Background="White"
+              Background="Transparent"
               Height="25"
               Width="25"
               VerticalAlignment="Top"

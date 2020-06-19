@@ -14,7 +14,9 @@
     <Viewbox HorizontalAlignment="Right">
         <TextBox x:Name="UIDisplayCalculus"
                  HorizontalAlignment="Stretch"
-                 Background="LightGray"
+                 Background="Transparent"
+                 BorderBrush="Violet"
+                 BorderThickness="0"
                  FontSize="30"
                  IsReadOnly="True"
                  TextWrapping="WrapWithOverflow"
