@@ -11,7 +11,7 @@
         Background="LightGray"
         Height="595">
 
-    <Border Background="Black" BorderBrush="Red" BorderThickness="1">
+    <Border Background="Black" BorderBrush="Red" BorderThickness="1" CornerRadius="25">
          <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 0 0 0">
           <!--Main Container Grid-->
     <Grid x:Name="MainGrid"
