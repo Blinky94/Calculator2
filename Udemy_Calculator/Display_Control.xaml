@@ -5,24 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
+             Height="60"
+             Width="260"
              d:DesignHeight="450"
              d:DesignWidth="485">
-    <Grid Background="LightGray"
-          Margin="0 0 0 0">
-        <!--Calulus Area-->
-        <Viewbox HorizontalAlignment="Right">
-            <TextBlock x:Name="UIDisplayCalculus"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Top"
-                       Background="Transparent"
-                       Margin="5 0 5 0"
-                       FontSize="30"
-                       TextWrapping="WrapWithOverflow"
-                       FontWeight="DemiBold"
-                       Text="0"
-                       Height="175" />
-        </Viewbox>
-       
-        <!--Graph Area-->
-    </Grid>
+
+    <!--Calulus Area-->
+    <Viewbox HorizontalAlignment="Right">
+        <TextBox x:Name="UIDisplayCalculus"
+                 HorizontalAlignment="Stretch"
+                 Background="LightGray"
+                 FontSize="30"
+                 IsReadOnly="True"
+                 TextWrapping="WrapWithOverflow"
+                 FontWeight="DemiBold"
+                 Text="0" />
+    </Viewbox>
+
+    <!--Graph Area-->
+
 </UserControl>

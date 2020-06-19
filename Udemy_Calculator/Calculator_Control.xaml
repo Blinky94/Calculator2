@@ -42,7 +42,8 @@
         </Grid.RowDefinitions>
 
         <!--Scientific panel-->
-        <WrapPanel Grid.Row="0">
+        <WrapPanel Grid.Row="0"
+                   Margin="0 0 0 5">
             <WrapPanel.Resources>
                 <Style TargetType="Button"
                        BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
@@ -90,7 +91,7 @@
                     Content="Xª"
                     Click="UIXExpXButton_Click">
             </Button>
-            <!--Second Range-->       
+            <!--Second Range-->
             <Button x:Name="UINFactorielButton"
                     x:Uid="N!"
                     Content="N!"
