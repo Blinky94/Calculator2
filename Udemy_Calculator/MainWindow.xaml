@@ -6,48 +6,58 @@
         xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
         Title="Calculator"
+        WindowStyle="None"
         ResizeMode="NoResize"
         Width="300"
-        Background="LightGray"
-        Height="595">
+        Height="535"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="Manual">
 
-    <Border Background="Black" BorderBrush="Red" BorderThickness="1" CornerRadius="25">
-         <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 0 0 0">
-          <!--Main Container Grid-->
-    <Grid x:Name="MainGrid"
-          Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <DockPanel UseLayoutRounding="True"
+               Background="Transparent">
+        <Border Background="DarkCyan"
+                BorderBrush="DarkBlue"
+                BorderThickness="1.5"
+                CornerRadius="25"
+                DockPanel.Dock="Top">
+            <Canvas Margin="18 25 0 0"
+                    HorizontalAlignment="Left">
+                <!--Main Container Grid-->
+                <Grid x:Name="MainGrid"
+                      Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-        <!--Call the MenuSide User control-->
-        <local:MenuSide_Control Grid.Row="0"
-                                Margin="-7 0 0 0"
-                                x:Name="UIMenuSide" />
+                    <!--Call the MenuSide User control-->
+                    <local:MenuSide_Control Grid.Row="0"
+                                            Margin="-25 0 0 0"
+                                            x:Name="UIMenuSide" />
 
-        <!--Call the Display User control-->
-        <local:Display_Control Grid.Row="1"
-                               Background="White"
-                               x:Name="UIDisplay"
-                               BorderBrush="Gray"
-                               BorderThickness="1"
-                               HorizontalAlignment="Right"
-                               HorizontalContentAlignment="Stretch"
-                               Margin="0 0 0 5" />
+                    <!--Call the Display User control-->
+                    <local:Display_Control Grid.Row="1"
+                                           Background="Transparent"
+                                           x:Name="UIDisplay"
+                                           HorizontalAlignment="Center"
+                                           HorizontalContentAlignment="Stretch"
+                                           Margin="0 0 0 5" />
 
-        <!--Call the Calculator User control-->
-        <local:Calculator_Control Grid.Row="2"
-                                  x:Name="UICalculator" />
-    </Grid>
-    </Canvas>
-    </Border>
-   
-  
+                    <!--Call the Calculator User control-->
+                    <local:Calculator_Control Grid.Row="2"
+                                              x:Name="UICalculator" />
+                </Grid>
+            </Canvas>
+        </Border>
+    </DockPanel>
+
+
+
 
 </Window>

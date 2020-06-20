@@ -15,9 +15,9 @@
             <Style x:Key="BaseStyleButton"
                    TargetType="Button">
                 <Setter Property="FontSize"
-                        Value="15" />
+                        Value="20" />
                 <Setter Property="Foreground"
-                        Value="DarkBlue" />
+                        Value="Black" />
                 <Setter Property="Background"
                         Value="Cornsilk" />
                 <Setter Property="Width"
@@ -30,6 +30,27 @@
                         Value="1.5" />
                 <Setter Property="FontWeight"
                         Value="ExtraBold" />
+                <Setter Property="Padding"
+                        Value="0 0 0 2" />
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5"
+                                    Background="White"
+                                    BorderBrush="DarkBlue"
+                                    BorderThickness="1.5">
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
         </Grid.Resources>
@@ -90,10 +111,7 @@
         <WrapPanel Grid.Row="1"
                    Margin="0 0 0 5">
             <WrapPanel.Resources>
-                <Style TargetType="Button"
-                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
-                    <Setter Property="Background"
-                            Value="LightCyan" />
+                <Style TargetType="Button">
                     <Setter Property="FontSize"
                             Value="12" />
                     <Setter Property="FontWeight"
@@ -102,8 +120,25 @@
                             Value="20" />
                     <Setter Property="Width"
                             Value="52" />
-                    <Setter Property="VerticalContentAlignment"
-                            Value="Center" />
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="5"
+                                        Background="LightBlue"
+                                        BorderBrush="DarkBlue"
+                                        BorderThickness="1.5">
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
                 <Style TargetType="Image">
                     <Setter Property="Width"
@@ -112,55 +147,53 @@
                             Value="18" />
                 </Style>
             </WrapPanel.Resources>
-            <Button x:Name="Dumy"
-                    Visibility="Hidden" />
             <!--First Range-->
             <Button x:Name="UISecondFuncButton"
                     x:Uid="2nde"
                     Content="2nde"
-                    Background="LightGreen"
+                    Background="Yellow"
                     Click="UISecondFuncButton_Click">
             </Button>
             <Button x:Name="UIXSquareButton"
-                    x:Uid="X²"
-                    Content="X²"
+                    x:Uid="x²"
+                    Content="x²"
                     Click="UIXSquareButton_Click">
             </Button>
             <Button x:Name="UIXCubeButton"
-                    x:Uid="X³"
-                    Content="X³"
+                    x:Uid="x³"
+                    Content="x³"
                     Click="UIXCubeButton_Click">
             </Button>
             <Button x:Name="UIXExpXButton"
-                    x:Uid="Xª"
-                    Content="Xª"
+                    x:Uid="xª"
+                    Content="xª"
                     Click="UIXExpXButton_Click">
             </Button>
             <!--Second Range-->
             <Button x:Name="UINFactorielButton"
-                    x:Uid="N!"
-                    Content="N!"
+                    x:Uid="n!"
+                    Content="n!"
                     Click="UINFactorielButton_Click">
             </Button>
             <Button x:Name="UITwoSquareRootButton"
-                    x:Uid="²√X"
-                    Content="²√X"
+                    x:Uid="²√x"
+                    Content="²√x"
                     Click="UITwoSquareRootButton_Click">
             </Button>
             <Button x:Name="UIThreeSquareRootButton"
-                    x:Uid="³√X"
-                    Content="³√X"
+                    x:Uid="³√x"
+                    Content="³√x"
                     Click="UIThreeSquareRootButton_Click">
             </Button>
             <!--Second Range-->
             <Button x:Name="UIXSquareRootYButton"
-                    x:Uid="ª√X"
-                    Content="ª√X"
+                    x:Uid="ª√x"
+                    Content="ª√x"
                     Click="UIXSquareRootYButton_Click">
             </Button>
             <Button x:Name="UIOneDivideByXButton"
-                    x:Uid="ª√X"
-                    Content="ª√X"
+                    x:Uid="ª√x"
+                    Content="ª√x"
                     Click="UIXSquareRootYButton_Click">
             </Button>
             <Button x:Name="UITenExpXButton"
@@ -169,8 +202,8 @@
                     Click="UITenExpXButton_Click">
             </Button>
             <Button x:Name="UIMODButton"
-                    x:Uid="MOD"
-                    Content="MOD"
+                    x:Uid="mod"
+                    Content="mod"
                     Click="UIMODButton_Click">
             </Button>
             <!--Thirst Range-->
@@ -181,8 +214,8 @@
             </Button>
             <!--Fourth Range-->
             <Button x:Name="UIRandomButton"
-                    x:Uid="Rand"
-                    Content="RAND"
+                    x:Uid="rand"
+                    Content="rand"
                     Click="UIRandomButton_Click">
             </Button>
             <Button x:Name="UIEXPButton"
@@ -196,20 +229,20 @@
                     Click="UIEXPSquareButton_Click">
             </Button>
             <Button x:Name="UIOneOnXButton"
-                    x:Uid="1/X"
-                    Content="1/X"
+                    x:Uid="1/x"
+                    Content="1/x"
                     Click="UIOneOnXButton_Click">
             </Button>
             <!--Fifth Range-->
             <Button x:Name="UIExpButton"
                     x:Uid="^"
-                    Content="EXP"
+                    Content="exp"
                     Click="UIExpButton_Click" />
             <Button x:Name="UISquareRootButton"
                     x:Uid="√"
                     Click="UISquareRootButton_Click">
                 <Image Source="Images/SquareRoot_icon.png"
-                       Stretch="Fill" />
+                       Stretch="Fill" Width="15" Height="15"/>
             </Button>
             <Button x:Name="UIOpenParenthesisButton"
                     x:Uid="("
@@ -227,68 +260,65 @@
                        Stretch="Fill" />
             </Button>
             <Button x:Name="UILOGButton"
-                    x:Uid="Log"
-                    Content="LOG"
+                    x:Uid="log"
+                    Content="log"
                     Click="UILOGButton_Click" />
             <Button x:Name="UILNButton"
                     x:Uid="Ln"
-                    Content="LN"
+                    Content="ln"
                     Click="UILNButton_Click" />
             <Button x:Name="UICOSButton"
-                    x:Uid="Cos"
-                    Content="COS"
+                    x:Uid="cos"
+                    Content="cos"
                     Click="UICOSButton_Click" />
             <!--Seventh Range-->
-            <Button x:Name="UIACOSButton"
-                    x:Uid="ACos"
-                    Content="ACOS"
-                    Click="UIACOSButton_Click" />
-            <Button x:Name="UISINButton"
-                    x:Uid="Sin"
-                    Content="SIN"
-                    Click="UISINButton_Click" />
-            <Button x:Name="UIASINButton"
-                    x:Uid="ASin"
-                    Content="ASIN"
-                    Click="UIASINButton_Click" />
-            <Button x:Name="UITANButton"
-                    x:Uid="Tan"
-                    Content="TAN"
-                    Click="UITANButton_Click" />
+            <!--First Functions-->
+            <Canvas x:Name="FirstFunctions"
+                    Visibility="Collapsed">
+                <Button x:Name="UICOTButton"
+                        x:Uid="cot"
+                        Content="cot"
+                        Click="UICOTButton_Click" />
+                <Button x:Name="UISECButton"
+                        x:Uid="sec"
+                        Content="sec"
+                        Click="UISECButton_Click" />
+                <Button x:Name="UICSCButton"
+                        x:Uid="csc"
+                        Content="csc"
+                        Click="UICSCButton_Click" />
+                <Button x:Name="UITANButton"
+                        x:Uid="tan"
+                        Content="tan"
+                        Click="UITANButton_Click" />
+            </Canvas>
+
+            <!--Snde Functions-->
+            <Canvas x:Name="SndeFunctions"
+                    Visibility="Collapsed">
+                <Button x:Name="UIACOTButton"
+                        x:Uid="Acot"
+                        Content="Acot"
+                        Click="UIACOTButton_Click" />
+                <Button x:Name="UIASECButton"
+                        x:Uid="Asec"
+                        Content="Asec"
+                        Click="UIASECButton_Click" />
+                <Button x:Name="UIACSCButton"
+                        x:Uid="Acsc"
+                        Content="Acsc"
+                        Click="UIACSCButton_Click" />
+                <Button x:Name="UIATANButton"
+                        x:Uid="Atan"
+                        Content="Atan"
+                        Click="UIATANButton_Click" />
+            </Canvas>
+
             <!--Heighth Range-->
-            <Button x:Name="UIATANButton"
-                    x:Uid="ATan"
-                    Content="ATAN"
-                    Click="UIATANButton_Click" />
             <Button x:Name="UIHYPButton"
-                    x:Uid="Hyp"
-                    Content="HYP"
+                    x:Uid="hyp"
+                    Content="hyp"
                     Click="UIHYPButton_Click" />
-            <Button x:Name="UICOTButton"
-                    x:Uid="Cot"
-                    Content="COT"
-                    Click="UICOTButton_Click" />
-            <Button x:Name="UIACOTButton"
-                    x:Uid="ACot"
-                    Content="ACOT"
-                    Click="UIACOTButton_Click" />
-            <!--Nineth Range-->
-            <Button x:Name="UISECButton"
-                    x:Uid="Sec"
-                    Content="SEC"
-                    Click="UISECButton_Click" />
-            <Button x:Name="UIASECButton"
-                    x:Uid="ASec"
-                    Content="ASEC"
-                    Click="UIASECButton_Click" />
-            <Button x:Name="UICSCButton"
-                    x:Uid="Csc"
-                    Content="CSC"
-                    Click="UICSCButton_Click" />
-            <Button x:Name="UIACSCButton"
-                    x:Uid="ACsc"
-                    Content="ACSC"
-                    Click="UIACSCButton_Click" />
         </WrapPanel>
 
         <!--Main panel-->

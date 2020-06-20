@@ -263,5 +263,8 @@
   <ItemGroup>
     <Resource Include="Images\Graphs_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Menu_icon_Reverse.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

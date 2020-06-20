@@ -22,9 +22,11 @@
                        TargetType="Label"
                        BasedOn="{StaticResource ResourceKey=BaseStyleLabel}">
                     <Setter Property="FontSize"
-                            Value="15" />
+                            Value="18" />
                     <Setter Property="FontFamily"
                             Value="Courrier" />
+                    <Setter Property="FontWeight"
+                            Value="Bold" />
                     <Setter Property="Foreground"
                             Value="White" />
                     <Setter Property="Background"
@@ -39,20 +41,21 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--Menu Sidebar-->
             <Menu x:Name="MenuSideControl"
+                  HorizontalAlignment="Left"
                   Background="Transparent"
                   Foreground="White"
                   Height="25"
                   Width="25"
-                  VerticalAlignment="Top"
-                  Grid.RowSpan="2">
+                  Margin="15 0 0 0"
+                  VerticalAlignment="Top">
                 <MenuItem>
                     <MenuItem.Header>
-                        <Image Source="Images/Menu_icon.png" />
+                        <Image Source="Images/Menu_icon_Reverse.png" />
                     </MenuItem.Header>
                     <MenuItem Header="_Standard"
                               Click="MenuItem_Click">
@@ -196,9 +199,9 @@
 
             <!--Menu Label-->
             <Label x:Name="UIMenuSelected" Grid.Column="1"
-                   Background="Transparent"
+                   Background="Transparent"          
                    HorizontalContentAlignment="Center"
-                   Margin="0 0 10 0"
+                   Margin="0 -1 28 0"
                    Style="{StaticResource StyleUIMenuSelected}" />
         </Grid>
     </Border>

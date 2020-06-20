@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace Udemy_Calculator
 {
@@ -24,5 +25,24 @@ namespace Udemy_Calculator
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;
         }
+
+        #region Moving the Calculator
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            this.Opacity = 0.75F;
+            base.OnMouseLeftButtonDown(e);
+
+            // Begin dragging the window
+            this.DragMove();
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            this.Opacity = 1F;
+            base.OnMouseLeftButtonUp(e);
+        }
+
+        #endregion
     }
 }

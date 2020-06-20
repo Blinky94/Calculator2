@@ -11,7 +11,8 @@
              d:DesignWidth="485">
 
     <!--Calulus Area-->
-    <Viewbox HorizontalAlignment="Right">
+    <Border CornerRadius="10" Background="White" BorderBrush="DarkBlue" BorderThickness="1.5">
+          <Viewbox HorizontalAlignment="Right">
         <TextBox x:Name="UIDisplayCalculus"
                  HorizontalAlignment="Stretch"
                  Background="Transparent"
@@ -22,7 +23,9 @@
                  TextWrapping="WrapWithOverflow"
                  FontWeight="DemiBold"
                  Text="0" />
-    </Viewbox>
+    </Viewbox>  
+    </Border>
+
 
     <!--Graph Area-->
 
