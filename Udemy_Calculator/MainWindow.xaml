@@ -9,7 +9,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Width="300"
-        Height="535"
+        Height="565"
         AllowsTransparency="True"
         Background="Transparent"
         WindowStartupLocation="Manual">

@@ -264,7 +264,118 @@
     <Resource Include="Images\Graphs_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Menu_icon_Reverse.png" />
+    <Resource Include="Images\Angle_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Area_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Binary_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calendar_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cleaner_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Conversion_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Currency_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Data_icon__reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Divide_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Electronic_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Energy_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Equal_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Erase_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Flow_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Force_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Forward_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Graph_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Graphs_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\History_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Length_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Menu_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Multiply_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Options_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Percentage_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pi_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Plus_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Power_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pressure_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Scientific_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Sign_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Speed_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SquareRoot_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Standard_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Subtract_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Temperature_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Time_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Volume_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Weight_icon_reverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

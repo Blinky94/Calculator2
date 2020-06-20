@@ -54,6 +54,12 @@
                   Margin="15 0 0 0"
                   VerticalAlignment="Top">
                 <MenuItem>
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Background"
+                                    Value="DarkBlue" />
+                        </Style>
+                    </MenuItem.Resources>
                     <MenuItem.Header>
                         <Image Source="Images/Menu_icon_Reverse.png" />
                     </MenuItem.Header>
