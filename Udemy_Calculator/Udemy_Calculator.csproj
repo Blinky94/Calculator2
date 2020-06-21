@@ -82,6 +82,7 @@
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThemeObj.cs" />
     <Compile Include="XmlParameters.cs" />
     <Page Include="Calculator_Control.xaml">
       <SubType>Designer</SubType>
@@ -382,6 +383,12 @@
     <Resource Include="Params\Theme.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Themes_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Themes_icon_reverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,18 +14,17 @@
         Background="Transparent"
         WindowStartupLocation="Manual">
 
-    <DockPanel UseLayoutRounding="True"
-               Background="Transparent">
-        <Border Background="DarkCyan"
+    <DockPanel UseLayoutRounding="True">
+        <Border x:Name="MainCalculator"
                 BorderBrush="DarkBlue"
+                Background="DarkCyan"
                 BorderThickness="1.5"
                 CornerRadius="25"
                 DockPanel.Dock="Top">
             <Canvas Margin="18 25 0 0"
                     HorizontalAlignment="Left">
                 <!--Main Container Grid-->
-                <Grid x:Name="MainGrid"
-                      Background="Transparent">
+                <Grid x:Name="MainGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
@@ -38,19 +37,17 @@
 
                     <!--Call the MenuSide User control-->
                     <local:MenuSide_Control Grid.Row="0"
-                                            Margin="-25 0 0 0"
                                             x:Name="UIMenuSide" />
 
                     <!--Call the Display User control-->
                     <local:Display_Control Grid.Row="1"
-                                           Background="Transparent"
                                            x:Name="UIDisplay"
                                            HorizontalAlignment="Center"
-                                           HorizontalContentAlignment="Stretch"
-                                           Margin="0 0 0 5" />
+                                           HorizontalContentAlignment="Stretch" />
 
                     <!--Call the Calculator User control-->
                     <local:Calculator_Control Grid.Row="2"
+                                              Margin="0 20 0 0"
                                               x:Name="UICalculator" />
                 </Grid>
             </Canvas>

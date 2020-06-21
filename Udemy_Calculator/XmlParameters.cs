@@ -7,13 +7,6 @@ using System.Xml.Linq;
 
 namespace Udemy_Calculator
 {
-    public class ThemeObj
-    {
-        public string ThemeName { get; set; }
-        public string ParameterName { get; set; }
-        public string ParameterValue { get; set; }
-    }
-
     public class XmlParameters
     {
         public List<ThemeObj> GetListParameters { get; private set; }

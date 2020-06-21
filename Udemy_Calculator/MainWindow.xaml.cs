@@ -1,6 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -15,7 +15,8 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
-            SetThemeCalculator();
+            SetDefaultThemeCalculator();
+            UIMenuSide.SetMenuIcon();
 
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
             UIDisplay.UIDisplayCalculus.Text = "0";
@@ -24,15 +25,17 @@ namespace Udemy_Calculator
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
         }
 
-        private void SetThemeCalculator()
+        private void SetDefaultThemeCalculator()
         {
-            //Open Xml file
-            string lPath = @"";
-
-            XmlParameters lParams = new XmlParameters(lPath);
+            XmlParameters lParams = new XmlParameters();
             lParams.ReadParameters();
+            UIMenuSide.GetThemesList = lParams.GetListParameters;
 
-            //Set theme
+            //Set default theme
+            UIMenuSide.SetTheme();
+
+            this.MainCalculator.Background = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBackground);
+            this.MainCalculator.BorderBrush = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBorderBrush);
         }
 
         public void ModifyUIDisplay(string pContent)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -46,6 +48,94 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MenuSide_Control : UserControl
     {
+        #region MainCalculatorBackground
+
+        public static readonly DependencyProperty MainCalculatorBackgroundProperty =
+   DependencyProperty.Register("MainCalculatorBackground",
+                               typeof(string),
+                               typeof(MenuSide_Control),
+                               new PropertyMetadata(""));
+        public string MainCalculatorBackground
+        {
+            get { return (string)GetValue(MainCalculatorBackgroundProperty); }
+            set { SetValue(MainCalculatorBackgroundProperty, value); }
+        }
+
+        #endregion
+
+        #region MainCalculatorBorderBrush
+
+        public static readonly DependencyProperty MainCalculatorBorderBrushProperty =
+   DependencyProperty.Register("MainCalculatorBorderBrush",
+                               typeof(string),
+                               typeof(MenuSide_Control),
+                               new PropertyMetadata(""));
+        public string MainCalculatorBorderBrush
+        {
+            get { return (string)GetValue(MainCalculatorBorderBrushProperty); }
+            set { SetValue(MainCalculatorBorderBrushProperty, value); }
+        }
+
+        #endregion
+
+        #region BackGroundOthersButtons
+
+        #endregion
+
+        #region ForegroundOthersButtons
+
+        #endregion
+
+        #region BackgroundOperatorsButtons
+
+        #endregion
+
+        #region ForegroundOperatorsButtons
+
+        #endregion
+
+        #region BackgroundNumericalsButtons
+
+        #endregion
+
+        #region ForegroundNumericalsButtons
+
+        #endregion
+
+        #region BackgroundMemoryButtons
+
+        #endregion
+
+        #region ForegroundMemoryButtons
+
+        #endregion
+
+        #region BackgroundTrigonometryButtons
+
+        #endregion
+
+        #region ForegroundTrigonometryButtons
+
+        #endregion
+
+        private static List<ThemeObj> mListTheme;
+
+        public static readonly DependencyProperty GetThemesListProperty =
+    DependencyProperty.Register("GetThemesList",
+                                typeof(List<ThemeObj>),
+                                typeof(MenuSide_Control),
+                                new PropertyMetadata(OnAvailableItemsChanged));
+        public List<ThemeObj> GetThemesList
+        {
+            get { return (List<ThemeObj>)GetValue(GetThemesListProperty); }
+            set { SetValue(GetThemesListProperty, value); }
+        }
+
+        public static void OnAvailableItemsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            mListTheme = (List<ThemeObj>)e.NewValue;
+        }
+
         public static readonly DependencyProperty CurrentModeProperty =
     DependencyProperty.Register("CurrentMode",
                                 typeof(CalculatorMode),
@@ -61,13 +151,10 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
             CurrentMode = CalculatorMode.Standard;
-
-            bool lIsReverse = BackgroundNeedReversedColor();
-            SetMenuIcon(lIsReverse);
         }
 
         ///Set menuItem
-        private MenuItem SetMenuItem(ItemCollection pItem, string pName, string pReverseStr)
+        private MenuItem SetMenuItem(ItemCollection pItem, string pName, string pReverseStr, bool pNoIcon = false)
         {
             MenuItem lMenuItem = new MenuItem();
             lMenuItem.Click += MenuItem_Click;
@@ -85,8 +172,11 @@ namespace Udemy_Calculator
                 UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
             }
 
-            pName = pName.Replace(".", "");
-            lMenuItem.Icon = new Image { Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Images/" + $"{pName}_icon{pReverseStr}.png", UriKind.Absolute)) };
+            if (!pNoIcon)
+            {
+                pName = pName.Replace(".", "");
+                lMenuItem.Icon = new Image { Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Images/" + $"{pName}_icon{pReverseStr}.png", UriKind.Absolute)) };
+            }
 
             pItem.Add(lMenuItem);
 
@@ -120,13 +210,18 @@ namespace Udemy_Calculator
             SetMenuItem(lMenuItemConverter.Items, "Data", pReverseStr);
             SetMenuItem(lMenuItemConverter.Items, "Angle", pReverseStr);
             SetMenuItem(lMenuItemConverter.Items, "Currency", pReverseStr);
-            SetMenuItem(MenuSideControlItem.Items, "Options", pReverseStr);
+            var lOptions = SetMenuItem(MenuSideControlItem.Items, "Options", pReverseStr);
+            var lThemes = SetMenuItem(lOptions.Items, "Themes", pReverseStr);
+
+            // Get generated themes list
+            var lList = mListTheme?.Select(p => p.ThemeName).Distinct().ToList();
+            lList.ForEach(pThemeName => { SetMenuItem(lThemes.Items, pThemeName, pReverseStr, true); });
         }
 
-        ///Set Menu Icon (reversed color if pIsReverse is true
-        private void SetMenuIcon(bool pIsReverse)
+        ///Main method to set the Menu side with corresponding Icons (reversed color if pIsReverse is true)
+        public void SetMenuIcon()
         {
-            if (pIsReverse)
+            if (BackgroundNeedReversedColor())
             {
                 MenuItem("_reverse");
             }
@@ -228,6 +323,52 @@ namespace Udemy_Calculator
             }
 
             UIMenuSelected.Content = CurrentMode.ToString();
+
+            SetTheme(lItemName);
+        }
+
+        public void SetTheme(string pThemeName = "Default")
+        {
+            List<ThemeObj> lList = new List<ThemeObj>();
+
+            foreach (var lTheme in mListTheme)
+            {
+                if (lTheme.ThemeName == pThemeName)
+                {
+                    lList.Add(new ThemeObj() { ParameterName = lTheme.ParameterName, ParameterValue = lTheme.ParameterValue });
+                }
+            }
+
+            foreach (var lItem in lList)
+            {
+                switch (lItem.ParameterName)
+                {
+                    case "MainCalculatorBackground":
+                        MainCalculatorBackground = lItem.ParameterValue; break;
+                    case "MainCalculatorBorderBrush":
+                        MainCalculatorBorderBrush = lItem.ParameterValue; break;
+                        //case "BackGroundOthersButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "ForegroundOthersButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "BackgroundOperatorsButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "ForegroundOperatorsButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "BackgroundNumericalsButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "ForegroundNumericalsButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "BackgroundMemoryButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "ForegroundMemoryButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "BackgroundTrigonometryButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                        //case "ForegroundTrigonometryButtons":
+                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                }
+            }
         }
     }
 }
