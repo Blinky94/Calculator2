@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Udemy_Calculator
@@ -14,11 +15,24 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
+            SetThemeCalculator();
+
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
             UIDisplay.UIDisplayCalculus.Text = "0";
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
+        }
+
+        private void SetThemeCalculator()
+        {
+            //Open Xml file
+            string lPath = @"";
+
+            XmlParameters lParams = new XmlParameters(lPath);
+            lParams.ReadParameters();
+
+            //Set theme
         }
 
         public void ModifyUIDisplay(string pContent)

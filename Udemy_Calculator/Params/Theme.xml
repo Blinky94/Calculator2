@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Themes>
+  <Theme name="Theme1">
+    <BackgroundCalculator>#2efa00</BackgroundCalculator>
+    <BackGroundOthersButtons>#072500</BackGroundOthersButtons>
+    <ForegroundOthersButtons>#cbdb00</ForegroundOthersButtons>
+    <BackgroundOperatorsButtons>#072500</BackgroundOperatorsButtons>
+    <ForegroundOperatorsButtons>#cbdbf2</ForegroundOperatorsButtons>
+    <BackgroundNumericalsButtons>#cbdb24</BackgroundNumericalsButtons>
+    <ForegroundNumericalsButtons>#cbeee1</ForegroundNumericalsButtons>
+    <BackgroundMemoryButtons>#ca98e1</BackgroundMemoryButtons>
+    <ForegroundMemoryButtons>#f598e1</ForegroundMemoryButtons>
+    <BackgroundTrigonometryButtons>#f554e1</BackgroundTrigonometryButtons>
+    <ForegroundTrigonometryButtons>#f5541c</ForegroundTrigonometryButtons>
+  </Theme>
+  <Theme name="Theme2">
+    <BackgroundCalculator>#FF5733</BackgroundCalculator>
+    <BackGroundOthersButtons>#55BA1F</BackGroundOthersButtons>
+    <ForegroundOthersButtons>#C3D6CE</ForegroundOthersButtons>
+    <BackgroundOperatorsButtons>#2B1B8B</BackgroundOperatorsButtons>
+    <ForegroundOperatorsButtons>#cbdbf2</ForegroundOperatorsButtons>
+    <BackgroundNumericalsButtons>#2B1B8B</BackgroundNumericalsButtons>
+    <ForegroundNumericalsButtons>#cbeee1</ForegroundNumericalsButtons>
+    <BackgroundMemoryButtons>#ca98e1</BackgroundMemoryButtons>
+    <ForegroundMemoryButtons>#7AD2D5</ForegroundMemoryButtons>
+    <BackgroundTrigonometryButtons>#f554e1</BackgroundTrigonometryButtons>
+    <ForegroundTrigonometryButtons>#781553</ForegroundTrigonometryButtons>
+  </Theme>
+  <Theme name="Theme3">
+    <BackgroundCalculator>#8C978B</BackgroundCalculator>
+    <BackGroundOthersButtons>#0E3764</BackGroundOthersButtons>
+    <ForegroundOthersButtons>#C3D6CE</ForegroundOthersButtons>
+    <BackgroundOperatorsButtons>#8B9397</BackgroundOperatorsButtons>
+    <ForegroundOperatorsButtons>#cbdbf2</ForegroundOperatorsButtons>
+    <BackgroundNumericalsButtons>#2B1B8B</BackgroundNumericalsButtons>
+    <ForegroundNumericalsButtons>#8B978B</ForegroundNumericalsButtons>
+    <BackgroundMemoryButtons>#ca98e1</BackgroundMemoryButtons>
+    <ForegroundMemoryButtons>#7AD2D5</ForegroundMemoryButtons>
+    <BackgroundTrigonometryButtons>#347FD3</BackgroundTrigonometryButtons>
+    <ForegroundTrigonometryButtons>#781553</ForegroundTrigonometryButtons>
+  </Theme>
+</Themes>

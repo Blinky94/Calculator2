@@ -82,6 +82,7 @@
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XmlParameters.cs" />
     <Page Include="Calculator_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,7 +175,7 @@
     <Resource Include="Images\Cleaner_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Conversion_icon.png" />
+    <Resource Include="Images\Converter_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Area_icon.png" />
@@ -279,13 +280,13 @@
     <Resource Include="Images\Cleaner_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Conversion_icon_reverse.png" />
+    <Resource Include="Images\Converter_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Currency_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Data_icon__reverse.png" />
+    <Resource Include="Images\Data_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Divide_icon_reverse.png" />
@@ -376,6 +377,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Weight_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Params\Theme.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
