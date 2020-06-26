@@ -25,23 +25,6 @@ namespace Udemy_Calculator
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
         }
 
-        private void SetDefaultThemeCalculator()
-        {
-            XmlParameters lParams = new XmlParameters();
-            lParams.ReadParameters();
-            UIMenuSide.GetThemesList = lParams.GetListParameters;
-
-            //Set default theme
-            UIMenuSide.SetTheme();
-
-            UIMenuSide.SetMenuIcon(UIMenuSide.MainCalculatorBackground);
-
-            // Set Main color background
-            MainCalculator.Background = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBackground);
-            // Set Main color borderbrush
-            MainCalculator.BorderBrush = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBorderBrush);
-        }
-
         public void ModifyUIDisplay(string pContent)
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;
