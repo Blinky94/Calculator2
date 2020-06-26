@@ -15,8 +15,8 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
-            SetDefaultThemeCalculator();
-            UIMenuSide.SetMenuIcon();
+           // SetDefaultThemeCalculator();
+
 
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
             UIDisplay.UIDisplayCalculus.Text = "0";
@@ -34,8 +34,12 @@ namespace Udemy_Calculator
             //Set default theme
             UIMenuSide.SetTheme();
 
-            this.MainCalculator.Background = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBackground);
-            this.MainCalculator.BorderBrush = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBorderBrush);
+            UIMenuSide.SetMenuIcon(UIMenuSide.MainCalculatorBackground);
+
+            // Set Main color background
+            MainCalculator.Background = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBackground);
+            // Set Main color borderbrush
+            MainCalculator.BorderBrush = (Brush)new BrushConverter().ConvertFrom(UIMenuSide.MainCalculatorBorderBrush);
         }
 
         public void ModifyUIDisplay(string pContent)

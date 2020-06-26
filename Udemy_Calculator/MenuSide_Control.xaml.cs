@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -80,41 +81,151 @@ namespace Udemy_Calculator
 
         #region BackGroundOthersButtons
 
+        public static readonly DependencyProperty BackGroundOthersButtonsProperty =
+DependencyProperty.Register("BackGroundOthersButtons",
+                       typeof(string),
+                       typeof(MenuSide_Control),
+                       new PropertyMetadata(""));
+        public string BackGroundOthersButtons
+        {
+            get { return (string)GetValue(BackGroundOthersButtonsProperty); }
+            set { SetValue(BackGroundOthersButtonsProperty, value); }
+        }
+
         #endregion
 
         #region ForegroundOthersButtons
+
+        public static readonly DependencyProperty ForegroundOthersButtonsProperty =
+DependencyProperty.Register("ForegroundOthersButtons",
+               typeof(string),
+               typeof(MenuSide_Control),
+               new PropertyMetadata(""));
+        public string ForegroundOthersButtons
+        {
+            get { return (string)GetValue(ForegroundOthersButtonsProperty); }
+            set { SetValue(ForegroundOthersButtonsProperty, value); }
+        }
 
         #endregion
 
         #region BackgroundOperatorsButtons
 
+        public static readonly DependencyProperty BackgroundOperatorsButtonsProperty =
+DependencyProperty.Register("BackgroundOperatorsButtons",
+       typeof(string),
+       typeof(MenuSide_Control),
+       new PropertyMetadata(""));
+        public string BackgroundOperatorsButtons
+        {
+            get { return (string)GetValue(BackgroundOperatorsButtonsProperty); }
+            set { SetValue(BackgroundOperatorsButtonsProperty, value); }
+        }
+
         #endregion
 
         #region ForegroundOperatorsButtons
+
+        public static readonly DependencyProperty ForegroundOperatorsButtonsProperty =
+DependencyProperty.Register("ForegroundOperatorsButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string ForegroundOperatorsButtons
+        {
+            get { return (string)GetValue(ForegroundOperatorsButtonsProperty); }
+            set { SetValue(ForegroundOperatorsButtonsProperty, value); }
+        }
 
         #endregion
 
         #region BackgroundNumericalsButtons
 
+        public static readonly DependencyProperty BackgroundNumericalsButtonsProperty =
+DependencyProperty.Register("BackgroundNumericalsButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string BackgroundNumericalsButtons
+        {
+            get { return (string)GetValue(BackgroundNumericalsButtonsProperty); }
+            set { SetValue(BackgroundNumericalsButtonsProperty, value); }
+        }
+
         #endregion
 
         #region ForegroundNumericalsButtons
+
+        public static readonly DependencyProperty ForegroundNumericalsButtonsProperty =
+DependencyProperty.Register("ForegroundNumericalsButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string ForegroundNumericalsButtons
+        {
+            get { return (string)GetValue(ForegroundNumericalsButtonsProperty); }
+            set { SetValue(ForegroundNumericalsButtonsProperty, value); }
+        }
 
         #endregion
 
         #region BackgroundMemoryButtons
 
+        public static readonly DependencyProperty BackgroundMemoryButtonsProperty =
+DependencyProperty.Register("BackgroundMemoryButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string BackgroundMemoryButtons
+        {
+            get { return (string)GetValue(BackgroundMemoryButtonsProperty); }
+            set { SetValue(BackgroundMemoryButtonsProperty, value); }
+        }
+
         #endregion
 
         #region ForegroundMemoryButtons
+
+        public static readonly DependencyProperty ForegroundMemoryButtonsProperty =
+DependencyProperty.Register("ForegroundMemoryButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string ForegroundMemoryButtons
+        {
+            get { return (string)GetValue(ForegroundMemoryButtonsProperty); }
+            set { SetValue(ForegroundMemoryButtonsProperty, value); }
+        }
 
         #endregion
 
         #region BackgroundTrigonometryButtons
 
+        public static readonly DependencyProperty BackgroundTrigonometryButtonsProperty =
+DependencyProperty.Register("BackgroundTrigonometryButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string BackgroundTrigonometryButtons
+        {
+            get { return (string)GetValue(BackgroundTrigonometryButtonsProperty); }
+            set { SetValue(BackgroundTrigonometryButtonsProperty, value); }
+        }
+
         #endregion
 
         #region ForegroundTrigonometryButtons
+
+        public static readonly DependencyProperty ForegroundTrigonometryButtonsProperty =
+DependencyProperty.Register("ForegroundTrigonometryButtons",
+typeof(string),
+typeof(MenuSide_Control),
+new PropertyMetadata(""));
+        public string ForegroundTrigonometryButtons
+        {
+            get { return (string)GetValue(ForegroundTrigonometryButtonsProperty); }
+            set { SetValue(ForegroundTrigonometryButtonsProperty, value); }
+        }
 
         #endregion
 
@@ -163,14 +274,18 @@ namespace Udemy_Calculator
             // Reverse text color ?
             if (pReverseStr == "")
             {
-                lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
-                UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
+                lMenuItem.Foreground = new SolidColorBrush(Colors.Black);
+                UIMenuSelected.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
-                lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
-                UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
+                lMenuItem.Foreground = new SolidColorBrush(Colors.White);
+                UIMenuSelected.Foreground = new SolidColorBrush(Colors.White);
             }
+
+            // Set Menuside background and menuItemBackground as the same color
+            MenuSideControl.Background = (Brush)new BrushConverter().ConvertFrom(mMainBgColor);
+            lMenuItem.Background = (Brush)new BrushConverter().ConvertFrom(mMainBgColor);
 
             if (!pNoIcon)
             {
@@ -218,9 +333,14 @@ namespace Udemy_Calculator
             lList.ForEach(pThemeName => { SetMenuItem(lThemes.Items, pThemeName, pReverseStr, true); });
         }
 
+
+        private string mMainBgColor;
+
         ///Main method to set the Menu side with corresponding Icons (reversed color if pIsReverse is true)
-        public void SetMenuIcon()
+        public void SetMenuIcon(string pMainBgColor)
         {
+            mMainBgColor = pMainBgColor;
+
             if (BackgroundNeedReversedColor())
             {
                 MenuItem("_reverse");
@@ -234,9 +354,9 @@ namespace Udemy_Calculator
         ///Determine if the current background color need reversed foreground
         private bool BackgroundNeedReversedColor()
         {
-            var lBackgroundColor = MenuSideControlItem.Background;
+            var lBackgroundColor = (Brush)new BrushConverter().ConvertFrom(mMainBgColor);
 
-            System.Windows.Media.SolidColorBrush lNewBrush = (System.Windows.Media.SolidColorBrush)lBackgroundColor;
+            SolidColorBrush lNewBrush = (SolidColorBrush)lBackgroundColor;
 
             var r = (int)lNewBrush.Color.R;
             var g = (int)lNewBrush.Color.G;
@@ -347,26 +467,26 @@ namespace Udemy_Calculator
                         MainCalculatorBackground = lItem.ParameterValue; break;
                     case "MainCalculatorBorderBrush":
                         MainCalculatorBorderBrush = lItem.ParameterValue; break;
-                        //case "BackGroundOthersButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "ForegroundOthersButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "BackgroundOperatorsButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "ForegroundOperatorsButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "BackgroundNumericalsButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "ForegroundNumericalsButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "BackgroundMemoryButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "ForegroundMemoryButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "BackgroundTrigonometryButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
-                        //case "ForegroundTrigonometryButtons":
-                        //    BackgroundCalculator = lItem.ParameterValue; break;
+                    case "BackGroundOthersButtons":
+                        BackGroundOthersButtons = lItem.ParameterValue; break;
+                    case "ForegroundOthersButtons":
+                        ForegroundOthersButtons = lItem.ParameterValue; break;
+                    case "BackgroundOperatorsButtons":
+                        BackgroundOperatorsButtons = lItem.ParameterValue; break;
+                    case "ForegroundOperatorsButtons":
+                        ForegroundOperatorsButtons = lItem.ParameterValue; break;
+                    case "BackgroundNumericalsButtons":
+                        BackgroundNumericalsButtons = lItem.ParameterValue; break;
+                    case "ForegroundNumericalsButtons":
+                        ForegroundNumericalsButtons = lItem.ParameterValue; break;
+                    case "BackgroundMemoryButtons":
+                        BackgroundMemoryButtons = lItem.ParameterValue; break;
+                    case "ForegroundMemoryButtons":
+                        ForegroundMemoryButtons = lItem.ParameterValue; break;
+                    case "BackgroundTrigonometryButtons":
+                        BackgroundTrigonometryButtons = lItem.ParameterValue; break;
+                    case "ForegroundTrigonometryButtons":
+                        ForegroundTrigonometryButtons = lItem.ParameterValue; break;
                 }
             }
         }

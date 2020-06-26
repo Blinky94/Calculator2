@@ -22,13 +22,28 @@
                     <Setter Property="Foreground"
                             Value="White" />
                 </Style>
-                <Style TargetType="Menu">
-                    <Setter Property="Background"
-                            Value="DarkCyan" />
-                </Style>
+
                 <Style TargetType="MenuItem">
                     <Setter Property="Background"
-                            Value="DarkCyan" />
+                            Value="Red" />
+                    <Setter Property="Foreground"
+                            Value="Yellow" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="Red" />
+                            <Setter Property="Foreground"
+                                    Value="Beige" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="Orange" />
+                            <Setter Property="Foreground"
+                                    Value="Green" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
@@ -46,7 +61,58 @@
                   Width="25"
                   Margin="15 0 0 0"
                   VerticalAlignment="Top">
-                <MenuItem x:Name="MenuSideControlItem" />
+                <MenuItem x:Name="MenuSideControlItem">
+                    <MenuItem Header="_Standard"
+                              Click="MenuItem_Click"/>
+                    <MenuItem Header="_Scientific"
+                              Click="MenuItem_Click" />
+                    <MenuItem Header="_Binary"
+                              Click="MenuItem_Click" />
+                    <MenuItem Header="_Graphs"
+                              Click="MenuItem_Click" />
+                    <MenuItem Header="_Calendar"
+                              Click="MenuItem_Click" />
+                    <MenuItem Header="_Converter...">
+                        <!--Converter subitems-->
+                        <MenuItem Header="_Area"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Electronic"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Energy"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Flow"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Force"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Length"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Power"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Pressure"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Speed"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Temperature"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Time"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Volume"
+                                  Click="MenuItem_Click" />
+
+
+                        <MenuItem Header="_Weight"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Data"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Angle"
+                                  Click="MenuItem_Click" />
+                        <MenuItem Header="_Currency"
+                                  Click="MenuItem_Click" />
+                    </MenuItem>
+                    <MenuItem Header="_Options"
+                              Click="MenuItem_Click" />
+
+                </MenuItem>
             </Menu>
 
             <!--Menu Label-->

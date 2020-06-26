@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Themes>
   <Theme name="Default">
-    <MainCalculatorBackground>#2efa00</MainCalculatorBackground>
+    <MainCalculatorBackground>#314449</MainCalculatorBackground>
 	<MainCalculatorBorderBrush>#ff0000</MainCalculatorBorderBrush>
     <BackGroundOthersButtons>#072500</BackGroundOthersButtons>
     <ForegroundOthersButtons>#cbdb00</ForegroundOthersButtons>
