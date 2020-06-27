@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -15,8 +14,6 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
-           // SetDefaultThemeCalculator();
-
 
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
             UIDisplay.UIDisplayCalculus.Text = "0";

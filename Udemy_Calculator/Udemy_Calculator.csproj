@@ -263,9 +263,6 @@
     <Resource Include="Images\Subtract_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Graphs_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Angle_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
@@ -315,9 +312,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Graph_icon_reverse.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Graphs_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\History_icon_reverse.png" />
@@ -389,6 +383,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Themes_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icons8_exit_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exit_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exit_icon_reverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

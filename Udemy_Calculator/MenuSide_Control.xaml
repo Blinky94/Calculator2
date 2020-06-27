@@ -9,8 +9,27 @@
              d:DesignWidth="200">
     <Border CornerRadius="25"
             Background="Transparent">
-        <Grid Background="Transparent">
+        <Grid>
             <Grid.Resources>
+                <Style TargetType="Menu">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="Transparent" />
+                </Style>
+                
+
+                <ControlTemplate x:Key="MenuItemTemplate"
+                                 TargetType="MenuItem">
+                    <Grid>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                        <Border>
+                            
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+
                 <Style TargetType="Label"
                        x:Key="StyleUIMenuSelected">
                     <Setter Property="FontSize"
@@ -20,30 +39,7 @@
                     <Setter Property="FontWeight"
                             Value="Bold" />
                     <Setter Property="Foreground"
-                            Value="White" />
-                </Style>
-
-                <Style TargetType="MenuItem">
-                    <Setter Property="Background"
-                            Value="Red" />
-                    <Setter Property="Foreground"
-                            Value="Yellow" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver"
-                                 Value="True">
-                            <Setter Property="Background"
-                                    Value="Red" />
-                            <Setter Property="Foreground"
-                                    Value="Beige" />
-                        </Trigger>
-                        <Trigger Property="IsPressed"
-                                 Value="True">
-                            <Setter Property="Background"
-                                    Value="Orange" />
-                            <Setter Property="Foreground"
-                                    Value="Green" />
-                        </Trigger>
-                    </Style.Triggers>
+                            Value="Black" />
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
@@ -53,11 +49,9 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-
+            
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
-                  Background="Transparent"
                   Height="25"
                   Width="25"
                   VerticalAlignment="Top"
@@ -202,6 +196,13 @@
                             <Image Source="Images/Options_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Exit"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Exit_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
                   
@@ -210,7 +211,7 @@
                    Grid.Column="1"
                    Background="Transparent"
                    HorizontalContentAlignment="Center"
-                   Margin="0 -1 28 0"
+                   Margin="0 0 50 0"
                    Style="{StaticResource StyleUIMenuSelected}" />
         </Grid>
     </Border>

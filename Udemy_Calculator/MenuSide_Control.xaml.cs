@@ -264,7 +264,7 @@ new PropertyMetadata(""));
             CurrentMode = CalculatorMode.Standard;
         }
 
-          
+
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             string lItemName = (e.Source as MenuItem).Header.ToString();
@@ -336,12 +336,15 @@ new PropertyMetadata(""));
                 case "_Options":
                     CurrentMode = CalculatorMode.Options;
                     break;
+                case "_Exit":
+                    Application.Current.Shutdown();
+                    break;
                 default:
                     CurrentMode = CalculatorMode.Standard;
                     break;
             }
 
             UIMenuSelected.Content = CurrentMode.ToString();
-        }  
+        }
     }
 }
