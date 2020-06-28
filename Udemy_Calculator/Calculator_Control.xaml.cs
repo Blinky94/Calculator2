@@ -12,6 +12,66 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class Calculator_Control : UserControl
     {
+        #region Background2ndeButton
+
+        public static readonly DependencyProperty Background2ndeButtonProperty =
+            DependencyProperty.Register("Background2ndeButton",
+            typeof(Brush),
+            typeof(Calculator_Control),
+            new PropertyMetadata(Brushes.Transparent));
+        public Brush Background2ndeButton
+        {
+            get { return (Brush)GetValue(Background2ndeButtonProperty); }
+            set { SetValue(Background2ndeButtonProperty, value); }
+        }
+
+        #endregion
+
+        #region Foreground2ndeButton
+
+        public static readonly DependencyProperty Foreground2ndeButtonProperty =
+            DependencyProperty.Register("Foreground2ndeButton",
+            typeof(Brush),
+            typeof(Calculator_Control),
+            new PropertyMetadata(Brushes.Transparent));
+        public Brush Foreground2ndeButton
+        {
+            get { return (Brush)GetValue(Foreground2ndeButtonProperty); }
+            set { SetValue(Foreground2ndeButtonProperty, value); }
+        }
+
+        #endregion
+
+        #region BorderBrush2ndeButton
+
+        public static readonly DependencyProperty BorderBrush2ndeButtonProperty =
+            DependencyProperty.Register("BorderBrush2ndeButton",
+            typeof(Brush),
+            typeof(Calculator_Control),
+            new PropertyMetadata(Brushes.Transparent));
+        public Brush BorderBrush2ndeButton
+        {
+            get { return (Brush)GetValue(BorderBrush2ndeButtonProperty); }
+            set { SetValue(BorderBrush2ndeButtonProperty, value); }
+        }
+
+        #endregion
+
+        #region BorderThickness2ndeButton
+
+        public static readonly DependencyProperty BorderThickness2ndeButtonProperty =
+            DependencyProperty.Register("BorderThickness2ndeButton",
+            typeof(double),
+            typeof(Calculator_Control),
+            new PropertyMetadata(5D));
+        public double BorderThickness2ndeButton
+        {
+            get { return (double)GetValue(BorderThickness2ndeButtonProperty); }
+            set { SetValue(BorderThickness2ndeButtonProperty, value); }
+        }
+
+        #endregion
+
         #region BackgroundBaseButtons
 
         public static readonly DependencyProperty BackgroundBaseButtonsProperty =

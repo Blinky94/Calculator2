@@ -22,7 +22,7 @@
                 <Setter Property="OverridesDefaultStyle"
                         Value="true" />
                 <Setter Property="Padding"
-                        Value="0 0 0 3" />
+                        Value="0 0 0 0" />
                 <Setter Property="Foreground"
                         Value="{Binding Path=ForegroundBaseButtons, ElementName=calculatorControl}" />
                 <Setter Property="Background"
@@ -55,6 +55,15 @@
                                                   Margin="{TemplateBinding Padding}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsPressed"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="White" />
+                                    <Setter Property="Foreground"
+                                            Value="Black" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -199,7 +208,10 @@
             <Button x:Name="UISecondFuncButton"
                     x:Uid="2nde"
                     Content="2nde"
-                    Background="Red"
+                    Background="{Binding Path=Background2ndeButton, ElementName=calculatorControl}"
+                    Foreground="{Binding Path=Foreground2ndeButton, ElementName=calculatorControl}"
+                    BorderBrush="{Binding Path=BorderBrush2ndeButton, ElementName=calculatorControl}"
+                    BorderThickness="{Binding Path=BorderThickness2ndeButton, ElementName=calculatorControl}"
                     Click="UISecondFuncButton_Click">
             </Button>
             <Button x:Name="UIXSquareButton"

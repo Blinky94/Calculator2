@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Themes>
   <Theme name="Default">
-    <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
-    <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
-    <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
+    <MainCalculatorBackground>#0d93ce</MainCalculatorBackground>
+    <MainCalculatorBorderBrush>#FF0000</MainCalculatorBorderBrush>
+    <MainCalculatorBorderThickness>5.0</MainCalculatorBorderThickness>
+	<Background2ndeButton>#0d6a1c</Background2ndeButton>
+	<Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
+	<BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
+	<BorderThickness2ndeButton>1</BorderThickness2ndeButton>
     <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
     <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
     <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
@@ -18,8 +22,8 @@
     <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
     <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
     <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
-    <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
-    <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
+    <BorderBrushNumericalsButtons>#5500EE</BorderBrushNumericalsButtons>
+    <BorderThicknessNumericalsButtons>1</BorderThicknessNumericalsButtons>
     <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
     <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
     <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
@@ -27,7 +31,7 @@
     <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
     <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
     <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
-    <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    <BorderThicknessTrigonometryButtons>1</BorderThicknessTrigonometryButtons>
   </Theme>
   <Theme name="Fire">
     <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
