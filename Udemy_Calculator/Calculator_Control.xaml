@@ -6,41 +6,48 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="410"
-             d:DesignWidth="260">
+             d:DesignWidth="260"
+             x:Name="calculatorControl">
 
     <!--Calculator-->
     <Grid x:Name="UICalculator"
           Background="Transparent">
         <Grid.Resources>
-            <Style x:Key="BaseStyleButton"
+            <Style x:Key="BaseButtons"
                    TargetType="Button">
                 <Setter Property="FontSize"
                         Value="20" />
-                <Setter Property="Foreground"
-                        Value="Black" />
-                <Setter Property="Background"
-                        Value="Cornsilk" />
-                <Setter Property="Width"
-                        Value="65" />
-                <Setter Property="Height"
-                        Value="50" />
-                <Setter Property="BorderBrush"
-                        Value="Black" />
-                <Setter Property="BorderThickness"
-                        Value="1.5" />
                 <Setter Property="FontWeight"
                         Value="ExtraBold" />
+                <Setter Property="OverridesDefaultStyle"
+                        Value="true" />
                 <Setter Property="Padding"
-                        Value="0 0 0 2" />
+                        Value="0 0 0 3" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundBaseButtons, ElementName=calculatorControl}" />
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundBaseButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushBaseButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessBaseButtons, ElementName=calculatorControl}" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Center" />
                 <Setter Property="VerticalContentAlignment"
                         Value="Center" />
+                <Setter Property="Width"
+                        Value="63" />
+                <Setter Property="Height"
+                        Value="45" />
+                <Setter Property="Margin"
+                        Value="1" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5"
-                                    Background="White"
-                                    BorderBrush="DarkBlue"
-                                    BorderThickness="1.5">
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter x:Name="contentPresenter"
                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                                   Content="{TemplateBinding Content}"
@@ -51,6 +58,98 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style x:Key="OperatorsButtons"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseButtons}">
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundOperatorsButtons, ElementName=calculatorControl}" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundOperatorsButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushOperatorsButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessOperatorsButtons, ElementName=calculatorControl}" />
+            </Style>
+
+            <Style x:Key="NumericalsButtons"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseButtons}">
+                <Setter Property="FontSize"
+                        Value="25" />
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundNumericalsButtons, ElementName=calculatorControl}" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundNumericalsButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushNumericalsButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessNumericalsButtons, ElementName=calculatorControl}" />
+            </Style>
+
+            <Style x:Key="MemoryButtons"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseButtons}">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundMemoryButtons, ElementName=calculatorControl}" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundMemoryButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushMemoryButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessMemoryButtons, ElementName=calculatorControl}" />
+                <Setter Property="Width"
+                        Value="65" />
+                <Setter Property="Height"
+                        Value="25" />
+                <Setter Property="Margin"
+                        Value="2 0 0 10" />
+            </Style>
+
+            <Style x:Key="ScientificButtons"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=BaseButtons}">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="FontWeight"
+                        Value="ExtraBold" />
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundScientificButtons, ElementName=calculatorControl}" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundScientificButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushScientificButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessScientificButtons, ElementName=calculatorControl}" />
+                <Setter Property="Width"
+                        Value="50.5" />
+                <Setter Property="Height"
+                        Value="20" />
+                <Setter Property="Margin"
+                        Value="2 0 0 2" />
+            </Style>
+
+            <Style x:Key="TrigonometryButtons"
+                   TargetType="Button"
+                   BasedOn="{StaticResource ResourceKey=ScientificButtons}">
+                <Setter Property="Background"
+                        Value="{Binding Path=BackgroundTrigonometryButtons, ElementName=calculatorControl}" />
+                <Setter Property="Foreground"
+                        Value="{Binding Path=ForegroundTrigonometryButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=BorderBrushTrigonometryButtons, ElementName=calculatorControl}" />
+                <Setter Property="BorderThickness"
+                        Value="{Binding Path=BorderThicknessTrigonometryButtons, ElementName=calculatorControl}" />
+            </Style>
+
+            <Style TargetType="Image">
+                <Setter Property="Width"
+                        Value="20" />
+                <Setter Property="Height"
+                        Value="18" />
             </Style>
 
         </Grid.Resources>
@@ -64,96 +163,43 @@
         </Grid.RowDefinitions>
 
         <!--Memorisation Panel-->
-        <WrapPanel Grid.Row="0" Margin="0 0 0 5" HorizontalAlignment="Right">
-            <WrapPanel.Resources>
-                <Style TargetType="Button"
-                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
-                    <Setter Property="Background"
-                            Value="LightBlue" />
-                    <Setter Property="FontSize"
-                            Value="12" />
-                    <Setter Property="FontWeight"
-                            Value="ExtraBold" />
-                    <Setter Property="Height"
-                            Value="30" />
-                    <Setter Property="Width"
-                            Value="60" />
-                    <Setter Property="VerticalContentAlignment"
-                            Value="Center" />
-                    <Setter Property="Margin"
-                            Value="2" />
-                </Style>
-                <Style TargetType="Image">
-                    <Setter Property="Width"
-                            Value="18" />
-                    <Setter Property="Height"
-                            Value="18" />
-                </Style>
-            </WrapPanel.Resources>
+        <WrapPanel Grid.Row="0"
+                   HorizontalAlignment="Right">
             <Button x:Name="UIMCButton"
                     x:Uid="MC"
                     Content="MC"
+                    Style="{StaticResource MemoryButtons}"
                     Click="UIMCButton_Click">
             </Button>
             <Button x:Name="UIMemoryPlusButton"
                     x:Uid="M+"
                     Content="M+"
+                    Style="{StaticResource MemoryButtons}"
                     Click="UIMemoryPlusButton_Click">
             </Button>
             <Button x:Name="UIMemoryRecallButton"
                     x:Uid="MR"
                     Content="MR"
+                    Style="{StaticResource MemoryButtons}"
                     Click="UIMemoryRecallButton_Click">
             </Button>
         </WrapPanel>
-        
+
         <!--Scientific panel-->
-        <WrapPanel Grid.Row="1"
-                   Margin="0 0 0 5">
+        <WrapPanel Grid.Row="1">
             <WrapPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="FontSize"
-                            Value="12" />
-                    <Setter Property="FontWeight"
-                            Value="ExtraBold" />
-                    <Setter Property="Height"
-                            Value="20" />
-                    <Setter Property="Width"
-                            Value="52" />
-                    <Setter Property="Padding"
-                            Value="0" />
-                    <Setter Property="Margin"
-                            Value="0 0 0 2" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border CornerRadius="5"
-                                        Background="LightBlue"
-                                        BorderBrush="DarkBlue"
-                                        BorderThickness="1.5">
-                                    <ContentPresenter x:Name="contentPresenter"
-                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                      Content="{TemplateBinding Content}"
-                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                      Margin="{TemplateBinding Padding}"
-                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <Style TargetType="Image">
-                    <Setter Property="Width"
-                            Value="18" />
-                    <Setter Property="Height"
-                            Value="18" />
-                </Style>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource ResourceKey=ScientificButtons}" />
             </WrapPanel.Resources>
             <!--First Range-->
+            <Button x:Name="DummyButton"
+                    Visibility="Hidden"
+                    Click="UISecondFuncButton_Click">
+            </Button>
             <Button x:Name="UISecondFuncButton"
                     x:Uid="2nde"
                     Content="2nde"
-                    Background="Yellow"
+                    Background="Red"
                     Click="UISecondFuncButton_Click">
             </Button>
             <Button x:Name="UIXSquareButton"
@@ -244,16 +290,10 @@
                     x:Uid="√"
                     Click="UISquareRootButton_Click">
                 <Image Source="Images/SquareRoot_icon.png"
-                       Stretch="Fill" Width="15" Height="15"/>
+                       Stretch="Fill"
+                       Width="15"
+                       Height="15" />
             </Button>
-            <Button x:Name="UIOpenParenthesisButton"
-                    x:Uid="("
-                    Content="("
-                    Click="UIOpenParenthesisButton_Click" />
-            <Button x:Name="UICloseParenthesisButton"
-                    x:Uid=")"
-                    Content=")"
-                    Click="UICloseParenthesisButton_Click" />
             <!--Sixth Range-->
             <Button x:Name="UIPIButton"
                     x:Uid="π"
@@ -273,10 +313,23 @@
                     x:Uid="cos"
                     Content="cos"
                     Click="UICOSButton_Click" />
+            <Button x:Name="UIOpenParenthesisButton"
+                    x:Uid="("
+                    Content="("
+                    Click="UIOpenParenthesisButton_Click" />
+            <Button x:Name="UICloseParenthesisButton"
+                    x:Uid=")"
+                    Content=")"
+                    Click="UICloseParenthesisButton_Click" />
             <!--Seventh Range-->
             <!--First Functions-->
-            <Canvas x:Name="FirstFunctions"
-                    Visibility="Collapsed">
+            <StackPanel x:Name="FirstFunctions"
+                        Orientation="Horizontal"
+                        Visibility="Visible">
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ResourceKey=TrigonometryButtons}" />
+                </StackPanel.Resources>
                 <Button x:Name="UICOTButton"
                         x:Uid="cot"
                         Content="cot"
@@ -293,11 +346,16 @@
                         x:Uid="tan"
                         Content="tan"
                         Click="UITANButton_Click" />
-            </Canvas>
+            </StackPanel>
 
             <!--Snde Functions-->
-            <Canvas x:Name="SndeFunctions"
-                    Visibility="Collapsed">
+            <StackPanel x:Name="SndeFunctions"
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ResourceKey=TrigonometryButtons}" />
+                </StackPanel.Resources>
                 <Button x:Name="UIACOTButton"
                         x:Uid="Acot"
                         Content="Acot"
@@ -314,56 +372,46 @@
                         x:Uid="Atan"
                         Content="Atan"
                         Click="UIATANButton_Click" />
-            </Canvas>
+            </StackPanel>
 
             <!--Heighth Range-->
             <Button x:Name="UIHYPButton"
                     x:Uid="hyp"
                     Content="hyp"
+                    Padding="0"
+                    Style="{StaticResource TrigonometryButtons}"
                     Click="UIHYPButton_Click" />
         </WrapPanel>
 
         <!--Main panel-->
-        <WrapPanel Grid.Row="2">
+        <WrapPanel Grid.Row="2"
+                   Margin="0 10 0 0">
             <WrapPanel.Resources>
                 <Style TargetType="Button"
-                       BasedOn="{StaticResource ResourceKey=BaseStyleButton}">
-                    <Setter Property="Background"
-                            Value="LightCyan" />
-                    <Setter Property="FontSize"
-                            Value="22" />
-                    <Setter Property="FontWeight"
-                            Value="ExtraBold" />
-                    <Setter Property="Width"
-                            Value="65" />
-                    <Setter Property="Height"
-                            Value="50" />
-                </Style>
+                       BasedOn="{StaticResource ResourceKey=BaseButtons}" />
             </WrapPanel.Resources>
             <!--First range-->
             <Button x:Name="UIACButton"
                     x:Uid="AC"
-                    Style="{StaticResource BaseStyleButton}"
                     Content="AC"
                     Click="UIACButton_Click" />
             <Button x:Name="UIBackReturnButton"
                     x:Uid="CE"
-                    Style="{StaticResource BaseStyleButton}"
                     Content="CE"
                     Click="UIBackReturnButton_Click">
             </Button>
             <Button x:Name="UIPercentButton"
                     x:Uid="%"
-                    Style="{StaticResource BaseStyleButton}"
                     Click="UIPercentageButton_Click">
                 <Image Height="23"
                        Source="Images/Percentage_icon.png"
                        Stretch="Fill"
                        Width="23" />
             </Button>
+
             <Button x:Name="UIDivideButton"
                     x:Uid="÷"
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
                 <Image Height="20"
                        Source="Images/Divide_Icon.png"
@@ -374,18 +422,21 @@
             <Button x:Name="UISevenButton"
                     x:Uid="7"
                     Content="7"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIHeightButton"
                     x:Uid="8"
                     Content="8"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UINineButton"
                     x:Uid="9"
                     Content="9"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIMultiplyButton"
                     x:Uid="×"
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
                 <Image Height="20"
                        Source="Images/Multiply_icon.png"
@@ -396,18 +447,21 @@
             <Button x:Name="UIFourButton"
                     x:Uid="4"
                     Content="4"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIFiveButton"
                     x:Uid="5"
                     Content="5"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UISixButton"
                     x:Uid="6"
                     Content="6"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIPlusButton"
                     x:Uid="+"
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
                 <Image Height="20"
                        Source="Images/Plus_icon.png"
@@ -418,18 +472,21 @@
             <Button x:Name="UIOneButton"
                     x:Uid="1"
                     Content="1"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UITwoButton"
                     x:Uid="2"
                     Content="2"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIThreeButton"
                     x:Uid="3"
                     Content="3"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UIMinusButton"
                     x:Uid="−"
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
                 <Image Height="20"
                        Source="Images/Subtract_icon.png"
@@ -440,10 +497,11 @@
             <Button x:Name="UIZeroButton"
                     x:Uid="0"
                     Content="0"
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UINumberButton_Click" />
             <Button x:Name="UISignButton"
                     x:Uid="±"
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource BaseButtons}"
                     Click="UISignOrUnSignButton_Click">
                 <Image Height="20"
                        Source="Images/Sign_icon.png"
@@ -452,12 +510,12 @@
             </Button>
             <Button x:Name="UIPointButton"
                     x:Uid="."
-                    Style="{StaticResource BaseStyleButton}"
                     Content="."
+                    Style="{StaticResource NumericalsButtons}"
                     Click="UIPointButton_Click" />
             <Button x:Name="UIEqualButton"
                     x:Uid="="
-                    Style="{StaticResource BaseStyleButton}"
+                    Style="{StaticResource OperatorsButtons}"
                     Click="UIEqualButton_Click">
                 <Image Height="20"
                        Source="Images/Equal_icon.png"

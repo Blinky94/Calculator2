@@ -12,13 +12,21 @@
         Height="565"
         AllowsTransparency="True"
         Background="Transparent"
-        WindowStartupLocation="Manual">
+        WindowStartupLocation="Manual"
+        x:Name="mainCalculator">
+    <Window.Resources>
+        <!--Theme.xml-->
+        <XmlDataProvider Source="Params\Theme.xml"
+                         XPath="/Themes/Theme[@name='Default']"
+                         x:Key="DefaultTheme"
+                         x:Name="DefaultTheme" />
+    </Window.Resources>
 
     <DockPanel UseLayoutRounding="True">
         <Border x:Name="MainCalculator"
-                BorderBrush="DarkBlue"
-                Background="DarkCyan"
-                BorderThickness="1.5"
+                BorderBrush="{Binding Source={StaticResource DefaultTheme}, XPath=MainCalculatorBorderBrush}"
+                Background="{Binding Source={StaticResource DefaultTheme}, XPath=MainCalculatorBackground}"
+                BorderThickness="{Binding Source={StaticResource DefaultTheme}, XPath=MainCalculatorBorderThickness}"
                 CornerRadius="25"
                 DockPanel.Dock="Top">
             <Canvas Margin="18 25 0 0"
@@ -37,7 +45,9 @@
 
                     <!--Call the MenuSide User control-->
                     <local:MenuSide_Control Grid.Row="0"
-                                            x:Name="UIMenuSide" />
+                                            x:Name="UIMenuSide">
+                      
+                    </local:MenuSide_Control>
 
                     <!--Call the Display User control-->
                     <local:Display_Control Grid.Row="1"
@@ -47,8 +57,68 @@
 
                     <!--Call the Calculator User control-->
                     <local:Calculator_Control Grid.Row="2"
-                                              Margin="0 20 0 0"
-                                              x:Name="UICalculator" />
+                                              Margin="0 10 0 0"
+                                              x:Name="UICalculator">
+
+                        <local:Calculator_Control.Style>
+                            <Style TargetType="local:Calculator_Control">
+                                <Setter Property="BackgroundBaseButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundBaseButtons}" />
+                                <Setter Property="ForegroundBaseButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundBaseButtons}" />
+                                <Setter Property="BorderBrushBaseButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushBaseButtons}" />
+                                <Setter Property="BorderThicknessBaseButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessBaseButtons}" />
+
+                                <Setter Property="BackgroundScientificButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundScientificButtons}" />
+                                <Setter Property="ForegroundScientificButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundScientificButtons}" />
+                                <Setter Property="BorderBrushScientificButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushScientificButtons}" />
+                                <Setter Property="BorderThicknessScientificButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessScientificButtons}" />
+
+                                <Setter Property="BackgroundOperatorsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundOperatorsButtons}" />
+                                <Setter Property="ForegroundOperatorsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundOperatorsButtons}" />
+                                <Setter Property="BorderBrushOperatorsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushOperatorsButtons}" />
+                                <Setter Property="BorderThicknessOperatorsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessOperatorsButtons}" />
+
+                                <Setter Property="BackgroundNumericalsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundNumericalsButtons}" />
+                                <Setter Property="ForegroundNumericalsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundNumericalsButtons}" />
+                                <Setter Property="BorderBrushNumericalsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushNumericalsButtons}" />
+                                <Setter Property="BorderThicknessNumericalsButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessNumericalsButtons}" />
+
+                                <Setter Property="BackgroundMemoryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundMemoryButtons}" />
+                                <Setter Property="ForegroundMemoryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundMemoryButtons}" />
+                                <Setter Property="BorderBrushMemoryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushMemoryButtons}" />
+                                <Setter Property="BorderThicknessMemoryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessMemoryButtons}" />
+
+                                <Setter Property="BackgroundTrigonometryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BackgroundTrigonometryButtons}" />
+                                <Setter Property="ForegroundTrigonometryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=ForegroundTrigonometryButtons}" />
+                                <Setter Property="BorderBrushTrigonometryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderBrushTrigonometryButtons}" />
+                                <Setter Property="BorderThicknessTrigonometryButtons"
+                                        Value="{Binding Source={StaticResource DefaultTheme}, XPath=BorderThicknessTrigonometryButtons}" />
+                            </Style>
+                        </local:Calculator_Control.Style>
+
+                    </local:Calculator_Control>
                 </Grid>
             </Canvas>
         </Border>

@@ -11,6 +11,7 @@
             Background="Transparent">
         <Grid>
             <Grid.Resources>
+
                 <Style TargetType="Menu">
                     <Setter Property="Background"
                             Value="Transparent" />
@@ -55,7 +56,8 @@
                   Height="25"
                   Width="25"
                   VerticalAlignment="Top"
-                  BorderBrush="Transparent">
+                  BorderBrush="Transparent"
+                  Background="Transparent">
                 <MenuItem>
                     <MenuItem.Header>
                         <Image Source="Images/Menu_icon.png" />

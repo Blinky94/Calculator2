@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -8,6 +9,53 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        #region MainCalculatorBackground
+
+        public static readonly DependencyProperty MainCalculatorBackgroundProperty =
+            DependencyProperty.Register("MainCalculatorBackground",
+            typeof(Brush),
+            typeof(MainWindow),
+            new PropertyMetadata(Brushes.Transparent));
+        public Brush MainCalculatorBackground
+        {
+            get { return (Brush)GetValue(MainCalculatorBackgroundProperty); }
+            set { SetValue(MainCalculatorBackgroundProperty, value); }
+        }
+
+        #endregion
+
+        #region MainCalculatorBorderBrush
+
+        public static readonly DependencyProperty MainCalculatorBorderBrushProperty =
+            DependencyProperty.Register("MainCalculatorBorderBrush",
+            typeof(Brush),
+            typeof(MainWindow),
+            new PropertyMetadata(Brushes.Transparent));
+        public Brush MainCalculatorBorderBrush
+        {
+            get { return (Brush)GetValue(MainCalculatorBorderBrushProperty); }
+            set { SetValue(MainCalculatorBorderBrushProperty, value); }
+        }
+
+        #endregion
+
+        #region MainCalculatorBorderThickness
+
+        public static readonly DependencyProperty MainCalculatorBorderThicknessProperty =
+            DependencyProperty.Register("MainCalculatorBorderThickness",
+            typeof(double),
+            typeof(MainWindow),
+            new PropertyMetadata(5D));
+        public double MainCalculatorBorderThickness
+        {
+            get { return (double)GetValue(MainCalculatorBorderThicknessProperty); }
+            set { SetValue(MainCalculatorBorderThicknessProperty, value); }
+        }
+
+        #endregion
+
+
         public delegate void UpdateUIDisplayHandler(string pContent);
         public event UpdateUIDisplayHandler UIDisplayValueEvent;
 
