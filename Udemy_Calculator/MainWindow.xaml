@@ -18,7 +18,9 @@
         <XmlDataProvider Source="Params\Theme.xml"
                          XPath="/Themes"
                          x:Key="ThemeList"
-                         x:Name="ThemeList" />
+                         x:Name="ThemeList"
+                         IsInitialLoadEnabled="True"
+                         IsAsynchronous="False" />
     </Window.Resources>
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>

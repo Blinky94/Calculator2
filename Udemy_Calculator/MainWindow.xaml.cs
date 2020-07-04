@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -68,6 +70,10 @@ namespace Udemy_Calculator
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
+
+            var bookData = (XmlDataProvider)FindResource("ThemeList");
+            var xmlDoc = bookData.Document;
+            //UIMenuSide.GetThemesList = xdp.Data;
         }
 
         public void ModifyUIDisplay(string pContent)
