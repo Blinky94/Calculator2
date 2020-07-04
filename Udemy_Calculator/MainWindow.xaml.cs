@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Udemy_Calculator
 {
@@ -71,10 +74,33 @@ namespace Udemy_Calculator
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
 
-            var bookData = (XmlDataProvider)FindResource("ThemeList");
-            var xmlDoc = bookData.Document;
-            //UIMenuSide.GetThemesList = xdp.Data;
+            var lXMLDataProvider = (XmlDataProvider)FindResource("ThemeList");
+            var lXmlThemes = lXMLDataProvider.Document;
+
+            UIMenuSide.GetThemesList = SetListOfParameters(lXmlThemes);
         }
+
+
+        private List<ThemeObj> SetListOfParameters(XmlDocument pDoc)
+        {
+            List<ThemeObj> lList = new List<ThemeObj>();
+
+            foreach (XmlElement lElement in pDoc.DocumentElement.ChildNodes)
+            {
+                foreach (XmlElement lNode in lElement)
+                {
+                    lList.Add(new ThemeObj()
+                    {
+                        ThemeName = lElement.GetAttribute("name"),
+                        ParameterName = lNode.Name.ToString(),
+                        ParameterValue = lNode.InnerText
+                    });
+                }
+            }
+
+            return lList;
+        }
+
 
         public void ModifyUIDisplay(string pContent)
         {

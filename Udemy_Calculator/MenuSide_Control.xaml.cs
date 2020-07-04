@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -79,8 +80,15 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
             CurrentMode = CalculatorMode.Standard;
+
+            // Fill the theme list from the current file theme.xml from XMLDataProvider
+            FillListMenuItems();
         }
 
+        private void FillListMenuItems()
+        {
+            throw new NotImplementedException();
+        }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
