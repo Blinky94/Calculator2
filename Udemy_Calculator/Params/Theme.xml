@@ -7,7 +7,7 @@
 	<Background2ndeButton>#0d6a1c</Background2ndeButton>
 	<Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
 	<BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
-	<BorderThickness2ndeButton>1</BorderThickness2ndeButton>
+	<BorderThickness2ndeButton>1.0</BorderThickness2ndeButton>
     <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
     <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
     <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
