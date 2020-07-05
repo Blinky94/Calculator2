@@ -8,42 +8,7 @@ using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
-    public enum CalculatorMode
-    {
-        /// <summary>
-        /// Main modes
-        /// </summary>
-        Standard,
-        Scientific,
-        Binary,
-        Graphs,
-        Calendar,
-
-        /// <summary>
-        /// Conversions modes
-        /// </summary>
-        Area,
-        Electronic,
-        Energy,
-        Flow,
-        Force,
-        Length,
-        Power,
-        Pressure,
-        Speed,
-        Temperature,
-        Time,
-        Volume,
-        Weight,
-        Data,
-        Angle,
-        Currency,
-
-        /// <summary>
-        /// Option mode for paraméters
-        /// </summary>
-        Options
-    };
+    public enum CalculatorMode { Standard, Scientific, Binary, Graphs, Calendar, Area, Electronic, Energy, Flow, Force, Length, Power, Pressure, Speed, Temperature, Time, Volume, Weight, Data, Angle, Currency, Options };
 
     /// <summary>
     /// Interaction logic for MenuSide.xaml
