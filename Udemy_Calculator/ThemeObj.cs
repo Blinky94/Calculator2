@@ -23,7 +23,7 @@
         /// <summary>
         /// Parameter value
         /// </summary>
-        public string ParameterValue 
+        public string ParameterValueStr 
         { 
             get; 
             set; 

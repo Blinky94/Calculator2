@@ -18,7 +18,7 @@
                     <Setter Property="Foreground"
                             Value="Transparent" />
                 </Style>
-                
+
 
                 <ControlTemplate x:Key="MenuItemTemplate"
                                  TargetType="MenuItem">
@@ -26,7 +26,7 @@
                         <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center" />
                         <Border>
-                            
+
                         </Border>
                     </Grid>
                 </ControlTemplate>
@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
                   Height="25"
@@ -59,7 +59,7 @@
                   BorderBrush="Transparent"
                   Background="Transparent"
                   Foreground="Black">
-                <MenuItem>
+                <MenuItem x:Name="MenuSideControlItem">
                     <MenuItem.Header>
                         <Image Source="Images/Menu_icon.png" />
                     </MenuItem.Header>
@@ -199,8 +199,9 @@
                             <Image Source="Images/Options_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="_Themes"
-                              Click="MenuItem_Click">
+                    <MenuItem x:Name="MenuThemes"
+                              Header="_Themes"
+                              Click="MenuTheme_Click">
                         <MenuItem.Icon>
                             <Image Source="Images/Themes_icon.png" />
                         </MenuItem.Icon>
@@ -214,7 +215,7 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-                  
+
             <!--Menu Label-->
             <Label x:Name="UIMenuSelected"
                    Grid.Column="1"

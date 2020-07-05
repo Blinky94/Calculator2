@@ -43,7 +43,7 @@ namespace Udemy_Calculator
                     {
                         ThemeName = lElement.Attribute("name").Value,
                         ParameterName = node.Name.ToString(),
-                        ParameterValue = node.Value
+                        ParameterValueStr = node.Value
                     });
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -14,53 +15,6 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        #region MainCalculatorBackground
-
-        public static readonly DependencyProperty MainCalculatorBackgroundProperty =
-            DependencyProperty.Register("MainCalculatorBackground",
-            typeof(Brush),
-            typeof(MainWindow),
-            new PropertyMetadata(Brushes.Transparent));
-        public Brush MainCalculatorBackground
-        {
-            get { return (Brush)GetValue(MainCalculatorBackgroundProperty); }
-            set { SetValue(MainCalculatorBackgroundProperty, value); }
-        }
-
-        #endregion
-
-        #region MainCalculatorBorderBrush
-
-        public static readonly DependencyProperty MainCalculatorBorderBrushProperty =
-            DependencyProperty.Register("MainCalculatorBorderBrush",
-            typeof(Brush),
-            typeof(MainWindow),
-            new PropertyMetadata(Brushes.Transparent));
-        public Brush MainCalculatorBorderBrush
-        {
-            get { return (Brush)GetValue(MainCalculatorBorderBrushProperty); }
-            set { SetValue(MainCalculatorBorderBrushProperty, value); }
-        }
-
-        #endregion
-
-        #region MainCalculatorBorderThickness
-
-        public static readonly DependencyProperty MainCalculatorBorderThicknessProperty =
-            DependencyProperty.Register("MainCalculatorBorderThickness",
-            typeof(double),
-            typeof(MainWindow),
-            new PropertyMetadata(5D));
-        public double MainCalculatorBorderThickness
-        {
-            get { return (double)GetValue(MainCalculatorBorderThicknessProperty); }
-            set { SetValue(MainCalculatorBorderThicknessProperty, value); }
-        }
-
-        #endregion
-
-
         public delegate void UpdateUIDisplayHandler(string pContent);
         public event UpdateUIDisplayHandler UIDisplayValueEvent;
 
@@ -69,17 +23,50 @@ namespace Udemy_Calculator
             InitializeComponent();
 
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
-            UIDisplay.UIDisplayCalculus.Text = "0";
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
+            
+            SetMenuThemeItems();
+            UIMenuSide.SetTheme();
+        }
 
+        /// <summary>
+        /// Set the menu theme items
+        /// </summary>
+        private void SetMenuThemeItems()
+        {
             var lXMLDataProvider = (XmlDataProvider)FindResource("ThemeList");
             var lXmlThemes = lXMLDataProvider.Document;
 
             UIMenuSide.GetThemesList = SetListOfParameters(lXmlThemes);
+
+            if (!UIMenuSide.SetMenuItems())
+            {
+                Debug.WriteLine("MenuItem is not loading correctly !");
+            }
         }
 
+        private void ChangeColor()
+        {
+            //if (pHasIcon)
+            //{
+            //    pName = pName.Replace(".", "");
+            //    lMenuItem.Icon = new Image { Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Images/" + $"{pName}_icon{pReverseStr}.png", UriKind.Absolute)) };
+            //}
+
+            // Reverse text color ?
+            //if (pReverseStr == "")
+            //{
+            //    lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
+            //    UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
+            //}
+            //else
+            //{
+            //    lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
+            //    UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
+            //}
+        }
 
         private List<ThemeObj> SetListOfParameters(XmlDocument pDoc)
         {
@@ -93,14 +80,13 @@ namespace Udemy_Calculator
                     {
                         ThemeName = lElement.GetAttribute("name"),
                         ParameterName = lNode.Name.ToString(),
-                        ParameterValue = lNode.InnerText
+                        ParameterValueStr = lNode.InnerText
                     });
                 }
             }
 
             return lList;
         }
-
 
         public void ModifyUIDisplay(string pContent)
         {
