@@ -37,8 +37,8 @@
     <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
     <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
     <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
-    <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
-    <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
+    <BackgroundBaseButtons>#555555</BackgroundBaseButtons>
+    <ForegroundBaseButtons>#AAAAAA</ForegroundBaseButtons>
     <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
     <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
     <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>

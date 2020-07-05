@@ -207,11 +207,7 @@
             </Button>
             <Button x:Name="UISecondFuncButton"
                     x:Uid="2nde"
-                    Content="2nde"
-                    Background="{Binding Path=Background2ndeButton, ElementName=calculatorControl}"
-                    Foreground="{Binding Path=Foreground2ndeButton, ElementName=calculatorControl}"
-                    BorderBrush="{Binding Path=BorderBrush2ndeButton, ElementName=calculatorControl}"
-                    BorderThickness="{Binding Path=BorderThickness2ndeButton, ElementName=calculatorControl}"
+                    Content="2nde"                  
                     Click="UISecondFuncButton_Click">
             </Button>
             <Button x:Name="UIXSquareButton"

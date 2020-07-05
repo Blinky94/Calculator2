@@ -28,7 +28,7 @@ namespace Udemy_Calculator
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
             
             SetMenuThemeItems();
-            UIMenuSide.SetTheme();
+            UIMenuSide.GetThemes();
         }
 
         /// <summary>
