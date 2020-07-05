@@ -39,7 +39,7 @@
                     <!--Main Container Grid-->
                     <Border CornerRadius="25">
                         <Grid x:Name="MainGrid"
-                              Margin="10 10 10 20">
+                              Margin="10 10 11 20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>

@@ -71,17 +71,29 @@ namespace Udemy_Calculator
         private List<ThemeObj> SetListOfParameters(XmlDocument pDoc)
         {
             List<ThemeObj> lList = new List<ThemeObj>();
+            string lThemeSelected = string.Empty;
 
             foreach (XmlElement lElement in pDoc.DocumentElement.ChildNodes)
             {
+                if (lElement.Name == "ThemeSelected")
+                {
+                    lThemeSelected = lElement.GetAttribute("name");
+                }
+
                 foreach (XmlElement lNode in lElement)
                 {
-                    lList.Add(new ThemeObj()
-                    {
-                        ThemeName = lElement.GetAttribute("name"),
-                        ParameterName = lNode.Name.ToString(),
-                        ParameterValueStr = lNode.InnerText
-                    });
+                    foreach (XmlElement lSubNode in lNode)
+                    {      
+                        lList.Add(new ThemeObj()
+                        {
+                            ThemeSelected = lThemeSelected,
+                            ParentThemeName = lElement.GetAttribute("name"),
+                            ChildThemeName = lNode.Name,
+                            ChildThemeText = lNode.GetAttribute("name"),
+                            ParameterName = lSubNode.Name,
+                            ParameterStringValue = lSubNode.InnerText
+                        }) ;
+                    }                 
                 }
             }
 

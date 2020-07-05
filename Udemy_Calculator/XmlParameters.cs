@@ -41,9 +41,9 @@ namespace Udemy_Calculator
                     XElement node = lNode as XElement;
                     lList.Add(new ThemeObj()
                     {
-                        ThemeName = lElement.Attribute("name").Value,
+                        ParentThemeName = lElement.Attribute("name").Value,
                         ParameterName = node.Name.ToString(),
-                        ParameterValueStr = node.Value
+                        ParameterStringValue = node.Value
                     });
                 }
             }

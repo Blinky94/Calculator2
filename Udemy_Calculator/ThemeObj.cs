@@ -3,12 +3,39 @@
     public class ThemeObj
     {
         /// <summary>
-        /// Main theme name
+        /// theme selected name
         /// </summary>
-        public string ThemeName 
+        public string ThemeSelected
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Parent theme name
+        /// </summary>
+        public string ParentThemeName 
         { 
             get; 
             set; 
+        }
+
+        /// <summary>
+        /// Child theme name
+        /// </summary>
+        public string ChildThemeName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Child theme value string
+        /// </summary>
+        public string ChildThemeText
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -21,9 +48,9 @@
         }
 
         /// <summary>
-        /// Parameter value
+        /// Parameter value string
         /// </summary>
-        public string ParameterValueStr 
+        public string ParameterStringValue 
         { 
             get; 
             set; 

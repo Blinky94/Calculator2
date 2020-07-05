@@ -18,21 +18,21 @@ namespace Udemy_Calculator
         private static List<string> mListThemeName;
         private static List<ThemeObj> mListTheme;
 
-        public static readonly DependencyProperty GetThemesListProperty =
+        public static readonly DependencyProperty GetThemesList2Property =
     DependencyProperty.Register("GetThemesList",
                                 typeof(List<ThemeObj>),
                                 typeof(MenuSide_Control),
                                 new PropertyMetadata(OnAvailableItemsChanged));
         public List<ThemeObj> GetThemesList
         {
-            get { return (List<ThemeObj>)GetValue(GetThemesListProperty); }
-            set { SetValue(GetThemesListProperty, value); }
+            get { return (List<ThemeObj>)GetValue(GetThemesList2Property); }
+            set { SetValue(GetThemesList2Property, value); }
         }
 
         public static void OnAvailableItemsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             mListTheme = (List<ThemeObj>)e.NewValue;
-            mListThemeName = mListTheme.Select(p => p.ThemeName).Distinct().ToList();
+            mListThemeName = mListTheme.Select(p => p.ParentThemeName).Distinct().ToList();
         }
 
         public static readonly DependencyProperty CurrentModeProperty =
@@ -68,7 +68,21 @@ namespace Udemy_Calculator
                 lIsOk = true;
             });
 
+            MenuItem llCustomItem = new MenuItem();
+            llCustomItem.Click += CustomItem_Click;
+            llCustomItem.Header = "_Custom...";
+            MenuThemes.Items.Add(llCustomItem);
+
             return lIsOk;
+        }
+
+        CustomWindow mUICustomWindow;
+        private void CustomItem_Click(object sender, RoutedEventArgs e)
+        {
+            mUICustomWindow = new CustomWindow();
+            mUICustomWindow.AddRadioButtonsList(mListTheme);
+            mUICustomWindow.UIThemeName.Content = mThemeSelected;
+            mUICustomWindow.Show();
         }
 
         private void MenuTheme_Click(object sender, RoutedEventArgs e)
@@ -76,74 +90,76 @@ namespace Udemy_Calculator
             GetThemes((e.OriginalSource as MenuItem).Header.ToString());
         }
 
+        private string mThemeSelected;
         public void GetThemes(string pThemeName = "Default")
         {
-            mListTheme?.Where(p => p.ThemeName == pThemeName).ToList().ForEach(p =>
+            mListTheme?.Where(p => p.ParentThemeName == pThemeName).ToList().ForEach(p =>
             {
+                mThemeSelected = pThemeName;
                 switch (p.ParameterName)
                 {
                     case "MainCalculatorBackground":
-                        ((MainWindow)Application.Current.MainWindow).MainCalculator.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).MainCalculator.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "MainCalculatorBorderBrush":
-                        ((MainWindow)Application.Current.MainWindow).MainCalculator.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).MainCalculator.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "MainCalculatorBorderThickness":
-                        ((MainWindow)Application.Current.MainWindow).MainCalculator.BorderThickness = new Thickness(Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture)); break;
+                        ((MainWindow)Application.Current.MainWindow).MainCalculator.BorderThickness = new Thickness(Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture)); break;
                     case "Background2ndeButton":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "Foreground2ndeButton":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrush2ndeButton":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThickness2ndeButton":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.BorderThickness = new Thickness(Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture)); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.UISecondFuncButton.BorderThickness = new Thickness(Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture)); break;
                     case "BackgroundBaseButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundBaseButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushBaseButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushBaseButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessBaseButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessBaseButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessBaseButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                     case "BackgroundScientificButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundScientificButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushScientificButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushScientificButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessScientificButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessScientificButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessScientificButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                     case "BackgroundOperatorsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundOperatorsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushOperatorsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushOperatorsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessOperatorsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessOperatorsButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessOperatorsButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                     case "BackgroundNumericalsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundNumericalsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushNumericalsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushNumericalsButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessNumericalsButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessNumericalsButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessNumericalsButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                     case "BackgroundMemoryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundMemoryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushMemoryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushMemoryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessMemoryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessMemoryButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessMemoryButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                     case "BackgroundTrigonometryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BackgroundTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "ForegroundTrigonometryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.ForegroundTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderBrushTrigonometryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterValueStr); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderBrushTrigonometryButtons = (SolidColorBrush)new BrushConverter().ConvertFromString(p.ParameterStringValue); break;
                     case "BorderThicknessTrigonometryButtons":
-                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessTrigonometryButtons = Double.Parse(p.ParameterValueStr, NumberStyles.Any, CultureInfo.InvariantCulture); break;
+                        ((MainWindow)Application.Current.MainWindow).UICalculator.BorderThicknessTrigonometryButtons = Double.Parse(p.ParameterStringValue, NumberStyles.Any, CultureInfo.InvariantCulture); break;
                 }
             });
 

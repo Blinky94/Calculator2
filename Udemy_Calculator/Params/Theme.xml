@@ -1,123 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Themes>
+  <ThemeSelected name="Fire"/>
   <Theme name="Default">
-    <MainCalculatorBackground>#0d93ce</MainCalculatorBackground>
-    <MainCalculatorBorderBrush>#FF0000</MainCalculatorBorderBrush>
-    <MainCalculatorBorderThickness>5.0</MainCalculatorBorderThickness>
-	<Background2ndeButton>#0d6a1c</Background2ndeButton>
-	<Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
-	<BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
-	<BorderThickness2ndeButton>1.0</BorderThickness2ndeButton>
-    <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
-    <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
-    <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
-    <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
-    <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
-    <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
-    <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
-    <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
-    <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
-    <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
-    <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
-    <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
-    <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
-    <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
-    <BorderBrushNumericalsButtons>#5500EE</BorderBrushNumericalsButtons>
-    <BorderThicknessNumericalsButtons>1</BorderThicknessNumericalsButtons>
-    <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
-    <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
-    <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
-    <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
-    <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
-    <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
-    <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
-    <BorderThicknessTrigonometryButtons>1</BorderThicknessTrigonometryButtons>
+    <MainTheme name="Main theme">
+      <MainCalculatorBackground>#0d93ce</MainCalculatorBackground>
+      <MainCalculatorBorderBrush>#FF0000</MainCalculatorBorderBrush>
+      <MainCalculatorBorderThickness>5.0</MainCalculatorBorderThickness>
+    </MainTheme>
+    <SndeButton name="Seconde button theme">
+      <Background2ndeButton>#0d6a1c</Background2ndeButton>
+      <Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
+      <BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
+      <BorderThickness2ndeButton>1.0</BorderThickness2ndeButton>
+    </SndeButton>
+    <BaseButtons name="Base buttons theme">
+      <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
+      <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
+      <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
+      <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
+    </BaseButtons>
+    <ScientificButtons name="Scientific buttons theme">
+      <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
+      <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
+      <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
+      <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
+    </ScientificButtons>
+    <OperatorsButtons name="Operator buttons theme">
+      <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
+      <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
+      <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
+      <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
+    </OperatorsButtons>
+    <NumericalsButtons name="Numerical buttons theme">
+      <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
+      <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons>#5500EE</BorderBrushNumericalsButtons>
+      <BorderThicknessNumericalsButtons>1</BorderThicknessNumericalsButtons>
+    </NumericalsButtons>
+    <MemoryButtons name="Memory buttons theme">
+      <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
+      <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
+      <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
+      <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
+    </MemoryButtons>
+    <Trigonometry name="Trigonometry buttons theme">
+      <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
+      <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
+      <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
+      <BorderThicknessTrigonometryButtons>1</BorderThicknessTrigonometryButtons>
+    </Trigonometry>
   </Theme>
   <Theme name="Fire">
-    <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
-    <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
-    <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
-    <BackgroundBaseButtons>#555555</BackgroundBaseButtons>
-    <ForegroundBaseButtons>#AAAAAA</ForegroundBaseButtons>
-    <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
-    <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
-    <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
-    <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
-    <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
-    <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
-    <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
-    <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
-    <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
-    <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
-    <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
-    <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
-    <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
-    <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
-    <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
-    <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
-    <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
-    <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
-    <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
-    <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
-    <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
-    <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    <MainTheme name="Main theme">
+      <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
+      <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
+      <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
+    </MainTheme>
+    <SndeButton name="Seconde button theme">
+      <Background2ndeButton>#0d6a1c</Background2ndeButton>
+      <Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
+      <BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
+    </SndeButton>
+    <BaseButtons name="Base buttons theme">
+      <BackgroundBaseButtons>#555555</BackgroundBaseButtons>
+      <ForegroundBaseButtons>#AAAAAA</ForegroundBaseButtons>
+      <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
+      <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
+    </BaseButtons>
+    <ScientificButtons name="Scientific buttons theme">
+      <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
+      <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
+      <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
+      <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
+    </ScientificButtons>
+    <OperatorsButtons name="Operator buttons theme">
+      <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
+      <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
+      <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
+      <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
+    </OperatorsButtons>
+    <NumericalsButtons name="Numerical buttons theme">
+      <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
+      <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
+      <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
+    </NumericalsButtons>
+    <MemoryButtons name="Memory buttons theme">
+      <BackgroundMemoryButtons>#A1B5F6</BackgroundMemoryButtons>
+      <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
+      <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
+      <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
+    </MemoryButtons>
+    <Trigonometry name="Trigonometry buttons theme">
+      <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
+      <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
+      <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
+      <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    </Trigonometry>
   </Theme>
   <Theme name="Ice">
-    <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
-    <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
-    <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
-    <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
-    <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
-    <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
-    <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
-    <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
-    <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
-    <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
-    <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
-    <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
-    <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
-    <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
-    <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
-    <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
-    <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
-    <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
-    <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
-    <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
-    <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
-    <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
-    <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
-    <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
-    <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
-    <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
-    <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    <MainTheme name="Main theme">
+      <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
+      <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
+      <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
+    </MainTheme>
+    <SndeButton name="Seconde button theme">
+      <Background2ndeButton>#0d6a1c</Background2ndeButton>
+      <Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
+      <BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
+    </SndeButton>
+    <BaseButtons name="Base buttons theme">
+      <BackgroundBaseButtons>#555555</BackgroundBaseButtons>
+      <ForegroundBaseButtons>#AAAAAA</ForegroundBaseButtons>
+      <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
+      <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
+    </BaseButtons>
+    <ScientificButtons name="Scientific buttons theme">
+      <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
+      <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
+      <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
+      <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
+    </ScientificButtons>
+    <OperatorsButtons name="Operator buttons theme">
+      <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
+      <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
+      <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
+      <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
+    </OperatorsButtons>
+    <NumericalsButtons name="Numerical buttons theme">
+      <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
+      <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
+      <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
+    </NumericalsButtons>
+    <MemoryButtons name="Memory buttons theme">
+      <BackgroundMemoryButtons>#A1B5F6</BackgroundMemoryButtons>
+      <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
+      <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
+      <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
+    </MemoryButtons>
+    <Trigonometry name="Trigonometry buttons theme">
+      <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
+      <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
+      <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
+      <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    </Trigonometry>
   </Theme>
   <Theme name="Dark">
-    <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
-    <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
-    <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
-    <BackgroundBaseButtons>#ff00f2</BackgroundBaseButtons>
-    <ForegroundBaseButtons>#FFFFFF</ForegroundBaseButtons>
-    <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
-    <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
-    <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
-    <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
-    <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
-    <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
-    <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
-    <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
-    <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
-    <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
-    <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
-    <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
-    <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
-    <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
-    <BackgroundMemoryButtons>#CA98E1</BackgroundMemoryButtons>
-    <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
-    <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
-    <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
-    <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
-    <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
-    <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
-    <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    <MainTheme name="Main theme">
+      <MainCalculatorBackground>#0000f2</MainCalculatorBackground>
+      <MainCalculatorBorderBrush>#000000</MainCalculatorBorderBrush>
+      <MainCalculatorBorderThickness>1.5</MainCalculatorBorderThickness>
+    </MainTheme>
+    <SndeButton name="Seconde button theme">
+      <Background2ndeButton>#0d6a1c</Background2ndeButton>
+      <Foreground2ndeButton>#FFFFFF</Foreground2ndeButton>
+      <BorderBrush2ndeButton>#0db41c</BorderBrush2ndeButton>
+    </SndeButton>
+    <BaseButtons name="Base buttons theme">
+      <BackgroundBaseButtons>#555555</BackgroundBaseButtons>
+      <ForegroundBaseButtons>#AAAAAA</ForegroundBaseButtons>
+      <BorderBrushBaseButtons>#55BA1F</BorderBrushBaseButtons>
+      <BorderThicknessBaseButtons>1</BorderThicknessBaseButtons>
+    </BaseButtons>
+    <ScientificButtons name="Scientific buttons theme">
+      <BackgroundScientificButtons>#ffff05</BackgroundScientificButtons>
+      <ForegroundScientificButtons>#000000</ForegroundScientificButtons>
+      <BorderBrushScientificButtons>#CBEEE1</BorderBrushScientificButtons>
+      <BorderThicknessScientificButtons>1</BorderThicknessScientificButtons>
+    </ScientificButtons>
+    <OperatorsButtons name="Operator buttons theme">
+      <BackgroundOperatorsButtons>#af3805</BackgroundOperatorsButtons>
+      <ForegroundOperatorsButtons>#000000</ForegroundOperatorsButtons>
+      <BorderBrushOperatorsButtons>#CBDB00</BorderBrushOperatorsButtons>
+      <BorderThicknessOperatorsButtons>1</BorderThicknessOperatorsButtons>
+    </OperatorsButtons>
+    <NumericalsButtons name="Numerical buttons theme">
+      <BackgroundNumericalsButtons>#CBDB24</BackgroundNumericalsButtons>
+      <ForegroundNumericalsButtons>#000000</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons>#CBDB00</BorderBrushNumericalsButtons>
+      <BorderThicknessNumericalsButtons>1.5</BorderThicknessNumericalsButtons>
+    </NumericalsButtons>
+    <MemoryButtons name="Memory buttons theme">
+      <BackgroundMemoryButtons>#A1B5F6</BackgroundMemoryButtons>
+      <ForegroundMemoryButtons>#000000</ForegroundMemoryButtons>
+      <BorderBrushMemoryButtons>#ffbdce</BorderBrushMemoryButtons>
+      <BorderThicknessMemoryButtons>2</BorderThicknessMemoryButtons>
+    </MemoryButtons>
+    <Trigonometry name="Trigonometry buttons theme">
+      <BackgroundTrigonometryButtons>#0effce</BackgroundTrigonometryButtons>
+      <ForegroundTrigonometryButtons>#000000</ForegroundTrigonometryButtons>
+      <BorderBrushTrigonometryButtons>#CBDB00</BorderBrushTrigonometryButtons>
+      <BorderThicknessTrigonometryButtons>1.5</BorderThicknessTrigonometryButtons>
+    </Trigonometry>
   </Theme>
 </Themes>
