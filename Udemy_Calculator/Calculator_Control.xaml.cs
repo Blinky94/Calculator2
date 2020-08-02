@@ -408,7 +408,7 @@ namespace Udemy_Calculator
             }
         }
 
-        private string mSpecialSymbols = "×÷+-";
+        private readonly string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
 
         public Calculator_Control()
@@ -443,7 +443,7 @@ namespace Udemy_Calculator
             {
                 // If preceding is operator or nothing, add 0 before the point
                 string lOperators = "÷/×xX*-+√";
-                string lAdded = string.Empty;
+                string lAdded;
 
                 if (lOperators.Contains(lUIContent[lUIContent.Length - 1]))
                 {
@@ -506,7 +506,7 @@ namespace Udemy_Calculator
             {
                 LastNumber = ToCalculusDisplay;
 
-                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(System.Windows.Controls.Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
+                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
 
                 OnCalculusDisplayChanged();
             }
@@ -516,7 +516,7 @@ namespace Udemy_Calculator
         {
             if (!mIsResult)
             {
-                if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
+                if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
                 {
                     mIsResult = true;
                     LastNumber = ToCalculusDisplay;

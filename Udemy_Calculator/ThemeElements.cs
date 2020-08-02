@@ -1,6 +1,8 @@
-﻿namespace Udemy_Calculator
+﻿using System.Windows.Media;
+
+namespace Udemy_Calculator
 {
-    public class ThemeObj
+    public class ThemeElements
     {
         /// <summary>
         /// theme selected name
@@ -48,9 +50,18 @@
         }
 
         /// <summary>
+        /// Parameter text
+        /// </summary>
+        public string ParameterText
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Parameter value string
         /// </summary>
-        public string ParameterStringValue 
+        public string ParameterValue 
         { 
             get; 
             set; 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -26,51 +27,59 @@ namespace Udemy_Calculator
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
-            
-            SetMenuThemeItems();
-            UIMenuSide.GetThemes();
-        }
 
-        /// <summary>
-        /// Set the menu theme items
-        /// </summary>
-        private void SetMenuThemeItems()
-        {
             var lXMLDataProvider = (XmlDataProvider)FindResource("ThemeList");
             var lXmlThemes = lXMLDataProvider.Document;
 
-            UIMenuSide.GetThemesList = SetListOfParameters(lXmlThemes);
-
-            if (!UIMenuSide.SetMenuItems())
-            {
-                Debug.WriteLine("MenuItem is not loading correctly !");
-            }
+            UIMenuSide.SetThemesList = GetListOfParametersFromXmlFile(lXmlThemes);
+            
+            CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
+            UIMenuSide.SetMenuItems();
+            CommonTheme.SetThemesProperties();
+            SetThemes();
         }
 
-        private void ChangeColor()
+        /// <summary>
+        /// Set all the themes color for the current window
+        /// </summary>
+        public void SetThemes()
         {
-            //if (pHasIcon)
-            //{
-            //    pName = pName.Replace(".", "");
-            //    lMenuItem.Icon = new Image { Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Images/" + $"{pName}_icon{pReverseStr}.png", UriKind.Absolute)) };
-            //}
-
-            // Reverse text color ?
-            //if (pReverseStr == "")
-            //{
-            //    lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
-            //    UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Black);
-            //}
-            //else
-            //{
-            //    lMenuItem.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
-            //    UIMenuSelected.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
-            //}
+            MainCalculator.Background = CommonTheme.MainCalculatorBackground;
+            UIMenuSide.UIMenuSelected.Foreground = CommonTheme.MainCalculatorForeground;
+            MainCalculator.BorderBrush = CommonTheme.MainCalculatorBorderBrush;
+            MainCalculator.BorderThickness = new Thickness(CommonTheme.MainCalculatorBorderThickness);
+            UICalculator.BackgroundBaseButtons = CommonTheme.BackgroundBaseButtons;
+            UICalculator.ForegroundBaseButtons = CommonTheme.ForegroundBaseButtons;
+            UICalculator.BorderBrushBaseButtons = CommonTheme.BorderBrushBaseButtons;
+            UICalculator.BorderThicknessBaseButtons = CommonTheme.BorderThicknessBaseButtons;
+            UICalculator.UISecondFuncButton.Background = CommonTheme.Background2ndeButton;
+            UICalculator.UISecondFuncButton.Foreground = CommonTheme.Foreground2ndeButton;
+            UICalculator.UISecondFuncButton.BorderBrush = CommonTheme.BorderBrush2ndeButton;
+            UICalculator.BackgroundScientificButtons = CommonTheme.BackgroundScientificButtons;
+            UICalculator.ForegroundScientificButtons = CommonTheme.ForegroundScientificButtons;
+            UICalculator.BorderBrushScientificButtons = CommonTheme.BorderBrushScientificButtons;
+            UICalculator.BackgroundOperatorsButtons = CommonTheme.BackgroundOperatorsButtons;
+            UICalculator.ForegroundOperatorsButtons = CommonTheme.ForegroundOperatorsButtons;
+            UICalculator.BorderBrushOperatorsButtons = CommonTheme.BorderBrushOperatorsButtons;
+            UICalculator.BackgroundNumericalsButtons = CommonTheme.BackgroundNumericalsButtons;
+            UICalculator.ForegroundNumericalsButtons = CommonTheme.ForegroundNumericalsButtons;
+            UICalculator.BorderBrushNumericalsButtons = CommonTheme.BorderBrushNumericalsButtons;
+            UICalculator.BackgroundMemoryButtons = CommonTheme.BackgroundMemoryButtons;
+            UICalculator.ForegroundMemoryButtons = CommonTheme.ForegroundMemoryButtons;
+            UICalculator.BorderBrushMemoryButtons = CommonTheme.BorderBrushMemoryButtons;
+            UICalculator.BackgroundTrigonometryButtons = CommonTheme.BackgroundTrigonometryButtons;
+            UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
+            UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
         }
 
-        private List<ThemeObj> SetListOfParameters(XmlDocument pDoc)
+        /// <summary>
+        /// xtract every parameters from the theme xml file and store them to a list of themeObject
+        /// </summary>
+        /// <param name="pDoc"></param>
+        /// <returns></returns>
+        private List<ThemeElements> GetListOfParametersFromXmlFile(XmlDocument pDoc)
         {
-            List<ThemeObj> lList = new List<ThemeObj>();
+            List<ThemeElements> lList = new List<ThemeElements>();
             string lThemeSelected = string.Empty;
 
             foreach (XmlElement lElement in pDoc.DocumentElement.ChildNodes)
@@ -83,17 +92,18 @@ namespace Udemy_Calculator
                 foreach (XmlElement lNode in lElement)
                 {
                     foreach (XmlElement lSubNode in lNode)
-                    {      
-                        lList.Add(new ThemeObj()
+                    {
+                        lList.Add(new ThemeElements()
                         {
                             ThemeSelected = lThemeSelected,
                             ParentThemeName = lElement.GetAttribute("name"),
                             ChildThemeName = lNode.Name,
                             ChildThemeText = lNode.GetAttribute("name"),
                             ParameterName = lSubNode.Name,
-                            ParameterStringValue = lSubNode.InnerText
-                        }) ;
-                    }                 
+                            ParameterText = lSubNode.GetAttribute("name"),
+                            ParameterValue = lSubNode.InnerText
+                        });
+                    }
                 }
             }
 

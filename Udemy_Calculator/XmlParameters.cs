@@ -9,9 +9,9 @@ namespace Udemy_Calculator
 {
     public class XmlParameters
     {
-        public List<ThemeObj> GetListParameters { get; private set; }
+        public List<ThemeElements> GetListParameters { get; private set; }
 
-        private string mPath;
+        private readonly string mPath;
 
         public XmlParameters(string pPath = "")
         {
@@ -27,9 +27,9 @@ namespace Udemy_Calculator
             }
         }
 
-        private List<ThemeObj> SetListOfParameters()
+        private List<ThemeElements> SetListOfParameters()
         {
-            List<ThemeObj> lList = new List<ThemeObj>();
+            List<ThemeElements> lList = new List<ThemeElements>();
 
             // Open XML file and affect values
             XDocument lDoc = XDocument.Load(mPath);
@@ -39,11 +39,11 @@ namespace Udemy_Calculator
                 foreach (XNode lNode in lElement.Nodes())
                 {
                     XElement node = lNode as XElement;
-                    lList.Add(new ThemeObj()
+                    lList.Add(new ThemeElements()
                     {
                         ParentThemeName = lElement.Attribute("name").Value,
                         ParameterName = node.Name.ToString(),
-                        ParameterStringValue = node.Value
+                        ParameterValue = node.Value
                     });
                 }
             }

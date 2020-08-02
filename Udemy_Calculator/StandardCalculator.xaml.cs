@@ -37,9 +37,9 @@ namespace Udemy_Calculator
             }
         }
 
-        private string mSpecialSymbols = "×÷+-";
+        private readonly string mSpecialSymbols = "×÷+-";
         private bool mIsResult = false;
-        private History mHistory;
+        private readonly History mHistory;
         private PEMDAS mPemdas;
 
         public StandardCalculator()
@@ -169,7 +169,7 @@ namespace Udemy_Calculator
             {
                 string lFormula = mHistory.ReturnFormula();
 
-                if (double.TryParse(ResultLabel, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
+                if (!double.IsNaN(double.Parse(ResultLabel, NumberStyles.Any, CultureInfo.InvariantCulture)))
                 {
                     // Ici PEMDAS
                     string lResult;

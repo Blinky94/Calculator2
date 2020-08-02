@@ -38,9 +38,6 @@
     <ApplicationIcon>Calculator_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ColorPickerWPF, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ColorPickerWPF.1.0.9\lib\net461\ColorPickerWPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,6 +57,21 @@
     <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
       <HintPath>..\packages\WriteableBitmapEx.1.5.1.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -69,6 +81,10 @@
     <Compile Include="Calculator_Control.xaml.cs">
       <DependentUpon>Calculator_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorPicker_Control.xaml.cs">
+      <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonTheme.cs" />
     <Compile Include="Display_Control.xaml.cs">
       <DependentUpon>Display_Control.xaml</DependentUpon>
     </Compile>
@@ -88,12 +104,19 @@
     <Compile Include="CustomWindow.xaml.cs">
       <DependentUpon>CustomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Spinner_Control.xaml.cs">
+      <DependentUpon>Spinner_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThemeObj.cs" />
+    <Compile Include="ThemeElements.cs" />
     <Compile Include="XmlParameters.cs" />
     <Page Include="Calculator_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Spinner_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -406,6 +433,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Exit_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8_sort_up_24px_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Up_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Up_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Down_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Down_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add_icon.png" />
+    <Resource Include="Images\Cancel_icon.png" />
+    <Resource Include="Images\Save_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

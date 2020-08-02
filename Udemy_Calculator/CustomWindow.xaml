@@ -4,136 +4,89 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Udemy_Calculator"
+        xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Calculator theme"
         ResizeMode="NoResize"
-        Height="400"
-        Width="550"
+        WindowStartupLocation="Manual"
         SizeToContent="WidthAndHeight">
-    <Grid Background="Blue">
-        <Grid.Resources>
-            <Style TargetType="Button">
-                <Setter Property="FontSize"
-                        Value="20" />
-                <Setter Property="FontWeight"
-                        Value="ExtraBold" />
-                <Setter Property="OverridesDefaultStyle"
-                        Value="true" />
-                <Setter Property="Padding"
-                        Value="10 0 10 0" />
-                <Setter Property="Foreground"
-                        Value="White" />
-                <Setter Property="Background"
-                        Value="Blue" />
-                <Setter Property="BorderBrush"
-                        Value="Black" />
-                <Setter Property="BorderThickness"
-                        Value="2" />
-                <Setter Property="HorizontalContentAlignment"
-                        Value="Center" />
-                <Setter Property="VerticalContentAlignment"
-                        Value="Center" />
-                <Setter Property="Width"
-                        Value="Auto" />
-                <Setter Property="Height"
-                        Value="45" />
-                <Setter Property="Margin"
-                        Value="1" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}">
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                  Content="{TemplateBinding Content}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsPressed"
-                                         Value="True">
-                                    <Setter Property="Background"
-                                            Value="White" />
-                                    <Setter Property="Foreground"
-                                            Value="Black" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style TargetType="RadioButton">
-                <Setter Property="Foreground"
-                        Value="White" />
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="Foreground"
-                        Value="White" />
-                <Setter Property="FontWeight"
-                        Value="Bold" />
-            </Style>
-        </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="550" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="380" />
-            <RowDefinition Height="70" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              Grid.Column="0"
-              HorizontalAlignment="Left">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Theme : " />
-                <Label x:Name="UIThemeName" />
-            </StackPanel>
 
-        </Grid>
-        <Grid Grid.Column="0"
-              Grid.Row="1">
-            <ScrollViewer HorizontalAlignment="Left"
-                          Background="Transparent"
-                          VerticalAlignment="Top"
-                          VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="UICustomThemes_RadioButtonList"
-                            Orientation="Vertical"
-                            Margin="15 0 5 0">
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
-        <Grid Grid.Column="1"
-              Grid.Row="0">
-            <DockPanel x:Name="UIColorPickerWPF"
-                       Grid.Column="1"
-                       Grid.Row="0">
-                <Canvas x:Name="UNCANVAS"
-                        DockPanel.Dock="Left"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top" />
-            </DockPanel>
-        </Grid>
+    <Canvas Width="360"
+            Height="570">
+        <Grid x:Name="CustomWindowGrid"
+              Canvas.Top="0"
+              Canvas.Left="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="485" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding"
+                            Value="5" />
+                    <Setter Property="Width"
+                            Value="35" />
+                    <Setter Property="Height"
+                            Value="35" />
+                    <Setter Property="Margin"
+                            Value="15 0 5 0" />
+                </Style>
 
-        <Grid Grid.Column="0"
-              Grid.Row="2"
-              Grid.ColumnSpan="2">
+                <Style TargetType="Label">
+                    <Setter Property="Foreground"
+                            Value="White" />
+                    <Setter Property="FontWeight"
+                            Value="Bold" />
+                    <Setter Property="FontSize"
+                            Value="15" />
+                    <Setter Property="Margin"
+                            Value="0 0 0 0" />
+                </Style>
+            </Grid.Resources>
+
             <StackPanel Orientation="Horizontal"
-                        Grid.Column="0"
-                        Grid.Row="1"
-                        Grid.ColumnSpan="2"
+                        Margin="0 10 0 0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                <Button Content="Load"
-                        Click="Button_Load" />
-                <Button Content="Save"
-                        Click="Button_Save" />
+                        Grid.Row="0">
+                <Label Content="Theme name: " />
+                <ComboBox x:Name="ComboBoxThemeList"
+                          HorizontalAlignment="Stretch"
+                          Width="230"
+                          FontSize="20"
+                          FontWeight="SemiBold"
+                          VerticalContentAlignment="Center"
+                          Padding="10 0 0 5"
+                          HorizontalContentAlignment="Center"
+                          SelectionChanged="ComboBoxThemeList_SelectionChanged" />
+            </StackPanel>
+
+            <WrapPanel x:Name="UICustomThemesList" Grid.Row="1" Orientation="Vertical" Margin="0 10 0 10"></WrapPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 10"
+                        Grid.Row="2">
+                <Button Click="Button_Add">
+                    <StackPanel>
+                        <Image Width="18"
+                               Source="/Images/Add_icon.png" />
+                    </StackPanel>
+                </Button>
+                <Button Click="Button_Save">
+                    <StackPanel>
+                        <Image Width="16"
+                               Source="/Images/Save_icon.png" />
+                    </StackPanel>
+                </Button>
+                <Button Click="Button_Cancel">
+                    <StackPanel>
+                        <Image Width="20"
+                               Source="/Images/Cancel_icon.png" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
-    </Grid>
+    </Canvas>
 
 </Window>

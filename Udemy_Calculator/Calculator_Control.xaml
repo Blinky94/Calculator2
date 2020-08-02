@@ -78,8 +78,6 @@
                         Value="{Binding Path=ForegroundOperatorsButtons, ElementName=calculatorControl}" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=BorderBrushOperatorsButtons, ElementName=calculatorControl}" />
-                <Setter Property="BorderThickness"
-                        Value="{Binding Path=BorderThicknessOperatorsButtons, ElementName=calculatorControl}" />
             </Style>
 
             <Style x:Key="NumericalsButtons"
@@ -93,8 +91,6 @@
                         Value="{Binding Path=ForegroundNumericalsButtons, ElementName=calculatorControl}" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=BorderBrushNumericalsButtons, ElementName=calculatorControl}" />
-                <Setter Property="BorderThickness"
-                        Value="{Binding Path=BorderThicknessNumericalsButtons, ElementName=calculatorControl}" />
             </Style>
 
             <Style x:Key="MemoryButtons"
@@ -108,8 +104,6 @@
                         Value="{Binding Path=ForegroundMemoryButtons, ElementName=calculatorControl}" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=BorderBrushMemoryButtons, ElementName=calculatorControl}" />
-                <Setter Property="BorderThickness"
-                        Value="{Binding Path=BorderThicknessMemoryButtons, ElementName=calculatorControl}" />
                 <Setter Property="Width"
                         Value="65" />
                 <Setter Property="Height"
@@ -131,8 +125,6 @@
                         Value="{Binding Path=ForegroundScientificButtons, ElementName=calculatorControl}" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=BorderBrushScientificButtons, ElementName=calculatorControl}" />
-                <Setter Property="BorderThickness"
-                        Value="{Binding Path=BorderThicknessScientificButtons, ElementName=calculatorControl}" />
                 <Setter Property="Width"
                         Value="50.5" />
                 <Setter Property="Height"
@@ -150,8 +142,6 @@
                         Value="{Binding Path=ForegroundTrigonometryButtons, ElementName=calculatorControl}" />
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=BorderBrushTrigonometryButtons, ElementName=calculatorControl}" />
-                <Setter Property="BorderThickness"
-                        Value="{Binding Path=BorderThicknessTrigonometryButtons, ElementName=calculatorControl}" />
             </Style>
 
             <Style TargetType="Image">
