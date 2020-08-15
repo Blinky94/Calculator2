@@ -188,8 +188,8 @@ namespace Udemy_Calculator
                 }              
             });
 
-            if(lControlName == ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.)
-            ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.BorderThicknessBaseButtons = 
+            //if(lControlName == ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.)
+            //((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.BorderThicknessBaseButtons = 
         }
 
         /// <summary>
