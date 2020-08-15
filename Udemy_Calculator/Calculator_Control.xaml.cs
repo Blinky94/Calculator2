@@ -534,11 +534,6 @@ namespace Udemy_Calculator
 
         }
 
-        private void UISINButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UITANButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -560,16 +555,6 @@ namespace Udemy_Calculator
         }
 
         private void UICSCButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIACOSButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIASINButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -599,11 +584,6 @@ namespace Udemy_Calculator
 
         }
 
-        private void UISquareButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UIOpenParenthesisButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -629,22 +609,12 @@ namespace Udemy_Calculator
 
         }
 
-        private void UISquareButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UIXSquareButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void UIXCubeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIYExpXButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -690,16 +660,6 @@ namespace Udemy_Calculator
         }
 
         private void UIMCButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIMPlusButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIMMinusButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
