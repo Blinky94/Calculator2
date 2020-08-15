@@ -83,7 +83,7 @@ namespace Udemy_Calculator
                 Background = CommonTheme.MainCalculatorBackground
             };
 
-            CommonTheme.CurrentCustomWindow.SetCustomThemes();         
+            CommonTheme.CurrentCustomWindow.SetControlsCustomThemes();         
             CommonTheme.CurrentCustomWindow.Show();
         }
 

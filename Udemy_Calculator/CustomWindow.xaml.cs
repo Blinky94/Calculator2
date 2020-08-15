@@ -23,15 +23,22 @@ namespace Udemy_Calculator
             Canvas.SetTop(this, Application.Current.MainWindow.Top);
         }
 
-        public void SetCustomThemes()
+        public void SetControlsCustomThemes()
         {
-            SetUIThemeList();
+            // Create control item them depending of type concerned
+            CommonTheme.ListThemesWithThemeSelected?.ForEach(p =>
+            {
+                SetElementsThemes(p);
+            });
+
+            // Set the ComboBox list themes with the selected one
+            SetMainThemeList(CommonTheme.ListParentThemesName, CommonTheme.ThemeSelectedName);
 
             // For all
             //SetTheme(value, name);
         }
 
-        private void SetTheme(string pName, string pValue)
+        private void SetCustomTheme()
         {
             foreach (var lChild in UICustomThemesList.Children)
             {
@@ -129,21 +136,6 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Set the UI theme list with all the control needed
-        /// </summary>
-        private void SetUIThemeList()
-        {
-            // Create control item them depending of type concerned
-            CommonTheme.ListThemesWithThemeSelected?.ForEach(p =>
-            {
-                SetElementsThemes(p);
-            });
-
-            // Set the ComboBox list themes with the selected one
-            SetMainThemeList(CommonTheme.ListParentThemesName, CommonTheme.ThemeSelectedName);
-        }
-
-        /// <summary>
         /// Define the ComboxBox list of themes
         /// </summary>
         /// <param name="pListParentThemeName"></param>
@@ -167,28 +159,37 @@ namespace Udemy_Calculator
         /// <param name="e"></param>
         private void UIButton_Click(object sender, RoutedEventArgs e)
         {
-            TextBox lUITextBox = null;
-            string lControlName = (e.Source as Button).Uid;
+            //TextBox lUITextBox = null;
+            string lControlName = (e.Source as Button).Name;
+            string lControlDestName = (e.Source as Button).Uid;
 
             // Managing thickness changements, set the spinner control concerned
             UICustomThemesList.Children.OfType<Spinner_Control>().Where(p => p.UIText.Uid == (e.Source as Button).Uid).ToList().ForEach(p =>
             {
-                if (double.TryParse(lUITextBox.Text.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lUITextValue))
+                if (double.TryParse(p.UIText.Text.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lUITextValue))
                 {
-                    if ((e.Source as Button).Name == "UIButtonUp")
+                    if (lControlName == "UIButtonUp")
                     {
                         lUITextValue += 0.1;
                     }
-                    else if ((e.Source as Button).Name == "UIButtonDown")
+                    else if (lControlName == "UIButtonDown")
                     {
                         if (lUITextValue > 0.0)
                         {
                             lUITextValue -= 0.1;
                         }
                     }
-                    lUITextBox.Text = lUITextValue.ToString();
-                }
+
+                    p.UIText.Text = lUITextValue.ToString();
+                    //if (p. is Label)
+                    //{
+                    //    (lChild as Label).Foreground = CommonTheme.MainCalculatorForeground;
+                    //}
+                }              
             });
+
+            if(lControlName == ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.)
+            ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.BorderThicknessBaseButtons = 
         }
 
         /// <summary>
@@ -196,29 +197,21 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UIColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
+        private void UIColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             var lControlName = (e.OriginalSource as Xceed.Wpf.Toolkit.ColorPicker).Uid;
             var lControlValue = (e.OriginalSource as Xceed.Wpf.Toolkit.ColorPicker).SelectedColorText;
 
-            SetTheme(lControlName, lControlValue);
-            Background = CommonTheme.MainCalculatorBackground;
+            CommonTheme.SetProperty(lControlName, lControlValue);
 
+            //Applying theme to the MainWindow
+            ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
+            Canvas.Background = CommonTheme.MainCalculatorBackground;
             foreach (var lChild in UICustomThemesList.Children)
             {
                 if (lChild is Label)
                 {
                     (lChild as Label).Foreground = CommonTheme.MainCalculatorForeground;
-                }
-                if (lChild is ColorPicker_Control)
-                {
-                    (lChild as ColorPicker_Control).UITitle.Foreground = CommonTheme.MainCalculatorForeground;
-                    (lChild as ColorPicker_Control).UIColorPicker.SelectedColor = CommonTheme.MainCalculatorBackground.Color;
-
-                }
-                if (lChild is Spinner_Control)
-                {
-                    (lChild as Spinner_Control).UITitle.Foreground = CommonTheme.MainCalculatorBackground;
                 }
             }
         }

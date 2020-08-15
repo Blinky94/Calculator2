@@ -99,17 +99,11 @@ namespace Udemy_Calculator
 
 
         // Get the complete list of parent name themes
-        private static List<string> mListParentThemesName;
         public static List<string> ListParentThemesName
         {
             get
             {
-                return mListParentThemesName;
-            }
-
-            private set
-            {
-                mListParentThemesName = mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
+                return mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList(); 
             }
         }
 
@@ -118,7 +112,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pName"></param>
         /// <param name="pValue"></param>
-        private static void SetProperty(string pName, string pValue)
+        public static void SetProperty(string pName, string pValue)
         {
             SolidColorBrush lSolidColorBrushValue = default;
 
@@ -184,10 +178,7 @@ namespace Udemy_Calculator
                     ForegroundTrigonometryButtons = lSolidColorBrushValue; break;
                 case "BorderBrushTrigonometryButtons":
                     BorderBrushTrigonometryButtons = lSolidColorBrushValue; break;
-            }
-
-            //Applying theme to the MainWindow
-            ((MainWindow)Application.Current.MainWindow).UICalculator.InitializeComponent();        
+            }     
         }
     }
 }

@@ -11,10 +11,10 @@
         WindowStartupLocation="Manual"
         SizeToContent="WidthAndHeight">
 
-    <Canvas Width="360"
+    <Canvas x:Name="Canvas"
+            Width="360"
             Height="570">
-        <Grid x:Name="CustomWindowGrid"
-              Canvas.Top="0"
+        <Grid Canvas.Top="0"
               Canvas.Left="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -61,7 +61,10 @@
                           SelectionChanged="ComboBoxThemeList_SelectionChanged" />
             </StackPanel>
 
-            <WrapPanel x:Name="UICustomThemesList" Grid.Row="1" Orientation="Vertical" Margin="0 10 0 10"></WrapPanel>
+            <WrapPanel x:Name="UICustomThemesList"
+                       Grid.Row="1"
+                       Orientation="Vertical"
+                       Margin="0 10 0 10"></WrapPanel>
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
