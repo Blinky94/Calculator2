@@ -408,7 +408,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40.56×15)");
 
-            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator op);
+            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator? op);
 
             Assert.AreEqual(40.56d, a);
             Assert.AreEqual(15d, b);
@@ -420,7 +420,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40,56×15)");
 
-            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator op);
+            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator? op);
 
             Assert.AreEqual(40.56d, a);
             Assert.AreEqual(15d, b);
@@ -432,7 +432,7 @@ namespace Udemy_Calculator_Tests
         {
             PEMDAS lPemdas = new PEMDAS("(40÷15)");
 
-            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator op);
+            lPemdas.ExtractArithmeticsGroups(out double a, out double b, out Operator? op);
 
             Assert.AreEqual(40d, a);
             Assert.AreEqual(15d, b);
@@ -522,7 +522,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("31", lResult.ToString());
+            Assert.AreEqual("31", lResult);
         }
 
         [TestMethod]
@@ -532,7 +532,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("31,87", lResult.ToString());
+            Assert.AreEqual("31,87", lResult);
         }
 
         [TestMethod]
@@ -542,7 +542,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("1", lResult.ToString());
+            Assert.AreEqual("1", lResult);
         }
 
         [TestMethod]
@@ -552,7 +552,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("(-1)", lResult.ToString());
+            Assert.AreEqual("(-1)", lResult);
         }
 
         [TestMethod]
@@ -719,7 +719,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("1", lResult.ToString());
+            Assert.AreEqual("1", lResult);
         }
 
         /// <summary>
@@ -732,7 +732,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("(-0,9375)", lResult.ToString());
+            Assert.AreEqual("(-0,9375)", lResult);
         }
 
         [TestMethod]
@@ -742,7 +742,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("(-0,9375)", lResult.ToString());
+            Assert.AreEqual("(-0,9375)", lResult);
         }
 
         #endregion
@@ -810,7 +810,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("9", lResult.ToString());
+            Assert.AreEqual("9", lResult);
         }
 
         [TestMethod]
@@ -820,7 +820,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("3,87298334620742", lResult.ToString());
+            Assert.AreEqual("3,87298334620742", lResult);
         }
 
         [TestMethod]
@@ -830,7 +830,7 @@ namespace Udemy_Calculator_Tests
 
             lPemdas.DoCompute(out string lResult);
 
-            Assert.AreEqual("NaN", lResult.ToString());
+            Assert.AreEqual("NaN", lResult);
         }
 
         #endregion

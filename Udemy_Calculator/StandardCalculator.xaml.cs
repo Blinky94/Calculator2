@@ -184,7 +184,7 @@ namespace Udemy_Calculator
                     mHistory.NewElement();
 
                     LastNumber = ResultLabel;
-                    mHistory.AppendElement(lResult.ToString().Replace(',', '.'), true);
+                    mHistory.AppendElement(lResult.Replace(',', '.'), true);
                     mHistory.NewElement();
                     UIResultLabel.Content = ResultLabel;
                 }

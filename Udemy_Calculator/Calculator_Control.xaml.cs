@@ -506,7 +506,7 @@ namespace Udemy_Calculator
             {
                 LastNumber = ToCalculusDisplay;
 
-                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
+                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid;
 
                 OnCalculusDisplayChanged();
             }

@@ -4,7 +4,156 @@
         <name>WriteableBitmapEx.Wpf</name>
     </assembly>
     <members>
+        <member name="T:System.Windows.Media.Imaging.ReadWriteMode">
+            <summary>
+            Read Write Mode for the BitmapContext.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadOnly">
+            <summary>
+            On Dispose of a BitmapContext, do not Invalidate
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadWrite">
+            <summary>
+            On Dispose of a BitmapContext, invalidate the bitmap
+            </summary>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.BitmapContext">
+            <summary>
+            A disposable cross-platform wrapper around a WriteableBitmap, allowing a common API for Silverlight + WPF with locking + unlocking if necessary
+            </summary>
+            <remarks>Attempting to put as many preprocessor hacks in this file, to keep the rest of the codebase relatively clean</remarks>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.WriteableBitmap">
+            <summary>
+            The Bitmap
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Width">
+            <summary>
+            Width of the bitmap
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Height">
+            <summary>
+            Height of the bitmap
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap)">
+            <summary>
+            Creates an instance of a BitmapContext, with default mode = ReadWrite
+            </summary>
+            <param name="writeableBitmap"></param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.ReadWriteMode)">
+            <summary>
+            Creates an instance of a BitmapContext, with specified ReadWriteMode
+            </summary>
+            <param name="writeableBitmap"></param>
+            <param name="mode"></param>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Pixels">
+            <summary>
+            The pixels as ARGB integer values, where each channel is 8 bit.
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Format">
+            <summary>
+            The pixel format
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Length">
+            <summary>
+            The number of pixels.
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source to destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Int32[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source Array to destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Byte[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source Array to destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source BitmapContext to destination Array
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source BitmapContext to destination Array
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.Clear">
+            <summary>
+            Clears the BitmapContext, filling the underlying bitmap with zeros
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.Dispose">
+            <summary>
+            Disposes the BitmapContext, unlocking it and invalidating if WPF
+            </summary>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.BitmapFactory">
+            <summary>
+            Cross-platform factory for WriteableBitmaps
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.New(System.Int32,System.Int32)">
+            <summary>
+            Creates a new WriteableBitmap of the specified width and height
+            </summary>
+            <remarks>For WPF the default DPI is 96x96 and PixelFormat is Pbgra32</remarks>
+            <param name="pixelWidth"></param>
+            <param name="pixelHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.ConvertToPbgra32Format(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Converts the input BitmapSource to the Pbgra32 format WriteableBitmap which is internally used by the WriteableBitmapEx.
+            </summary>
+            <param name="source">The source bitmap.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromResource(System.String)">
+            <summary>
+            Loads an image from the applications resource file and returns a new WriteableBitmap.
+            </summary>
+            <param name="relativePath">Only the relative path to the resource file. The assembly name is retrieved automatically.</param>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromContent(System.String)">
+            <summary>
+            Loads an image from the applications content and returns a new WriteableBitmap.
+            </summary>
+            <param name="relativePath">Only the relative path to the content file.</param>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromStream(System.IO.Stream)">
+            <summary>
+            Loads the data from an image stream and returns a new WriteableBitmap.
+            </summary>
+            <param name="stream">The stream with the image data.</param>
+            <returns>A new WriteableBitmap containing the pixel data.</returns>
+        </member>
         <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions">
+            <summary>
+            Collection of draw extension methods for the Silverlight WriteableBitmap class.
+            </summary>
             <summary>
             Collection of extension methods for the WriteableBitmap class.
             </summary>
@@ -28,14 +177,6 @@
             </summary>
             <summary>
             Collection of transformation extension methods for the WriteableBitmap class.
-            </summary>
-            <summary>
-            Collection of draw extension methods for the Silverlight WriteableBitmap class.
-            </summary>
-        </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.INSIDE">
-            <summary>
-            Bitfields used to partition the space into 9 regions
             </summary>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Clear(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Color)">
@@ -209,6 +350,46 @@
             <param name="x">The x coordinate (row).</param>
             <param name="y">The y coordinate (column).</param>
             <param name="color">The color.</param>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode">
+            <summary>
+            The blending mode.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Alpha">
+            <summary>
+            Alpha blending uses the alpha channel to combine the source and destination. 
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Additive">
+            <summary>
+            Additive blending adds the colors of the source and the destination.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Subtractive">
+            <summary>
+            Subtractive blending subtracts the source color from the destination.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Mask">
+            <summary>
+            Uses the source color as a mask.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Multiply">
+            <summary>
+            Multiplies the source color with the destination color.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.ColorKeying">
+            <summary>
+            Ignores the specified Color
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.None">
+            <summary>
+            No blending just copies the pixels from the source.
+            </summary>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Blit(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
             <summary>
@@ -439,6 +620,61 @@
             <param name="points">The points of the polygon in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
             <param name="color">The color for the line.</param>
             <param name="doAlphaBlend">True if alpha blending should be performed or false if not.</param>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge">
+            <summary>
+            Helper class for storing the data of an edge.
+            </summary>
+            <remarks>
+            The following is always true: 
+            <code>edge.StartY &lt; edge.EndY</code>
+            </remarks>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.StartX">
+            <summary>
+            X coordinate of starting point of edge.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.StartY">
+            <summary>
+            Y coordinate of starting point of edge.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.EndX">
+            <summary>
+            X coordinate of ending point of edge.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.EndY">
+            <summary>
+            Y coordinate of ending point of edge.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.Sloap">
+            <summary>
+            The slope of the edge.
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge"/> class.
+            </summary>
+            <remarks>
+            The constructor may swap start and end point to fulfill the guarantees of this class.
+            </remarks>
+            <param name="startX">The X coordinate of the start point of the edge.</param>
+            <param name="startY">The Y coordinate of the start point of the edge.</param>
+            <param name="endX">The X coordinate of the end point of the edge.</param>
+            <param name="endY">The Y coordinate of the end point of the edge.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.CompareTo(System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge)">
+            <summary>
+            Compares the current object with another object of the same type.
+            </summary>
+            <returns>
+            A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other"/> parameter.Zero This object is equal to <paramref name="other"/>. Greater than zero This object is greater than <paramref name="other"/>. 
+            </returns>
+            <param name="other">An object to compare with this object.</param>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillPolygonsEvenOdd(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[][],System.Windows.Media.Color)">
             <summary>
@@ -719,352 +955,6 @@
             <param name="value">Value of gamma for adjustment. Original is 1.0.</param>
             <returns>The new WriteableBitmap.</returns>
         </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
-            <summary>
-            Draws a polyline. Add the first point also at the end of the array if the line should be closed.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
-            <summary>
-            Draws a polyline anti-aliased. Add the first point also at the end of the array if the line should be closed.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolylineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
-            <summary>
-            Draws a polyline. Add the first point also at the end of the array if the line should be closed.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolylineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
-            <summary>
-            Draws a polyline anti-aliased. Add the first point also at the end of the array if the line should be closed.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            Draws a triangle.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the 1st point.</param>
-            <param name="y1">The y-coordinate of the 1st point.</param>
-            <param name="x2">The x-coordinate of the 2nd point.</param>
-            <param name="y2">The y-coordinate of the 2nd point.</param>
-            <param name="x3">The x-coordinate of the 3rd point.</param>
-            <param name="y3">The y-coordinate of the 3rd point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Draws a triangle.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the 1st point.</param>
-            <param name="y1">The y-coordinate of the 1st point.</param>
-            <param name="x2">The x-coordinate of the 2nd point.</param>
-            <param name="y2">The y-coordinate of the 2nd point.</param>
-            <param name="x3">The x-coordinate of the 3rd point.</param>
-            <param name="y3">The y-coordinate of the 3rd point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            Draws a quad.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the 1st point.</param>
-            <param name="y1">The y-coordinate of the 1st point.</param>
-            <param name="x2">The x-coordinate of the 2nd point.</param>
-            <param name="y2">The y-coordinate of the 2nd point.</param>
-            <param name="x3">The x-coordinate of the 3rd point.</param>
-            <param name="y3">The y-coordinate of the 3rd point.</param>
-            <param name="x4">The x-coordinate of the 4th point.</param>
-            <param name="y4">The y-coordinate of the 4th point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Draws a quad.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the 1st point.</param>
-            <param name="y1">The y-coordinate of the 1st point.</param>
-            <param name="x2">The x-coordinate of the 2nd point.</param>
-            <param name="y2">The y-coordinate of the 2nd point.</param>
-            <param name="x3">The x-coordinate of the 3rd point.</param>
-            <param name="y3">The y-coordinate of the 3rd point.</param>
-            <param name="x4">The x-coordinate of the 4th point.</param>
-            <param name="y4">The y-coordinate of the 4th point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            Draws a rectangle.
-            x2 has to be greater than x1 and y2 has to be greater than y1.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
-            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
-            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
-            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Draws a rectangle.
-            x2 has to be greater than x1 and y2 has to be greater than y1.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
-            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
-            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
-            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
-            x2 has to be greater than x1 and y2 has to be greater than y1.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
-            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
-            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
-            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
-            x2 has to be greater than x1 and y2 has to be greater than y1.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
-            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
-            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
-            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf
-            Uses a different parameter representation than DrawEllipse().
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="xc">The x-coordinate of the ellipses center.</param>
-            <param name="yc">The y-coordinate of the ellipses center.</param>
-            <param name="xr">The radius of the ellipse in x-direction.</param>
-            <param name="yr">The radius of the ellipse in y-direction.</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
-            Uses a different parameter representation than DrawEllipse().
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="xc">The x-coordinate of the ellipses center.</param>
-            <param name="yc">The y-coordinate of the ellipses center.</param>
-            <param name="xr">The radius of the ellipse in x-direction.</param>
-            <param name="yr">The radius of the ellipse in y-direction.</param>
-            <param name="color">The color for the line.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
-            <summary>
-            Draws a cubic Beziér spline defined by start, end and two control points.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the start point.</param>
-            <param name="y1">The y-coordinate of the start point.</param>
-            <param name="cx1">The x-coordinate of the 1st control point.</param>
-            <param name="cy1">The y-coordinate of the 1st control point.</param>
-            <param name="cx2">The x-coordinate of the 2nd control point.</param>
-            <param name="cy2">The y-coordinate of the 2nd control point.</param>
-            <param name="x2">The x-coordinate of the end point.</param>
-            <param name="y2">The y-coordinate of the end point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Draws a cubic Beziér spline defined by start, end and two control points.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x1">The x-coordinate of the start point.</param>
-            <param name="y1">The y-coordinate of the start point.</param>
-            <param name="cx1">The x-coordinate of the 1st control point.</param>
-            <param name="cy1">The y-coordinate of the 1st control point.</param>
-            <param name="cx2">The x-coordinate of the 2nd control point.</param>
-            <param name="cy2">The y-coordinate of the 2nd control point.</param>
-            <param name="x2">The x-coordinate of the end point.</param>
-            <param name="y2">The y-coordinate of the end point.</param>
-            <param name="color">The color.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
-            <summary>
-            Draws a series of cubic Beziér splines each defined by start, end and two control points. 
-            The ending point of the previous curve is used as starting point for the next. 
-            Therefore the initial curve needs four points and the subsequent 3 (2 control and 1 end point).
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
-            <summary>
-            Draws a series of cubic Beziér splines each defined by start, end and two control points. 
-            The ending point of the previous curve is used as starting point for the next. 
-            Therefore the initial curve needs four points and the subsequent 3 (2 control and 1 end point).
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveSegment(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
-            <summary>
-            Draws a segment of a Cardinal spline (cubic) defined by four control points.
-            </summary>
-            <param name="x1">The x-coordinate of the 1st control point.</param>
-            <param name="y1">The y-coordinate of the 1st control point.</param>
-            <param name="x2">The x-coordinate of the 2nd control point.</param>
-            <param name="y2">The y-coordinate of the 2nd control point.</param>
-            <param name="x3">The x-coordinate of the 3rd control point.</param>
-            <param name="y3">The y-coordinate of the 3rd control point.</param>
-            <param name="x4">The x-coordinate of the 4th control point.</param>
-            <param name="y4">The y-coordinate of the 4th control point.</param>
-            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
-            <param name="color">The color.</param>
-            <param name="context">The pixel context.</param>
-            <param name="w">The width of the bitmap.</param>
-            <param name="h">The height of the bitmap.</param> 
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
-            <summary>
-            Draws a Cardinal spline (cubic) defined by a point collection. 
-            The cardinal spline passes through each point in the collection.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
-            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
-            <summary>
-            Draws a Cardinal spline (cubic) defined by a point collection. 
-            The cardinal spline passes through each point in the collection.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
-            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
-            <summary>
-            Draws a closed Cardinal spline (cubic) defined by a point collection. 
-            The cardinal spline passes through each point in the collection.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
-            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
-            <summary>
-            Draws a closed Cardinal spline (cubic) defined by a point collection. 
-            The cardinal spline passes through each point in the collection.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
-            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
-            <param name="color">The color for the spline.</param>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Creates a new cropped WriteableBitmap.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="x">The x coordinate of the rectangle that defines the crop region.</param>
-            <param name="y">The y coordinate of the rectangle that defines the crop region.</param>
-            <param name="width">The width of the rectangle that defines the crop region.</param>
-            <param name="height">The height of the rectangle that defines the crop region.</param>
-            <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect)">
-            <summary>
-            Creates a new cropped WriteableBitmap.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="region">The rectangle that defines the crop region.</param>
-            <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
-            <summary>
-            Creates a new resized WriteableBitmap.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="width">The new desired width.</param>
-            <param name="height">The new desired height.</param>
-            <param name="interpolation">The interpolation method that should be used.</param>
-            <returns>A new WriteableBitmap that is a resized version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
-            <summary>
-            Creates a new resized bitmap.
-            </summary>
-            <param name="srcContext">The source context.</param>
-            <param name="widthSource">The width of the source pixels.</param>
-            <param name="heightSource">The height of the source pixels.</param>
-            <param name="width">The new desired width.</param>
-            <param name="height">The new desired height.</param>
-            <param name="interpolation">The interpolation method that should be used.</param>
-            <returns>A new bitmap that is a resized version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Int32*,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
-            <summary>
-            Creates a new resized bitmap.
-            </summary>
-            <param name="pixels">The source pixels.</param>
-            <param name="widthSource">The width of the source pixels.</param>
-            <param name="heightSource">The height of the source pixels.</param>
-            <param name="width">The new desired width.</param>
-            <param name="height">The new desired height.</param>
-            <param name="interpolation">The interpolation method that should be used.</param>
-            <returns>A new bitmap that is a resized version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Rotate(System.Windows.Media.Imaging.WriteableBitmap,System.Int32)">
-            <summary>
-            Rotates the bitmap in 90° steps clockwise and returns a new rotated WriteableBitmap.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="angle">The angle in degrees the bitmap should be rotated in 90° steps clockwise.</param>
-            <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.RotateFree(System.Windows.Media.Imaging.WriteableBitmap,System.Double,System.Boolean)">
-            <summary>
-            Rotates the bitmap in any degree returns a new rotated WriteableBitmap.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="angle">Arbitrary angle in 360 Degrees (positive = clockwise).</param>
-            <param name="crop">if true: keep the size, false: adjust canvas to new size</param>
-            <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Flip(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode)">
-            <summary>
-            Flips (reflects the image) either vertical or horizontal.
-            </summary>
-            <param name="bmp">The WriteableBitmap.</param>
-            <param name="flipMode">The flip mode.</param>
-            <returns>A new WriteableBitmap that is a flipped version of the input.</returns>
-        </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color,System.Nullable{System.Windows.Rect})">
             <summary>
             Draws a colored line by connecting two points using the Bresenham algorithm.
@@ -1152,6 +1042,11 @@
             <param name="color">The color for the line.</param>
             <param name="clipRect">The region in the image to restrict drawing to.</param>
         </member>
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.INSIDE">
+            <summary>
+            Bitfields used to partition the space into 9 regions
+            </summary>
+        </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLinePenned(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmap,System.Nullable{System.Windows.Rect})">
             <summary>
             Draws a line using a pen / stamp for the line 
@@ -1188,6 +1083,32 @@
             <param name="x">The x.</param>
             <param name="y">The y.</param>
             <returns></returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineDotted(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
+            <summary>
+            Draws a colored dotted line
+            </summary>
+            <param name="bmp">The WriteableBitmap</param>
+            <param name="x1">The x-coordinate of the start point.</param>
+            <param name="y1">The y-coordinate of the start point.</param>
+            <param name="x2">The x-coordinate of the end point.</param>
+            <param name="y2">The y-coordinate of the end point.</param>
+            <param name="dotSpace">length of space between each line segment</param>
+            <param name="dotLength">length of each line segment</param>
+            <param name="color">The color for the line.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineDotted(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Draws a colored dotted line
+            </summary>
+            <param name="bmp">The WriteableBitmap</param>
+            <param name="x1">The x-coordinate of the start point.</param>
+            <param name="y1">The y-coordinate of the start point.</param>
+            <param name="x2">The x-coordinate of the end point.</param>
+            <param name="y2">The y-coordinate of the end point.</param>
+            <param name="dotSpace">length of space between each line segment</param>
+            <param name="dotLength">length of each line segment</param>
+            <param name="color">The color for the line.</param>
         </member>
         <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineWu(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Windows.Rect})">
             <summary>
@@ -1339,100 +1260,273 @@
             <param name="destPixel">Premultiplied destination color</param>
             <returns>Premultiplied blended color value</returns>
         </member>
-        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
-            The blending mode.
+            Draws a polyline. Add the first point also at the end of the array if the line should be closed.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Alpha">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
-            Alpha blending uses the alpha channel to combine the source and destination. 
+            Draws a polyline anti-aliased. Add the first point also at the end of the array if the line should be closed.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Additive">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolylineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
-            Additive blending adds the colors of the source and the destination.
+            Draws a polyline. Add the first point also at the end of the array if the line should be closed.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Subtractive">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolylineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
-            Subtractive blending subtracts the source color from the destination.
+            Draws a polyline anti-aliased. Add the first point also at the end of the array if the line should be closed.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Mask">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Uses the source color as a mask.
+            Draws a triangle.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the 1st point.</param>
+            <param name="y1">The y-coordinate of the 1st point.</param>
+            <param name="x2">The x-coordinate of the 2nd point.</param>
+            <param name="y2">The y-coordinate of the 2nd point.</param>
+            <param name="x3">The x-coordinate of the 3rd point.</param>
+            <param name="y3">The y-coordinate of the 3rd point.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Multiply">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Multiplies the source color with the destination color.
+            Draws a triangle.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the 1st point.</param>
+            <param name="y1">The y-coordinate of the 1st point.</param>
+            <param name="x2">The x-coordinate of the 2nd point.</param>
+            <param name="y2">The y-coordinate of the 2nd point.</param>
+            <param name="x3">The x-coordinate of the 3rd point.</param>
+            <param name="y3">The y-coordinate of the 3rd point.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.ColorKeying">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Ignores the specified Color
+            Draws a quad.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the 1st point.</param>
+            <param name="y1">The y-coordinate of the 1st point.</param>
+            <param name="x2">The x-coordinate of the 2nd point.</param>
+            <param name="y2">The y-coordinate of the 2nd point.</param>
+            <param name="x3">The x-coordinate of the 3rd point.</param>
+            <param name="y3">The y-coordinate of the 3rd point.</param>
+            <param name="x4">The x-coordinate of the 4th point.</param>
+            <param name="y4">The y-coordinate of the 4th point.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.None">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            No blending just copies the pixels from the source.
+            Draws a quad.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the 1st point.</param>
+            <param name="y1">The y-coordinate of the 1st point.</param>
+            <param name="x2">The x-coordinate of the 2nd point.</param>
+            <param name="y2">The y-coordinate of the 2nd point.</param>
+            <param name="x3">The x-coordinate of the 3rd point.</param>
+            <param name="y3">The y-coordinate of the 3rd point.</param>
+            <param name="x4">The x-coordinate of the 4th point.</param>
+            <param name="y4">The y-coordinate of the 4th point.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Helper class for storing the data of an edge.
+            Draws a rectangle.
+            x2 has to be greater than x1 and y2 has to be greater than y1.
             </summary>
-            <remarks>
-            The following is always true: 
-            <code>edge.StartY &lt; edge.EndY</code>
-            </remarks>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
+            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
+            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
+            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.StartX">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            X coordinate of starting point of edge.
+            Draws a rectangle.
+            x2 has to be greater than x1 and y2 has to be greater than y1.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
+            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
+            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
+            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.StartY">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Y coordinate of starting point of edge.
+            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
+            x2 has to be greater than x1 and y2 has to be less than y1.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
+            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
+            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
+            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.EndX">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            X coordinate of ending point of edge.
+            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
+            x2 has to be greater than x1 and y2 has to be less than y1.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the bounding rectangle's left side.</param>
+            <param name="y1">The y-coordinate of the bounding rectangle's top side.</param>
+            <param name="x2">The x-coordinate of the bounding rectangle's right side.</param>
+            <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.EndY">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Y coordinate of ending point of edge.
+            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf
+            Uses a different parameter representation than DrawEllipse().
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="xc">The x-coordinate of the ellipses center.</param>
+            <param name="yc">The y-coordinate of the ellipses center.</param>
+            <param name="xr">The radius of the ellipse in x-direction.</param>
+            <param name="yr">The radius of the ellipse in y-direction.</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.Sloap">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            The slope of the edge.
+            A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
+            Uses a different parameter representation than DrawEllipse().
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="xc">The x-coordinate of the ellipses center.</param>
+            <param name="yc">The y-coordinate of the ellipses center.</param>
+            <param name="xr">The radius of the ellipse in x-direction.</param>
+            <param name="yr">The radius of the ellipse in y-direction.</param>
+            <param name="color">The color for the line.</param>
         </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
-            Initializes a new instance of the <see cref="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge"/> class.
+            Draws a cubic Beziér spline defined by start, end and two control points.
             </summary>
-            <remarks>
-            The constructor may swap start and end point to fulfill the guarantees of this class.
-            </remarks>
-            <param name="startX">The X coordinate of the start point of the edge.</param>
-            <param name="startY">The Y coordinate of the start point of the edge.</param>
-            <param name="endX">The X coordinate of the end point of the edge.</param>
-            <param name="endY">The Y coordinate of the end point of the edge.</param>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the start point.</param>
+            <param name="y1">The y-coordinate of the start point.</param>
+            <param name="cx1">The x-coordinate of the 1st control point.</param>
+            <param name="cy1">The y-coordinate of the 1st control point.</param>
+            <param name="cx2">The x-coordinate of the 2nd control point.</param>
+            <param name="cy2">The y-coordinate of the 2nd control point.</param>
+            <param name="x2">The x-coordinate of the end point.</param>
+            <param name="y2">The y-coordinate of the end point.</param>
+            <param name="color">The color.</param>
         </member>
-        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge.CompareTo(System.Windows.Media.Imaging.WriteableBitmapExtensions.Edge)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Compares the current object with another object of the same type.
+            Draws a cubic Beziér spline defined by start, end and two control points.
             </summary>
-            <returns>
-            A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other"/> parameter.Zero This object is equal to <paramref name="other"/>. Greater than zero This object is greater than <paramref name="other"/>. 
-            </returns>
-            <param name="other">An object to compare with this object.</param>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x1">The x-coordinate of the start point.</param>
+            <param name="y1">The y-coordinate of the start point.</param>
+            <param name="cx1">The x-coordinate of the 1st control point.</param>
+            <param name="cy1">The y-coordinate of the 1st control point.</param>
+            <param name="cx2">The x-coordinate of the 2nd control point.</param>
+            <param name="cy2">The y-coordinate of the 2nd control point.</param>
+            <param name="x2">The x-coordinate of the end point.</param>
+            <param name="y2">The y-coordinate of the end point.</param>
+            <param name="color">The color.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
+            <summary>
+            Draws a series of cubic Beziér splines each defined by start, end and two control points. 
+            The ending point of the previous curve is used as starting point for the next. 
+            Therefore the initial curve needs four points and the subsequent 3 (2 control and 1 end point).
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
+            <param name="color">The color for the spline.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
+            <summary>
+            Draws a series of cubic Beziér splines each defined by start, end and two control points. 
+            The ending point of the previous curve is used as starting point for the next. 
+            Therefore the initial curve needs four points and the subsequent 3 (2 control and 1 end point).
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
+            <param name="color">The color for the spline.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveSegment(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Draws a segment of a Cardinal spline (cubic) defined by four control points.
+            </summary>
+            <param name="x1">The x-coordinate of the 1st control point.</param>
+            <param name="y1">The y-coordinate of the 1st control point.</param>
+            <param name="x2">The x-coordinate of the 2nd control point.</param>
+            <param name="y2">The y-coordinate of the 2nd control point.</param>
+            <param name="x3">The x-coordinate of the 3rd control point.</param>
+            <param name="y3">The y-coordinate of the 3rd control point.</param>
+            <param name="x4">The x-coordinate of the 4th control point.</param>
+            <param name="y4">The y-coordinate of the 4th control point.</param>
+            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
+            <param name="color">The color.</param>
+            <param name="context">The pixel context.</param>
+            <param name="w">The width of the bitmap.</param>
+            <param name="h">The height of the bitmap.</param> 
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
+            <summary>
+            Draws a Cardinal spline (cubic) defined by a point collection. 
+            The cardinal spline passes through each point in the collection.
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
+            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
+            <param name="color">The color for the spline.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+            <summary>
+            Draws a Cardinal spline (cubic) defined by a point collection. 
+            The cardinal spline passes through each point in the collection.
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
+            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
+            <param name="color">The color for the spline.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
+            <summary>
+            Draws a closed Cardinal spline (cubic) defined by a point collection. 
+            The cardinal spline passes through each point in the collection.
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
+            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
+            <param name="color">The color for the spline.</param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+            <summary>
+            Draws a closed Cardinal spline (cubic) defined by a point collection. 
+            The cardinal spline passes through each point in the collection.
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, x3, y3, x4, y4, x1, x2 ..., xn, yn).</param>
+            <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
+            <param name="color">The color for the spline.</param>
         </member>
         <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation">
             <summary>
@@ -1464,151 +1558,83 @@
             Flips the image horizontal (around the center of the x-axis).
             </summary>
         </member>
-        <member name="T:System.Windows.Media.Imaging.ReadWriteMode">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Read Write Mode for the BitmapContext.
+            Creates a new cropped WriteableBitmap.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="x">The x coordinate of the rectangle that defines the crop region.</param>
+            <param name="y">The y coordinate of the rectangle that defines the crop region.</param>
+            <param name="width">The width of the rectangle that defines the crop region.</param>
+            <param name="height">The height of the rectangle that defines the crop region.</param>
+            <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
         </member>
-        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadOnly">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect)">
             <summary>
-            On Dispose of a BitmapContext, do not Invalidate
+            Creates a new cropped WriteableBitmap.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="region">The rectangle that defines the crop region.</param>
+            <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
         </member>
-        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadWrite">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
             <summary>
-            On Dispose of a BitmapContext, invalidate the bitmap
+            Creates a new resized WriteableBitmap.
             </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="width">The new desired width.</param>
+            <param name="height">The new desired height.</param>
+            <param name="interpolation">The interpolation method that should be used.</param>
+            <returns>A new WriteableBitmap that is a resized version of the input.</returns>
         </member>
-        <member name="T:System.Windows.Media.Imaging.BitmapContext">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
             <summary>
-            A disposable cross-platform wrapper around a WriteableBitmap, allowing a common API for Silverlight + WPF with locking + unlocking if necessary
+            Creates a new resized bitmap.
             </summary>
-            <remarks>Attempting to put as many preprocessor hacks in this file, to keep the rest of the codebase relatively clean</remarks>
+            <param name="srcContext">The source context.</param>
+            <param name="widthSource">The width of the source pixels.</param>
+            <param name="heightSource">The height of the source pixels.</param>
+            <param name="width">The new desired width.</param>
+            <param name="height">The new desired height.</param>
+            <param name="interpolation">The interpolation method that should be used.</param>
+            <returns>A new bitmap that is a resized version of the input.</returns>
         </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Int32*,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
             <summary>
-            Creates an instance of a BitmapContext, with default mode = ReadWrite
+            Creates a new resized bitmap.
             </summary>
-            <param name="writeableBitmap"></param>
+            <param name="pixels">The source pixels.</param>
+            <param name="widthSource">The width of the source pixels.</param>
+            <param name="heightSource">The height of the source pixels.</param>
+            <param name="width">The new desired width.</param>
+            <param name="height">The new desired height.</param>
+            <param name="interpolation">The interpolation method that should be used.</param>
+            <returns>A new bitmap that is a resized version of the input.</returns>
         </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.ReadWriteMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Rotate(System.Windows.Media.Imaging.WriteableBitmap,System.Int32)">
             <summary>
-            Creates an instance of a BitmapContext, with specified ReadWriteMode
+            Rotates the bitmap in 90° steps clockwise and returns a new rotated WriteableBitmap.
             </summary>
-            <param name="writeableBitmap"></param>
-            <param name="mode"></param>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="angle">The angle in degrees the bitmap should be rotated in 90° steps clockwise.</param>
+            <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
         </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.RotateFree(System.Windows.Media.Imaging.WriteableBitmap,System.Double,System.Boolean)">
             <summary>
-            Performs a Copy operation from source to destination BitmapContext
+            Rotates the bitmap in any degree returns a new rotated WriteableBitmap.
             </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="angle">Arbitrary angle in 360 Degrees (positive = clockwise).</param>
+            <param name="crop">if true: keep the size, false: adjust canvas to new size</param>
+            <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
         </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Int32[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Flip(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode)">
             <summary>
-            Performs a Copy operation from source Array to destination BitmapContext
+            Flips (reflects the image) either vertical or horizontal.
             </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Byte[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source Array to destination BitmapContext
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source BitmapContext to destination Array
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32[],System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source BitmapContext to destination Array
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.Clear">
-            <summary>
-            Clears the BitmapContext, filling the underlying bitmap with zeros
-            </summary>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapContext.Dispose">
-            <summary>
-            Disposes the BitmapContext, unlocking it and invalidating if WPF
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.WriteableBitmap">
-            <summary>
-            The Bitmap
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.Width">
-            <summary>
-            Width of the bitmap
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.Height">
-            <summary>
-            Height of the bitmap
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.Pixels">
-            <summary>
-            The pixels as ARGB integer values, where each channel is 8 bit.
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.Format">
-            <summary>
-            The pixel format
-            </summary>
-        </member>
-        <member name="P:System.Windows.Media.Imaging.BitmapContext.Length">
-            <summary>
-            The number of pixels.
-            </summary>
-        </member>
-        <member name="T:System.Windows.Media.Imaging.BitmapFactory">
-            <summary>
-            Cross-platform factory for WriteableBitmaps
-            </summary>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapFactory.New(System.Int32,System.Int32)">
-            <summary>
-            Creates a new WriteableBitmap of the specified width and height
-            </summary>
-            <remarks>For WPF the default DPI is 96x96 and PixelFormat is Pbgra32</remarks>
-            <param name="pixelWidth"></param>
-            <param name="pixelHeight"></param>
-            <returns></returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapFactory.ConvertToPbgra32Format(System.Windows.Media.Imaging.BitmapSource)">
-            <summary>
-            Converts the input BitmapSource to the Pbgra32 format WriteableBitmap which is internally used by the WriteableBitmapEx.
-            </summary>
-            <param name="source">The source bitmap.</param>
-            <returns></returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromResource(System.String)">
-            <summary>
-            Loads an image from the applications resource file and returns a new WriteableBitmap.
-            </summary>
-            <param name="relativePath">Only the relative path to the resource file. The assembly name is retrieved automatically.</param>
-            <returns>A new WriteableBitmap containing the pixel data.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromContent(System.String)">
-            <summary>
-            Loads an image from the applications content and returns a new WriteableBitmap.
-            </summary>
-            <param name="relativePath">Only the relative path to the content file.</param>
-            <returns>A new WriteableBitmap containing the pixel data.</returns>
-        </member>
-        <member name="M:System.Windows.Media.Imaging.BitmapFactory.FromStream(System.IO.Stream)">
-            <summary>
-            Loads the data from an image stream and returns a new WriteableBitmap.
-            </summary>
-            <param name="stream">The stream with the image data.</param>
-            <returns>A new WriteableBitmap containing the pixel data.</returns>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="flipMode">The flip mode.</param>
+            <returns>A new WriteableBitmap that is a flipped version of the input.</returns>
         </member>
         <member name="T:System.Windows.Media.Imaging.WriteableBitmapContextExtensions">
             <summary>
