@@ -506,7 +506,7 @@ namespace Udemy_Calculator
             {
                 LastNumber = ToCalculusDisplay;
 
-                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid.ToString();
+                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid;
 
                 OnCalculusDisplayChanged();
             }
@@ -530,11 +530,6 @@ namespace Udemy_Calculator
         }
 
         private void UICOSButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UISINButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -564,16 +559,6 @@ namespace Udemy_Calculator
 
         }
 
-        private void UIACOSButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIASINButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UIATANButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -595,11 +580,6 @@ namespace Udemy_Calculator
         }
 
         private void UIExpButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UISquareButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -629,22 +609,12 @@ namespace Udemy_Calculator
 
         }
 
-        private void UISquareButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UIXSquareButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void UIXCubeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIYExpXButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -690,16 +660,6 @@ namespace Udemy_Calculator
         }
 
         private void UIMCButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIMPlusButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UIMMinusButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

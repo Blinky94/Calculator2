@@ -166,7 +166,7 @@ namespace Udemy_Calculator
             // Managing thickness changements, set the spinner control concerned
             UICustomThemesList.Children.OfType<Spinner_Control>().Where(p => p.UIText.Uid == (e.Source as Button).Uid).ToList().ForEach(p =>
             {
-                if (double.TryParse(p.UIText.Text.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lUITextValue))
+                if (double.TryParse(lUITextBox.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lUITextValue))
                 {
                     if (lControlName == "UIButtonUp")
                     {

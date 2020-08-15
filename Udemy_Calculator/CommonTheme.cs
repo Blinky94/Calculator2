@@ -118,7 +118,7 @@ namespace Udemy_Calculator
 
             if (double.TryParse(pValue.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lDoubleValue) == false)
             {
-                if (pValue.ToString() != "")
+                if (!string.IsNullOrEmpty(pValue))
                 {
                     lSolidColorBrushValue = (SolidColorBrush)new BrushConverter().ConvertFromString(pValue);
                 }

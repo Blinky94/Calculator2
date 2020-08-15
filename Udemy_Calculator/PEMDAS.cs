@@ -81,12 +81,21 @@ namespace Udemy_Calculator
 
             while (lMatch.Success)
             {
-                ExtractParenthesis();
-                ComputeExponent();
-                ComputeMultAndDiv();
-                ComputeAddAndSub();
+                // P (Parenthesis) E (Exponents) MD (Multiplcation and division) AS (Addition and substraction): PEMDAS
+                ExtractParenthesis();   // P
+                ComputeExponent();      // E
+                ComputeMultAndDiv();    // MD
+                ComputeAddAndSub();     // AS
+
                 DoCompute(out string lResult);
+
+                if (string.IsNullOrEmpty(lResult))
+                {
+                    throw new NullReferenceException("No result to do comute from current chuck !!!");
+                }
+
                 DoReplaceByResult(lResult);
+
                 lMatch = lRegex.Match(Chunk.Formula.ToString());
             }
 
@@ -177,7 +186,7 @@ namespace Udemy_Calculator
         /// <param name="pLeftOperand"></param>
         /// <param name="pRightOperand"></param>
         /// <param name="pOperator"></param>
-        public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out Operator pOperator)
+        public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out Operator? pOperator)
         {
             pLeftOperand = default;
             pRightOperand = default;
@@ -272,7 +281,12 @@ namespace Udemy_Calculator
         {
             pResult = default;
 
-            ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out Operator lOperator);
+            ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out Operator? lOperator);
+
+            if (double.IsNaN(lLeftOperand) || double.IsNaN(lRightOperand) || lOperator == null)
+            {
+                throw new Exception("Do compute: operands are not consistents !!!");
+            }
 
             string lResult = string.Empty;
 
@@ -298,7 +312,7 @@ namespace Udemy_Calculator
                     break;
             }
 
-            pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult.ToString();
+            pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult;
         }
 
         private Operator mOperator = 0;
@@ -361,7 +375,7 @@ namespace Udemy_Calculator
             }
 
             Chunk.SB.Remove(Chunk.StartIndex, Chunk.Length);
-            Chunk.SB.Insert(Chunk.StartIndex, pResult.ToString());
+            Chunk.SB.Insert(Chunk.StartIndex, pResult);
         }
 
         #endregion
