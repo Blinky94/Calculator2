@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -23,14 +22,12 @@ namespace Udemy_Calculator
 
             UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
-
-            var lXMLDataProvider = (XmlDataProvider)FindResource("ThemeList");
-            var lXmlThemes = lXMLDataProvider.Document;
-
-            UIMenuSide.SetThemesList = GetListOfParametersFromXmlFile(lXmlThemes);
+           
+            XmlParser.OpenTheme();
+            UIMenuSide.SetThemesList = XmlParser.GetListOfParametersFromXmlFile();
             
             CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
-            UIMenuSide.SetMenuItems();
+            // UIMenuSide.SetMenuItems();
             CommonTheme.SetThemesProperties();
             SetThemes();
         }
@@ -67,45 +64,7 @@ namespace Udemy_Calculator
             UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
             UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
         }
-
-        /// <summary>
-        /// xtract every parameters from the theme xml file and store them to a list of themeObject
-        /// </summary>
-        /// <param name="pDoc"></param>
-        /// <returns></returns>
-        private List<ThemeElements> GetListOfParametersFromXmlFile(XmlDocument pDoc)
-        {
-            List<ThemeElements> lList = new List<ThemeElements>();
-            string lThemeSelected = string.Empty;
-
-            foreach (XmlElement lElement in pDoc.DocumentElement.ChildNodes)
-            {
-                if (lElement.Name == "ThemeSelected")
-                {
-                    lThemeSelected = lElement.GetAttribute("name");
-                }
-
-                foreach (XmlElement lNode in lElement)
-                {
-                    foreach (XmlElement lSubNode in lNode)
-                    {
-                        lList.Add(new ThemeElements()
-                        {
-                            ThemeSelected = lThemeSelected,
-                            ParentThemeName = lElement.GetAttribute("name"),
-                            ChildThemeName = lNode.Name,
-                            ChildThemeText = lNode.GetAttribute("name"),
-                            ParameterName = lSubNode.Name,
-                            ParameterText = lSubNode.GetAttribute("name"),
-                            ParameterValue = lSubNode.InnerText
-                        });
-                    }
-                }
-            }
-
-            return lList;
-        }
-
+    
         public void ModifyUIDisplay(string pContent)
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;

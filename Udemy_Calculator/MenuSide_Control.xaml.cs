@@ -48,44 +48,33 @@ namespace Udemy_Calculator
             CurrentMode = CalculatorMode.Standard;
         }
 
-        /// <summary>
-        /// Set a menu item
-        /// </summary>
-        /// <param name="pHeader"></param>
-        /// <param name="pHandler"></param>
-        private void SetMenuItem(string pHeader, RoutedEventHandler pHandler)
-        {
-            MenuItem lMenuItem = new MenuItem();
-            lMenuItem.Click += pHandler;
-            lMenuItem.Header = pHeader;
-            MenuThemes.Items.Add(lMenuItem);
-        }
+        ///// <summary>
+        ///// Set a menu item
+        ///// </summary>
+        ///// <param name="pHeader"></param>
+        ///// <param name="pHandler"></param>
+        //private void SetMenuItem(string pHeader, RoutedEventHandler pHandler)
+        //{
+        //    MenuItem lMenuItem = new MenuItem();
+        //    lMenuItem.Click += pHandler;
+        //    lMenuItem.Header = pHeader;
+        //    MenuThemes.Items.Add(lMenuItem);
+        //}
 
-        /// <summary>
-        /// Set new items in the menuside
-        /// </summary>
-        public void SetMenuItems()
-        {
-            //Set every itemsfrom xml file
-            mListThemeName?.ForEach(pThemeName =>
-            {
-                SetMenuItem($"_{pThemeName}", MenuTheme_Click);
-            });
+        ///// <summary>
+        ///// Set new items in the menuside
+        ///// </summary>
+        //public void SetMenuItems()
+        //{
+        //    //Set every itemsfrom xml file
+        //    mListThemeName?.ForEach(pThemeName =>
+        //    {
+        //        SetMenuItem($"_{pThemeName}", MenuTheme_Click);
+        //    });
 
-            // Set the custom themes item
-            SetMenuItem("_Custom...", CustomItem_Click);
-        }
-
-        private void CustomItem_Click(object sender, RoutedEventArgs e)
-        {
-            CommonTheme.CurrentCustomWindow = new CustomWindow
-            {
-                Background = CommonTheme.MainCalculatorBackground
-            };
-
-            CommonTheme.CurrentCustomWindow.SetControlsCustomThemes();         
-            CommonTheme.CurrentCustomWindow.Show();
-        }
+        //    // Set the custom themes item
+        //    SetMenuItem("_Custom...", CustomItem_Click);
+        //}
 
         private void MenuTheme_Click(object sender, RoutedEventArgs e)
         {
@@ -163,6 +152,15 @@ namespace Udemy_Calculator
                     break;
                 case "_Options":
                     CurrentMode = CalculatorMode.Options;
+                    // Open option window
+                    CommonTheme.CurrentCustomWindow = new CustomWindow
+                    {
+                        Background = CommonTheme.MainCalculatorBackground
+                    };
+
+                    CommonTheme.CurrentCustomWindow.SetControlsCustomThemes();
+                    CommonTheme.CurrentCustomWindow.Show();
+
                     break;
                 case "_Exit":
                     Application.Current.Shutdown();

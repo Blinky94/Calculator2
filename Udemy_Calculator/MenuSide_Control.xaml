@@ -199,13 +199,6 @@
                             <Image Source="Images/Options_icon.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem x:Name="MenuThemes"
-                              Header="_Themes"
-                              Click="MenuTheme_Click">
-                        <MenuItem.Icon>
-                            <Image Source="Images/Themes_icon.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
                     <Separator />
                     <MenuItem Header="_Exit"
                               Click="MenuItem_Click">

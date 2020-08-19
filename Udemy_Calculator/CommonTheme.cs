@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Udemy_Calculator
@@ -53,6 +51,9 @@ namespace Udemy_Calculator
             set
             {
                 mThemeSelectedName = value;
+
+                // Write the current theme selected to xml file
+                XmlParser.SaveThemeNameToXmlFile(mThemeSelectedName);
             }
         }
 
@@ -78,7 +79,7 @@ namespace Udemy_Calculator
         {
             get
             {
-                return mCompleteListThemes.Where(p => p.ParentThemeName == ThemeSelectedName).ToList(); 
+                return mCompleteListThemes.Where(p => p.ParentThemeName == ThemeSelectedName).ToList();
             }
         }
 
@@ -103,7 +104,7 @@ namespace Udemy_Calculator
         {
             get
             {
-                return mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList(); 
+                return mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
             }
         }
 
@@ -116,7 +117,7 @@ namespace Udemy_Calculator
         {
             SolidColorBrush lSolidColorBrushValue = default;
 
-            if (double.TryParse(pValue.ToString().Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lDoubleValue) == false)
+            if (double.TryParse(pValue.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lDoubleValue) == false)
             {
                 if (!string.IsNullOrEmpty(pValue))
                 {
@@ -178,7 +179,7 @@ namespace Udemy_Calculator
                     ForegroundTrigonometryButtons = lSolidColorBrushValue; break;
                 case "BorderBrushTrigonometryButtons":
                     BorderBrushTrigonometryButtons = lSolidColorBrushValue; break;
-            }     
+            }
         }
     }
 }

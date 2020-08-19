@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="ThemeElements.cs" />
     <Compile Include="XmlParameters.cs" />
+    <Compile Include="XmlParser.cs" />
     <Page Include="Calculator_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
