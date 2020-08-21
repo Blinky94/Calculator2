@@ -153,14 +153,7 @@ namespace Udemy_Calculator
                 case "_Options":
                     CurrentMode = CalculatorMode.Options;
                     // Open option window
-                    CommonTheme.CurrentCustomWindow = new CustomWindow
-                    {
-                        Background = CommonTheme.MainCalculatorBackground
-                    };
-
-                    CommonTheme.CurrentCustomWindow.SetControlsCustomThemes();
-                    CommonTheme.CurrentCustomWindow.Show();
-
+                    OptionWindow.GetInstance().Show();
                     break;
                 case "_Exit":
                     Application.Current.Shutdown();

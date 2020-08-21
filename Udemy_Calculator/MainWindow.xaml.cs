@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Xml;
 
 namespace Udemy_Calculator
 {
@@ -11,8 +9,18 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        public delegate void UpdateUIDisplayHandler(string pContent);
-        public event UpdateUIDisplayHandler UIDisplayValueEvent;
+        // Event to raise number pressed by user to display to the UIDisplay
+        public delegate void EventUpdateUIDisplayHandler(string pContent);
+        public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
+
+        private void SetEvents()
+        {
+            // Event registered to the UIDisplay when number is typed
+            UIEventDisplayValueEvent += new EventUpdateUIDisplayHandler(ModifyUIDisplay);
+            UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
+        }
+
+        public static ConsoleDebug mConsoleDebug;
 
         public MainWindow()
         {
@@ -20,12 +28,18 @@ namespace Udemy_Calculator
 
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
 
-            UIDisplayValueEvent += new UpdateUIDisplayHandler(ModifyUIDisplay);
-            UICalculator.CalculusDisplayDelegate = UIDisplayValueEvent;
-           
-            XmlParser.OpenTheme();
+            // Set all events
+            SetEvents();
+
+            // Set the ConsoleDebug window
+            mConsoleDebug = new ConsoleDebug();
+            mConsoleDebug.Hide();
+
+            // Load the current theme from the params xml file
+            XmlParser.LoadParamsXmlTheme();
+            // Get the list from xml file loaded
             UIMenuSide.SetThemesList = XmlParser.GetListOfParametersFromXmlFile();
-            
+
             CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
             // UIMenuSide.SetMenuItems();
             CommonTheme.SetThemesProperties();
@@ -64,10 +78,28 @@ namespace Udemy_Calculator
             UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
             UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
         }
-    
+
         public void ModifyUIDisplay(string pContent)
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;
+        }
+
+        public void SpecialKeysPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F3)
+            {
+                // Show/Hide consoleDebug window
+                if (mConsoleDebug.IsVisible)
+                {
+                    mConsoleDebug.Hide();
+                    this.Focus();
+                }
+                else
+                {
+                    mConsoleDebug.Show();
+                    this.Focus();
+                }
+            }
         }
 
         #region Moving the Calculator

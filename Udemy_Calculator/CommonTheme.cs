@@ -37,7 +37,6 @@ namespace Udemy_Calculator
         public static SolidColorBrush ForegroundTrigonometryButtons;
         public static SolidColorBrush BorderBrushTrigonometryButtons;
 
-
         private static string mThemeSelectedName;
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
@@ -56,8 +55,6 @@ namespace Udemy_Calculator
                 XmlParser.SaveThemeNameToXmlFile(mThemeSelectedName);
             }
         }
-
-        public static CustomWindow CurrentCustomWindow;
 
         /// <summary>
         /// Set all properties from xml file
@@ -97,7 +94,6 @@ namespace Udemy_Calculator
                 mCompleteListThemes = value;
             }
         }
-
 
         // Get the complete list of parent name themes
         public static List<string> ListParentThemesName

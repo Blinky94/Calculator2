@@ -88,6 +88,9 @@
       <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonTheme.cs" />
+    <Compile Include="ConsoleDebug.xaml.cs">
+      <DependentUpon>ConsoleDebug.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Display_Control.xaml.cs">
       <DependentUpon>Display_Control.xaml</DependentUpon>
     </Compile>
@@ -104,8 +107,8 @@
     <Compile Include="ScientificCalculator.xaml.cs">
       <DependentUpon>ScientificCalculator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomWindow.xaml.cs">
-      <DependentUpon>CustomWindow.xaml</DependentUpon>
+    <Compile Include="OptionWindow.xaml.cs">
+      <DependentUpon>OptionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Spinner_Control.xaml.cs">
       <DependentUpon>Spinner_Control.xaml</DependentUpon>
@@ -121,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ColorPicker_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConsoleDebug.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,7 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomWindow.xaml">
+    <Page Include="OptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

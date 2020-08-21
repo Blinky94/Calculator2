@@ -12,7 +12,8 @@
         Background="Transparent"
         WindowStartupLocation="Manual"
         x:Name="mainCalculator"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        KeyDown="SpecialKeysPressed">
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

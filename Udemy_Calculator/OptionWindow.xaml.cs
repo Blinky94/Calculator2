@@ -1,26 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
     /// <summary>
-    /// Interaction logic for SecondWindow.xaml
+    /// Interaction logic for OptionWindow.xaml
     /// </summary>
-    public partial class CustomWindow : Window
+    public partial class OptionWindow : Window
     {
-        public CustomWindow()
+        // Init singleton
+        private static readonly OptionWindow mOptionWindow = new OptionWindow();
+
+        private OptionWindow()
         {
+            // Private constructor to instanciate local objects here 
             InitializeComponent();
 
             // Set the custom window theme position next to the main window calculator application
             Canvas.SetLeft(this, Application.Current.MainWindow.Left + Application.Current.MainWindow.Width);
             Canvas.SetTop(this, Application.Current.MainWindow.Top);
+            SetControlsCustomThemes();
+        }
+
+        public static OptionWindow GetInstance()
+        {                               
+            return mOptionWindow;
         }
 
         public void SetControlsCustomThemes()
@@ -229,11 +238,13 @@ namespace Udemy_Calculator
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             //Save theme
+            XmlParser.SaveTheme();
         }
 
         private void Button_Cancel(object sender, RoutedEventArgs e)
         {
             //cancel change
+            mOptionWindow.Hide();
         }
 
         private void Button_Add(object sender, RoutedEventArgs e)
@@ -247,5 +258,25 @@ namespace Udemy_Calculator
             CommonTheme.ThemeSelectedName = (lSelectedItem as ComboBoxItem).Content.ToString();
             CommonTheme.SetThemesProperties();
         }
+
+
+        #region Moving the Window
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            this.Opacity = 0.75F;
+            base.OnMouseLeftButtonDown(e);
+
+            // Begin dragging the window
+            this.DragMove();
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            this.Opacity = 1F;
+            base.OnMouseLeftButtonUp(e);
+        }
+
+        #endregion
     }
 }

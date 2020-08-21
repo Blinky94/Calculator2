@@ -22,7 +22,7 @@
                 <Setter Property="OverridesDefaultStyle"
                         Value="true" />
                 <Setter Property="Padding"
-                        Value="0 0 0 0" />
+                        Value="0 0 0 3" />
                 <Setter Property="Foreground"
                         Value="{Binding Path=ForegroundBaseButtons, ElementName=calculatorControl}" />
                 <Setter Property="Background"
@@ -286,25 +286,24 @@
                     Click="UIExpButton_Click" />
             <Button x:Name="UISquareRootButton"
                     x:Uid="√"
+                    Content="√"
+                    FontSize="15"
                     Click="UISquareRootButton_Click">
-                <Image Source="Images/SquareRoot_icon.png"
-                       Stretch="Fill"
-                       Width="15"
-                       Height="15" />
             </Button>
             <!--Sixth Range-->
             <Button x:Name="UIPIButton"
                     x:Uid="π"
+                    Content="π"
+                    Padding="0 0 0 3"
+                    FontSize="13"
                     Click="UICloseParenthesisButton_Click">
-                <Image Source="Images/Pi_icon.png"
-                       Stretch="Fill" />
             </Button>
             <Button x:Name="UILOGButton"
                     x:Uid="log"
                     Content="log"
                     Click="UILOGButton_Click" />
             <Button x:Name="UILNButton"
-                    x:Uid="Ln"
+                    x:Uid="ln"
                     Content="ln"
                     Click="UILNButton_Click" />
             <Button x:Name="UICOSButton"
@@ -376,7 +375,6 @@
             <Button x:Name="UIHYPButton"
                     x:Uid="hyp"
                     Content="hyp"
-                    Padding="0"
                     Style="{StaticResource TrigonometryButtons}"
                     Click="UIHYPButton_Click" />
         </WrapPanel>
@@ -400,21 +398,17 @@
             </Button>
             <Button x:Name="UIPercentButton"
                     x:Uid="%"
+                    Content="%"
+                    FontSize="23"                   
                     Click="UIPercentageButton_Click">
-                <Image Height="23"
-                       Source="Images/Percentage_icon.png"
-                       Stretch="Fill"
-                       Width="23" />
             </Button>
 
             <Button x:Name="UIDivideButton"
                     x:Uid="÷"
+                    Content="÷"
+                    FontSize="30"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
-                <Image Height="20"
-                       Source="Images/Divide_Icon.png"
-                       Stretch="Fill"
-                       Width="20" />
             </Button>
             <!--Second range-->
             <Button x:Name="UISevenButton"
@@ -434,12 +428,10 @@
                     Click="UINumberButton_Click" />
             <Button x:Name="UIMultiplyButton"
                     x:Uid="×"
+                    Content="×"
+                    FontSize="30"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
-                <Image Height="20"
-                       Source="Images/Multiply_icon.png"
-                       Stretch="Fill"
-                       Width="20" />
             </Button>
             <!--Third range-->
             <Button x:Name="UIFourButton"
@@ -459,12 +451,10 @@
                     Click="UINumberButton_Click" />
             <Button x:Name="UIPlusButton"
                     x:Uid="+"
+                    Content="+"
+                    FontSize="30"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
-                <Image Height="20"
-                       Source="Images/Plus_icon.png"
-                       Stretch="Fill"
-                       Width="20" />
             </Button>
             <!--Fourth range-->
             <Button x:Name="UIOneButton"
@@ -484,12 +474,10 @@
                     Click="UINumberButton_Click" />
             <Button x:Name="UIMinusButton"
                     x:Uid="−"
+                    Content="‒"
+                    FontSize="30"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
-                <Image Height="20"
-                       Source="Images/Subtract_icon.png"
-                       Stretch="Fill"
-                       Width="20" />
             </Button>
             <!--Fifth range-->
             <Button x:Name="UIZeroButton"
@@ -499,12 +487,11 @@
                     Click="UINumberButton_Click" />
             <Button x:Name="UISignButton"
                     x:Uid="±"
+                    Content="±"
+                    FontSize="30"
                     Style="{StaticResource BaseButtons}"
                     Click="UISignOrUnSignButton_Click">
-                <Image Height="20"
-                       Source="Images/Sign_icon.png"
-                       Stretch="Fill"
-                       Width="20" />
+
             </Button>
             <Button x:Name="UIPointButton"
                     x:Uid="."
@@ -513,12 +500,10 @@
                     Click="UIPointButton_Click" />
             <Button x:Name="UIEqualButton"
                     x:Uid="="
+                    Content="="
+                    FontSize="30"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIEqualButton_Click">
-                <Image Height="20"
-                       Source="Images/Equal_icon.png"
-                       Stretch="Fill"
-                       Width="20" />
             </Button>
         </WrapPanel>
     </Grid>

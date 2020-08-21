@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace Udemy_Calculator
+﻿namespace Udemy_Calculator
 {
     public class ThemeElements
     {
