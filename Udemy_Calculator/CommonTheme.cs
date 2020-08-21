@@ -45,7 +45,8 @@ namespace Udemy_Calculator
         {
             get
             {
-                return mCompleteListThemes?.FirstOrDefault(p => p.ParentThemeName == p.ThemeSelected).ThemeSelected;
+                // mThemeSelectedName = mCompleteListThemes?.FirstOrDefault(p => p.ParentThemeName == p.ThemeSelected).ThemeSelected;
+                return mThemeSelectedName;
             }
             set
             {

@@ -11,21 +11,24 @@
              d:DesignWidth="485">
 
     <!--Calulus Area-->
-    <Border CornerRadius="10" Background="White" BorderBrush="DarkBlue" BorderThickness="1.5">
-          <Viewbox HorizontalAlignment="Right">
-        <TextBox x:Name="UIDisplayCalculus"
-                 HorizontalAlignment="Stretch"
-                 Background="Transparent"
-                 BorderBrush="Violet"
-                 BorderThickness="0"
-                 FontSize="30"
-                 IsReadOnly="True"
-                 TextWrapping="WrapWithOverflow"
-                 FontWeight="DemiBold"
-                 Text="0" />
-    </Viewbox>  
+    <Border CornerRadius="10"
+            Background="White"
+            BorderBrush="DarkBlue"
+            BorderThickness="1.5">
+        <Viewbox HorizontalAlignment="Right">
+            <TextBox x:Name="UIDisplayCalculus"
+                     HorizontalAlignment="Stretch"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     FontSize="30"
+                     FontFamily="{StaticResource Digital}"
+                     IsReadOnly="True"
+                     TextWrapping="WrapWithOverflow"
+                     FontWeight="Medium"
+                     Padding="0 2 0 1"
+                     Text="0" />
+        </Viewbox>
     </Border>
-
 
     <!--Graph Area-->
 

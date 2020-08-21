@@ -84,7 +84,13 @@
                    TargetType="Button"
                    BasedOn="{StaticResource ResourceKey=BaseButtons}">
                 <Setter Property="FontSize"
-                        Value="25" />
+                        Value="35" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource Digital}" />
+                <Setter Property="FontWeight"
+                        Value="Bold" />
+                <Setter Property="Padding"
+                        Value="0 -2 0 0" />
                 <Setter Property="Background"
                         Value="{Binding Path=BackgroundNumericalsButtons, ElementName=calculatorControl}" />
                 <Setter Property="Foreground"
@@ -98,6 +104,8 @@
                    BasedOn="{StaticResource ResourceKey=BaseButtons}">
                 <Setter Property="FontSize"
                         Value="12" />
+                <Setter Property="FontWeight"
+                        Value="DemiBold" />
                 <Setter Property="Background"
                         Value="{Binding Path=BackgroundMemoryButtons, ElementName=calculatorControl}" />
                 <Setter Property="Foreground"
@@ -118,7 +126,7 @@
                 <Setter Property="FontSize"
                         Value="12" />
                 <Setter Property="FontWeight"
-                        Value="ExtraBold" />
+                        Value="DemiBold" />
                 <Setter Property="Background"
                         Value="{Binding Path=BackgroundScientificButtons, ElementName=calculatorControl}" />
                 <Setter Property="Foreground"
@@ -167,18 +175,21 @@
             <Button x:Name="UIMCButton"
                     x:Uid="MC"
                     Content="MC"
+                    Padding="0 1 0 1"
                     Style="{StaticResource MemoryButtons}"
                     Click="UIMCButton_Click">
             </Button>
             <Button x:Name="UIMemoryPlusButton"
                     x:Uid="M+"
                     Content="M+"
+                    Padding="0 1 0 1"
                     Style="{StaticResource MemoryButtons}"
                     Click="UIMemoryPlusButton_Click">
             </Button>
             <Button x:Name="UIMemoryRecallButton"
                     x:Uid="MR"
                     Content="MR"
+                    Padding="0 1 0 1"
                     Style="{StaticResource MemoryButtons}"
                     Click="UIMemoryRecallButton_Click">
             </Button>
@@ -203,112 +214,151 @@
             <Button x:Name="UIXSquareButton"
                     x:Uid="x²"
                     Content="x²"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UIXSquareButton_Click">
             </Button>
             <Button x:Name="UIXCubeButton"
                     x:Uid="x³"
                     Content="x³"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UIXCubeButton_Click">
             </Button>
             <Button x:Name="UIXExpXButton"
                     x:Uid="xª"
                     Content="xª"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UIXExpXButton_Click">
             </Button>
             <!--Second Range-->
             <Button x:Name="UINFactorielButton"
                     x:Uid="n!"
                     Content="n!"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UINFactorielButton_Click">
+            </Button>
+            <Button x:Name="UIRootXButton"
+                    x:Uid="√x"
+                    Content="√x"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
+                    Click="UIRootXButton_Click">
             </Button>
             <Button x:Name="UITwoSquareRootButton"
                     x:Uid="²√x"
                     Content="²√x"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UITwoSquareRootButton_Click">
             </Button>
             <Button x:Name="UIThreeSquareRootButton"
                     x:Uid="³√x"
                     Content="³√x"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UIThreeSquareRootButton_Click">
             </Button>
             <!--Second Range-->
             <Button x:Name="UIXSquareRootYButton"
                     x:Uid="ª√x"
                     Content="ª√x"
-                    Click="UIXSquareRootYButton_Click">
-            </Button>
-            <Button x:Name="UIOneDivideByXButton"
-                    x:Uid="ª√x"
-                    Content="ª√x"
+                    FontSize="15"
+                    Padding="0 -2 0 3"
                     Click="UIXSquareRootYButton_Click">
             </Button>
             <Button x:Name="UITenExpXButton"
                     x:Uid="10ª"
                     Content="10ª"
+                    FontSize="15"
+                    Padding="0 -1 0 0"
                     Click="UITenExpXButton_Click">
             </Button>
             <Button x:Name="UIMODButton"
                     x:Uid="mod"
                     Content="mod"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UIMODButton_Click">
             </Button>
             <!--Thirst Range-->
             <Button x:Name="UIAbsoluteValButton"
                     x:Uid="|N|"
                     Content="|N|"
+                    FontSize="12"
+                    Padding="0 -2 0 0"
                     Click="UIAbsoluteValButton_Click">
             </Button>
             <!--Fourth Range-->
             <Button x:Name="UIRandomButton"
                     x:Uid="rand"
                     Content="rand"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UIRandomButton_Click">
             </Button>
             <Button x:Name="UIEXPButton"
                     x:Uid="e"
                     Content="e"
+                    FontSize="15"
+                    Padding="0 -3 0 1"
                     Click="UIEXPButton_Click_1">
             </Button>
             <Button x:Name="UIEXPSquareButton"
                     x:Uid="eª"
                     Content="eª"
+                    FontSize="16"
+                    Padding="0 -3 0 1"
                     Click="UIEXPSquareButton_Click">
             </Button>
             <Button x:Name="UIOneOnXButton"
                     x:Uid="1/x"
                     Content="1/x"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UIOneOnXButton_Click">
             </Button>
             <!--Fifth Range-->
             <Button x:Name="UIExpButton"
                     x:Uid="^"
                     Content="exp"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UIExpButton_Click" />
             <Button x:Name="UISquareRootButton"
                     x:Uid="√"
                     Content="√"
-                    FontSize="15"
+                    FontSize="17"
+                    Padding="0 -3 0 1"
                     Click="UISquareRootButton_Click">
             </Button>
             <!--Sixth Range-->
             <Button x:Name="UIPIButton"
                     x:Uid="π"
                     Content="π"
-                    Padding="0 0 0 3"
-                    FontSize="13"
+                    Padding="0 -4 0 0"
+                    FontSize="17"
                     Click="UICloseParenthesisButton_Click">
             </Button>
             <Button x:Name="UILOGButton"
                     x:Uid="log"
                     Content="log"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UILOGButton_Click" />
             <Button x:Name="UILNButton"
                     x:Uid="ln"
                     Content="ln"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UILNButton_Click" />
             <Button x:Name="UICOSButton"
                     x:Uid="cos"
                     Content="cos"
+                    FontSize="14"
+                    Padding="0 -2 0 1"
                     Click="UICOSButton_Click" />
             <Button x:Name="UIOpenParenthesisButton"
                     x:Uid="("
@@ -330,18 +380,26 @@
                 <Button x:Name="UICOTButton"
                         x:Uid="cot"
                         Content="cot"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UICOTButton_Click" />
                 <Button x:Name="UISECButton"
                         x:Uid="sec"
                         Content="sec"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UISECButton_Click" />
                 <Button x:Name="UICSCButton"
                         x:Uid="csc"
                         Content="csc"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UICSCButton_Click" />
                 <Button x:Name="UITANButton"
                         x:Uid="tan"
                         Content="tan"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UITANButton_Click" />
             </StackPanel>
 
@@ -356,18 +414,26 @@
                 <Button x:Name="UIACOTButton"
                         x:Uid="Acot"
                         Content="Acot"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UIACOTButton_Click" />
                 <Button x:Name="UIASECButton"
                         x:Uid="Asec"
                         Content="Asec"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UIASECButton_Click" />
                 <Button x:Name="UIACSCButton"
                         x:Uid="Acsc"
                         Content="Acsc"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UIACSCButton_Click" />
                 <Button x:Name="UIATANButton"
                         x:Uid="Atan"
                         Content="Atan"
+                        FontSize="15"
+                        Padding="0 -2 0 1"
                         Click="UIATANButton_Click" />
             </StackPanel>
 
@@ -375,6 +441,8 @@
             <Button x:Name="UIHYPButton"
                     x:Uid="hyp"
                     Content="hyp"
+                    FontSize="15"
+                    Padding="0 -2 0 1"
                     Style="{StaticResource TrigonometryButtons}"
                     Click="UIHYPButton_Click" />
         </WrapPanel>
@@ -406,7 +474,8 @@
             <Button x:Name="UIDivideButton"
                     x:Uid="÷"
                     Content="÷"
-                    FontSize="30"
+                    FontSize="35"
+                    Padding="0 -6 0 0"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
             </Button>
@@ -429,7 +498,8 @@
             <Button x:Name="UIMultiplyButton"
                     x:Uid="×"
                     Content="×"
-                    FontSize="30"
+                    FontSize="35"
+                    Padding="0 -6 0 0"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
             </Button>
@@ -452,7 +522,8 @@
             <Button x:Name="UIPlusButton"
                     x:Uid="+"
                     Content="+"
-                    FontSize="30"
+                    FontSize="35"
+                    Padding="0 -7 0 2"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
             </Button>
@@ -475,7 +546,8 @@
             <Button x:Name="UIMinusButton"
                     x:Uid="−"
                     Content="‒"
-                    FontSize="30"
+                    FontSize="37"
+                    Padding="0 -9 0 6"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIOperatorButton_Click">
             </Button>
@@ -488,7 +560,7 @@
             <Button x:Name="UISignButton"
                     x:Uid="±"
                     Content="±"
-                    FontSize="30"
+                    FontSize="25"
                     Style="{StaticResource BaseButtons}"
                     Click="UISignOrUnSignButton_Click">
 
@@ -501,7 +573,8 @@
             <Button x:Name="UIEqualButton"
                     x:Uid="="
                     Content="="
-                    FontSize="30"
+                    FontSize="35"
+                    Padding="0 -7 0 4"
                     Style="{StaticResource OperatorsButtons}"
                     Click="UIEqualButton_Click">
             </Button>

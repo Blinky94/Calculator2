@@ -698,5 +698,10 @@ namespace Udemy_Calculator
         {
 
         }
+
+        private void UIRootXButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

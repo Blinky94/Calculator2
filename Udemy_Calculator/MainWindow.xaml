@@ -54,7 +54,7 @@
 
                             <!--Call the Calculator User control-->
                             <local:Calculator_Control Grid.Row="2"
-                                                      Margin="0 10 0 0"
+                                                      Margin="1 10 0 0"
                                                       x:Name="UICalculator" />
                         </Grid>
                     </Border>

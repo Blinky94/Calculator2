@@ -257,6 +257,8 @@ namespace Udemy_Calculator
             var lSelectedItem = (sender as ComboBox).SelectedItem;
             CommonTheme.ThemeSelectedName = (lSelectedItem as ComboBoxItem).Content.ToString();
             CommonTheme.SetThemesProperties();
+            // Display the theme
+            ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
         }
 
 
