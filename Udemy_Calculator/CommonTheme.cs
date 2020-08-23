@@ -81,8 +81,11 @@ namespace Udemy_Calculator
             }
         }
 
-        // Get the complete list of themes
         private static List<ThemeElements> mCompleteListThemes;
+
+        /// <summary>
+        /// Get the complete list of themes
+        /// </summary>
         public static List<ThemeElements> CompleteListThemes
         {
             get
@@ -96,13 +99,26 @@ namespace Udemy_Calculator
             }
         }
 
-        // Get the complete list of parent name themes
-        public static List<string> ListParentThemesName
+        /// <summary>
+        /// Get the complete list of parent name themes
+        /// </summary>
+        public static List<string> GetListParentThemesName
         {
             get
             {
                 return mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
             }
+        }
+
+        /// <summary>
+        /// Set the new theme selected to the current list of themeElements
+        /// </summary>
+        /// <param name="pTSelected"></param>
+        public static void SetThemeSelectedToList(string pTSelected = "")
+        {
+            string lPTSelected = !string.IsNullOrEmpty(pTSelected) ? pTSelected : ThemeSelectedName;
+
+            mCompleteListThemes.ForEach(p => { p.ThemeSelected = lPTSelected; });
         }
 
         /// <summary>

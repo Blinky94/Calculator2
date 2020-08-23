@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Udemy_Calculator.Spinner_Control"
+﻿<UserControl x:Class="Udemy_Calculator.Thickness_Control"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -63,7 +63,6 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical"
-                    Background="Yellow"
                     VerticalAlignment="Center"
                     Grid.Column="2">
             <Button x:Name="UIButtonUp"

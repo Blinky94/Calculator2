@@ -8,28 +8,38 @@
              Height="60"
              Width="260"
              d:DesignHeight="450"
-             d:DesignWidth="485">
+             d:DesignWidth="485"
+             x:Name="displayControl">
 
     <!--Calulus Area-->
-    <Border CornerRadius="10"
-            Background="White"
-            BorderBrush="DarkBlue"
-            BorderThickness="1.5">
-        <Viewbox HorizontalAlignment="Right">
-            <TextBox x:Name="UIDisplayCalculus"
-                     HorizontalAlignment="Stretch"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     FontSize="30"
-                     FontFamily="{StaticResource Digital}"
-                     IsReadOnly="True"
-                     TextWrapping="WrapWithOverflow"
-                     FontWeight="Medium"
-                     Padding="0 2 0 1"
-                     Text="0" />
-        </Viewbox>
-    </Border>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush"
+                        Value="{Binding Path=UIDisplayBorderBrush, ElementName=displayControl}" />
+            </Style>
+        </Grid.Resources>
+        <Border x:Name="UIDisplayBorder"
+                CornerRadius="10"
+                Background="White"
+                BorderThickness="1.5">
+            <Viewbox HorizontalAlignment="Right">
+                <TextBox x:Name="UIDisplayCalculus"
+                         HorizontalAlignment="Stretch"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         FontSize="30"
+                         FontFamily="{StaticResource Digital}"
+                         IsReadOnly="True"
+                         TextWrapping="WrapWithOverflow"
+                         FontWeight="Medium"
+                         Padding="0 2 0 1"
+                         Text="0" />
+            </Viewbox>
+        </Border>
 
-    <!--Graph Area-->
+        <!--Graph Area-->
+    </Grid>
+
 
 </UserControl>

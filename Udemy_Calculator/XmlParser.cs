@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 namespace Udemy_Calculator
@@ -71,7 +70,7 @@ namespace Udemy_Calculator
         /// </summary>
         public static void SaveTheme(string pCurrentTheme = "")
         {
-            string lCurrentTheme = pCurrentTheme != string.Empty ? pCurrentTheme : mDoc.SelectSingleNode("//Themes/ThemeSelected").Attributes["name"].InnerText;
+            string lCurrentTheme = pCurrentTheme.Length > 0 ? pCurrentTheme : mDoc.SelectSingleNode("//Themes/ThemeSelected").Attributes["name"].InnerText;
 
             // Get current theme from xml relative to pCurrentTheme
             XmlNodeList lNodes = mDoc?.DocumentElement?.ChildNodes;

@@ -24,7 +24,11 @@ namespace Udemy_Calculator
             // Set the custom window theme position next to the main window calculator application
             Canvas.SetLeft(this, Application.Current.MainWindow.Left + Application.Current.MainWindow.Width);
             Canvas.SetTop(this, Application.Current.MainWindow.Top);
+            
+            // Set the complete control theme to the current Option window
             SetControlsCustomThemes();
+            // Set the ComboBox list themes with the selected one
+            SetComboBoxThemeList(CommonTheme.GetListParentThemesName, CommonTheme.ThemeSelectedName);
         }
 
         public static OptionWindow GetInstance()
@@ -32,40 +36,19 @@ namespace Udemy_Calculator
             return mOptionWindow;
         }
 
+        /// <summary>
+        /// Make the complete custom theme list to the current Option control
+        /// </summary>
         public void SetControlsCustomThemes()
         {
+            // Clear UICustomThemesList before filling
+            UICustomThemesList.Children.Clear();
+
             // Create control item them depending of type concerned
             CommonTheme.ListThemesWithThemeSelected?.ForEach(p =>
             {
                 SetElementsThemes(p);
             });
-
-            // Set the ComboBox list themes with the selected one
-            SetMainThemeList(CommonTheme.ListParentThemesName, CommonTheme.ThemeSelectedName);
-
-            // For all
-            //SetTheme(value, name);
-        }
-
-        private void SetCustomTheme()
-        {
-            foreach (var lChild in UICustomThemesList.Children)
-            {
-                if (lChild is Label)
-                {
-                    (lChild as Label).Foreground = CommonTheme.MainCalculatorForeground;
-                }
-                if (lChild is ColorPicker_Control)
-                {
-                    (lChild as ColorPicker_Control).UITitle.Foreground = CommonTheme.MainCalculatorForeground;
-                    (lChild as ColorPicker_Control).UIColorPicker.SelectedColor = CommonTheme.MainCalculatorBackground.Color;
-
-                }
-                if (lChild is Spinner_Control)
-                {
-                    (lChild as Spinner_Control).UITitle.Foreground = CommonTheme.MainCalculatorBackground;
-                }
-            }
         }
 
         // take the last label in memory to appear only one time by theme (first is an empty one)
@@ -96,11 +79,12 @@ namespace Udemy_Calculator
             {
                 ColorPicker_Control lColorPicker = new ColorPicker_Control();
                 lColorPicker.UITitle.Text = pElements.ParameterText;
+                lColorPicker.UITitle.Foreground = CommonTheme.MainCalculatorForeground;
                 lColorPicker.UITitle.Margin = new Thickness(10, 0, 0, 0);
                 lColorPicker.UIColorPicker.Uid = pElements.ParameterName;
                 lColorPicker.UIColorPicker.SelectedColorChanged += UIColorPicker_SelectedColorChanged;
 
-                if (pElements.ParameterValue != "")
+                if (!string.IsNullOrEmpty(pElements.ParameterValue))
                 {
                     lColorPicker.UIColorPicker.SelectedColor = (Color)ColorConverter.ConvertFromString(pElements.ParameterValue);
                 }
@@ -117,27 +101,29 @@ namespace Udemy_Calculator
             // Type Spinner : If it is thickness option, create Spinner control
             if (pElements.ParameterText == "Thickness")
             {
-                Spinner_Control lSpinner = new Spinner_Control();
+                Thickness_Control lSpinner = new Thickness_Control();
 
-                if (pElements.ParameterValue != "")
+                if (!string.IsNullOrEmpty(pElements.ParameterValue))
                 {
                     lSpinner.UITitle.Text = pElements.ParameterText;
                     lSpinner.UITitle.Margin = new Thickness(10, 0, 0, 0);
+                    lSpinner.UITitle.Foreground = CommonTheme.MainCalculatorForeground;
 
                     lSpinner.UIText.Uid = pElements.ParameterName;
                     lSpinner.UIText.HorizontalContentAlignment = HorizontalAlignment.Right;
+                    lSpinner.UIText.Text = pElements.ParameterValue;
                     lSpinner.UIText.TextChanged += UISpinner_SelectedThicknessChanged;
+
                     lSpinner.UIButtonUp.Uid = pElements.ParameterName;
                     lSpinner.UIButtonDown.Uid = pElements.ParameterName;
                     lSpinner.UIButtonUp.Click += UIButton_Click;
-                    lSpinner.UIButtonDown.Click += UIButton_Click;
-
-                    lSpinner.UIText.Text = pElements.ParameterValue;
+                    lSpinner.UIButtonDown.Click += UIButton_Click;                
                 }
                 else
                 {
                     // If no value on thickness parameter, the zone is taken but hidden
                     lSpinner.Visibility = Visibility.Hidden;
+                    lSpinner.UITitle.Margin = new Thickness(10, 0, 0, 0);
                 }
 
                 UICustomThemesList.Children.Add(lSpinner);
@@ -149,7 +135,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pListParentThemeName"></param>
         /// <param name="pThemeSelected"></param>
-        private void SetMainThemeList(List<string> pListParentThemeName, string pThemeSelected)
+        private void SetComboBoxThemeList(List<string> pListParentThemeName, string pThemeSelected)
         {
             pListParentThemeName?.ForEach(p =>
             {
@@ -159,6 +145,8 @@ namespace Udemy_Calculator
                     IsSelected = p == pThemeSelected
                 });
             });
+
+            ComboBoxThemeListLabel.Foreground = CommonTheme.MainCalculatorForeground;
         }
 
         /// <summary>
@@ -173,7 +161,7 @@ namespace Udemy_Calculator
             string lControlDestName = (e.Source as Button).Uid;
 
             // Managing thickness changements, set the spinner control concerned
-            UICustomThemesList.Children.OfType<Spinner_Control>().Where(p => p.UIText.Uid == (e.Source as Button).Uid).ToList().ForEach(p =>
+            UICustomThemesList.Children.OfType<Thickness_Control>().Where(p => p.UIText.Uid == (e.Source as Button).Uid).ToList().ForEach(p =>
             {
                 if (double.TryParse(p.UIText.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lUITextValue))
                 {
@@ -190,15 +178,8 @@ namespace Udemy_Calculator
                     }
 
                     p.UIText.Text = lUITextValue.ToString();
-                    //if (p. is Label)
-                    //{
-                    //    (lChild as Label).Foreground = CommonTheme.MainCalculatorForeground;
-                    //}
                 }              
             });
-
-            //if(lControlName == ((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.)
-            //((MainWindow)Application.Current.MainWindow).mainCalculator.UICalculator.BorderThicknessBaseButtons = 
         }
 
         /// <summary>
@@ -253,14 +234,25 @@ namespace Udemy_Calculator
         }
 
         private void ComboBoxThemeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        { 
+            // Get the item selected in the combobox
             var lSelectedItem = (sender as ComboBox).SelectedItem;
             CommonTheme.ThemeSelectedName = (lSelectedItem as ComboBoxItem).Content.ToString();
+
+            // Set the selected theme to all the Themeselected property in the current theme list
+            CommonTheme.SetThemeSelectedToList();
+
+            // Set all the properties to the common theme object
             CommonTheme.SetThemesProperties();
-            // Display the theme
+
+            // Set the complete control theme to the current Option window
+            SetControlsCustomThemes();
+            // Set the ComboBox list themes with the selected one
+           // SetComboBoxThemeList(CommonTheme.GetListParentThemesName, CommonTheme.ThemeSelectedName);
+
+            // Display the theme in the main calculator window
             ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
         }
-
 
         #region Moving the Window
 

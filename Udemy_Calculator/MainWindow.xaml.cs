@@ -77,6 +77,7 @@ namespace Udemy_Calculator
             UICalculator.BackgroundTrigonometryButtons = CommonTheme.BackgroundTrigonometryButtons;
             UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
             UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
+            UIDisplay.UIDisplayBorderBrush = CommonTheme.MainCalculatorBorderBrush;
         }
 
         public void ModifyUIDisplay(string pContent)

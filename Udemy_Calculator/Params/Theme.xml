@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Dark" />
+  <ThemeSelected name="Fire" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Background">#FFCBCDCE</MainCalculatorBackground>

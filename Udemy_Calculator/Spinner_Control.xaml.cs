@@ -5,9 +5,9 @@ using System.Windows.Controls;
 
 namespace Udemy_Calculator
 {
-    public partial class Spinner_Control : UserControl
+    public partial class Thickness_Control : UserControl
     {
-        public Spinner_Control()
+        public Thickness_Control()
         {
             InitializeComponent();
         }    

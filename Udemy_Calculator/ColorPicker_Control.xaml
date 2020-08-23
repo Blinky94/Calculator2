@@ -10,32 +10,29 @@
              d:DesignWidth="200"
              Width="Auto"
              Height="Auto">
-    <Grid 
-                VerticalAlignment="Center">
+    <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel 
-            Grid.Column="0"
-            Orientation="Horizontal"
+        <StackPanel Grid.Column="0"
+                    Orientation="Horizontal"
                     VerticalAlignment="Center">
             <TextBlock x:Name="UITitle"
-                       Text="Title of the area"
+                       Text="Title"
                        VerticalAlignment="Center"
                        FontSize="12"
                        Grid.Column="0"
                        Margin="0 0 10 5" />
         </StackPanel>
 
-        <StackPanel 
-            Grid.Column="1"
-            Orientation="Horizontal">
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal">
             <wpfx:ColorPicker x:Name="UIColorPicker"
                               Grid.Column="1"
                               Width="75"
-                              Height="20"
-                              Padding="0 1 0 0"/>
+                              Height="auto"
+                              Padding="0 1 0 0" />
         </StackPanel>
 
     </Grid>
