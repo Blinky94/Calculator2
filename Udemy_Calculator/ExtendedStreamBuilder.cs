@@ -101,7 +101,8 @@ namespace Udemy_Calculator
 
             while (lStr.ContainsAny(pStr.ToCharArray()))
             {
-                int lIndex = lStr.ToString().IndexOf(pStr);
+                string lString = lStr.ToString();
+                int lIndex = lString.IndexOf(pStr, StringComparison.InvariantCulture);
 
                 if (lIndex != -1)
                 {

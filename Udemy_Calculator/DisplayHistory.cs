@@ -10,7 +10,7 @@ namespace Udemy_Calculator
     {
         private Paragraph mParagraph;
         FlowDocument mFlowDocument;
-        private float mLineHeight = 1;
+        private readonly float mLineHeight = 1;
 
         public string FormulaStr { get; private set; }
         public string ResultStr { get; private set; }
@@ -58,7 +58,7 @@ namespace Udemy_Calculator
 
             if (!textRange.IsEmpty)
             {
-                string lOutput = textRange.Text.Substring(0, textRange.Text.Count() - pUILength);
+                string lOutput = textRange.Text.Substring(0, textRange.Text.Length - pUILength);
                 mParagraph.Inlines.Clear();
                 mParagraph.Inlines.Add(new Run(lOutput));
 

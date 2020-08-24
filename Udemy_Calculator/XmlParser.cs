@@ -6,7 +6,7 @@ namespace Udemy_Calculator
     public static class XmlParser
     {
         private static XmlDocument mDoc;
-        private static string mPath = @"~/../../../Params/Theme.xml";
+        private const string mPath = @"~/../../../Params/Theme.xml";
 
         public static void LoadParamsXmlTheme()
         {

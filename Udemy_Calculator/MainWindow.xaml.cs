@@ -20,7 +20,7 @@ namespace Udemy_Calculator
             UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
         }
 
-        public static ConsoleDebug mConsoleDebug;
+        internal static ConsoleDebug mConsoleDebug;
 
         public MainWindow()
         {
@@ -42,7 +42,7 @@ namespace Udemy_Calculator
 
             CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
             // UIMenuSide.SetMenuItems();
-            CommonTheme.SetThemesProperties();
+            CommonTheme.LoadPropertiesFromXmlFile();
             SetThemes();
         }
 

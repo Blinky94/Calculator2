@@ -8,34 +8,34 @@ namespace Udemy_Calculator
     /// <summary>
     /// Class to set the common theme with colors and thickness
     /// </summary>
-    public class CommonTheme
+    public static class CommonTheme
     {
-        public static SolidColorBrush MainCalculatorBackground;
-        public static SolidColorBrush MainCalculatorForeground;
-        public static SolidColorBrush MainCalculatorBorderBrush;
-        public static double MainCalculatorBorderThickness;
-        public static SolidColorBrush BackgroundBaseButtons;
-        public static SolidColorBrush ForegroundBaseButtons;
-        public static SolidColorBrush BorderBrushBaseButtons;
-        public static double BorderThicknessBaseButtons;
-        public static SolidColorBrush Background2ndeButton;
-        public static SolidColorBrush Foreground2ndeButton;
-        public static SolidColorBrush BorderBrush2ndeButton;
-        public static SolidColorBrush BackgroundScientificButtons;
-        public static SolidColorBrush ForegroundScientificButtons;
-        public static SolidColorBrush BorderBrushScientificButtons;
-        public static SolidColorBrush BackgroundOperatorsButtons;
-        public static SolidColorBrush ForegroundOperatorsButtons;
-        public static SolidColorBrush BorderBrushOperatorsButtons;
-        public static SolidColorBrush BackgroundNumericalsButtons;
-        public static SolidColorBrush ForegroundNumericalsButtons;
-        public static SolidColorBrush BorderBrushNumericalsButtons;
-        public static SolidColorBrush BackgroundMemoryButtons;
-        public static SolidColorBrush ForegroundMemoryButtons;
-        public static SolidColorBrush BorderBrushMemoryButtons;
-        public static SolidColorBrush BackgroundTrigonometryButtons;
-        public static SolidColorBrush ForegroundTrigonometryButtons;
-        public static SolidColorBrush BorderBrushTrigonometryButtons;
+        internal static SolidColorBrush MainCalculatorBackground;
+        internal static SolidColorBrush MainCalculatorForeground;
+        internal static SolidColorBrush MainCalculatorBorderBrush;
+        internal static double MainCalculatorBorderThickness;
+        internal static SolidColorBrush BackgroundBaseButtons;
+        internal static SolidColorBrush ForegroundBaseButtons;
+        internal static SolidColorBrush BorderBrushBaseButtons;
+        internal static double BorderThicknessBaseButtons;
+        internal static SolidColorBrush Background2ndeButton;
+        internal static SolidColorBrush Foreground2ndeButton;
+        internal static SolidColorBrush BorderBrush2ndeButton;
+        internal static SolidColorBrush BackgroundScientificButtons;
+        internal static SolidColorBrush ForegroundScientificButtons;
+        internal static SolidColorBrush BorderBrushScientificButtons;
+        internal static SolidColorBrush BackgroundOperatorsButtons;
+        internal static SolidColorBrush ForegroundOperatorsButtons;
+        internal static SolidColorBrush BorderBrushOperatorsButtons;
+        internal static SolidColorBrush BackgroundNumericalsButtons;
+        internal static SolidColorBrush ForegroundNumericalsButtons;
+        internal static SolidColorBrush BorderBrushNumericalsButtons;
+        internal static SolidColorBrush BackgroundMemoryButtons;
+        internal static SolidColorBrush ForegroundMemoryButtons;
+        internal static SolidColorBrush BorderBrushMemoryButtons;
+        internal static SolidColorBrush BackgroundTrigonometryButtons;
+        internal static SolidColorBrush ForegroundTrigonometryButtons;
+        internal static SolidColorBrush BorderBrushTrigonometryButtons;
 
         private static string mThemeSelectedName;
         /// <summary>
@@ -45,7 +45,6 @@ namespace Udemy_Calculator
         {
             get
             {
-                // mThemeSelectedName = mCompleteListThemes?.FirstOrDefault(p => p.ParentThemeName == p.ThemeSelected).ThemeSelected;
                 return mThemeSelectedName;
             }
             set
@@ -58,9 +57,9 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Set all properties from xml file
+        /// Load all properties from xml file
         /// </summary>
-        public static void SetThemesProperties()
+        public static void LoadPropertiesFromXmlFile()
         {
             var lCurrentTheme = CompleteListThemes.Where(p => p.ParentThemeName == ThemeSelectedName).ToList();
 
@@ -77,27 +76,14 @@ namespace Udemy_Calculator
         {
             get
             {
-                return mCompleteListThemes.Where(p => p.ParentThemeName == ThemeSelectedName).ToList();
+                return CompleteListThemes.Where(p => p.ParentThemeName == ThemeSelectedName).ToList();
             }
         }
-
-        private static List<ThemeElements> mCompleteListThemes;
 
         /// <summary>
         /// Get the complete list of themes
         /// </summary>
-        public static List<ThemeElements> CompleteListThemes
-        {
-            get
-            {
-                return mCompleteListThemes;
-            }
-
-            internal set
-            {
-                mCompleteListThemes = value;
-            }
-        }
+        public static List<ThemeElements> CompleteListThemes { get; internal set; }
 
         /// <summary>
         /// Get the complete list of parent name themes
@@ -106,19 +92,19 @@ namespace Udemy_Calculator
         {
             get
             {
-                return mCompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
+                return CompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
             }
         }
 
         /// <summary>
-        /// Set the new theme selected to the current list of themeElements
+        /// Modify the new theme selected into the current list of themeElements
         /// </summary>
         /// <param name="pTSelected"></param>
-        public static void SetThemeSelectedToList(string pTSelected = "")
+        public static void ModifyThemeSelectedToList(string pTSelected = "")
         {
             string lPTSelected = !string.IsNullOrEmpty(pTSelected) ? pTSelected : ThemeSelectedName;
 
-            mCompleteListThemes.ForEach(p => { p.ThemeSelected = lPTSelected; });
+            CompleteListThemes.ForEach(p => { p.ThemeSelected = lPTSelected; });
         }
 
         /// <summary>

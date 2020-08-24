@@ -387,7 +387,7 @@ namespace Udemy_Calculator
             }
         }
 
-        public Delegate CalculusDisplayDelegate;
+        internal Delegate CalculusDisplayDelegate;
 
         public void OnCalculusDisplayChanged()
         {
@@ -409,7 +409,7 @@ namespace Udemy_Calculator
         }
 
         private readonly string mSpecialSymbols = "×÷+-";
-        private bool mIsResult = false;
+        private bool mIsResult;
 
         public Calculator_Control()
         {
@@ -479,7 +479,7 @@ namespace Udemy_Calculator
                 {
                     mIsResult = false;
                     string lDuplicate = LastNumber;
-                    lDuplicate.Replace("(", "").Replace(")", "");
+                    _ = lDuplicate.Replace("(", "").Replace(")", "");
 
                     double.TryParse(lDuplicate, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNum);
 

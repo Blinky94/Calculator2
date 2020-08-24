@@ -37,9 +37,9 @@ namespace Udemy_Calculator
             }
         }
 
-        private string mSpecialSymbols = "×÷+-";
-        private bool mIsResult = false;
-        private History mHistory;
+        private readonly string mSpecialSymbols = "×÷+-";
+        private bool mIsResult;
+        private readonly History mHistory;
         private PEMDAS mPemdas;
 
         public ScientificCalculator()
@@ -120,7 +120,7 @@ namespace Udemy_Calculator
                 {
                     mIsResult = false;
                     string lDuplicate = LastNumber;
-                    lDuplicate.Replace("(", "").Replace(")", "");
+                    _ = lDuplicate.Replace("(", "").Replace(")", "");
 
                     double.TryParse(lDuplicate, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNum);
 
@@ -168,8 +168,7 @@ namespace Udemy_Calculator
             if (!mIsResult)
             {
                 string lFormula = mHistory.ReturnFormula();
-
-                if (double.TryParse(ResultLabel, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNewNumber))
+                if (double.TryParse(ResultLabel, NumberStyles.Any, CultureInfo.InvariantCulture, out _))
                 {
                     // Ici PEMDAS
                     string lResult;

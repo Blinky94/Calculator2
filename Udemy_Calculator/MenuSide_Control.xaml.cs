@@ -12,8 +12,6 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MenuSide_Control : UserControl
     {
-        private static List<string> mListThemeName;
-
         public static readonly DependencyProperty GetThemesList2Property =
     DependencyProperty.Register("GetThemesList",
                                 typeof(List<ThemeElements>),
@@ -28,7 +26,6 @@ namespace Udemy_Calculator
         public static void OnAvailableItemsChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             CommonTheme.CompleteListThemes = (List<ThemeElements>)e.NewValue;
-            mListThemeName = CommonTheme.CompleteListThemes.Select(p => p.ParentThemeName).Distinct().ToList();
         }
 
         public static readonly DependencyProperty CurrentModeProperty =
@@ -79,7 +76,7 @@ namespace Udemy_Calculator
         private void MenuTheme_Click(object sender, RoutedEventArgs e)
         {
             CommonTheme.ThemeSelectedName = (e.OriginalSource as MenuItem).Header.ToString();
-            CommonTheme.SetThemesProperties();
+            CommonTheme.LoadPropertiesFromXmlFile();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

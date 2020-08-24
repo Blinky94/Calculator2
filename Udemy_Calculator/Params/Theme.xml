@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Fire" />
+  <ThemeSelected name="Ice" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Background">#FFCBCDCE</MainCalculatorBackground>
@@ -117,8 +117,8 @@
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Background">#FFC9F9FA</MainCalculatorBackground>
       <MainCalculatorForeground name="Foreground">#FF678DFF</MainCalculatorForeground>
-      <MainCalculatorBorderBrush name="Border color">#FF00FFFF</MainCalculatorBorderBrush>
-      <MainCalculatorBorderThickness max="10" name="Thickness">5</MainCalculatorBorderThickness>
+      <MainCalculatorBorderBrush name="Border color">#FF50A1A1</MainCalculatorBorderBrush>
+      <MainCalculatorBorderThickness max="10" name="Thickness">10</MainCalculatorBorderThickness>
     </MainTheme>
     <BaseButtons name="General buttons">
       <BackgroundBaseButtons name="Background">#FF8BD6FF</BackgroundBaseButtons>

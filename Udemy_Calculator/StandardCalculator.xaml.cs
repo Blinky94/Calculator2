@@ -38,7 +38,7 @@ namespace Udemy_Calculator
         }
 
         private readonly string mSpecialSymbols = "×÷+-";
-        private bool mIsResult = false;
+        private bool mIsResult;
         private readonly History mHistory;
         private PEMDAS mPemdas;
 
@@ -120,7 +120,7 @@ namespace Udemy_Calculator
                 {
                     mIsResult = false;
                     string lDuplicate = LastNumber;
-                    lDuplicate.Replace("(", "").Replace(")", "");
+                    _ = lDuplicate.Replace("(", "").Replace(")", "");
 
                     double.TryParse(lDuplicate, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNum);
 

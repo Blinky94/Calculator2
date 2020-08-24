@@ -41,16 +41,16 @@ namespace Udemy_Calculator
         }
     }
 
-    public enum Operator { Unknown, Multiplication, Division, Addition, Substraction, Square, Exponent }
+    public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Square, Exponent }
 
     public class PEMDAS
     {
         #region Fields
         // Pattern to test if there are no operator remaining in the current formula
-        string lFinishedComputationPattern = @"(?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])";
+        private readonly string lFinishedComputationPattern = @"(?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])";
 
         // Enum to select which part of a chunk
-        internal enum eFormulaPart { All = 0, Left = 1, Right = 2 };
+        internal enum EFormulaPart { All = 0, Left = 1, Right = 2 };
 
         /// <summary>
         /// Chunk of a formula
@@ -186,7 +186,7 @@ namespace Udemy_Calculator
         /// <param name="pLeftOperand"></param>
         /// <param name="pRightOperand"></param>
         /// <param name="pOperator"></param>
-        public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out Operator? pOperator)
+        public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out EOperation? pOperator)
         {
             pLeftOperand = default;
             pRightOperand = default;
@@ -281,7 +281,7 @@ namespace Udemy_Calculator
         {
             pResult = default;
 
-            ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out Operator? lOperator);
+            ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out EOperation? lOperator);
 
             if (double.IsNaN(lLeftOperand) || double.IsNaN(lRightOperand) || lOperator == null)
             {
@@ -292,22 +292,22 @@ namespace Udemy_Calculator
 
             switch (lOperator)
             {
-                case Operator.Multiplication:
+                case EOperation.Multiplication:
                     lResult = MathOperation.Multiply(lLeftOperand, lRightOperand);
                     break;
-                case Operator.Division:
+                case EOperation.Division:
                     lResult = MathOperation.Divide(lLeftOperand, lRightOperand);
                     break;
-                case Operator.Addition:
+                case EOperation.Addition:
                     lResult = MathOperation.Add(lLeftOperand, lRightOperand);
                     break;
-                case Operator.Substraction:
+                case EOperation.Substraction:
                     lResult = MathOperation.Substract(lLeftOperand, lRightOperand);
                     break;
-                case Operator.Square:
+                case EOperation.Square:
                     lResult = MathOperation.Sqrt(lRightOperand);
                     break;
-                case Operator.Exponent:
+                case EOperation.Exponent:
                     lResult = MathOperation.Exponent(lLeftOperand, lRightOperand);
                     break;
             }
@@ -315,39 +315,39 @@ namespace Udemy_Calculator
             pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult;
         }
 
-        private Operator mOperator = 0;
+        private EOperation mOperator;
 
         /// <summary>
         /// Get the operator from the string
         /// </summary>
-        internal Operator WhatOperator(char pOperator)
+        internal EOperation WhatOperator(char pOperator)
         {
             switch (pOperator)
             {
                 case '^':
-                    mOperator = Operator.Exponent;
+                    mOperator = EOperation.Exponent;
                     break;
                 case '×':
                 case 'x':
                 case 'X':
                 case '*':
-                    mOperator = Operator.Multiplication;
+                    mOperator = EOperation.Multiplication;
                     break;
                 case '÷':
                 case '/':
-                    mOperator = Operator.Division;
+                    mOperator = EOperation.Division;
                     break;
                 case '+':
-                    mOperator = Operator.Addition;
+                    mOperator = EOperation.Addition;
                     break;
                 case '-':
-                    mOperator = Operator.Substraction;
+                    mOperator = EOperation.Substraction;
                     break;
                 case '√':
-                    mOperator = Operator.Square;
+                    mOperator = EOperation.Square;
                     break;
                 default:
-                    mOperator = Operator.Unknown;
+                    mOperator = EOperation.Unknown;
                     break;
             }
 

@@ -20,7 +20,7 @@
               Canvas.Left="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="480" />
+                <RowDefinition Height="460" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.Resources>
@@ -83,7 +83,7 @@
             <StackPanel Orientation="Horizontal" 
                         Background="Transparent"
                         Grid.Row="2"
-                        Margin="85 -10 0 0"
+                        Margin="85 5 0 0"
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Center">
                 <Button Click="Button_Add" 

@@ -24,7 +24,7 @@ namespace Udemy_Calculator
             // Set the custom window theme position next to the main window calculator application
             Canvas.SetLeft(this, Application.Current.MainWindow.Left + Application.Current.MainWindow.Width);
             Canvas.SetTop(this, Application.Current.MainWindow.Top);
-            
+
             // Set the complete control theme to the current Option window
             SetControlsCustomThemes();
             // Set the ComboBox list themes with the selected one
@@ -32,7 +32,7 @@ namespace Udemy_Calculator
         }
 
         public static OptionWindow GetInstance()
-        {                               
+        {
             return mOptionWindow;
         }
 
@@ -117,12 +117,12 @@ namespace Udemy_Calculator
                     lSpinner.UIButtonUp.Uid = pElements.ParameterName;
                     lSpinner.UIButtonDown.Uid = pElements.ParameterName;
                     lSpinner.UIButtonUp.Click += UIButton_Click;
-                    lSpinner.UIButtonDown.Click += UIButton_Click;                
+                    lSpinner.UIButtonDown.Click += UIButton_Click;
                 }
                 else
                 {
                     // If no value on thickness parameter, the zone is taken but hidden
-                    lSpinner.Visibility = Visibility.Hidden;
+                    lSpinner.Visibility = Visibility.Collapsed;
                     lSpinner.UITitle.Margin = new Thickness(10, 0, 0, 0);
                 }
 
@@ -177,9 +177,22 @@ namespace Udemy_Calculator
                         }
                     }
 
-                    p.UIText.Text = lUITextValue.ToString();
-                }              
+                    if (lControlDestName == "MainCalculatorBorderThickness")
+                    {
+                        CommonTheme.MainCalculatorBorderThickness = lUITextValue;
+                    }
+
+                    if (lControlDestName == "BorderThicknessBaseButtons")
+                    {
+                        CommonTheme.BorderThicknessBaseButtons = lUITextValue;
+                    }
+
+                    p.UIText.Text = lUITextValue.ToString().Replace(',', '.');
+                }
             });
+
+            //Applying theme to the MainWindow
+            ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
         }
 
         /// <summary>
@@ -196,6 +209,7 @@ namespace Udemy_Calculator
 
             //Applying theme to the MainWindow
             ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
+
             Canvas.Background = CommonTheme.MainCalculatorBackground;
             foreach (var lChild in UICustomThemesList.Children)
             {
@@ -203,7 +217,20 @@ namespace Udemy_Calculator
                 {
                     (lChild as Label).Foreground = CommonTheme.MainCalculatorForeground;
                 }
+
+                if (lChild is ColorPicker_Control)
+                {
+                    (lChild as ColorPicker_Control).UITitle.Foreground = CommonTheme.MainCalculatorForeground;
+                }
+
+                if (lChild is Thickness_Control)
+                {
+                    (lChild as Thickness_Control).UITitle.Foreground = CommonTheme.MainCalculatorForeground;
+                }
             }
+
+            // Set ComboBoxTheme List foreground color
+            ComboBoxThemeListLabel.Foreground = CommonTheme.MainCalculatorForeground;
         }
 
         /// <summary>
@@ -233,22 +260,31 @@ namespace Udemy_Calculator
             // Add new theme
         }
 
+        /// <summary>
+        /// Set all the colors theme to the current option window
+        /// </summary>
+        private void SetOptionWindowThemeColors()
+        {
+            // Set the selected theme to all the Themeselected property in the current theme list
+            CommonTheme.ModifyThemeSelectedToList();
+
+            // Set all the properties to the common theme object
+            CommonTheme.LoadPropertiesFromXmlFile();
+
+            // Set the complete control theme to the current Option window
+            SetControlsCustomThemes();
+
+            // Set ComboBoxTheme List foreground color
+            ComboBoxThemeListLabel.Foreground = CommonTheme.MainCalculatorForeground;
+        }
+
         private void ComboBoxThemeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { 
+        {
             // Get the item selected in the combobox
             var lSelectedItem = (sender as ComboBox).SelectedItem;
             CommonTheme.ThemeSelectedName = (lSelectedItem as ComboBoxItem).Content.ToString();
 
-            // Set the selected theme to all the Themeselected property in the current theme list
-            CommonTheme.SetThemeSelectedToList();
-
-            // Set all the properties to the common theme object
-            CommonTheme.SetThemesProperties();
-
-            // Set the complete control theme to the current Option window
-            SetControlsCustomThemes();
-            // Set the ComboBox list themes with the selected one
-           // SetComboBoxThemeList(CommonTheme.GetListParentThemesName, CommonTheme.ThemeSelectedName);
+            SetOptionWindowThemeColors();
 
             // Display the theme in the main calculator window
             ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
