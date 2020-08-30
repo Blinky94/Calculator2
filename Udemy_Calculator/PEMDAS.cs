@@ -225,7 +225,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pStr"></param>
         /// <returns></returns>
-        internal decimal GetDecimalFromString(string pStr)
+        internal static decimal GetDecimalFromString(string pStr)
         {
             bool lHasExponential = (pStr.Contains("E") || pStr.Contains("e"));
 
@@ -249,7 +249,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pStr"></param>
         /// <returns></returns>
-        internal double GetDoubleFromString(string pStr)
+        internal static double GetDoubleFromString(string pStr)
         {
             try
             {
