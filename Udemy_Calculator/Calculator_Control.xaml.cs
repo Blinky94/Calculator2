@@ -373,6 +373,8 @@ namespace Udemy_Calculator
 
         #endregion
 
+        #region Delegate to display Event
+
         private string mToCalculusDisplay = "0";
 
         public string ToCalculusDisplay
@@ -391,8 +393,17 @@ namespace Udemy_Calculator
 
         public void OnCalculusDisplayChanged()
         {
-            CalculusDisplayDelegate.DynamicInvoke(ToCalculusDisplay);
+            CalculusDisplayDelegate?.DynamicInvoke(ToCalculusDisplay);
         }
+
+        #endregion
+
+        #region Delegate to Debug log console Event
+
+        internal Delegate CalculatorControl_DebugLogsDelegate;
+
+
+        #endregion
 
         private string mLastNumber = "0";
         internal string LastNumber
@@ -413,7 +424,7 @@ namespace Udemy_Calculator
 
         public Calculator_Control()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
@@ -432,6 +443,8 @@ namespace Udemy_Calculator
                 ToCalculusDisplay = $"{ToCalculusDisplay}{lNumber}";
             }
 
+            lInput = lNumber.ToString().Replace(',', '.');
+            UIHistory.AppendElement(lInput, mIsResult, LastNumber);
             OnCalculusDisplayChanged();
         }
 
@@ -443,7 +456,7 @@ namespace Udemy_Calculator
             {
                 // If preceding is operator or nothing, add 0 before the point
                 string lOperators = "÷/×xX*-+√";
-                string lAdded;
+                string lAdded = string.Empty;
 
                 if (lOperators.Contains(lUIContent[lUIContent.Length - 1]))
                 {
@@ -455,7 +468,9 @@ namespace Udemy_Calculator
                     ToCalculusDisplay = $"{ToCalculusDisplay}.";
                 }
 
+                UIHistory.AppendElement(lAdded + (e.Source as Button).Content.ToString(), mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
+                mIsResult = false;
             }
         }
 
@@ -464,6 +479,7 @@ namespace Udemy_Calculator
             ToCalculusDisplay = "0";
             LastNumber = "0";
 
+            UIHistory.AppendElement(string.Empty);
             OnCalculusDisplayChanged();
         }
 
@@ -486,6 +502,7 @@ namespace Udemy_Calculator
                     ToCalculusDisplay = (lNum * (-1)).ToString();
                 }
 
+                UIHistory.AppendElement(ToCalculusDisplay, mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
             }
         }
@@ -496,6 +513,8 @@ namespace Udemy_Calculator
             if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
                 ToCalculusDisplay = (lResult * (0.01)).ToString();
+
+                UIHistory.AppendElement(ToCalculusDisplay, false);
                 OnCalculusDisplayChanged();
             }
         }
@@ -504,24 +523,43 @@ namespace Udemy_Calculator
         {
             if (!mSpecialSymbols.Contains(ToCalculusDisplay.LastOrDefault()))
             {
+                ToCalculusDisplay = (e.Source as Button).Content.ToString();
+
+                UIHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, LastNumber);
+
                 LastNumber = ToCalculusDisplay;
-
-                ToCalculusDisplay = (e.Source as Button).Content.GetType() != typeof(Image) ? (e.Source as Button).Content.ToString() : (e.Source as Button).Uid;
-
                 OnCalculusDisplayChanged();
             }
         }
+
+        private PEMDAS mPemdas;
 
         public virtual void UIEqualButton_Click(object sender, RoutedEventArgs e)
         {
             if (!mIsResult)
             {
+                string lFormula = UIHistory.ReturnFormula();
+
                 if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
                 {
+                    // Ici PEMDAS
+                    string lResult;
+                    mPemdas = new PEMDAS(lFormula);
+                    lResult = mPemdas.ComputeFormula();
+
+                    ToCalculusDisplay = lResult;
+                    UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber);
+
                     mIsResult = true;
+
+                    UIHistory.NewElement();
+
                     LastNumber = ToCalculusDisplay;
+                    UIHistory.AppendElement(lResult.Replace(',', '.'), true);
+                    UIHistory.NewElement();
+                    OnCalculusDisplayChanged();
                 }
-            }
+            }          
         }
 
         private void UIBackReturnButton_Click(object sender, RoutedEventArgs e)

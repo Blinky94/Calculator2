@@ -48,14 +48,12 @@
 
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
-                                                   x:Name="UIDisplay"
-                                                   HorizontalAlignment="Center"
-                                                   HorizontalContentAlignment="Stretch" />
+                                                   x:Name="UIDisplay" />
 
                             <!--Call the Calculator User control-->
                             <local:Calculator_Control Grid.Row="2"
-                                                      Margin="1 10 0 0"
-                                                      x:Name="UICalculator" />
+                                                      x:Name="UICalculator"
+                                                      Margin="1 10 0 0" />
                         </Grid>
                     </Border>
                 </StackPanel>

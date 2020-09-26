@@ -19,7 +19,6 @@
                             Value="Transparent" />
                 </Style>
 
-
                 <ControlTemplate x:Key="MenuItemTemplate"
                                  TargetType="MenuItem">
                     <Grid>

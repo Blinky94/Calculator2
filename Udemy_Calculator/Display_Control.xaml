@@ -6,40 +6,46 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              Height="60"
-             Width="260"
-             d:DesignHeight="450"
+             MaxWidth="520"
+             d:DesignHeight="460"
              d:DesignWidth="485"
              x:Name="displayControl">
 
     <!--Calulus Area-->
     <Grid>
-        <Grid.Resources>
+          <Grid.Resources>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush"
                         Value="{Binding Path=UIDisplayBorderBrush, ElementName=displayControl}" />
             </Style>
         </Grid.Resources>
         <Border x:Name="UIDisplayBorder"
+                DockPanel.Dock="Left"
+                HorizontalAlignment="Stretch"
                 CornerRadius="10"
                 Background="White"
                 BorderThickness="1.5">
-            <Viewbox HorizontalAlignment="Right">
-                <TextBox x:Name="UIDisplayCalculus"
-                         HorizontalAlignment="Stretch"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         FontSize="30"
-                         FontFamily="{StaticResource Digital}"
-                         IsReadOnly="True"
-                         TextWrapping="WrapWithOverflow"
-                         FontWeight="Medium"
-                         Padding="0 2 0 1"
-                         Text="0" />
+            <Viewbox HorizontalAlignment="Right"
+                Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualWidth}"
+                     Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}">
+                  <TextBox x:Name="UIDisplayCalculus"                  
+                     Background="Transparent"
+                     BorderThickness="0"
+                     HorizontalContentAlignment="Right"
+                     FontSize="50"                
+                     FontFamily="{StaticResource Digital}"
+                     IsReadOnly="True"
+                     TextWrapping="WrapWithOverflow"
+                     FontWeight="Medium"
+                     Padding="10 1 10 1"
+                     Text="0" />
             </Viewbox>
+          
+
         </Border>
 
         <!--Graph Area-->
     </Grid>
-
+      
 
 </UserControl>

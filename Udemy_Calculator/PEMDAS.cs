@@ -76,10 +76,9 @@ namespace Udemy_Calculator
         public string ComputeFormula()
         {
             Regex lRegex = new Regex(lFinishedComputationPattern);
-
-            Match lMatch = lRegex.Match(Chunk.Formula.ToString());
-
-            while (lMatch.Success)
+            Match lMatch;
+            
+            do
             {
                 // P (Parenthesis) E (Exponents) MD (Multiplcation and division) AS (Addition and substraction): PEMDAS
                 ExtractParenthesis();   // P
@@ -95,11 +94,11 @@ namespace Udemy_Calculator
                 }
 
                 DoReplaceByResult(lResult);
-
                 lMatch = lRegex.Match(Chunk.Formula.ToString());
-            }
 
-            return Chunk.SB.ToString();
+            } while (lMatch.Success);
+
+                return Chunk.SB.ToString();
         }
 
         #region Extract Parenthesis, Exponent, Multiplication/Division, Addition/Substraction

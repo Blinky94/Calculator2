@@ -8,10 +8,10 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class History : UserControl
     {
-        private static double mHistoryWidth = 200d;
+        private const double mHistoryWidth = 200d;
         private const double mMainWindowWidth = 260d;
         private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
-        private DisplayHistory mDisplayHistory;
+        private readonly DisplayHistory mDisplayHistory;
 
         public History()
         {

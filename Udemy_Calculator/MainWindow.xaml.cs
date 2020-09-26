@@ -18,6 +18,10 @@ namespace Udemy_Calculator
             // Event registered to the UIDisplay when number is typed
             UIEventDisplayValueEvent += new EventUpdateUIDisplayHandler(ModifyUIDisplay);
             UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
+
+            // Event registered to send all logs entries to the console log window
+            mConsoleDebug = new ConsoleDebug();
+            mConsoleDebug.Show();
         }
 
         internal static ConsoleDebug mConsoleDebug;
@@ -30,10 +34,6 @@ namespace Udemy_Calculator
 
             // Set all events
             SetEvents();
-
-            // Set the ConsoleDebug window
-            mConsoleDebug = new ConsoleDebug();
-            mConsoleDebug.Hide();
 
             // Load the current theme from the params xml file
             XmlParser.LoadParamsXmlTheme();

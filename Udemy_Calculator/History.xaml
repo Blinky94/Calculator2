@@ -23,7 +23,7 @@
                                   Unchecked="UIHistoryExpander_Collapsed">
                         <Image Source="Images/History_icon.png"
                                Width="22"
-                               Height="22" Margin="-10 0 0 0" />
+                               Height="22" />
                     </ToggleButton>
                     <ContentPresenter x:Name="ExpanderContent"
                                       Grid.Column="1"
@@ -47,7 +47,7 @@
         </Grid.ColumnDefinitions>
         
         <!--History Grid-->
-        <Expander Width="220"
+        <Expander Width="250"
                   ExpandDirection="Right"
                   IsExpanded="False"
                   Template="{StaticResource ResourceKey=UIHistoryExpander}"
@@ -64,7 +64,7 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="350" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -77,9 +77,10 @@
                                      IsReadOnly="True"
                                      BorderBrush="LightGray"
                                      BorderThickness="0 0 0 0"
-                                     Margin="35 0 10 0"
+                                     Margin="0 0 0 0"
                                      ScrollViewer.CanContentScroll="True"
                                      Padding="0"
+                                     Background="DimGray"
                                      TextChanged="UIHistoryTextBox_TextChanged">
                             <FlowDocument x:Name="UIHistoryFlowDoc"
                                           LineHeight="1">
@@ -91,14 +92,13 @@
                                 Background="Transparent"
                                 Grid.Row="1"
                                 HorizontalAlignment="Right"
-                                Margin="0 0 15 0"
+                                Margin="0 0 0 0"
                                 DockPanel.Dock="Bottom">
                         <Button x:Name="UICleaner"
                                 Background="White"
-                                Visibility="Hidden"
-                                Width="25"
-                                Height="25"
-                                Margin="0 0 0 -3"
+                                Visibility="Visible"  
+                                Padding="5 0 5 0"
+                                Margin="0 5 0 1"
                                 Click="UICleaner_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Images/Cleaner_icon.png" />

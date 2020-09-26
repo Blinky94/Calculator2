@@ -6,10 +6,54 @@
         xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
         Title="ConsoleDebug"
-        Height="450"
-        Width="350">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="White"
+        WindowStartupLocation="Manual"
+        Height="550"
+        Width="850">
     <Grid x:Name="UIGridConsoleDebug">
-        <RichTextBox x:Name="UIRichTextBoxConsoleDebug"
-                     Margin="20" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <RichTextBox Grid.Column="0"
+                     Grid.ColumnSpan="4"
+                     Grid.Row="0"
+                     x:Name="UIRichTextBoxConsoleDebug"
+                     Background="Black"
+                     Margin="20 20 20 0"
+                     Block.LineHeight="0.2"
+                     HorizontalScrollBarVisibility="Disabled"
+                     VerticalScrollBarVisibility="Auto" />
+
+        <Button Width="100"
+                Height="Auto"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="10"
+                Padding="10"
+                HorizontalAlignment="Right"
+                Content="Clear"
+                FontSize="20"
+                Click="ClearConsole_Click" />
+
+        <Button Width="100"
+                Height="Auto"
+                Grid.Column="2"
+                Grid.Row="1"
+                Margin="10"
+                Padding="10"
+                HorizontalAlignment="Left"
+                Content="Close"
+                FontSize="20"
+                Click="CloseConsole_Click" />
     </Grid>
 </Window>
