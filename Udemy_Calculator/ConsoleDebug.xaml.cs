@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -40,6 +40,19 @@ namespace Udemy_Calculator
     /// </summary>
     public static class TraceLogs
     {
+        private static bool mIsConsoleDebugVisible;
+        public static bool IsConsoleDebugVisible
+        {
+            get
+            {
+                return mIsConsoleDebugVisible;
+            }
+            set
+            {
+                mIsConsoleDebugVisible = value;
+            }
+        }
+
         private static BindingList<LogTrace> mLogList = new BindingList<LogTrace>();
         public static BindingList<LogTrace> LogList
         {
@@ -55,24 +68,41 @@ namespace Udemy_Calculator
 
         private static void LogEnqueue(string pMessage, LogCategory pCat = LogCategory.Info)
         {
-            string lStr = $"{DateTime.Now}: {pMessage}";
-            LogList.Add(new LogTrace(lStr, pCat));
+            if (IsConsoleDebugVisible)
+            {
+                string lStr = $"{DateTime.Now}: {pMessage}";
+                LogList.Add(new LogTrace(lStr, pCat));
+            }
         }
 
+        /// <summary>
+        /// Add the message as an information to the ConsoleDebug window
+        /// </summary>
+        /// <param name="pMessage"></param>
         public static void AddInfo(string pMessage)
         {
             LogEnqueue(pMessage, LogCategory.Info);
         }
 
+        /// <summary>
+        /// Add the message as a warning to the ConsoleDebug window
+        /// </summary>
         public static void AddWarning(string pMessage)
         {
             LogEnqueue(pMessage, LogCategory.Warning);
         }
 
+        /// <summary>
+        /// Add the message as an error to the ConsoleDebug window
+        /// </summary>
         public static void AddError(string pMessage)
         {
             LogEnqueue(pMessage, LogCategory.Error);
         }
+
+        /// <summary>
+        /// Add the message as an output to the ConsoleDebug window
+        /// </summary>
         public static void AddOutput(string pMessage)
         {
             LogEnqueue(pMessage, LogCategory.Output);
@@ -84,6 +114,8 @@ namespace Udemy_Calculator
         public ConsoleDebug()
         {
             InitializeComponent();
+
+            TraceLogs.IsConsoleDebugVisible = true;
 
             TraceLogs.LogList.AllowNew = true;
             TraceLogs.LogList.AllowRemove = true;
@@ -113,8 +145,10 @@ namespace Udemy_Calculator
         /// <param name="pColor"></param>
         private void SetNewParagraph(string pMessage, Brush pColor)
         {
+            string lInline = new string('-', 150) + "\n";
             var paragraph = new Paragraph();
-            paragraph.Inlines.Add(new Run(string.Format(pMessage, Environment.TickCount)));
+            paragraph.Inlines.Add(new Run(lInline));
+            paragraph.Inlines.Add(new Run(pMessage));
             paragraph.Foreground = pColor;
             UIRichTextBoxConsoleDebug.Document.Blocks.Add(paragraph);
 
@@ -155,7 +189,8 @@ namespace Udemy_Calculator
 
         private void CloseConsole_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
+            TraceLogs.IsConsoleDebugVisible = false;
         }
 
         #region Moving the Calculator

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ConsoleDebug"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         AllowsTransparency="True"
         Background="White"
         WindowStartupLocation="Manual"
