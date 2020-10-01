@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace Udemy_Calculator
     /// <summary>
     /// Category of logs
     /// </summary>
-    public enum LogCategory { Info, Warning, Error, Output }
+    public enum LogCategory { Info, Warning, Error, Output, Technical }
 
     /// <summary>
     /// Log tracing object to fill with string part for the message
@@ -41,6 +42,10 @@ namespace Udemy_Calculator
     public static class TraceLogs
     {
         private static bool mIsConsoleDebugVisible;
+
+        /// <summary>
+        /// Get or set the visibility of the console debug window
+        /// </summary>
         public static bool IsConsoleDebugVisible
         {
             get
@@ -53,19 +58,45 @@ namespace Udemy_Calculator
             }
         }
 
+        private static BindingList<LogTrace> mBufferLogList = new BindingList<LogTrace>();
+
+        /// <summary>
+        /// Buffering all logs into this list
+        /// </summary>
+        public static BindingList<LogTrace> BufferLogList
+        {
+            get
+            {
+                return mBufferLogList;
+            }
+            set
+            {
+                mBufferLogList = value;
+            }
+        }
+
         private static BindingList<LogTrace> mLogList = new BindingList<LogTrace>();
+
+        /// <summary>
+        /// Special list allowing to raise event handler when changing
+        /// </summary>
         public static BindingList<LogTrace> LogList
         {
             get
             {
                 return mLogList;
             }
-            private set
+            set
             {
                 mLogList = value;
             }
         }
 
+        /// <summary>
+        /// Concat log entries with date/hours/min/sec to the logList
+        /// </summary>
+        /// <param name="pMessage"></param>
+        /// <param name="pCat"></param>
         private static void LogEnqueue(string pMessage, LogCategory pCat = LogCategory.Info)
         {
             if (IsConsoleDebugVisible)
@@ -107,6 +138,14 @@ namespace Udemy_Calculator
         {
             LogEnqueue(pMessage, LogCategory.Output);
         }
+
+        /// <summary>
+        /// Add the message as a technical to the ConsoleDebug window
+        /// </summary>
+        public static void AddTechnical(string pMessage)
+        {
+            LogEnqueue(pMessage, LogCategory.Technical);
+        }
     }
 
     public partial class ConsoleDebug : Window
@@ -127,15 +166,52 @@ namespace Udemy_Calculator
             TraceLogs.AddWarning("Testing logs warning... OK");
             TraceLogs.AddError("Testing logs error... OK");
             TraceLogs.AddOutput("Testing logs output... OK");
+            TraceLogs.AddTechnical("Testing logs technical... OK");
         }
 
+        /// <summary>
+        /// Adding the new paragraph to the debug console output, depending of the category checked
+        /// </summary>
+        /// <param name="pTrace"></param>
+        private void AddToParagraph(LogTrace pTrace)
+        {
+            if ((bool)CheckBoxInfo.IsChecked && pTrace?.Category == LogCategory.Info)
+            {
+                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+            }
+
+            if ((bool)CheckBoxWarning.IsChecked && pTrace?.Category == LogCategory.Warning)
+            {
+                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+            }
+
+            if ((bool)CheckBoxTechnical.IsChecked && pTrace?.Category == LogCategory.Technical)
+            {
+                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+            }
+
+            if ((bool)CheckBoxError.IsChecked && pTrace?.Category == LogCategory.Error)
+            {
+                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+            }
+
+            if ((bool)CheckBoxOutput.IsChecked && pTrace?.Category == LogCategory.Output)
+            {
+                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+            }
+        }
+
+        /// <summary>
+        /// Event to take in charge changed of the dynamic logs list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            for (int i = 0; i < TraceLogs.LogList.Count; i++)
-            {
-                SetNewParagraph(TraceLogs.LogList[i].Message, GetColorFromCategory(TraceLogs.LogList[i].Category));
-                TraceLogs.LogList.RemoveAt(i);
-            }
+            BindingList<LogTrace> lList = sender as BindingList<LogTrace>;
+
+            if (lList != null && lList.Count > 0)
+                AddToParagraph(lList.Last());
         }
 
         /// <summary>
@@ -177,6 +253,8 @@ namespace Udemy_Calculator
                 case LogCategory.Output:
                     return Brushes.LightGreen;
 
+                case LogCategory.Technical:
+                    return Brushes.Yellow;
                 default:
                     return Brushes.Yellow;
             }
@@ -211,5 +289,56 @@ namespace Udemy_Calculator
         }
 
         #endregion
+
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.CheckBox lCheckBox = sender as System.Windows.Controls.CheckBox;
+
+            LogCategory lLCat = LogCategory.Info;
+
+            switch (lCheckBox.Content.ToString())
+            {
+                case "Info":
+                    lLCat = LogCategory.Info;
+                    break;
+                case "Warning":
+                    lLCat = LogCategory.Warning;
+                    break;
+                case "Error":
+                    lLCat = LogCategory.Error;
+                    break;
+                case "Output":
+                    lLCat = LogCategory.Output;
+                    break;
+                case "Technical":
+                    lLCat = LogCategory.Technical;
+                    break;
+            }
+
+            for (int i = 0; i < TraceLogs.LogList.Count; i++)
+            {
+                TraceLogs.BufferLogList.Add(TraceLogs.LogList[i]);
+            }
+
+            TraceLogs.LogList.Clear();
+
+            TraceLogs.BufferLogList = new BindingList<LogTrace>(TraceLogs.BufferLogList.Distinct().ToList());
+
+            UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
+
+            for (int i = 0; i < TraceLogs.BufferLogList.Count; i++)
+            {
+                if (TraceLogs.BufferLogList[i].Category != lLCat)
+                {
+                    TraceLogs.LogList.Add(TraceLogs.BufferLogList[i]);
+                }
+            }
+        }
     }
 }

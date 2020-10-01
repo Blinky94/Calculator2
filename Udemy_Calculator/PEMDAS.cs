@@ -76,7 +76,7 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            TraceLogs.AddOutput($"ComputeFormula: Begining to compute de formula with Regex pattern ({lFinishedComputationPattern})");
+            TraceLogs.AddTechnical($"ComputeFormula: Begining to compute de formula with Regex pattern ({lFinishedComputationPattern})");
             TraceLogs.AddInfo($"ComputeFormula: onto the formula ({Chunk.Formula})");
 
             Regex lRegex = new Regex(lFinishedComputationPattern);
@@ -127,7 +127,7 @@ namespace Udemy_Calculator
         /// <param name="pPattern"></param>
         private void ArrangeChunkOfFormula(string pPattern)
         {
-            TraceLogs.AddOutput($"ArrangeChunkOfFormula: Applying Regex pattern ({pPattern})");
+            TraceLogs.AddTechnical($"ArrangeChunkOfFormula: Applying Regex pattern ({pPattern})");
             TraceLogs.AddInfo($"ArrangeChunkOfFormula: on the formula chunk ({Chunk.SB})");
 
             try
@@ -165,7 +165,7 @@ namespace Udemy_Calculator
             // Regex to select all parenthesis groups
             string lPattern = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
-            TraceLogs.AddOutput($"ExtractParenthesis: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"ExtractParenthesis: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -179,7 +179,7 @@ namespace Udemy_Calculator
             // Regex to select all exponents groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
 
-            TraceLogs.AddOutput($"ComputeExponent: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"ComputeExponent: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -193,7 +193,7 @@ namespace Udemy_Calculator
             // Regex to select all multiplication and division groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-            TraceLogs.AddOutput($"ComputeMultAndDiv: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"ComputeMultAndDiv: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -207,7 +207,7 @@ namespace Udemy_Calculator
             // Regex to select all addition and substraction groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-            TraceLogs.AddOutput($"ComputeAddAndSub: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"ComputeAddAndSub: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -239,7 +239,7 @@ namespace Udemy_Calculator
                 Regex regex = new Regex(lPattern);
                 Match lMatch = regex.Match(Chunk.SB.ToString());
 
-                TraceLogs.AddOutput($"ExtractArithmeticsGroups: Pattern for extractions ({lPattern})");
+                TraceLogs.AddTechnical($"ExtractArithmeticsGroups: Pattern for extractions ({lPattern})");
 
                 string lLeft = lMatch.Groups["LeftOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
                 string lRight = lMatch.Groups["RightOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
@@ -471,7 +471,7 @@ namespace Udemy_Calculator
                 // Check if compute if finish, return if yes
                 Regex lRegex = new Regex(lFinishedComputationPattern);
                 Match lMatch = lRegex.Match(pResult);
-                TraceLogs.AddOutput($"DoReplaceByResult: Checking if compute is finish\n Regex Pattern: {lFinishedComputationPattern}");
+                TraceLogs.AddTechnical($"DoReplaceByResult: Checking if compute is finish\n Regex Pattern: {lFinishedComputationPattern}");
 
                 TraceLogs.AddInfo($"DoReplaceByResult: Finding operator to continue: {lMatch.Success}");
 

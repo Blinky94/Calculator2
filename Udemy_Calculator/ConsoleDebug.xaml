@@ -34,26 +34,84 @@
                      HorizontalScrollBarVisibility="Disabled"
                      VerticalScrollBarVisibility="Auto" />
 
-        <Button Width="100"
-                Height="Auto"
-                Grid.Column="1"
-                Grid.Row="1"
-                Margin="10"
-                Padding="10"
-                HorizontalAlignment="Right"
-                Content="Clear"
-                FontSize="20"
-                Click="ClearConsole_Click" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="1">
+            <Grid Width="250"
+                  Margin="20 2 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="CheckBoxInfo"
+                          Grid.Column="0"
+                          Grid.Row="0"
+                          Content="Info"
+                          IsChecked="True"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked" />
+                <CheckBox x:Name="CheckBoxWarning"
+                          Grid.Column="0"
+                          Grid.Row="1"
+                          Content="Warning"
+                          IsChecked="True"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked" />
+                <CheckBox x:Name="CheckBoxError"
+                          Grid.Column="0"
+                          Grid.Row="2"
+                          Content="Error"
+                          IsChecked="True"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked" />
+                <CheckBox x:Name="CheckBoxOutput"
+                          Grid.Column="1"
+                          Grid.Row="0"
+                          Content="Output"
+                          IsChecked="True"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked" />
+                <CheckBox x:Name="CheckBoxTechnical"
+                          Grid.Column="1"
+                          Grid.Row="1"
+                          Content="Technical"
+                          IsChecked="True"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked" />
+            </Grid>
+            <StackPanel Orientation="Horizontal"
+                        Margin="20 0 0 0">
+                <Button Width="100"
+                        Height="Auto"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Right"
+                        Content="Clear"
+                        FontSize="20"
+                        Click="ClearConsole_Click" />
 
-        <Button Width="100"
-                Height="Auto"
-                Grid.Column="2"
-                Grid.Row="1"
-                Margin="10"
-                Padding="10"
-                HorizontalAlignment="Left"
-                Content="Close"
-                FontSize="20"
-                Click="CloseConsole_Click" />
+                <Button Width="100"
+                        Height="Auto"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Left"
+                        Content="Close"
+                        FontSize="20"
+                        Click="CloseConsole_Click" />
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Window>
