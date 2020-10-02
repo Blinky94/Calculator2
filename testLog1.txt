@@ -1,27 +1,118 @@
-02/10/2020 18:56:10.282: Error - Testing logs error... OK
-02/10/2020 18:56:10.283: Technical - Testing logs technical... OK
-02/10/2020 18:57:39.480: Technical - ComputeFormula: Begining to compute de formula with Regex pattern ((?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√]))
-02/10/2020 18:57:39.536: Technical - ExtractParenthesis: Pattern [({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]
-02/10/2020 18:57:39.542: Technical - ArrangeChunkOfFormula: Applying Regex pattern ([({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]])
-02/10/2020 18:57:39.554: Technical - ComputeExponent: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]
-02/10/2020 18:57:39.559: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]])
-02/10/2020 18:57:39.569: Technical - ComputeMultAndDiv: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
-02/10/2020 18:57:39.573: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
-02/10/2020 18:57:39.580: Technical - ComputeAddAndSub: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
-02/10/2020 18:57:39.584: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
-02/10/2020 18:57:39.616: Technical - ExtractArithmeticsGroups: Pattern for extractions ((?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*)))
-02/10/2020 18:57:39.660: Technical - DoReplaceByResult: Checking if compute is finish
+03/10/2020 00:05:11.501: Info - Initializing the console finish... OK
+03/10/2020 00:05:11.504: Error - Testing logs error... OK
+03/10/2020 00:05:11.505: Technical - Testing logs technical... OK
+03/10/2020 00:05:22.36: Info - .ctor: Contructor creating chunk (parameter: 9×6+3-2.333)
+03/10/2020 00:05:22.37: Technical - .ctor: Contructor creating chunk (parameter: stringBuilder 9×6+3-2.333, StartIndex0, length 11)
+03/10/2020 00:05:22.40: Technical - ComputeFormula: Begining to compute de formula with Regex pattern ((?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√]))
+03/10/2020 00:05:22.42: Info - ComputeFormula: onto the formula (9×6+3-2.333)
+03/10/2020 00:05:22.44: Technical - ExtractParenthesis: Pattern [({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]
+03/10/2020 00:05:22.46: Technical - ArrangeChunkOfFormula: Applying Regex pattern ([({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]])
+03/10/2020 00:05:22.49: Info - ArrangeChunkOfFormula: Regex on the formula chunk (9×6+3-2.333)
+03/10/2020 00:05:22.50: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (9×6+3-2.333)
+03/10/2020 00:05:22.53: Technical - ComputeExponent: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]
+03/10/2020 00:05:22.55: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]])
+03/10/2020 00:05:22.57: Info - ArrangeChunkOfFormula: Regex on the formula chunk (9×6+3-2.333)
+03/10/2020 00:05:22.58: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (9×6+3-2.333)
+03/10/2020 00:05:22.60: Technical - ComputeMultAndDiv: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.61: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.67: Info - ArrangeChunkOfFormula: Regex on the formula chunk (9×6+3-2.333)
+03/10/2020 00:05:22.69: Technical - ArrangeChunkOfFormula: Chunk start index: 0;Chunk length: 3
+03/10/2020 00:05:22.71: Technical - ComputeAddAndSub: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.74: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.76: Info - ArrangeChunkOfFormula: Regex on the formula chunk (9×6)
+03/10/2020 00:05:22.78: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (9×6)
+03/10/2020 00:05:22.80: Info - DoCompute: Compute the chunk formula from a chunk 9×6 sequence
+03/10/2020 00:05:22.82: Info - ExtractArithmeticsGroups: Extracting each part of operands from the formula (9×6)
+03/10/2020 00:05:22.84: Technical - ExtractArithmeticsGroups: Pattern for extractions ((?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*)))
+03/10/2020 00:05:22.87: Info - ExtractArithmeticsGroups: Left part: 9 ; Right part: 6
+03/10/2020 00:05:22.89: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 9
+03/10/2020 00:05:22.90: Info - GetDoubleFromString: Has no exponent: 9
+03/10/2020 00:05:22.120: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 6
+03/10/2020 00:05:22.122: Info - GetDoubleFromString: Has no exponent: 6
+03/10/2020 00:05:22.123: Info - WhatOperator: Get the operator from the string input
+03/10/2020 00:05:22.125: Info - WhatOperator:  Operator is Multiplication
+03/10/2020 00:05:22.126: Info - ExtractArithmeticsGroups: Operator: Multiplication
+03/10/2020 00:05:22.127: Info - DoCompute: Compute the chunk formula from a chunk 9×6 sequence
+03/10/2020 00:05:22.129: Info - Multiply: 9 x 6
+03/10/2020 00:05:22.131: Info - Multiply: 54
+03/10/2020 00:05:22.133: Info - DoCompute: Compute result: 54
+03/10/2020 00:05:22.135: Info - DoReplaceByResult: Replacing the chunk sequence 9×6 by the result 54
+03/10/2020 00:05:22.136: Technical - DoReplaceByResult: Checking if compute is finish
  Regex Pattern: (?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])
-02/10/2020 18:58:26.454: Technical - ComputeFormula: Begining to compute de formula with Regex pattern ((?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√]))
-02/10/2020 18:58:26.472: Technical - ExtractParenthesis: Pattern [({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]
-02/10/2020 18:58:26.477: Technical - ArrangeChunkOfFormula: Applying Regex pattern ([({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]])
-02/10/2020 18:58:26.493: Technical - ComputeExponent: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]
-02/10/2020 18:58:26.500: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]])
-02/10/2020 18:58:26.517: Technical - ComputeMultAndDiv: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
-02/10/2020 18:58:26.522: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
-02/10/2020 18:58:26.531: Technical - ComputeAddAndSub: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
-02/10/2020 18:58:26.537: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
-02/10/2020 18:58:26.557: Technical - ExtractArithmeticsGroups: Pattern for extractions ((?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*)))
-02/10/2020 18:58:26.608: Error - Divide: result is not finite number (∞) !!!
-02/10/2020 18:58:26.623: Technical - DoReplaceByResult: Checking if compute is finish
+03/10/2020 00:05:22.138: Info - DoReplaceByResult: Finding operator to continue: False
+03/10/2020 00:05:22.139: Info - DoReplaceByResult: Replacing the main formula (9×6+3-2.333) by the result 54
+03/10/2020 00:05:22.140: Info - DoReplaceByResult: Main formula finaly: (54+3-2.333)
+03/10/2020 00:05:22.142: Technical - ExtractParenthesis: Pattern [({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]
+03/10/2020 00:05:22.144: Technical - ArrangeChunkOfFormula: Applying Regex pattern ([({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]])
+03/10/2020 00:05:22.146: Info - ArrangeChunkOfFormula: Regex on the formula chunk (54+3-2.333)
+03/10/2020 00:05:22.149: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (54+3-2.333)
+03/10/2020 00:05:22.150: Technical - ComputeExponent: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]
+03/10/2020 00:05:22.152: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]])
+03/10/2020 00:05:22.155: Info - ArrangeChunkOfFormula: Regex on the formula chunk (54+3-2.333)
+03/10/2020 00:05:22.157: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (54+3-2.333)
+03/10/2020 00:05:22.159: Technical - ComputeMultAndDiv: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.161: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.164: Info - ArrangeChunkOfFormula: Regex on the formula chunk (54+3-2.333)
+03/10/2020 00:05:22.166: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (54+3-2.333)
+03/10/2020 00:05:22.167: Technical - ComputeAddAndSub: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.170: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.172: Info - ArrangeChunkOfFormula: Regex on the formula chunk (54+3-2.333)
+03/10/2020 00:05:22.174: Technical - ArrangeChunkOfFormula: Chunk start index: 0;Chunk length: 4
+03/10/2020 00:05:22.175: Info - DoCompute: Compute the chunk formula from a chunk 54+3 sequence
+03/10/2020 00:05:22.176: Info - ExtractArithmeticsGroups: Extracting each part of operands from the formula (54+3)
+03/10/2020 00:05:22.178: Technical - ExtractArithmeticsGroups: Pattern for extractions ((?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*)))
+03/10/2020 00:05:22.185: Info - ExtractArithmeticsGroups: Left part: 54 ; Right part: 3
+03/10/2020 00:05:22.186: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 54
+03/10/2020 00:05:22.188: Info - GetDoubleFromString: Has no exponent: 54
+03/10/2020 00:05:22.189: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 3
+03/10/2020 00:05:22.191: Info - GetDoubleFromString: Has no exponent: 3
+03/10/2020 00:05:22.192: Info - WhatOperator: Get the operator from the string input
+03/10/2020 00:05:22.194: Info - WhatOperator:  Operator is Addition
+03/10/2020 00:05:22.195: Info - ExtractArithmeticsGroups: Operator: Addition
+03/10/2020 00:05:22.197: Info - DoCompute: Compute the chunk formula from a chunk 54+3 sequence
+03/10/2020 00:05:22.199: Info - Add: 54 + 3
+03/10/2020 00:05:22.201: Info - Add: 57
+03/10/2020 00:05:22.202: Info - DoCompute: Compute result: 57
+03/10/2020 00:05:22.204: Info - DoReplaceByResult: Replacing the chunk sequence 54+3 by the result 57
+03/10/2020 00:05:22.205: Technical - DoReplaceByResult: Checking if compute is finish
  Regex Pattern: (?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])
+03/10/2020 00:05:22.207: Info - DoReplaceByResult: Finding operator to continue: False
+03/10/2020 00:05:22.208: Info - DoReplaceByResult: Replacing the main formula (54+3-2.333) by the result 57
+03/10/2020 00:05:22.210: Info - DoReplaceByResult: Main formula finaly: (57-2.333)
+03/10/2020 00:05:22.211: Technical - ExtractParenthesis: Pattern [({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]
+03/10/2020 00:05:22.214: Technical - ArrangeChunkOfFormula: Applying Regex pattern ([({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]])
+03/10/2020 00:05:22.216: Info - ArrangeChunkOfFormula: Regex on the formula chunk (57-2.333)
+03/10/2020 00:05:22.219: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (57-2.333)
+03/10/2020 00:05:22.220: Technical - ComputeExponent: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]
+03/10/2020 00:05:22.223: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]])
+03/10/2020 00:05:22.225: Info - ArrangeChunkOfFormula: Regex on the formula chunk (57-2.333)
+03/10/2020 00:05:22.227: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (57-2.333)
+03/10/2020 00:05:22.229: Technical - ComputeMultAndDiv: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.231: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.234: Info - ArrangeChunkOfFormula: Regex on the formula chunk (57-2.333)
+03/10/2020 00:05:22.235: Info - ArrangeChunkOfFormula: No matching pattern onto the chunk (57-2.333)
+03/10/2020 00:05:22.237: Technical - ComputeAddAndSub: Pattern (?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)
+03/10/2020 00:05:22.239: Technical - ArrangeChunkOfFormula: Applying Regex pattern ((?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))
+03/10/2020 00:05:22.242: Info - ArrangeChunkOfFormula: Regex on the formula chunk (57-2.333)
+03/10/2020 00:05:22.243: Technical - ArrangeChunkOfFormula: Chunk start index: 0;Chunk length: 8
+03/10/2020 00:05:22.245: Info - DoCompute: Compute the chunk formula from a chunk 57-2.333 sequence
+03/10/2020 00:05:22.246: Info - ExtractArithmeticsGroups: Extracting each part of operands from the formula (57-2.333)
+03/10/2020 00:05:22.249: Technical - ExtractArithmeticsGroups: Pattern for extractions ((?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*)))
+03/10/2020 00:05:22.252: Info - ExtractArithmeticsGroups: Left part: 57 ; Right part: 2.333
+03/10/2020 00:05:22.254: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 57
+03/10/2020 00:05:22.256: Info - GetDoubleFromString: Has no exponent: 57
+03/10/2020 00:05:22.257: Info - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 2.333
+03/10/2020 00:05:22.259: Info - GetDoubleFromString: Has no exponent: 2.333
+03/10/2020 00:05:22.261: Info - WhatOperator: Get the operator from the string input
+03/10/2020 00:05:22.262: Info - WhatOperator:  Operator is Substraction
+03/10/2020 00:05:22.264: Info - ExtractArithmeticsGroups: Operator: Substraction
+03/10/2020 00:05:22.266: Info - DoCompute: Compute the chunk formula from a chunk 57-2.333 sequence
+03/10/2020 00:05:22.268: Info - Substract: 57 - 2,333
+03/10/2020 00:05:22.270: Info - Substract: 54,667
+03/10/2020 00:05:22.271: Info - DoCompute: Compute result: 54,667
+03/10/2020 00:05:22.273: Info - DoReplaceByResult: Replacing the chunk sequence 57-2.333 by the result 54,667
+03/10/2020 00:05:22.279: Technical - DoReplaceByResult: Checking if compute is finish
+ Regex Pattern: (?(?<=[(]|[Ee])([÷\/×xX*\^√])|[+\-÷\/×xX*\^√])
+03/10/2020 00:05:22.281: Info - DoReplaceByResult: Finding operator to continue: False
+03/10/2020 00:05:22.283: Info - DoReplaceByResult: Replacing the main formula (57-2.333) by the result 54,667
+03/10/2020 00:05:22.285: Info - DoReplaceByResult: Main formula finaly: (54,667)
