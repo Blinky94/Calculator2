@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -41,68 +43,41 @@ namespace Udemy_Calculator
     /// </summary>
     public static class TraceLogs
     {
-        private static bool mIsConsoleDebugVisible;
-
         /// <summary>
         /// Get or set the visibility of the console debug window
         /// </summary>
-        public static bool IsConsoleDebugVisible
-        {
-            get
-            {
-                return mIsConsoleDebugVisible;
-            }
-            set
-            {
-                mIsConsoleDebugVisible = value;
-            }
-        }
-
-        private static BindingList<LogTrace> mBufferLogList = new BindingList<LogTrace>();
+        public static bool IsConsoleDebugVisible { get; set; }
 
         /// <summary>
         /// Buffering all logs into this list
         /// </summary>
-        public static BindingList<LogTrace> BufferLogList
-        {
-            get
-            {
-                return mBufferLogList;
-            }
-            set
-            {
-                mBufferLogList = value;
-            }
-        }
-
-        private static BindingList<LogTrace> mLogList = new BindingList<LogTrace>();
+        internal static BindingList<LogTrace> BufferLogList { get; set; } = new BindingList<LogTrace>();
 
         /// <summary>
         /// Special list allowing to raise event handler when changing
         /// </summary>
-        public static BindingList<LogTrace> LogList
+        internal static BindingList<LogTrace> LogList { get; set; } = new BindingList<LogTrace>();
+
+        /// <summary>
+        /// Generate the actual time with millisecond precisions
+        /// </summary>
+        /// <returns></returns>
+        private static string GenerateTimeNow()
         {
-            get
-            {
-                return mLogList;
-            }
-            set
-            {
-                mLogList = value;
-            }
+            return DateTime.Now + "." + DateTime.Now.Millisecond;
         }
 
         /// <summary>
         /// Concat log entries with date/hours/min/sec to the logList
         /// </summary>
         /// <param name="pMessage"></param>
-        /// <param name="pCat"></param>
-        private static void LogEnqueue(string pMessage, LogCategory pCat = LogCategory.Info)
+        /// <param name="pCategory"></param>
+        private static void LogEnqueue(string pMessage, LogCategory pCategory = LogCategory.Info)
         {
             if (IsConsoleDebugVisible)
             {
-                string lStr = $"{DateTime.Now}: {pMessage}";
-                LogList.Add(new LogTrace(lStr, pCat));
+                string lStr = $"{GenerateTimeNow()}: {pCategory} - {pMessage}";
+                LogList.Add(new LogTrace(lStr, pCategory));
             }
         }
 
@@ -208,10 +183,10 @@ namespace Udemy_Calculator
         /// <param name="e"></param>
         private void LogList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            BindingList<LogTrace> lList = sender as BindingList<LogTrace>;
-
-            if (lList != null && lList.Count > 0)
+            if (sender is BindingList<LogTrace> lList && lList.Count > 0)
+            {
                 AddToParagraph(lList.Last());
+            }
         }
 
         /// <summary>
@@ -221,9 +196,9 @@ namespace Udemy_Calculator
         /// <param name="pColor"></param>
         private void SetNewParagraph(string pMessage, Brush pColor)
         {
-            string lInline = new string('-', 150) + "\n";
+            //string lInline = new string('-', 100) + "\n";
             var paragraph = new Paragraph();
-            paragraph.Inlines.Add(new Run(lInline));
+            //paragraph.Inlines.Add(new Run(lInline));
             paragraph.Inlines.Add(new Run(pMessage));
             paragraph.Foreground = pColor;
             UIRichTextBoxConsoleDebug.Document.Blocks.Add(paragraph);
@@ -242,7 +217,7 @@ namespace Udemy_Calculator
             switch (pLogCat)
             {
                 case LogCategory.Info:
-                    return Brushes.LightBlue;
+                    return Brushes.White;
 
                 case LogCategory.Warning:
                     return Brushes.Orange;
@@ -263,6 +238,8 @@ namespace Udemy_Calculator
         private void ClearConsole_Click(object sender, RoutedEventArgs e)
         {
             UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
+            TraceLogs.BufferLogList.Clear();
+            TraceLogs.LogList.Clear();
         }
 
         private void CloseConsole_Click(object sender, RoutedEventArgs e)
@@ -290,54 +267,88 @@ namespace Udemy_Calculator
 
         #endregion
 
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Fonction to return the list categories checked
+        /// </summary>
+        /// <param name="pCheckBoxType"></param>
+        /// <returns></returns>
+        private List<LogCategory> ReturnListCategoriesChecked()
         {
+            List<LogCategory> lListCategoriesChecked = new List<LogCategory>();
 
+            // Get all the checkbox checked
+            foreach (var lCheckBoxCategory in GridCheckBoxes.Children.Cast<CheckBox>())
+            {
+                if (lCheckBoxCategory.IsChecked == true)
+                {
+                    switch (lCheckBoxCategory.Content.ToString())
+                    {
+                        case "Info":
+                            lListCategoriesChecked.Add(LogCategory.Info);
+                            break;
+                        case "Warning":
+                            lListCategoriesChecked.Add(LogCategory.Warning);
+                            break;
+                        case "Error":
+                            lListCategoriesChecked.Add(LogCategory.Error);
+                            break;
+                        case "Output":
+                            lListCategoriesChecked.Add(LogCategory.Output);
+                            break;
+                        case "Technical":
+                            lListCategoriesChecked.Add(LogCategory.Technical);
+                            break;
+                    }
+                }
+            }
+
+            return lListCategoriesChecked;
         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Fill the buffer log list to keep it in memory
+        /// </summary>
+        private static void FillBufferLogList()
         {
-            System.Windows.Controls.CheckBox lCheckBox = sender as System.Windows.Controls.CheckBox;
-
-            LogCategory lLCat = LogCategory.Info;
-
-            switch (lCheckBox.Content.ToString())
-            {
-                case "Info":
-                    lLCat = LogCategory.Info;
-                    break;
-                case "Warning":
-                    lLCat = LogCategory.Warning;
-                    break;
-                case "Error":
-                    lLCat = LogCategory.Error;
-                    break;
-                case "Output":
-                    lLCat = LogCategory.Output;
-                    break;
-                case "Technical":
-                    lLCat = LogCategory.Technical;
-                    break;
-            }
-
             for (int i = 0; i < TraceLogs.LogList.Count; i++)
             {
-                TraceLogs.BufferLogList.Add(TraceLogs.LogList[i]);
+                if (!TraceLogs.BufferLogList.Contains(TraceLogs.LogList[i]))
+                {
+                    TraceLogs.BufferLogList.Add(TraceLogs.LogList[i]);
+                }
             }
+        }
+
+        private void CheckBox_DisplayMessageFromChecked(object sender, RoutedEventArgs e)
+        {
+            List<LogCategory> lCategoryChecked = ReturnListCategoriesChecked();
+
+            FillBufferLogList();
 
             TraceLogs.LogList.Clear();
-
-            TraceLogs.BufferLogList = new BindingList<LogTrace>(TraceLogs.BufferLogList.Distinct().ToList());
-
             UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
 
+            // Display messages categories checked 
             for (int i = 0; i < TraceLogs.BufferLogList.Count; i++)
             {
-                if (TraceLogs.BufferLogList[i].Category != lLCat)
+                if (lCategoryChecked.Contains(TraceLogs.BufferLogList[i].Category))
                 {
                     TraceLogs.LogList.Add(TraceLogs.BufferLogList[i]);
                 }
+            }
+        }
+
+        private void Button_SaveClick(object sender, RoutedEventArgs e)
+        {
+            using (System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog())
+            {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                dialog.Filter = "Text Files(*.txt)|*.txt|All(*.*)|*";
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                dialog.ShowDialog();
+
+                string lRichText = new TextRange(UIRichTextBoxConsoleDebug.Document.ContentStart, UIRichTextBoxConsoleDebug.Document.ContentEnd).Text;
+                File.WriteAllText(dialog.FileName, lRichText);
             }
         }
     }

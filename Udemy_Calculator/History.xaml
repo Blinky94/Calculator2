@@ -23,7 +23,7 @@
                                   Unchecked="UIHistoryExpander_Collapsed">
                         <Image Source="Images/History_icon.png"
                                Width="22"
-                               Height="22" />
+                               Height="22"/>
                     </ToggleButton>
                     <ContentPresenter x:Name="ExpanderContent"
                                       Grid.Column="1"
@@ -42,12 +42,12 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"
+            <ColumnDefinition Width="260"
                               x:Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
         
         <!--History Grid-->
-        <Expander Width="250"
+        <Expander Width="260"
                   ExpandDirection="Right"
                   IsExpanded="False"
                   Template="{StaticResource ResourceKey=UIHistoryExpander}"
@@ -55,6 +55,11 @@
             <Expander.Content>
                 <Grid Name="HistoryGrid"
                       Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="430" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                
                     <Grid.Resources>
                         <Style TargetType="RichTextBox">
                             <Setter Property="FontSize"
@@ -63,10 +68,6 @@
                                     Value="Bold" />
                         </Style>
                     </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="350" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
 
                     <ScrollViewer x:Name="UIHistoryScrollViewer"
                                   Grid.Row="0"
@@ -98,7 +99,7 @@
                                 Background="White"
                                 Visibility="Visible"  
                                 Padding="5 0 5 0"
-                                Margin="0 5 0 1"
+                                Margin="0 2 0 2"
                                 Click="UICleaner_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="Images/Cleaner_icon.png" />

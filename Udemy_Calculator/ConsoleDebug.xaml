@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="ConsoleDebug"
         WindowStyle="None"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         AllowsTransparency="True"
         Background="White"
         WindowStartupLocation="Manual"
-        Height="550"
+        Height="950"
         Width="850">
-    <Grid x:Name="UIGridConsoleDebug">
+    <Grid x:Name="UIGridConsoleDebug" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <RichTextBox Grid.Column="0"
                      Grid.ColumnSpan="4"
@@ -35,80 +35,69 @@
                      VerticalScrollBarVisibility="Auto" />
 
         <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
+                    Grid.ColumnSpan="4"
                     Grid.Row="1">
-            <Grid Width="250"
-                  Margin="20 2 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <WrapPanel Orientation="Vertical"
+                       Name="GridCheckBoxes">
+                <WrapPanel.Resources>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="IsChecked"
+                                Value="True" />
+                        <Setter Property="Margin"
+                                Value="5 2 0 2" />
+                    </Style>
+                </WrapPanel.Resources>
                 <CheckBox x:Name="CheckBoxInfo"
-                          Grid.Column="0"
-                          Grid.Row="0"
                           Content="Info"
-                          IsChecked="True"
-                          Checked="CheckBox_Checked"
-                          Unchecked="CheckBox_Unchecked" />
+                          Checked="CheckBox_DisplayMessageFromChecked"
+                          Unchecked="CheckBox_DisplayMessageFromChecked" />
                 <CheckBox x:Name="CheckBoxWarning"
-                          Grid.Column="0"
-                          Grid.Row="1"
                           Content="Warning"
-                          IsChecked="True"
-                          Checked="CheckBox_Checked"
-                          Unchecked="CheckBox_Unchecked" />
+                          Checked="CheckBox_DisplayMessageFromChecked"
+                          Unchecked="CheckBox_DisplayMessageFromChecked" />
                 <CheckBox x:Name="CheckBoxError"
-                          Grid.Column="0"
-                          Grid.Row="2"
                           Content="Error"
-                          IsChecked="True"
-                          Checked="CheckBox_Checked"
-                          Unchecked="CheckBox_Unchecked" />
+                          Checked="CheckBox_DisplayMessageFromChecked"
+                          Unchecked="CheckBox_DisplayMessageFromChecked" />
                 <CheckBox x:Name="CheckBoxOutput"
-                          Grid.Column="1"
-                          Grid.Row="0"
                           Content="Output"
-                          IsChecked="True"
-                          Checked="CheckBox_Checked"
-                          Unchecked="CheckBox_Unchecked" />
+                          Checked="CheckBox_DisplayMessageFromChecked"
+                          Unchecked="CheckBox_DisplayMessageFromChecked" />
                 <CheckBox x:Name="CheckBoxTechnical"
-                          Grid.Column="1"
-                          Grid.Row="1"
                           Content="Technical"
-                          IsChecked="True"
-                          Checked="CheckBox_Checked"
-                          Unchecked="CheckBox_Unchecked" />
-            </Grid>
-            <StackPanel Orientation="Horizontal"
-                        Margin="20 0 0 0">
-                <Button Width="100"
-                        Height="Auto"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        Margin="10"
-                        Padding="10"
-                        HorizontalAlignment="Right"
-                        Content="Clear"
-                        FontSize="20"
+                          Checked="CheckBox_DisplayMessageFromChecked"
+                          Unchecked="CheckBox_DisplayMessageFromChecked" />
+            </WrapPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="HorizontalAlignment"
+                                Value="Center" />
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Center" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                        <Setter Property="VerticalContentAlignment"
+                                Value="Center" />
+                        <Setter Property="FontSize"
+                                Value="20" />
+                        <Setter Property="Width"
+                                Value="100" />
+                        <Setter Property="Height"
+                                Value="auto" />
+                        <Setter Property="Margin"
+                                Value="10 0 0 0" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="Clear"
                         Click="ClearConsole_Click" />
-
-                <Button Width="100"
-                        Height="Auto"
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        Margin="10"
-                        Padding="10"
-                        HorizontalAlignment="Left"
-                        Content="Close"
-                        FontSize="20"
+                <Button Content="Close"
                         Click="CloseConsole_Click" />
+                <Button Content="Save..."
+                        Click="Button_SaveClick" />
             </StackPanel>
 
         </StackPanel>

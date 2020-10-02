@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="DisplayHistory.cs" />
     <Compile Include="ExtendedStreamBuilder.cs" />
+    <Compile Include="GlobalUsage.cs" />
     <Compile Include="History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>

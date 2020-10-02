@@ -15,7 +15,7 @@
           Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260" />
-            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,7 +27,7 @@
                        Grid.Column="1"
                        Grid.Row="0"
                        Grid.RowSpan="3"
-                       Margin="10 0 0 0"/>
+                       Margin="10 -80 0 0"/>
 
         <StackPanel Orientation="Vertical"
                     Grid.Row="0"

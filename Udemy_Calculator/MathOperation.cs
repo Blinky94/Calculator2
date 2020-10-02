@@ -45,18 +45,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Add: {p1} + {p2}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {p1} + {p2}");
                 double lDouble = p1 + p2;
-                lResult = CheckIfResultIsANumber("Add", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Add:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Add result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
 
@@ -85,18 +85,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Substract: {p1} + {p2}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {p1} - {p2}");
                 double lDouble = p1 - p2;
-                lResult = CheckIfResultIsANumber("Substract", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Substract:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Substract result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
 
@@ -125,18 +125,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Multiply: {p1} x {p2}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {p1} x {p2}");
                 double lDouble = p1 * p2;
-                lResult = CheckIfResultIsANumber("Multiply", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Multiply:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Multiply result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
 
@@ -165,18 +165,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Divide: {p1} ÷ {p2}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: { p1} ÷ {p2}");
                 double lDouble = p1 / p2;
-                lResult = CheckIfResultIsANumber("Divide", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Divide:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Divide result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
 
@@ -205,18 +205,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Exponent: {p1}^({p2})");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {p1}^({p2})");
                 double lDouble = Math.Pow(p1, p2);
-                lResult = CheckIfResultIsANumber("Exponent", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Exponent:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Exponent result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
 
@@ -245,18 +245,18 @@ namespace Udemy_Calculator
 
             try
             {
-                TraceLogs.AddInfo($"Sqrt: √({p})");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: √({p})");
                 double lDouble = Math.Sqrt(p);
-                lResult = CheckIfResultIsANumber("Sqrt", lDouble);
+                lResult = CheckIfResultIsANumber(GlobalUsage.GetCurrentMethodName, lDouble);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError($"Sqrt:\n {e.Message}");
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n {e.Message}");
             }
 
-            TraceLogs.AddInfo($"Sqrt result: {lResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: {lResult}");
             return lResult;
         }
     }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
 
 namespace Udemy_Calculator
 {
@@ -12,13 +10,7 @@ namespace Udemy_Calculator
     /// </summary>
     public class Chunk
     {
-        private StringBuilder mFormula;
-
-        public StringBuilder Formula
-        {
-            get { return mFormula; }
-            private set { mFormula = value; }
-        }
+        public StringBuilder Formula { get; private set; }
 
         public StringBuilder SB { get; set; }
 
@@ -33,8 +25,10 @@ namespace Udemy_Calculator
 
         public Chunk(StringBuilder pSb, int pStartIndex, int pLength)
         {
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Contructor creating chunk (parameter: stringBuilder {pSb}, StartIndex{pStartIndex}, length {pLength})");
+
             string lFormula = pSb.ToString();
-            mFormula = new StringBuilder(lFormula);
+            Formula = new StringBuilder(lFormula);
 
             SB = pSb;
             StartIndex = pStartIndex;
@@ -42,7 +36,7 @@ namespace Udemy_Calculator
         }
     }
 
-    public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Square, Exponent }
+    public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Sqrt, Exponent }
 
     public class PEMDAS
     {
@@ -66,9 +60,10 @@ namespace Udemy_Calculator
         /// <param name="pFormula"></param>
         public PEMDAS(string pFormula)
         {
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Contructor creating chunk (parameter: {pFormula})");
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
-        }
+        }     
 
         /// <summary>
         /// Main function to compute formula input and returns out parameter result
@@ -76,8 +71,8 @@ namespace Udemy_Calculator
         /// <param name="pResult"></param>
         public string ComputeFormula()
         {
-            TraceLogs.AddTechnical($"ComputeFormula: Begining to compute de formula with Regex pattern ({lFinishedComputationPattern})");
-            TraceLogs.AddInfo($"ComputeFormula: onto the formula ({Chunk.Formula})");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Begining to compute de formula with Regex pattern ({lFinishedComputationPattern})");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: onto the formula ({Chunk.Formula})");
 
             Regex lRegex = new Regex(lFinishedComputationPattern);
             Match lMatch;
@@ -96,9 +91,7 @@ namespace Udemy_Calculator
 
                     if (string.IsNullOrEmpty(lResult))
                     {
-                        string lWarn = "No result to do compute from current chuck !!!";
-                        TraceLogs.AddWarning(lWarn);
-                        //throw new NullReferenceException(lWarn);
+                        TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No result to do compute from current chuck!!!");
                     }
 
                     DoReplaceByResult(lResult);
@@ -112,7 +105,7 @@ namespace Udemy_Calculator
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("ComputeFormula:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
 
             return null;
@@ -127,18 +120,17 @@ namespace Udemy_Calculator
         /// <param name="pPattern"></param>
         private void ArrangeChunkOfFormula(string pPattern)
         {
-            TraceLogs.AddTechnical($"ArrangeChunkOfFormula: Applying Regex pattern ({pPattern})");
-            TraceLogs.AddInfo($"ArrangeChunkOfFormula: on the formula chunk ({Chunk.SB})");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Applying Regex pattern ({pPattern})");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Regex on the formula chunk ({Chunk.SB})");
 
             try
             {
                 Regex regex = new Regex(pPattern);
-
                 Match lMatch = regex.Match(Chunk.SB.ToString());
 
                 if (!lMatch.Success)
                 {
-                    TraceLogs.AddInfo("ArrangeChunkOfFormula: No matching pattern onto the chunk");
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: No matching pattern onto the chunk ({Chunk.SB})");
                     return;
                 }
 
@@ -148,12 +140,14 @@ namespace Udemy_Calculator
                 Chunk.SB.GetChunk(lIndex, lLength);
                 Chunk.StartIndex = lIndex;
                 Chunk.Length = lLength;
+
+                TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Chunk start index: {Chunk.StartIndex };Chunk length: {Chunk.Length}");
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("ArrangeChunkOfFormula:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
         }
 
@@ -165,7 +159,7 @@ namespace Udemy_Calculator
             // Regex to select all parenthesis groups
             string lPattern = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
-            TraceLogs.AddTechnical($"ExtractParenthesis: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -179,7 +173,7 @@ namespace Udemy_Calculator
             // Regex to select all exponents groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
 
-            TraceLogs.AddTechnical($"ComputeExponent: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -193,7 +187,7 @@ namespace Udemy_Calculator
             // Regex to select all multiplication and division groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[×xX*÷\/]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-            TraceLogs.AddTechnical($"ComputeMultAndDiv: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -207,7 +201,7 @@ namespace Udemy_Calculator
             // Regex to select all addition and substraction groups
             string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[+-]+(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)";
 
-            TraceLogs.AddTechnical($"ComputeAddAndSub: Pattern {lPattern}");
+            TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern {lPattern}");
 
             ArrangeChunkOfFormula(lPattern);
         }
@@ -226,7 +220,7 @@ namespace Udemy_Calculator
         /// <param name="pOperator"></param>
         public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out EOperation? pOperator)
         {
-            TraceLogs.AddInfo($"ExtractArithmeticsGroups: Extracting each part of operands from the formula ({Chunk.SB})");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Extracting each part of operands from the formula ({Chunk.SB})");
 
             pLeftOperand = default;
             pRightOperand = default;
@@ -239,12 +233,12 @@ namespace Udemy_Calculator
                 Regex regex = new Regex(lPattern);
                 Match lMatch = regex.Match(Chunk.SB.ToString());
 
-                TraceLogs.AddTechnical($"ExtractArithmeticsGroups: Pattern for extractions ({lPattern})");
+                TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern for extractions ({lPattern})");
 
                 string lLeft = lMatch.Groups["LeftOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
                 string lRight = lMatch.Groups["RightOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
 
-                TraceLogs.AddInfo($"ExtractArithmeticsGroups: Left part: {lLeft} ; Right part: {lRight}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Left part: {lLeft} ; Right part: {lRight}");
 
                 if (!string.IsNullOrEmpty(lLeft))
                 {
@@ -259,13 +253,13 @@ namespace Udemy_Calculator
                 }
 
                 pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
-                TraceLogs.AddInfo($"ExtractArithmeticsGroups: Operator: {pOperator}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Operator: {pOperator}");
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("ExtractArithmeticsGroups:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
         }
 
@@ -281,7 +275,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         internal static decimal GetDecimalFromString(string pStr)
         {
-            TraceLogs.AddInfo($"GetDecimalFromString: Removing the excedent of the string to limit the length for decimal number");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Removing the excedent of the string to limit the length for decimal number");
 
             decimal lResult = default;
 
@@ -299,15 +293,14 @@ namespace Udemy_Calculator
                 }
                 else
                 {
-                    TraceLogs.AddWarning($"Format of the string is incorrect: ({pStr})");
-                    //throw new OverflowException($"Le format de la valeur est incorrecte ({pStr})");
+                    TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: Format of the string is incorrect: ({pStr})");
                 }
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("GetDecimalFromString:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
 
             return lResult;
@@ -321,7 +314,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         internal static double GetDoubleFromString(string pStr)
         {
-            TraceLogs.AddInfo($"GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Removing the excedent of the string to limit the length for decimal number on {pStr}");
 
             double lResult = default;
 
@@ -332,17 +325,20 @@ namespace Udemy_Calculator
                 if (lHasExponential)
                 {
                     lResult = double.Parse(pStr, NumberStyles.Float, null);
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Has exponent: {pStr}");
                 }
                 else
                 {
                     lResult = double.Parse(pStr, NumberStyles.Any, CultureInfo.InvariantCulture);
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Has no exponent: {pStr}");
+
                 }
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("GetDoubleFromString:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
 
             return lResult;
@@ -357,18 +353,18 @@ namespace Udemy_Calculator
         /// </summary>
         internal void DoCompute(out string pResult)
         {
-            TraceLogs.AddInfo($"DoCompute: Compute the chunk formula from a chunk {Chunk.SB} sequence");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Compute the chunk formula from a chunk {Chunk.SB} sequence");
             pResult = default;
 
             try
             {
                 ExtractArithmeticsGroups(out double lLeftOperand, out double lRightOperand, out EOperation? lOperator);
-                TraceLogs.AddInfo($"DoCompute: Compute the chunk formula from a chunk {Chunk.SB} sequence");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Compute the chunk formula from a chunk {Chunk.SB} sequence");
 
                 if (double.IsNaN(lLeftOperand) || double.IsNaN(lRightOperand) || lOperator == null)
                 {
-                    TraceLogs.AddWarning($"Do compute: operands are not consistents (leftOperand: {lLeftOperand}, rightOperand: {lRightOperand}, operator: {lOperator}) !!!");
-                    throw new Exception("Do compute: operands are not consistents !!!");
+                    TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: operands are not consistents (leftOperand: {lLeftOperand}, rightOperand: {lRightOperand}, operator: {lOperator}) !!!");
+                    throw new Exception($"{GlobalUsage.GetCurrentMethodName}: operands are not consistents !!!");
                 }
 
                 string lResult = string.Empty;
@@ -387,7 +383,7 @@ namespace Udemy_Calculator
                     case EOperation.Substraction:
                         lResult = MathOperation.Substract(lLeftOperand, lRightOperand);
                         break;
-                    case EOperation.Square:
+                    case EOperation.Sqrt:
                         lResult = MathOperation.Sqrt(lRightOperand);
                         break;
                     case EOperation.Exponent:
@@ -396,13 +392,13 @@ namespace Udemy_Calculator
                 }
 
                 pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult;
-                TraceLogs.AddInfo($"DoCompute: Compute result: {pResult}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Compute result: {pResult}");
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("DoCompute:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
         }
 
@@ -413,7 +409,7 @@ namespace Udemy_Calculator
         /// </summary>
         internal EOperation WhatOperator(char pOperator)
         {
-            TraceLogs.AddInfo($"WhatOperator: Get the operator from the string input");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Get the operator from the string input");
 
             try
             {
@@ -439,7 +435,7 @@ namespace Udemy_Calculator
                         mOperator = EOperation.Substraction;
                         break;
                     case '√':
-                        mOperator = EOperation.Square;
+                        mOperator = EOperation.Sqrt;
                         break;
                     default:
                         mOperator = EOperation.Unknown;
@@ -450,10 +446,10 @@ namespace Udemy_Calculator
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("WhatOperator:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
 
-            TraceLogs.AddInfo($"WhatOperator: Operator is {mOperator}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}:  Operator is {mOperator}");
 
             return mOperator;
         }
@@ -464,44 +460,44 @@ namespace Udemy_Calculator
         /// <param name="lResult"></param>
         internal void DoReplaceByResult(string pResult)
         {
-            TraceLogs.AddInfo($"DoReplaceByResult: Replacing the chunk sequence {Chunk.SB} by the result {pResult}");
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the chunk sequence {Chunk.SB} by the result {pResult}");
 
             try
             {
                 // Check if compute if finish, return if yes
                 Regex lRegex = new Regex(lFinishedComputationPattern);
                 Match lMatch = lRegex.Match(pResult);
-                TraceLogs.AddTechnical($"DoReplaceByResult: Checking if compute is finish\n Regex Pattern: {lFinishedComputationPattern}");
+                TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Checking if compute is finish\n Regex Pattern: {lFinishedComputationPattern}");
 
-                TraceLogs.AddInfo($"DoReplaceByResult: Finding operator to continue: {lMatch.Success}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Finding operator to continue: {lMatch.Success}");
 
                 if (!lMatch.Success)
                 {
-                    TraceLogs.AddInfo($"DoReplaceByResult: Replacing the main formula ({Chunk.Formula}) by the result");
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the main formula ({Chunk.Formula}) by the result {pResult}");
 
                     Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
                     Chunk.Formula.Insert(Chunk.StartIndex, pResult);
                     string lTmp = Chunk.Formula.ToString();
                     Chunk.SB = new StringBuilder(lTmp);
 
-                    TraceLogs.AddInfo($"DoReplaceByResult: Main formula finaly: ({Chunk.Formula})");
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Main formula finaly: ({Chunk.Formula})");
                     return;
                 }
-            
-                TraceLogs.AddInfo($"DoReplaceByResult: Replacing the chunk ({Chunk.SB})");
+
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the chunk ({Chunk.SB})");
                 Chunk.SB.Remove(Chunk.StartIndex, Chunk.Length);
                 Chunk.SB.Insert(Chunk.StartIndex, pResult);
-                TraceLogs.AddInfo($"DoReplaceByResult: chunk finaly: ({Chunk.SB})");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: chunk finaly: ({Chunk.SB})");
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                TraceLogs.AddError("DoReplaceByResult:\n" + e.Message.ToString());
+                TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n" + e.Message.ToString());
             }
         }
 
-#endregion
+        #endregion
     }
 }
 

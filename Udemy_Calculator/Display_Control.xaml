@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              Height="60"
-             MaxWidth="520"
              d:DesignHeight="460"
              d:DesignWidth="485"
              x:Name="displayControl">
 
     <!--Calulus Area-->
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+        </Grid.ColumnDefinitions>
           <Grid.Resources>
             <Style TargetType="Border">
                 <Setter Property="BorderBrush"
@@ -20,15 +22,12 @@
             </Style>
         </Grid.Resources>
         <Border x:Name="UIDisplayBorder"
-                DockPanel.Dock="Left"
                 HorizontalAlignment="Stretch"
                 CornerRadius="10"
                 Background="White"
                 BorderThickness="1.5">
-            <Viewbox HorizontalAlignment="Right"
-                Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualWidth}"
-                     Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}">
-                  <TextBox x:Name="UIDisplayCalculus"                  
+            <Viewbox HorizontalAlignment="Right">
+                <TextBox x:Name="UIDisplayCalculus"                  
                      Background="Transparent"
                      BorderThickness="0"
                      HorizontalContentAlignment="Right"
