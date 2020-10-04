@@ -171,7 +171,7 @@
   </Theme>
   <Theme name="Dark">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Background">#FF050505</MainCalculatorBackground>
+      <MainCalculatorBackground name="Background">#FF211E1E</MainCalculatorBackground>
       <MainCalculatorForeground name="Foreground">#FFF0FFFF</MainCalculatorForeground>
       <MainCalculatorBorderBrush name="Border color">#FF4A4A4A</MainCalculatorBorderBrush>
       <MainCalculatorBorderThickness max="10" name="Thickness">5</MainCalculatorBorderThickness>

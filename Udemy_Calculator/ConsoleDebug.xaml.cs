@@ -59,15 +59,6 @@ namespace Udemy_Calculator
         internal static BindingList<LogTrace> LogList { get; set; } = new BindingList<LogTrace>();
 
         /// <summary>
-        /// Generate the actual time with millisecond precisions
-        /// </summary>
-        /// <returns></returns>
-        private static string GenerateTimeNow()
-        {
-            return DateTime.Now + "." + DateTime.Now.Millisecond;
-        }
-
-        /// <summary>
         /// Concat log entries with date/hours/min/sec to the logList
         /// </summary>
         /// <param name="pMessage"></param>
@@ -76,7 +67,7 @@ namespace Udemy_Calculator
         {
             if (IsConsoleDebugVisible)
             {
-                string lStr = $"{GenerateTimeNow()}: {pCategory} - {pMessage}";
+                string lStr = $"{GlobalUsage.GenerateTimeNow()}: {pCategory} - {pMessage}";
                 LogList.Add(new LogTrace(lStr, pCategory));
             }
         }
@@ -340,16 +331,9 @@ namespace Udemy_Calculator
 
         private void Button_SaveClick(object sender, RoutedEventArgs e)
         {
-            using (System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog())
-            {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                dialog.Filter = "Text Files(*.txt)|*.txt|All(*.*)|*";
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
-                dialog.ShowDialog();
+            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Saving Console debug logs");
 
-                string lRichText = new TextRange(UIRichTextBoxConsoleDebug.Document.ContentStart, UIRichTextBoxConsoleDebug.Document.ContentEnd).Text;
-                File.WriteAllText(dialog.FileName, lRichText);
-            }
+            GlobalUsage.SaveToFile(UIRichTextBoxConsoleDebug);
         }
     }
 }

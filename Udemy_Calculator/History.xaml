@@ -20,9 +20,6 @@
                                   HorizontalAlignment="Left"
                                   Checked="UIHistoryExpander_Expanded"
                                   Unchecked="UIHistoryExpander_Collapsed">
-                        <Image Source="Images/History_icon.png"
-                               Width="22"
-                               Height="22"/>
                     </ToggleButton>
                     <ContentPresenter x:Name="ExpanderContent"
                                       Grid.Column="1"
@@ -44,7 +41,7 @@
             <ColumnDefinition Width="260"
                               x:Name="UIHistoryExpanderColumn" />
         </Grid.ColumnDefinitions>
-        
+
         <!--History Grid-->
         <Expander Width="260"
                   ExpandDirection="Right"
@@ -55,10 +52,9 @@
                 <Grid Name="HistoryGrid"
                       Background="Transparent">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="430" />
+                        <RowDefinition Height="510" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                
                     <Grid.Resources>
                         <Style TargetType="RichTextBox">
                             <Setter Property="FontSize"
@@ -67,46 +63,63 @@
                                     Value="Bold" />
                         </Style>
                     </Grid.Resources>
-
                     <ScrollViewer x:Name="UIHistoryScrollViewer"
                                   Grid.Row="0"
                                   VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled"
                                   Background="Transparent">
+
                         <RichTextBox x:Name="UIHistoryTextBox"
-                                     IsReadOnly="True"
-                                     BorderBrush="LightGray"
-                                     BorderThickness="0 0 0 0"
-                                     Margin="0 0 0 0"
+                                     IsReadOnly="True"        
                                      ScrollViewer.CanContentScroll="True"
-                                     Padding="0"
-                                     Background="DimGray"
+                                     Padding="0"                                 
                                      TextChanged="UIHistoryTextBox_TextChanged">
+                            <RichTextBox.Background>
+                                <SolidColorBrush Color="#FFFFFF"
+                                                 Opacity="0.45" />
+                            </RichTextBox.Background>
                             <FlowDocument x:Name="UIHistoryFlowDoc"
                                           LineHeight="1">
                             </FlowDocument>
                         </RichTextBox>
                     </ScrollViewer>
-
                     <StackPanel Orientation="Horizontal"
                                 Background="Transparent"
                                 Grid.Row="1"
-                                HorizontalAlignment="Right"
-                                Margin="0 0 0 0"
+                                HorizontalAlignment="Center"
                                 DockPanel.Dock="Bottom">
+                        <CheckBox x:Name="CheckBoxWithDetails"
+                                  Content="Details"
+                                  VerticalAlignment="Center"
+                                  Margin="0 0 10 0"
+                                  Checked="CheckBoxWithDetails_Checked"
+                                  Unchecked="CheckBoxWithDetails_Unchecked" />
                         <Button x:Name="UICleaner"
                                 Background="White"
-                                Visibility="Visible"  
-                                Padding="5 0 5 0"
+                                Visibility="Visible"
+                                Padding="0 0 0 0"
                                 Margin="0 2 0 2"
+                                Height="20"
                                 Click="UICleaner_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/Cleaner_icon.png" />
+                                <Image Source="Images/Cleaner_icon.png"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="UISave"
+                                Background="White"
+                                Visibility="Visible"
+                                Padding="0 0 0 0"
+                                Margin="2"
+                                Height="20"
+                                Click="UISave_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Save_icon.png" Width="14" Height="14" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </Grid>
             </Expander.Content>
         </Expander>
+
     </Grid>
 </UserControl>

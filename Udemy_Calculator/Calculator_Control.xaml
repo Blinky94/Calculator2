@@ -15,19 +15,12 @@
           Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260" />
-            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <local:History x:Name="UIHistory"
-                       Grid.Column="1"
-                       Grid.Row="0"
-                       Grid.RowSpan="3"
-                       Margin="10 -80 0 0"/>
 
         <StackPanel Orientation="Vertical"
                     Grid.Row="0"

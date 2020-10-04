@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace Udemy_Calculator
 {
@@ -63,7 +64,7 @@ namespace Udemy_Calculator
             TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Contructor creating chunk (parameter: {pFormula})");
             // Initialize the chunk formula with the complete formula
             Chunk = new Chunk(new StringBuilder(pFormula), 0, pFormula.Length);
-        }     
+        }
 
         /// <summary>
         /// Main function to compute formula input and returns out parameter result
@@ -221,6 +222,9 @@ namespace Udemy_Calculator
         public void ExtractArithmeticsGroups(out double pLeftOperand, out double pRightOperand, out EOperation? pOperator)
         {
             TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Extracting each part of operands from the formula ({Chunk.SB})");
+
+            ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+            ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement($"({Chunk.SB})", false, null, true);
 
             pLeftOperand = default;
             pRightOperand = default;
@@ -466,28 +470,22 @@ namespace Udemy_Calculator
             {
                 // Check if compute if finish, return if yes
                 Regex lRegex = new Regex(lFinishedComputationPattern);
-                Match lMatch = lRegex.Match(pResult);
                 TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Checking if compute is finish\n Regex Pattern: {lFinishedComputationPattern}");
 
-                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Finding operator to continue: {lMatch.Success}");
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the main formula ({Chunk.Formula}) by the result {pResult}");
 
-                if (!lMatch.Success)
+                Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
+                Chunk.Formula.Insert(Chunk.StartIndex, pResult);
+                string lTmp = Chunk.Formula.ToString();
+                Chunk.SB = new StringBuilder(lTmp);
+
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Main formula finaly: ({Chunk.Formula})");
+
+                if (lRegex.Match(Chunk.Formula.ToString()).Success)
                 {
-                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the main formula ({Chunk.Formula}) by the result {pResult}");
-
-                    Chunk.Formula.Remove(Chunk.StartIndex, Chunk.Length);
-                    Chunk.Formula.Insert(Chunk.StartIndex, pResult);
-                    string lTmp = Chunk.Formula.ToString();
-                    Chunk.SB = new StringBuilder(lTmp);
-
-                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Main formula finaly: ({Chunk.Formula})");
-                    return;
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement($"=" + pResult, false, null, true);
                 }
 
-                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Replacing the chunk ({Chunk.SB})");
-                Chunk.SB.Remove(Chunk.StartIndex, Chunk.Length);
-                Chunk.SB.Insert(Chunk.StartIndex, pResult);
-                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: chunk finaly: ({Chunk.SB})");
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)

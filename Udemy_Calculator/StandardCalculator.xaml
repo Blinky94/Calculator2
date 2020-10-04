@@ -52,7 +52,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -424,7 +424,7 @@ namespace Udemy_Calculator
 
         public Calculator_Control()
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
@@ -444,7 +444,7 @@ namespace Udemy_Calculator
             }
 
             lInput = lNumber.ToString().Replace(',', '.');
-            UIHistory.AppendElement(lInput, mIsResult, LastNumber);
+            ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lInput, mIsResult, LastNumber);
             OnCalculusDisplayChanged();
         }
 
@@ -468,7 +468,7 @@ namespace Udemy_Calculator
                     ToCalculusDisplay = $"{ToCalculusDisplay}.";
                 }
 
-                UIHistory.AppendElement(lAdded + (e.Source as Button).Content.ToString(), mIsResult, LastNumber);
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lAdded + (e.Source as Button).Content.ToString(), mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
                 mIsResult = false;
             }
@@ -479,7 +479,7 @@ namespace Udemy_Calculator
             ToCalculusDisplay = "0";
             LastNumber = "0";
 
-            UIHistory.AppendElement(string.Empty);
+            ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(string.Empty);
             OnCalculusDisplayChanged();
         }
 
@@ -502,7 +502,7 @@ namespace Udemy_Calculator
                     ToCalculusDisplay = (lNum * (-1)).ToString();
                 }
 
-                UIHistory.AppendElement(ToCalculusDisplay, mIsResult, LastNumber);
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(ToCalculusDisplay, mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
             }
         }
@@ -514,7 +514,7 @@ namespace Udemy_Calculator
             {
                 ToCalculusDisplay = (lResult * (0.01)).ToString();
 
-                UIHistory.AppendElement(ToCalculusDisplay, false);
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(ToCalculusDisplay, false);
                 OnCalculusDisplayChanged();
             }
         }
@@ -525,7 +525,7 @@ namespace Udemy_Calculator
             {
                 ToCalculusDisplay = (e.Source as Button).Content.ToString();
 
-                UIHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, LastNumber);
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, LastNumber);
 
                 LastNumber = ToCalculusDisplay;
                 OnCalculusDisplayChanged();
@@ -538,7 +538,7 @@ namespace Udemy_Calculator
         {
             if (!mIsResult)
             {
-                string lFormula = UIHistory.ReturnFormula();
+                string lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
 
                 if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
                 {
@@ -548,18 +548,18 @@ namespace Udemy_Calculator
                     lResult = mPemdas.ComputeFormula();
 
                     ToCalculusDisplay = lResult;
-                    UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber);
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber, true);
 
-                    mIsResult = true;
-
-                    UIHistory.NewElement();
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
 
                     LastNumber = ToCalculusDisplay;
-                    UIHistory.AppendElement(lResult.Replace(',', '.'), true);
-                    UIHistory.NewElement();
+                    mIsResult = true;
+
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult);
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
                     OnCalculusDisplayChanged();
                 }
-            }          
+            }
         }
 
         private void UIBackReturnButton_Click(object sender, RoutedEventArgs e)
