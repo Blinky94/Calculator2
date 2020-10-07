@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using SQLite;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,34 +46,6 @@ namespace Udemy_Calculator
             InitializeComponent();
             CurrentMode = CalculatorMode.Standard;
         }
-
-        ///// <summary>
-        ///// Set a menu item
-        ///// </summary>
-        ///// <param name="pHeader"></param>
-        ///// <param name="pHandler"></param>
-        //private void SetMenuItem(string pHeader, RoutedEventHandler pHandler)
-        //{
-        //    MenuItem lMenuItem = new MenuItem();
-        //    lMenuItem.Click += pHandler;
-        //    lMenuItem.Header = pHeader;
-        //    MenuThemes.Items.Add(lMenuItem);
-        //}
-
-        ///// <summary>
-        ///// Set new items in the menuside
-        ///// </summary>
-        //public void SetMenuItems()
-        //{
-        //    //Set every itemsfrom xml file
-        //    mListThemeName?.ForEach(pThemeName =>
-        //    {
-        //        SetMenuItem($"_{pThemeName}", MenuTheme_Click);
-        //    });
-
-        //    // Set the custom themes item
-        //    SetMenuItem("_Custom...", CustomItem_Click);
-        //}
 
         private void MenuTheme_Click(object sender, RoutedEventArgs e)
         {

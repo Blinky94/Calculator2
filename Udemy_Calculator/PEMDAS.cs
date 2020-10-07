@@ -1,7 +1,10 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Udemy_Calculator
@@ -78,6 +81,17 @@ namespace Udemy_Calculator
             Regex lRegex = new Regex(lFinishedComputationPattern);
             Match lMatch;
 
+            FormulaTable lFormulaRow = new FormulaTable()
+            {
+                FormulaDate = GlobalUsage.GenerateTimeNow(true),
+                FormulaText = Chunk.Formula.ToString()
+            };
+
+            GlobalUsage.ListFormula.Add(lFormulaRow);
+            //GlobalUsage.Insert(lFormulaRow);
+            int lFormulaId = lFormulaRow.Id;
+            GlobalUsage.CurrentFormulaId = lFormulaId;
+
             try
             {
                 do
@@ -95,10 +109,25 @@ namespace Udemy_Calculator
                         TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No result to do compute from current chuck!!!");
                     }
 
+                    ChunkTable lChunkRow = new ChunkTable()
+                    {
+                        ChunkDate = GlobalUsage.GenerateTimeNow(true),
+                        ChunkText = Chunk.SB.ToString(),
+                        ChunkResult = lResult,
+                        Formula_Id = lFormulaId
+                    };
+
+                    GlobalUsage.ListChunk.Add(lChunkRow);
+                    //GlobalUsage.Insert(lChunkRow);
+
                     DoReplaceByResult(lResult);
                     lMatch = lRegex.Match(Chunk.Formula.ToString());
 
                 } while (lMatch.Success);
+
+                // Writing the result to database table formulaTable
+                lFormulaRow.FormulaResult = Chunk.SB.ToString();
+                //GlobalUsage.Update(lFormulaRow);
 
                 return Chunk.SB.ToString();
             }
@@ -107,6 +136,10 @@ namespace Udemy_Calculator
 #pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
+            }
+            finally
+            {
+                //GlobalUsage.SaveDebugLogToDatabase();
             }
 
             return null;

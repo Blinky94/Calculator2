@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Udemy_Calculator.HistoryControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="260">
+
+    <Grid>
+        <Grid.Resources>
+            <!--UI History Expander Template-->
+            <ControlTemplate x:Key="UIHistoryExpander"
+                             TargetType="{x:Type Expander}">
+                <DockPanel>
+                    <ToggleButton x:Name="ExpanderButton"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  DockPanel.Dock="Top"
+                                  HorizontalAlignment="Left"
+                                  Checked="UIHistoryExpander_Expanded"
+                                  Unchecked="UIHistoryExpander_Collapsed">
+                    </ToggleButton>
+                    <ContentPresenter x:Name="ExpanderContent"
+                                      Grid.Column="1"
+                                      Visibility="Visible"
+                                      DockPanel.Dock="Bottom" />
+                </DockPanel>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsExpanded"
+                             Value="True">
+                        <Setter TargetName="ExpanderContent"
+                                Property="Visibility"
+                                Value="Visible" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"
+                              x:Name="UIHistoryExpanderColumn" />
+        </Grid.ColumnDefinitions>
+
+        <!--History Grid-->
+        <Expander Width="260"
+                  ExpandDirection="Right"
+                  IsExpanded="False"
+                  Template="{StaticResource ResourceKey=UIHistoryExpander}"
+                  OverridesDefaultStyle="True">
+            <Expander.Content>
+                <Grid Name="HistoryGrid"
+                      Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="510" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="RichTextBox">
+                            <Setter Property="FontSize"
+                                    Value="16" />
+                            <Setter Property="FontWeight"
+                                    Value="Bold" />
+                        </Style>
+                    </Grid.Resources>
+                    <ScrollViewer x:Name="UIHistoryScrollViewer"
+                                  Grid.Row="0"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Background="Transparent">
+
+                        <RichTextBox x:Name="UIHistoryTextBox"
+                                     IsReadOnly="True"        
+                                     ScrollViewer.CanContentScroll="True"
+                                     Padding="0"                                 
+                                     TextChanged="UIHistoryTextBox_TextChanged">
+                            <RichTextBox.Background>
+                                <SolidColorBrush Color="#FFFFFF"
+                                                 Opacity="0.45" />
+                            </RichTextBox.Background>
+                            <FlowDocument x:Name="UIHistoryFlowDoc"
+                                          LineHeight="1">
+                            </FlowDocument>
+                        </RichTextBox>
+                    </ScrollViewer>
+                    <StackPanel Orientation="Horizontal"
+                                Background="Transparent"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                DockPanel.Dock="Bottom">
+                        <CheckBox x:Name="CheckBoxWithDetails"
+                                  Content="Details"
+                                  VerticalAlignment="Center"
+                                  Margin="0 0 10 0"
+                                  Checked="CheckBoxWithDetails_Checked"
+                                  Unchecked="CheckBoxWithDetails_Unchecked" />
+                        <Button x:Name="UICleaner"
+                                Background="White"
+                                Visibility="Visible"
+                                Padding="0 0 0 0"
+                                Margin="0 2 0 2"
+                                Height="20"
+                                Click="UICleaner_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Cleaner_icon.png"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="UISave"
+                                Background="White"
+                                Visibility="Visible"
+                                Padding="0 0 0 0"
+                                Margin="2"
+                                Height="20"
+                                Click="UISave_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/Save_icon.png" Width="14" Height="14" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Expander.Content>
+        </Expander>
+
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Udemy_Calculator
 {
@@ -7,5 +8,6 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

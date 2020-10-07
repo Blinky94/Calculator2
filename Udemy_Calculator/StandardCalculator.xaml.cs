@@ -39,14 +39,14 @@ namespace Udemy_Calculator
 
         private readonly string mSpecialSymbols = "×÷+-";
         private bool mIsResult;
-        private readonly History mHistory;
+        private readonly HistoryControl mHistory;
         private PEMDAS mPemdas;
 
         public StandardCalculator()
         {
             InitializeComponent();
 
-            mHistory = new History();
+            mHistory = new HistoryControl();
             mHistory.SetValue(Grid.RowProperty, 1);
             mHistory.SetValue(Grid.ColumnProperty, 1);
             mHistory.SetValue(Grid.ColumnSpanProperty, 6);

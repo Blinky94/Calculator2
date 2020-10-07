@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using SQLite;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -45,6 +47,8 @@ namespace Udemy_Calculator
             // UIMenuSide.SetMenuItems();
             CommonTheme.LoadPropertiesFromXmlFile();
             SetThemes();
+
+            //GlobalUsage.SetSqlitePragmaConfiguration();
         }
 
         /// <summary>

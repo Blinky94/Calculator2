@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,103 +14,6 @@ namespace Udemy_Calculator
     /// </summary>
     public enum LogCategory { Info, Warning, Error, Output, Technical }
 
-    /// <summary>
-    /// Log tracing object to fill with string part for the message
-    /// and LogCategory
-    /// </summary>
-    public class LogTrace
-    {
-        public LogTrace()
-        {
-            //Empty
-        }
-
-        public LogTrace(string pMessage, LogCategory pCat = LogCategory.Info)
-        {
-            Message = pMessage;
-            Category = pCat;
-        }
-
-        public string Message { get; set; }
-        public LogCategory Category { get; set; }
-    }
-
-    /// <summary>
-    /// Static class to encapsulate logs
-    /// </summary>
-    public static class TraceLogs
-    {
-        /// <summary>
-        /// Get or set the visibility of the console debug window
-        /// </summary>
-        public static bool IsConsoleDebugVisible { get; set; }
-
-        /// <summary>
-        /// Buffering all logs into this list
-        /// </summary>
-        internal static BindingList<LogTrace> BufferLogList { get; set; } = new BindingList<LogTrace>();
-
-        /// <summary>
-        /// Special list allowing to raise event handler when changing
-        /// </summary>
-        internal static BindingList<LogTrace> LogList { get; set; } = new BindingList<LogTrace>();
-
-        /// <summary>
-        /// Concat log entries with date/hours/min/sec to the logList
-        /// </summary>
-        /// <param name="pMessage"></param>
-        /// <param name="pCategory"></param>
-        private static void LogEnqueue(string pMessage, LogCategory pCategory = LogCategory.Info)
-        {
-            if (IsConsoleDebugVisible)
-            {
-                string lStr = $"{GlobalUsage.GenerateTimeNow()}: {pCategory} - {pMessage}";
-                LogList.Add(new LogTrace(lStr, pCategory));
-            }
-        }
-
-        /// <summary>
-        /// Add the message as an information to the ConsoleDebug window
-        /// </summary>
-        /// <param name="pMessage"></param>
-        public static void AddInfo(string pMessage)
-        {
-            LogEnqueue(pMessage, LogCategory.Info);
-        }
-
-        /// <summary>
-        /// Add the message as a warning to the ConsoleDebug window
-        /// </summary>
-        public static void AddWarning(string pMessage)
-        {
-            LogEnqueue(pMessage, LogCategory.Warning);
-        }
-
-        /// <summary>
-        /// Add the message as an error to the ConsoleDebug window
-        /// </summary>
-        public static void AddError(string pMessage)
-        {
-            LogEnqueue(pMessage, LogCategory.Error);
-        }
-
-        /// <summary>
-        /// Add the message as an output to the ConsoleDebug window
-        /// </summary>
-        public static void AddOutput(string pMessage)
-        {
-            LogEnqueue(pMessage, LogCategory.Output);
-        }
-
-        /// <summary>
-        /// Add the message as a technical to the ConsoleDebug window
-        /// </summary>
-        public static void AddTechnical(string pMessage)
-        {
-            LogEnqueue(pMessage, LogCategory.Technical);
-        }
-    }
-
     public partial class ConsoleDebug : Window
     {
         public ConsoleDebug()
@@ -121,62 +21,37 @@ namespace Udemy_Calculator
             InitializeComponent();
 
             TraceLogs.IsConsoleDebugVisible = true;
-
-            TraceLogs.LogList.AllowNew = true;
-            TraceLogs.LogList.AllowRemove = true;
-            TraceLogs.LogList.AllowEdit = false;
-            TraceLogs.LogList.RaiseListChangedEvents = true;
-            TraceLogs.LogList.ListChanged += new ListChangedEventHandler(LogList_ListChanged);
-
-            TraceLogs.AddInfo("Initializing the console finish... OK");
-            TraceLogs.AddWarning("Testing logs warning... OK");
-            TraceLogs.AddError("Testing logs error... OK");
-            TraceLogs.AddOutput("Testing logs output... OK");
-            TraceLogs.AddTechnical("Testing logs technical... OK");
         }
 
         /// <summary>
         /// Adding the new paragraph to the debug console output, depending of the category checked
         /// </summary>
         /// <param name="pTrace"></param>
-        private void AddToParagraph(LogTrace pTrace)
+        private void AddToParagraph(LogDebugTable pTrace)
         {
-            if ((bool)CheckBoxInfo.IsChecked && pTrace?.Category == LogCategory.Info)
+            if ((bool)CheckBoxInfo.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Info)
             {
-                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
             }
 
-            if ((bool)CheckBoxWarning.IsChecked && pTrace?.Category == LogCategory.Warning)
+            if ((bool)CheckBoxWarning.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Warning)
             {
-                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
             }
 
-            if ((bool)CheckBoxTechnical.IsChecked && pTrace?.Category == LogCategory.Technical)
+            if ((bool)CheckBoxTechnical.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Technical)
             {
-                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
             }
 
-            if ((bool)CheckBoxError.IsChecked && pTrace?.Category == LogCategory.Error)
+            if ((bool)CheckBoxError.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Error)
             {
-                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
+                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
             }
 
-            if ((bool)CheckBoxOutput.IsChecked && pTrace?.Category == LogCategory.Output)
+            if ((bool)CheckBoxOutput.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Output)
             {
-                SetNewParagraph(pTrace.Message, GetColorFromCategory(pTrace.Category));
-            }
-        }
-
-        /// <summary>
-        /// Event to take in charge changed of the dynamic logs list
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LogList_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            if (sender is BindingList<LogTrace> lList && lList.Count > 0)
-            {
-                AddToParagraph(lList.Last());
+                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
             }
         }
 
@@ -229,8 +104,6 @@ namespace Udemy_Calculator
         private void ClearConsole_Click(object sender, RoutedEventArgs e)
         {
             UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
-            TraceLogs.BufferLogList.Clear();
-            TraceLogs.LogList.Clear();
         }
 
         private void CloseConsole_Click(object sender, RoutedEventArgs e)
@@ -296,37 +169,13 @@ namespace Udemy_Calculator
             return lListCategoriesChecked;
         }
 
-        /// <summary>
-        /// Fill the buffer log list to keep it in memory
-        /// </summary>
-        private static void FillBufferLogList()
-        {
-            for (int i = 0; i < TraceLogs.LogList.Count; i++)
-            {
-                if (!TraceLogs.BufferLogList.Contains(TraceLogs.LogList[i]))
-                {
-                    TraceLogs.BufferLogList.Add(TraceLogs.LogList[i]);
-                }
-            }
-        }
-
         private void CheckBox_DisplayMessageFromChecked(object sender, RoutedEventArgs e)
         {
             List<LogCategory> lCategoryChecked = ReturnListCategoriesChecked();
 
-            FillBufferLogList();
-
-            TraceLogs.LogList.Clear();
             UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
 
-            // Display messages categories checked 
-            for (int i = 0; i < TraceLogs.BufferLogList.Count; i++)
-            {
-                if (lCategoryChecked.Contains(TraceLogs.BufferLogList[i].Category))
-                {
-                    TraceLogs.LogList.Add(TraceLogs.BufferLogList[i]);
-                }
-            }
+            // Interogating debug table from database here
         }
 
         private void Button_SaveClick(object sender, RoutedEventArgs e)

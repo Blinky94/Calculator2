@@ -29,7 +29,8 @@ namespace Udemy_Calculator
             mFlowDocument.Blocks.Add(mParagraph);
             pUITextBox.Document = mFlowDocument;
 
-            FormulaStr += pText;
+            FormulaStr += pText;    
+
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
