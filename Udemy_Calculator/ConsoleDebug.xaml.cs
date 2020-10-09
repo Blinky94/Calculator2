@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,38 +23,17 @@ namespace Udemy_Calculator
             InitializeComponent();
 
             TraceLogs.IsConsoleDebugVisible = true;
+            GlobalUsage.ListLogDebug.ListChanged += new ListChangedEventHandler(LogList_ListChanged);
         }
 
         /// <summary>
-        /// Adding the new paragraph to the debug console output, depending of the category checked
+        /// Event to take in charge changed of the dynamic logs list
         /// </summary>
-        /// <param name="pTrace"></param>
-        private void AddToParagraph(LogDebugTable pTrace)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            if ((bool)CheckBoxInfo.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Info)
-            {
-                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
-            }
-
-            if ((bool)CheckBoxWarning.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Warning)
-            {
-                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
-            }
-
-            if ((bool)CheckBoxTechnical.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Technical)
-            {
-                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
-            }
-
-            if ((bool)CheckBoxError.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Error)
-            {
-                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
-            }
-
-            if ((bool)CheckBoxOutput.IsChecked && pTrace?.DetailCategory == (int)LogCategory.Output)
-            {
-                SetNewParagraph(pTrace.DetailText, GetColorFromCategory((LogCategory)pTrace.DetailCategory));
-            }
+            SetNewParagraph();
         }
 
         /// <summary>
@@ -60,59 +41,48 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pMessage"></param>
         /// <param name="pColor"></param>
-        private void SetNewParagraph(string pMessage, Brush pColor)
+        private void SetNewParagraph()
         {
-            //string lInline = new string('-', 100) + "\n";
-            var paragraph = new Paragraph();
-            //paragraph.Inlines.Add(new Run(lInline));
-            paragraph.Inlines.Add(new Run(pMessage));
-            paragraph.Foreground = pColor;
-            UIRichTextBoxConsoleDebug.Document.Blocks.Add(paragraph);
-
-            UIRichTextBoxConsoleDebug.Focus();
-            UIRichTextBoxConsoleDebug.ScrollToEnd();
+            var lList = ReturnListCategoriesFromChecked();
+            if (lList != null)
+            {
+                ConsoleDebugListView.ItemsSource = lList;
+            }
+            ConsoleDebugScrollViewer.ScrollToEnd();
         }
 
         /// <summary>
-        /// Return the color corresponds from the category
+        /// Clearing all elements in the log debug list
         /// </summary>
-        /// <param name="pLogCat"></param>
-        /// <returns></returns>
-        private static Brush GetColorFromCategory(LogCategory pLogCat)
-        {
-            switch (pLogCat)
-            {
-                case LogCategory.Info:
-                    return Brushes.White;
-
-                case LogCategory.Warning:
-                    return Brushes.Orange;
-
-                case LogCategory.Error:
-                    return Brushes.Red;
-
-                case LogCategory.Output:
-                    return Brushes.LightGreen;
-
-                case LogCategory.Technical:
-                    return Brushes.Yellow;
-                default:
-                    return Brushes.Yellow;
-            }
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearConsole_Click(object sender, RoutedEventArgs e)
         {
-            UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
+            var lList = ReturnListCategoriesFromChecked();
+            if (lList != null)
+            {
+                GlobalUsage.ListLogDebug.ToList().ForEach(p => 
+                {
+                    if (lList.Contains(p))
+                    {
+                        GlobalUsage.ListLogDebug.Remove(p);
+                    }
+                });
+            }              
         }
 
+        /// <summary>
+        /// Closing (hidding) the current window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseConsole_Click(object sender, RoutedEventArgs e)
         {
             Hide();
             TraceLogs.IsConsoleDebugVisible = false;
         }
 
-        #region Moving the Calculator
+        #region Moving the Console Debug Window
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
@@ -132,57 +102,61 @@ namespace Udemy_Calculator
         #endregion
 
         /// <summary>
-        /// Fonction to return the list categories checked
+        /// Return the logdebug list from boxes selected
         /// </summary>
         /// <param name="pCheckBoxType"></param>
         /// <returns></returns>
-        private List<LogCategory> ReturnListCategoriesChecked()
+        private List<LogDebug> ReturnListCategoriesFromChecked()
         {
-            List<LogCategory> lListCategoriesChecked = new List<LogCategory>();
-
-            // Get all the checkbox checked
-            foreach (var lCheckBoxCategory in GridCheckBoxes.Children.Cast<CheckBox>())
-            {
-                if (lCheckBoxCategory.IsChecked == true)
-                {
-                    switch (lCheckBoxCategory.Content.ToString())
-                    {
-                        case "Info":
-                            lListCategoriesChecked.Add(LogCategory.Info);
-                            break;
-                        case "Warning":
-                            lListCategoriesChecked.Add(LogCategory.Warning);
-                            break;
-                        case "Error":
-                            lListCategoriesChecked.Add(LogCategory.Error);
-                            break;
-                        case "Output":
-                            lListCategoriesChecked.Add(LogCategory.Output);
-                            break;
-                        case "Technical":
-                            lListCategoriesChecked.Add(LogCategory.Technical);
-                            break;
-                    }
-                }
-            }
-
-            return lListCategoriesChecked;
+            return GlobalUsage.ListLogDebug.Where(p => GridCheckBoxes.Children.Cast<CheckBox>().Where(c => (bool)c.IsChecked).Select(d => (int)Enum.Parse(typeof(LogCategory), d.Content.ToString(), true)).ToList().Contains(p.DetailCategory)).ToList();
         }
 
+        /// <summary>
+        /// Refreshing the console debug listview with categories selected checkboxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBox_DisplayMessageFromChecked(object sender, RoutedEventArgs e)
         {
-            List<LogCategory> lCategoryChecked = ReturnListCategoriesChecked();
+            var lList = ReturnListCategoriesFromChecked();
+            if (lList != null)
+            {
+                ConsoleDebugListView.ItemsSource = lList;
+            }
 
-            UIRichTextBoxConsoleDebug.Document.Blocks.Clear();
-
-            // Interogating debug table from database here
+            ConsoleDebugScrollViewer.ScrollToEnd();
         }
 
+        /// <summary>
+        /// Saving debug logs selected to a file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_SaveClick(object sender, RoutedEventArgs e)
         {
-            TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Saving Console debug logs");
+            var lList = ReturnListCategoriesFromChecked();
+            if (lList != null)
+            {
+                GlobalUsage.SaveToFile(lList);
+            }       
+        }
 
-            GlobalUsage.SaveToFile(UIRichTextBoxConsoleDebug);
+        /// <summary>
+        /// Event to allow the wheel of the mouse to be mouved on the console debug screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConsoleDebugListView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+                eventArg.Source = sender;
+                var parent = ((Control)sender).Parent as UIElement;
+                parent.RaiseEvent(eventArg);
+            }
         }
     }
 }

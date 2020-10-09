@@ -70,13 +70,16 @@
                                   Background="Transparent">
 
                         <RichTextBox x:Name="UIHistoryTextBox"
-                                     IsReadOnly="True"        
+                                     IsReadOnly="True"
+                                     BorderBrush="LightGray"
+                                     BorderThickness="0 0 0 0"
+                                     Margin="0 0 0 0"
                                      ScrollViewer.CanContentScroll="True"
-                                     Padding="0"                                 
+                                     Padding="0"
                                      TextChanged="UIHistoryTextBox_TextChanged">
                             <RichTextBox.Background>
-                                <SolidColorBrush Color="#FFFFFF"
-                                                 Opacity="0.45" />
+                                <SolidColorBrush Color="Gray"
+                                                 Opacity="0.3" />
                             </RichTextBox.Background>
                             <FlowDocument x:Name="UIHistoryFlowDoc"
                                           LineHeight="1">
@@ -102,7 +105,7 @@
                                 Height="20"
                                 Click="UICleaner_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/Cleaner_icon.png"/>
+                                <Image Source="Images/Cleaner_icon.png" />
                             </StackPanel>
                         </Button>
                         <Button x:Name="UISave"
@@ -113,7 +116,9 @@
                                 Height="20"
                                 Click="UISave_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="Images/Save_icon.png" Width="14" Height="14" />
+                                <Image Source="Images/Save_icon.png"
+                                       Width="14"
+                                       Height="14" />
                             </StackPanel>
                         </Button>
                     </StackPanel>

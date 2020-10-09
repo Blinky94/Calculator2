@@ -1,10 +1,11 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -13,9 +14,39 @@ namespace Udemy_Calculator
 {
     public static class GlobalUsage
     {
-        public static volatile List<FormulaTable> ListFormula = new List<FormulaTable>();
-        public static volatile List<LogDebugTable> ListLogDebug = new List<LogDebugTable>();
-        public static volatile List<ChunkTable> ListChunk = new List<ChunkTable>();
+        private static BindingList<ChunkTable> mListChunks = new BindingList<ChunkTable>();
+
+        /// <summary>
+        /// Get or set the list of chunk used in a formula
+        /// </summary>
+        public static BindingList<ChunkTable> ListChunks
+        {
+            get
+            {
+                return mListChunks;
+            }
+            set
+            {
+                mListChunks = value;
+            }
+        }
+
+        private static BindingList<LogDebug> mListLogDebug = new BindingList<LogDebug>();
+
+        /// <summary>
+        /// Get or set the list of debugging logs
+        /// </summary>
+        public static BindingList<LogDebug> ListLogDebug
+        {
+            get
+            {
+                return mListLogDebug;
+            }
+            set
+            {
+                mListLogDebug = value;
+            }
+        }
 
         private const string DatabaseName = "Calculator.db";
 
@@ -30,8 +61,6 @@ namespace Udemy_Calculator
                 return Path.Combine(FolderPath, DatabaseName);
             }
         }
-
-        public static int CurrentFormulaId { get; set; } = -1;
 
         /// <summary>
         /// Get the calling method name
@@ -117,6 +146,42 @@ namespace Udemy_Calculator
             }
         }
 
+        /// <summary>
+        /// Save List of log debug content to file
+        /// Optional: precising the fileName
+        /// </summary>
+        /// <param name="pControl"></param>
+        /// <param name="pFileName"></param>
+        public static void SaveToFile(List<LogDebug> pList, string pFileName = "")
+        {
+            if (pList != null)
+            {
+                using (System.Windows.Forms.SaveFileDialog dialog = new System.Windows.Forms.SaveFileDialog())
+                {
+                    dialog.Filter = "Text Files(*.txt)|*.txt|All(*.*)|*";
+
+                    if (string.IsNullOrEmpty(pFileName))
+                    {
+                        pFileName = $"{GenerateTimeNow(false)}_{CurrentClassName()}";
+                    }
+
+                    dialog.FileName = pFileName;
+                    dialog.ShowDialog();
+
+                    StringBuilder list = new StringBuilder();
+
+                    foreach (LogDebug lItem in pList)
+                    {
+                        list.AppendLine(lItem.ToString());
+                    }
+
+                    File.WriteAllText(dialog.FileName, list.ToString(), Encoding.UTF8);
+
+                    TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: {dialog.FileName} has been saved !");
+                }
+            }
+        }
+
         private static readonly object mCollisionLock = new object();
 
         /// <summary>
@@ -145,7 +210,7 @@ namespace Udemy_Calculator
             {
                 var cmd = lConnection.CreateCommand("PRAGMA journal_mode=WAL", Array.Empty<object>());
                 var result = cmd.ExecuteQuery<object>();
-            }          
+            }
         }
 
         /// <summary>
@@ -172,8 +237,6 @@ namespace Udemy_Calculator
         {
             string lResult = string.Empty;
 
-            ReplaceUnknownFKByRightOne();
-
             try
             {
                 lResult = await Task.Run(() =>
@@ -182,12 +245,11 @@ namespace Udemy_Calculator
                     for (int i = 0; i < ListLogDebug.Count; i++)
                     {
                         // Writing debug table object to Db
-                        Insert(new LogDebugTable()
+                        Insert(new LogDebug()
                         {
                             DetailDate = ListLogDebug[i].DetailDate,
                             DetailCategory = (int)ListLogDebug[i].DetailCategory,
-                            DetailText = ListLogDebug[i].DetailText,
-                            Formula_Id = ListLogDebug[i].Formula_Id
+                            DetailText = ListLogDebug[i].DetailText
                         });
 
                         // Unstack the log debug inserted
@@ -205,18 +267,7 @@ namespace Udemy_Calculator
             finally
             {
                 ListLogDebug.Clear();
-                CurrentFormulaId = -1;
             }
-        }
-
-        /// <summary>
-        /// Replacing all rows mark with -1 by the right FK
-        /// </summary>
-        private static void ReplaceUnknownFKByRightOne()
-        {
-            int lLast = ListLogDebug.Select(p => p.Formula_Id).LastOrDefault();
-
-            ListLogDebug.Where(p => p.Formula_Id == -1).ToList().ForEach(p => { p.Formula_Id = lLast; });
-        }
+        }    
     }
 }

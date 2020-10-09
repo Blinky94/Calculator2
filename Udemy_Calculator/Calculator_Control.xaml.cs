@@ -555,7 +555,7 @@ namespace Udemy_Calculator
                     LastNumber = ToCalculusDisplay;
                     mIsResult = true;
 
-                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult);
+                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult,null, true);
                     ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
                     OnCalculusDisplayChanged();
                 }

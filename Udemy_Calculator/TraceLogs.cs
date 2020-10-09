@@ -19,12 +19,11 @@
         {
             if (IsConsoleDebugVisible)
             {
-                var lLogDebug = new LogDebugTable
+                var lLogDebug = new LogDebug
                 {
                     DetailDate = GlobalUsage.GenerateTimeNow(true),
                     DetailText = pMessage,
-                    DetailCategory = (int)pCategory,
-                    Formula_Id = GlobalUsage.CurrentFormulaId
+                    DetailCategory = (int)pCategory
                 };
                
                 GlobalUsage.ListLogDebug.Add(lLogDebug);

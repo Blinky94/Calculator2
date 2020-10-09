@@ -134,6 +134,7 @@
     <Compile Include="Calculator_Control.xaml.cs">
       <DependentUpon>Calculator_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EnumConverter.cs" />
     <Compile Include="Tables\ChunkTable.cs" />
     <Compile Include="ColorPicker_Control.xaml.cs">
       <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
@@ -142,13 +143,12 @@
     <Compile Include="ConsoleDebug.xaml.cs">
       <DependentUpon>ConsoleDebug.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tables\DebugTable.cs" />
+    <Compile Include="Tables\LogDebug.cs" />
     <Compile Include="Display_Control.xaml.cs">
       <DependentUpon>Display_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="DisplayHistory.cs" />
     <Compile Include="ExtendedStreamBuilder.cs" />
-    <Compile Include="Tables\FormulaTable.cs" />
     <Compile Include="GlobalUsage.cs" />
     <Compile Include="HistoryControl.xaml.cs">
       <DependentUpon>HistoryControl.xaml</DependentUpon>
@@ -503,7 +503,7 @@
     <Resource Include="Images\Exit_icon_reverse.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons8_sort_up_24px_5.png" />
+    <Resource Include="Images\icons8_sort_up_24px_5.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Up_icon_reverse.png" />

@@ -1,6 +1,6 @@
 <Query Kind="Statements">
   <Connection>
-    <ID>41e222fa-d0bf-4583-9a45-d8b1a4104781</ID>
+    <ID>bed47c54-6969-47df-ba2c-0961ce5d650a</ID>
     <NamingServiceVersion>2</NamingServiceVersion>
     <Persist>true</Persist>
     <Driver Assembly="(internal)" PublicKeyToken="no-strong-name">LINQPad.Drivers.EFCore.DynamicDriver</Driver>

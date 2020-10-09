@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace Udemy_Calculator
-{
-    /// <summary>
-    /// Chunk of formula
-    /// </summary>
+{  
+    public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Sqrt, Exponent }
+
     public class Chunk
     {
         public StringBuilder Formula { get; private set; }
@@ -39,9 +38,7 @@ namespace Udemy_Calculator
             Length = pLength;
         }
     }
-
-    public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Sqrt, Exponent }
-
+   
     public class PEMDAS
     {
         #region Fields
@@ -81,17 +78,6 @@ namespace Udemy_Calculator
             Regex lRegex = new Regex(lFinishedComputationPattern);
             Match lMatch;
 
-            FormulaTable lFormulaRow = new FormulaTable()
-            {
-                FormulaDate = GlobalUsage.GenerateTimeNow(true),
-                FormulaText = Chunk.Formula.ToString()
-            };
-
-            GlobalUsage.ListFormula.Add(lFormulaRow);
-            //GlobalUsage.Insert(lFormulaRow);
-            int lFormulaId = lFormulaRow.Id;
-            GlobalUsage.CurrentFormulaId = lFormulaId;
-
             try
             {
                 do
@@ -109,25 +95,17 @@ namespace Udemy_Calculator
                         TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No result to do compute from current chuck!!!");
                     }
 
-                    ChunkTable lChunkRow = new ChunkTable()
+                    GlobalUsage.ListChunks.Add(new ChunkTable()
                     {
                         ChunkDate = GlobalUsage.GenerateTimeNow(true),
                         ChunkText = Chunk.SB.ToString(),
-                        ChunkResult = lResult,
-                        Formula_Id = lFormulaId
-                    };
-
-                    GlobalUsage.ListChunk.Add(lChunkRow);
-                    //GlobalUsage.Insert(lChunkRow);
+                        ChunkResult = lResult
+                    });
 
                     DoReplaceByResult(lResult);
                     lMatch = lRegex.Match(Chunk.Formula.ToString());
 
                 } while (lMatch.Success);
-
-                // Writing the result to database table formulaTable
-                lFormulaRow.FormulaResult = Chunk.SB.ToString();
-                //GlobalUsage.Update(lFormulaRow);
 
                 return Chunk.SB.ToString();
             }

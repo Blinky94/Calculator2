@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
         Title="ConsoleDebug"
         WindowStyle="None"
@@ -12,7 +13,10 @@
         WindowStartupLocation="Manual"
         Height="950"
         Width="850">
-    <Grid x:Name="UIGridConsoleDebug" >
+    <Window.Resources>
+        <local:EnumConverter x:Key="enumConverter" />
+    </Window.Resources>
+    <Grid x:Name="UIGridConsoleDebug">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -23,15 +27,68 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <RichTextBox Grid.Column="0"
-                     Grid.ColumnSpan="4"
-                     Grid.Row="0"
-                     x:Name="UIRichTextBoxConsoleDebug"
-                     Background="Black"
-                     Margin="20 20 20 0"
-                     Block.LineHeight="0.2"
-                     HorizontalScrollBarVisibility="Disabled"
-                     VerticalScrollBarVisibility="Auto" />
+        <ScrollViewer x:Name="ConsoleDebugScrollViewer"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="4"
+                      Grid.Row="0"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Auto"                  
+                      Margin="20 20 20 0">
+            <ListView x:Name="ConsoleDebugListView"
+                      Background="Black"
+                      Block.LineHeight="0.2"
+                      PreviewMouseWheel="ConsoleDebugListView_PreviewMouseWheel">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DataTemplate.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping"
+                                        Value="Wrap" />
+                                <Setter Property="FontSize"
+                                        Value="12" />
+                                <Setter Property="FontWeight"
+                                        Value="DemiBold" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DetailCategory}"
+                                                 Value="0">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DetailCategory}"
+                                                 Value="1">
+                                        <Setter Property="Foreground"
+                                                Value="Orange" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DetailCategory}"
+                                                 Value="2">
+                                        <Setter Property="Foreground"
+                                                Value="Red" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DetailCategory}"
+                                                 Value="3">
+                                        <Setter Property="Foreground"
+                                                Value="LightGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DetailCategory}"
+                                                 Value="4">
+                                        <Setter Property="Foreground"
+                                                Value="LightBlue" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataTemplate.Resources>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="{Binding DetailDate}"/>
+                            <TextBlock Text=": " />
+                            <TextBlock Text="{Binding DetailCategory, Converter={StaticResource enumConverter}, ConverterParameter={x:Type local:LogCategory}}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding DetailText}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
@@ -105,17 +162,17 @@
                 </StackPanel.Resources>
                 <Button Click="ClearConsole_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Cleaner_icon.png"/>
+                        <Image Source="Images/Cleaner_icon.png" />
                     </StackPanel>
                 </Button>
                 <Button Click="CloseConsole_Click">
                     <StackPanel Orientation="Horizontal">
-                    <Image Source="Images/Cancel_icon.png" />
-            </StackPanel>
+                        <Image Source="Images/Cancel_icon.png" />
+                    </StackPanel>
                 </Button>
                 <Button Click="Button_SaveClick">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Save_icon.png"/>
+                        <Image Source="Images/Save_icon.png" />
                     </StackPanel>
                 </Button>
             </StackPanel>

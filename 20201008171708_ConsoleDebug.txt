@@ -1,0 +1,50 @@
+﻿20201009112534.457: (Info) - .ctor: Contructor creating chunk (parameter: 8×6-3)
+20201009112534.459: (Info) - ComputeFormula: onto the formula (8×6-3)
+20201009112534.460: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (8×6-3)
+20201009112534.460: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (8×6-3)
+20201009112534.461: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (8×6-3)
+20201009112534.461: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (8×6-3)
+20201009112534.474: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (8×6-3)
+20201009112534.475: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (8×6)
+20201009112534.475: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (8×6)
+20201009112534.476: (Info) - DoCompute: Compute the chunk formula from a chunk 8×6 sequence
+20201009112534.477: (Info) - ExtractArithmeticsGroups: Extracting each part of operands from the formula (8×6)
+20201009112534.478: (Info) - ExtractArithmeticsGroups: Left part: 8 ; Right part: 6
+20201009112534.478: (Info) - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 8
+20201009112534.479: (Info) - GetDoubleFromString: Has no exponent: 8
+20201009112534.479: (Info) - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 6
+20201009112534.479: (Info) - GetDoubleFromString: Has no exponent: 6
+20201009112534.479: (Info) - WhatOperator: Get the operator from the string input
+20201009112534.480: (Info) - WhatOperator:  Operator is Multiplication
+20201009112534.480: (Info) - ExtractArithmeticsGroups: Operator: Multiplication
+20201009112534.480: (Info) - DoCompute: Compute the chunk formula from a chunk 8×6 sequence
+20201009112534.481: (Info) - Multiply: 8 x 6
+20201009112534.481: (Info) - Multiply: 48
+20201009112534.482: (Info) - DoCompute: Compute result: 48
+20201009112534.483: (Info) - DoReplaceByResult: Replacing the chunk sequence 8×6 by the result 48
+20201009112534.483: (Info) - DoReplaceByResult: Replacing the main formula (8×6-3) by the result 48
+20201009112534.483: (Info) - DoReplaceByResult: Main formula finaly: (48-3)
+20201009112534.485: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (48-3)
+20201009112534.485: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (48-3)
+20201009112534.486: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (48-3)
+20201009112534.487: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (48-3)
+20201009112534.488: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (48-3)
+20201009112534.488: (Info) - ArrangeChunkOfFormula: No matching pattern onto the chunk (48-3)
+20201009112534.489: (Info) - ArrangeChunkOfFormula: Regex on the formula chunk (48-3)
+20201009112534.490: (Info) - DoCompute: Compute the chunk formula from a chunk 48-3 sequence
+20201009112534.490: (Info) - ExtractArithmeticsGroups: Extracting each part of operands from the formula (48-3)
+20201009112534.491: (Info) - ExtractArithmeticsGroups: Left part: 48 ; Right part: 3
+20201009112534.492: (Info) - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 48
+20201009112534.492: (Info) - GetDoubleFromString: Has no exponent: 48
+20201009112534.492: (Info) - GetDoubleFromString: Removing the excedent of the string to limit the length for decimal number on 3
+20201009112534.493: (Info) - GetDoubleFromString: Has no exponent: 3
+20201009112534.493: (Info) - WhatOperator: Get the operator from the string input
+20201009112534.493: (Info) - WhatOperator:  Operator is Substraction
+20201009112534.494: (Info) - ExtractArithmeticsGroups: Operator: Substraction
+20201009112534.494: (Info) - DoCompute: Compute the chunk formula from a chunk 48-3 sequence
+20201009112534.495: (Info) - Substract: 48 - 3
+20201009112534.495: (Info) - Substract: 45
+20201009112534.496: (Info) - DoCompute: Compute result: 45
+20201009112534.496: (Info) - DoReplaceByResult: Replacing the chunk sequence 48-3 by the result 45
+20201009112534.497: (Info) - DoReplaceByResult: Replacing the main formula (48-3) by the result 45
+20201009112534.497: (Info) - DoReplaceByResult: Main formula finaly: (45)
