@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Default" />
+  <ThemeSelected name="Ice" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Background">#FFCBCDCE</MainCalculatorBackground>
@@ -59,13 +59,13 @@
   </Theme>
   <Theme name="Fire">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Background">#FFFF4500</MainCalculatorBackground>
+      <MainCalculatorBackground name="Background">#FF842C0B</MainCalculatorBackground>
       <MainCalculatorForeground name="Foreground">#FFFFFF00</MainCalculatorForeground>
       <MainCalculatorBorderBrush name="Border color">#FFFFA500</MainCalculatorBorderBrush>
       <MainCalculatorBorderThickness max="10" name="Thickness">7</MainCalculatorBorderThickness>
     </MainTheme>
     <BaseButtons name="General buttons">
-      <BackgroundBaseButtons name="Background">#FFFF0A0A</BackgroundBaseButtons>
+      <BackgroundBaseButtons name="Background">#FFAB1E1E</BackgroundBaseButtons>
       <ForegroundBaseButtons name="Foreground">#FFFFFF00</ForegroundBaseButtons>
       <BorderBrushBaseButtons name="Border color">#FFF0F8FF</BorderBrushBaseButtons>
       <BorderThicknessBaseButtons max="3.5" name="Thickness">1,7</BorderThicknessBaseButtons>
@@ -85,14 +85,14 @@
       </BorderThicknessScientificButtons>
     </ScientificButtons>
     <OperatorsButtons name="Operator buttons">
-      <BackgroundOperatorsButtons name="Background">#FFFF0505</BackgroundOperatorsButtons>
+      <BackgroundOperatorsButtons name="Background">#FF701616</BackgroundOperatorsButtons>
       <ForegroundOperatorsButtons name="Foreground">#FFFFFFFF</ForegroundOperatorsButtons>
       <BorderBrushOperatorsButtons name="Border color">#FFFCFF00</BorderBrushOperatorsButtons>
       <BorderThicknessOperatorsButtons max="10" name="Thickness">
       </BorderThicknessOperatorsButtons>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <BackgroundNumericalsButtons name="Background">#FFFDFF06</BackgroundNumericalsButtons>
+      <BackgroundNumericalsButtons name="Background">#FFD1CA2C</BackgroundNumericalsButtons>
       <ForegroundNumericalsButtons name="Foreground">#FFFF0000</ForegroundNumericalsButtons>
       <BorderBrushNumericalsButtons name="Border color">#FFEE0000</BorderBrushNumericalsButtons>
       <BorderThicknessNumericalsButtons max="10" name="Thickness">
@@ -115,13 +115,13 @@
   </Theme>
   <Theme name="Ice">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Background">#FFC9F9FA</MainCalculatorBackground>
-      <MainCalculatorForeground name="Foreground">#FF678DFF</MainCalculatorForeground>
-      <MainCalculatorBorderBrush name="Border color">#FF50A1A1</MainCalculatorBorderBrush>
+      <MainCalculatorBackground name="Background">#FFD0D3D9</MainCalculatorBackground>
+      <MainCalculatorForeground name="Foreground">#FF2C2C78</MainCalculatorForeground>
+      <MainCalculatorBorderBrush name="Border color">#FF84A3A3</MainCalculatorBorderBrush>
       <MainCalculatorBorderThickness max="10" name="Thickness">10</MainCalculatorBorderThickness>
     </MainTheme>
     <BaseButtons name="General buttons">
-      <BackgroundBaseButtons name="Background">#FF8BD6FF</BackgroundBaseButtons>
+      <BackgroundBaseButtons name="Background">#FF5AB8EA</BackgroundBaseButtons>
       <ForegroundBaseButtons name="Foreground">#FF00008B</ForegroundBaseButtons>
       <BorderBrushBaseButtons name="Border color">#FF00008B</BorderBrushBaseButtons>
       <BorderThicknessBaseButtons max="3.5" name="Thickness">1</BorderThicknessBaseButtons>
@@ -141,28 +141,28 @@
       </BorderThicknessScientificButtons>
     </ScientificButtons>
     <OperatorsButtons name="Operator buttons">
-      <BackgroundOperatorsButtons name="Background">#FFB5B5FF</BackgroundOperatorsButtons>
+      <BackgroundOperatorsButtons name="Background">#FF00008B</BackgroundOperatorsButtons>
       <ForegroundOperatorsButtons name="Foreground">#FFF0F8FF</ForegroundOperatorsButtons>
       <BorderBrushOperatorsButtons name="Border color">#FFF0F8FF</BorderBrushOperatorsButtons>
       <BorderThicknessOperatorsButtons max="10" name="Thickness">
       </BorderThicknessOperatorsButtons>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <BackgroundNumericalsButtons name="Background">#FF0000CD</BackgroundNumericalsButtons>
+      <BackgroundNumericalsButtons name="Background">#FF3C3C54</BackgroundNumericalsButtons>
       <ForegroundNumericalsButtons name="Foreground">#FFF0F8FF</ForegroundNumericalsButtons>
-      <BorderBrushNumericalsButtons name="Border color">#FF5500EE</BorderBrushNumericalsButtons>
+      <BorderBrushNumericalsButtons name="Border color">#FF00008B</BorderBrushNumericalsButtons>
       <BorderThicknessNumericalsButtons max="10" name="Thickness">
       </BorderThicknessNumericalsButtons>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
-      <BackgroundMemoryButtons name="Background">#FF0000FF</BackgroundMemoryButtons>
+      <BackgroundMemoryButtons name="Background">#FF373768</BackgroundMemoryButtons>
       <ForegroundMemoryButtons name="Foreground">#FFF0FFFF</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Border color">#FF4169E1</BorderBrushMemoryButtons>
       <BorderThicknessMemoryButtons max="10" name="Thickness">
       </BorderThicknessMemoryButtons>
     </MemoryButtons>
     <Trigonometry name="Trigonometry buttons">
-      <BackgroundTrigonometryButtons name="Background">#FF49C8FC</BackgroundTrigonometryButtons>
+      <BackgroundTrigonometryButtons name="Background">#FF001354</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Foreground">#FFF0F8FF</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Border color">#FFF0FFFF</BorderBrushTrigonometryButtons>
       <BorderThicknessTrigonometryButtons max="10" name="Thickness">

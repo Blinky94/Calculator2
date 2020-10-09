@@ -31,7 +31,7 @@
                     <!--Main Container Grid-->
                     <Border CornerRadius="25">
                         <Grid x:Name="MainGrid"
-                              Margin="10 10 10 0">
+                              Margin="10 10 10 20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="auto" />
@@ -46,12 +46,21 @@
                             <local:MenuSide_Control Grid.Column="0"
                                                     Grid.Row="0"
                                                     x:Name="UIMenuSide" />
-                            <Image Grid.Row="0"
-                                   Margin="255 -10 0 0"
-                                   HorizontalAlignment="Left"
-                                   Source="Images/History_icon.png"
-                                   Width="17"
-                                   Height="17" />
+                            <ToggleButton Grid.Row="0"
+                                          Margin="240 -12 0 0"
+                                          HorizontalAlignment="Left"
+                                          BorderBrush="Transparent"
+                                          BorderThickness="0"
+                                          Background="Transparent"
+                                          Width="20"
+                                          Height="20"
+                                          Checked="UIHistoryExpander_Expanded"
+                                          Unchecked="UIHistoryExpander_Collapsed">
+                                <Image Source="Images/History_icon.png"
+                                       Width="17"
+                                       Height="17" />
+                            </ToggleButton>
+
 
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
@@ -62,12 +71,13 @@
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
                                                       Margin="1 10 0 0" />
-                          
+
                             <!--Call the History User control-->
                             <local:HistoryControl x:Name="UIHistory"
-                                           Grid.Column="1"
-                                           Grid.Row="2"
-                                           Margin="0 -95 0 0" />
+                                                  Grid.Column="1"
+                                                  Grid.Row="2"
+                                                  Visibility="Collapsed"
+                                                  Margin="0 -95 0 0" />
                         </Grid>
                     </Border>
                 </StackPanel>

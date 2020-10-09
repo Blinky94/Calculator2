@@ -4,20 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
-
     /// <summary>
     /// Category of logs
     /// </summary>
     public enum LogCategory { Info, Warning, Error, Output, Technical }
 
     public partial class ConsoleDebug : Window
-    {
+    {     
         public ConsoleDebug()
         {
             InitializeComponent();
@@ -33,7 +30,7 @@ namespace Udemy_Calculator
         /// <param name="e"></param>
         private void LogList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            SetNewParagraph();
+           SetNewParagraph();
         }
 
         /// <summary>
@@ -61,14 +58,14 @@ namespace Udemy_Calculator
             var lList = ReturnListCategoriesFromChecked();
             if (lList != null)
             {
-                GlobalUsage.ListLogDebug.ToList().ForEach(p => 
+                GlobalUsage.ListLogDebug.ToList().ForEach(p =>
                 {
                     if (lList.Contains(p))
                     {
                         GlobalUsage.ListLogDebug.Remove(p);
                     }
                 });
-            }              
+            }
         }
 
         /// <summary>
@@ -138,7 +135,7 @@ namespace Udemy_Calculator
             if (lList != null)
             {
                 GlobalUsage.SaveToFile(lList);
-            }       
+            }
         }
 
         /// <summary>

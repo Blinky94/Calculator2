@@ -211,6 +211,15 @@ namespace Udemy_Calculator
             ((MainWindow)Application.Current.MainWindow).mainCalculator.SetThemes();
 
             Canvas.Background = CommonTheme.MainCalculatorBackground;
+
+            foreach(var lWindow in Application.Current.Windows)
+            {
+                if(lWindow is ConsoleDebug)
+                {
+                    (lWindow as ConsoleDebug).UIGridConsoleDebug.Background = CommonTheme.MainCalculatorBackground;
+                }
+            }
+
             foreach (var lChild in UICustomThemesList.Children)
             {
                 if (lChild is Label)

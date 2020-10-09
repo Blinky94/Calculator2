@@ -9,10 +9,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="White"
         WindowStartupLocation="Manual"
-        Height="950"
-        Width="850">
+        Height="500"
+        Width="1000">
     <Window.Resources>
         <local:EnumConverter x:Key="enumConverter" />
     </Window.Resources>
@@ -31,12 +30,15 @@
                       Grid.Column="0"
                       Grid.ColumnSpan="4"
                       Grid.Row="0"
+                      Width="{Binding ElementName=UIGridConsoleDebug}"
                       HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Auto"                  
+                      VerticalScrollBarVisibility="Auto"
                       Margin="20 20 20 0">
             <ListView x:Name="ConsoleDebugListView"
                       Background="Black"
                       Block.LineHeight="0.2"
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
                       PreviewMouseWheel="ConsoleDebugListView_PreviewMouseWheel">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -78,12 +80,11 @@
                             </Style>
                         </DataTemplate.Resources>
                         <StackPanel Orientation="Horizontal">
-
-                            <TextBlock Text="{Binding DetailDate}"/>
+                            <TextBlock Text="{Binding DetailDate}" />
                             <TextBlock Text=": " />
                             <TextBlock Text="{Binding DetailCategory, Converter={StaticResource enumConverter}, ConverterParameter={x:Type local:LogCategory}}" />
                             <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding DetailText}"/>
+                            <TextBlock Text="{Binding DetailText}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -27,7 +27,6 @@
                 };
                
                 GlobalUsage.ListLogDebug.Add(lLogDebug);
-                //GlobalUsage.Insert(lLogDebug);
             }
         }
 

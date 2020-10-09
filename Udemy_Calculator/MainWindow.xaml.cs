@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Udemy_Calculator
@@ -33,7 +34,7 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
 
-            UIMenuSide.UIMenuSelected.Content = CalculatorMode.Standard.ToString();
+            UIMenuSide.UIMenuSelected.Content = CalculatorMode.Scientific.ToString();
 
             // Set all events
             SetEvents();
@@ -83,6 +84,20 @@ namespace Udemy_Calculator
             UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
             UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
             UIDisplay.UIDisplayBorderBrush = CommonTheme.MainCalculatorBorderBrush;
+            foreach (var lWindow in Application.Current.Windows)
+            {
+                if (lWindow is ConsoleDebug)
+                {
+                    (lWindow as ConsoleDebug).UIGridConsoleDebug.Background = CommonTheme.MainCalculatorBackground;
+                    foreach (var lChild in (lWindow as ConsoleDebug).GridCheckBoxes.Children)
+                    {
+                        if (lChild is CheckBox)
+                        {
+                            (lChild as CheckBox).Foreground = CommonTheme.MainCalculatorForeground;
+                        }
+                    }
+                }
+            }
         }
 
         public void ModifyUIDisplay(string pContent)
@@ -126,5 +141,19 @@ namespace Udemy_Calculator
         }
 
         #endregion
+
+        private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Expand the history panel");
+
+            UIHistory.Visibility = Visibility.Visible;
+        }
+
+        private void UIHistoryExpander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Collapse the history panel");
+
+            UIHistory.Visibility = Visibility.Collapsed;
+        }
     }
 }

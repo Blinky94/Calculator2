@@ -8,9 +8,6 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class HistoryControl : UserControl
     {
-        private const double mHistoryWidth = 200d;
-        private const double mMainWindowWidth = 260d;
-        private GridLength mExpandedWidth = new GridLength(1, GridUnitType.Star);
         private readonly DisplayHistory mDisplayHistory;
 
         public HistoryControl()
@@ -29,33 +26,6 @@ namespace Udemy_Calculator
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Cleaning history");
             mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
-        }
-
-        private void UIHistoryExpander_Expanded(object sender, RoutedEventArgs e)
-        {
-            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Expand the history panel");
-            Application.Current.MainWindow.Width = mMainWindowWidth + mHistoryWidth;
-            UIHistoryExpanderColumn.Width = mExpandedWidth;
-
-            if (HistoryGrid != null)
-            {
-                HistoryGrid.Visibility = Visibility.Visible;
-                UICleaner.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void UIHistoryExpander_Collapsed(object sender, RoutedEventArgs e)
-        {
-            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Collapse the history panel");
-            Application.Current.MainWindow.Width = mMainWindowWidth;
-            mExpandedWidth = UIHistoryExpanderColumn.Width;
-            UIHistoryExpanderColumn.Width = new GridLength(0);
-
-            if (HistoryGrid != null)
-            {
-                HistoryGrid.Visibility = Visibility.Collapsed;
-                UICleaner.Visibility = Visibility.Collapsed;
-            }
         }
 
         internal void NewElement()

@@ -536,28 +536,36 @@ namespace Udemy_Calculator
 
         public virtual void UIEqualButton_Click(object sender, RoutedEventArgs e)
         {
+            string lFormula = string.Empty;
             if (!mIsResult)
             {
-                string lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
-
-                if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
+                try
                 {
-                    // Ici PEMDAS
-                    string lResult;
-                    mPemdas = new PEMDAS(lFormula);
-                    lResult = mPemdas.ComputeFormula();
+                    lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
 
-                    ToCalculusDisplay = lResult;
-                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber, true);
+                    if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
+                    {
+                        // Ici PEMDAS
+                        string lResult;
+                        mPemdas = new PEMDAS(lFormula);
+                        lResult = mPemdas.ComputeFormula();
 
-                    ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+                        ToCalculusDisplay = lResult;
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber, true);
 
-                    LastNumber = ToCalculusDisplay;
-                    mIsResult = true;
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
 
-                    ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult,null, true);
-                    ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
-                    OnCalculusDisplayChanged();
+                        LastNumber = ToCalculusDisplay;
+                        mIsResult = true;
+
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult, null, true);
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+                        OnCalculusDisplayChanged();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TraceLogs.AddWarning($"{ex.Message}: Calcul impossible ({lFormula})");
                 }
             }
         }

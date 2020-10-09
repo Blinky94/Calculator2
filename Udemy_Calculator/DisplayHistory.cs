@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -29,13 +31,21 @@ namespace Udemy_Calculator
             mFlowDocument.Blocks.Add(mParagraph);
             pUITextBox.Document = mFlowDocument;
 
-            FormulaStr += pText;    
+            FormulaStr += pText;
 
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
         public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, string pLastNumber = default, bool pIsDetail = false)
         {
+            double.TryParse(pText, NumberStyles.Any, CultureInfo.InvariantCulture, out double lTextSigned);
+
+            if (Math.Sign(lTextSigned) == -1)
+            {
+                RemoveHistoryFormula(pText.Length - 1);
+                pText = $"({pText})";
+            }
+
             if (pIsResult)
             {
                 pText = $"{pLastNumber}{pText}";
