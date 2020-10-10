@@ -9,34 +9,7 @@ namespace Udemy_Calculator
     /// Class to set the common theme with colors and thickness
     /// </summary>
     public static class CommonTheme
-    {
-        internal static SolidColorBrush MainCalculatorBackground;
-        internal static SolidColorBrush MainCalculatorForeground;
-        internal static SolidColorBrush MainCalculatorBorderBrush;
-        internal static double MainCalculatorBorderThickness;
-        internal static SolidColorBrush BackgroundBaseButtons;
-        internal static SolidColorBrush ForegroundBaseButtons;
-        internal static SolidColorBrush BorderBrushBaseButtons;
-        internal static double BorderThicknessBaseButtons;
-        internal static SolidColorBrush Background2ndeButton;
-        internal static SolidColorBrush Foreground2ndeButton;
-        internal static SolidColorBrush BorderBrush2ndeButton;
-        internal static SolidColorBrush BackgroundScientificButtons;
-        internal static SolidColorBrush ForegroundScientificButtons;
-        internal static SolidColorBrush BorderBrushScientificButtons;
-        internal static SolidColorBrush BackgroundOperatorsButtons;
-        internal static SolidColorBrush ForegroundOperatorsButtons;
-        internal static SolidColorBrush BorderBrushOperatorsButtons;
-        internal static SolidColorBrush BackgroundNumericalsButtons;
-        internal static SolidColorBrush ForegroundNumericalsButtons;
-        internal static SolidColorBrush BorderBrushNumericalsButtons;
-        internal static SolidColorBrush BackgroundMemoryButtons;
-        internal static SolidColorBrush ForegroundMemoryButtons;
-        internal static SolidColorBrush BorderBrushMemoryButtons;
-        internal static SolidColorBrush BackgroundTrigonometryButtons;
-        internal static SolidColorBrush ForegroundTrigonometryButtons;
-        internal static SolidColorBrush BorderBrushTrigonometryButtons;
-
+    { 
         private static string mThemeSelectedName;
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
@@ -124,61 +97,57 @@ namespace Udemy_Calculator
                 }
             }
 
-            switch (pName)
-            {
-                case "MainCalculatorBackground":
-                    MainCalculatorBackground = lSolidColorBrushValue; break;
-                case "MainCalculatorForeground":
-                    MainCalculatorForeground = lSolidColorBrushValue; break;
-                case "MainCalculatorBorderBrush":
-                    MainCalculatorBorderBrush = lSolidColorBrushValue; break;
-                case "MainCalculatorBorderThickness":
-                    MainCalculatorBorderThickness = lDoubleValue; break;
-                case "BackgroundBaseButtons":
-                    BackgroundBaseButtons = lSolidColorBrushValue; break;
-                case "ForegroundBaseButtons":
-                    ForegroundBaseButtons = lSolidColorBrushValue; break;
-                case "BorderBrushBaseButtons":
-                    BorderBrushBaseButtons = lSolidColorBrushValue; break;
-                case "BorderThicknessBaseButtons":
-                    BorderThicknessBaseButtons = lDoubleValue; break;
-                case "Background2ndeButton":
-                    Background2ndeButton = lSolidColorBrushValue; break;
-                case "Foreground2ndeButton":
-                    Foreground2ndeButton = lSolidColorBrushValue; break;
-                case "BorderBrush2ndeButton":
-                    BorderBrush2ndeButton = lSolidColorBrushValue; break;
-                case "BackgroundScientificButtons":
-                    BackgroundScientificButtons = lSolidColorBrushValue; break;
-                case "ForegroundScientificButtons":
-                    ForegroundScientificButtons = lSolidColorBrushValue; break;
-                case "BorderBrushScientificButtons":
-                    BorderBrushScientificButtons = lSolidColorBrushValue; break;
-                case "BackgroundOperatorsButtons":
-                    BackgroundOperatorsButtons = lSolidColorBrushValue; break;
-                case "ForegroundOperatorsButtons":
-                    ForegroundOperatorsButtons = lSolidColorBrushValue; break;
-                case "BorderBrushOperatorsButtons":
-                    BorderBrushOperatorsButtons = lSolidColorBrushValue; break;
-                case "BackgroundNumericalsButtons":
-                    BackgroundNumericalsButtons = lSolidColorBrushValue; break;
-                case "ForegroundNumericalsButtons":
-                    ForegroundNumericalsButtons = lSolidColorBrushValue; break;
-                case "BorderBrushNumericalsButtons":
-                    BorderBrushNumericalsButtons = lSolidColorBrushValue; break;
-                case "BackgroundMemoryButtons":
-                    BackgroundMemoryButtons = lSolidColorBrushValue; break;
-                case "ForegroundMemoryButtons":
-                    ForegroundMemoryButtons = lSolidColorBrushValue; break;
-                case "BorderBrushMemoryButtons":
-                    BorderBrushMemoryButtons = lSolidColorBrushValue; break;
-                case "BackgroundTrigonometryButtons":
-                    BackgroundTrigonometryButtons = lSolidColorBrushValue; break;
-                case "ForegroundTrigonometryButtons":
-                    ForegroundTrigonometryButtons = lSolidColorBrushValue; break;
-                case "BorderBrushTrigonometryButtons":
-                    BorderBrushTrigonometryButtons = lSolidColorBrushValue; break;
-            }
+            //switch (pName)
+            //{
+            //    case "MainCalculatorBackground":
+            //        MainCalculatorBackground = lSolidColorBrushValue; break;
+            //    case "MainCalculatorForeground":
+            //        MainCalculatorForeground = lSolidColorBrushValue; break;
+            //    case "MainCalculatorBorderBrush":
+            //        MainCalculatorBorderBrush = lSolidColorBrushValue; break;             
+            //    case "BackgroundBaseButtons":
+            //        BackgroundBaseButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundBaseButtons":
+            //        ForegroundBaseButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushBaseButtons":
+            //        BorderBrushBaseButtons = lSolidColorBrushValue; break;              
+            //    case "Background2ndeButton":
+            //        Background2ndeButton = lSolidColorBrushValue; break;
+            //    case "Foreground2ndeButton":
+            //        Foreground2ndeButton = lSolidColorBrushValue; break;
+            //    case "BorderBrush2ndeButton":
+            //        BorderBrush2ndeButton = lSolidColorBrushValue; break;
+            //    case "BackgroundScientificButtons":
+            //        BackgroundScientificButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundScientificButtons":
+            //        ForegroundScientificButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushScientificButtons":
+            //        BorderBrushScientificButtons = lSolidColorBrushValue; break;
+            //    case "BackgroundOperatorsButtons":
+            //        BackgroundOperatorsButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundOperatorsButtons":
+            //        ForegroundOperatorsButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushOperatorsButtons":
+            //        BorderBrushOperatorsButtons = lSolidColorBrushValue; break;
+            //    case "BackgroundNumericalsButtons":
+            //        BackgroundNumericalsButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundNumericalsButtons":
+            //        ForegroundNumericalsButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushNumericalsButtons":
+            //        BorderBrushNumericalsButtons = lSolidColorBrushValue; break;
+            //    case "BackgroundMemoryButtons":
+            //        BackgroundMemoryButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundMemoryButtons":
+            //        ForegroundMemoryButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushMemoryButtons":
+            //        BorderBrushMemoryButtons = lSolidColorBrushValue; break;
+            //    case "BackgroundTrigonometryButtons":
+            //        BackgroundTrigonometryButtons = lSolidColorBrushValue; break;
+            //    case "ForegroundTrigonometryButtons":
+            //        ForegroundTrigonometryButtons = lSolidColorBrushValue; break;
+            //    case "BorderBrushTrigonometryButtons":
+            //        BorderBrushTrigonometryButtons = lSolidColorBrushValue; break;
+            //}
         }
     }
 }

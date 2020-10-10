@@ -9,6 +9,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
+        Style="{StaticResource MainWindowStyle}"
         WindowStartupLocation="Manual"
         Height="500"
         Width="1000">
@@ -91,94 +92,69 @@
             </ListView>
         </ScrollViewer>
 
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+        <StackPanel Name="GridCheckBoxes"
                     Grid.Column="0"
-                    Grid.ColumnSpan="4"
-                    Grid.Row="1">
-            <WrapPanel Orientation="Vertical"
-                       Name="GridCheckBoxes">
-                <WrapPanel.Resources>
-                    <Style TargetType="CheckBox">
-                        <Setter Property="IsChecked"
-                                Value="True" />
-                        <Setter Property="Margin"
-                                Value="5 2 0 2" />
-                    </Style>
-                </WrapPanel.Resources>
-                <CheckBox x:Name="CheckBoxInfo"
-                          Content="Info"
-                          Checked="CheckBox_DisplayMessageFromChecked"
-                          Unchecked="CheckBox_DisplayMessageFromChecked" />
-                <CheckBox x:Name="CheckBoxWarning"
-                          Content="Warning"
-                          Checked="CheckBox_DisplayMessageFromChecked"
-                          Unchecked="CheckBox_DisplayMessageFromChecked" />
-                <CheckBox x:Name="CheckBoxError"
-                          Content="Error"
-                          Checked="CheckBox_DisplayMessageFromChecked"
-                          Unchecked="CheckBox_DisplayMessageFromChecked" />
-                <CheckBox x:Name="CheckBoxOutput"
-                          Content="Output"
-                          Checked="CheckBox_DisplayMessageFromChecked"
-                          Unchecked="CheckBox_DisplayMessageFromChecked" />
-                <CheckBox x:Name="CheckBoxTechnical"
-                          Content="Technical"
-                          Checked="CheckBox_DisplayMessageFromChecked"
-                          Unchecked="CheckBox_DisplayMessageFromChecked" />
-            </WrapPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="HorizontalAlignment"
-                                Value="Center" />
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Center" />
-                        <Setter Property="VerticalAlignment"
-                                Value="Center" />
-                        <Setter Property="VerticalContentAlignment"
-                                Value="Center" />
-                        <Setter Property="FontSize"
-                                Value="20" />
-                        <Setter Property="Width"
-                                Value="auto" />
-                        <Setter Property="Height"
-                                Value="auto" />
-                        <Setter Property="Padding"
-                                Value="8" />
-                        <Setter Property="Margin"
-                                Value="5 0 0 0" />
-                    </Style>
-                    <Style TargetType="Image">
-                        <Setter Property="HorizontalAlignment"
-                                Value="Center" />
-                        <Setter Property="VerticalAlignment"
-                                Value="Center" />
-                        <Setter Property="Width"
-                                Value="20" />
-                        <Setter Property="Height"
-                                Value="20" />
-                    </Style>
-                </StackPanel.Resources>
-                <Button Click="ClearConsole_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Cleaner_icon.png" />
-                    </StackPanel>
-                </Button>
-                <Button Click="CloseConsole_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Cancel_icon.png" />
-                    </StackPanel>
-                </Button>
-                <Button Click="Button_SaveClick">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Save_icon.png" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="CheckBox">
+                    <Setter Property="IsChecked"
+                            Value="True" />
+                    <Setter Property="Margin"
+                            Value="5 0 5 0" />
+                </Style>
+            </StackPanel.Resources>
+            <CheckBox x:Name="CheckBoxInfo"
+                      Content="Info"
+                      Checked="CheckBox_DisplayMessageFromChecked"
+                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+            <CheckBox x:Name="CheckBoxWarning"
+                      Content="Warning"
+                      Checked="CheckBox_DisplayMessageFromChecked"
+                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+            <CheckBox x:Name="CheckBoxError"
+                      Content="Error"
+                      Checked="CheckBox_DisplayMessageFromChecked"
+                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+            <CheckBox x:Name="CheckBoxOutput"
+                      Content="Output"
+                      Checked="CheckBox_DisplayMessageFromChecked"
+                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+            <CheckBox x:Name="CheckBoxTechnical"
+                      Content="Technical"
+                      Checked="CheckBox_DisplayMessageFromChecked"
+                      Unchecked="CheckBox_DisplayMessageFromChecked" />
         </StackPanel>
 
+        <StackPanel Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource ResourceKey=MainThemeButtonStyle}">
+                </Style>
+            </StackPanel.Resources>
+            <Button Click="ClearConsole_Click">
+                <StackPanel>
+                    <Image Source="Images/Cleaner_icon.png" />
+                </StackPanel>
+            </Button>
+            <Button Click="CloseConsole_Click">
+                <StackPanel>
+                    <Image Source="Images/Cancel_icon.png" />
+                </StackPanel>
+            </Button>
+            <Button Click="Button_SaveClick">
+                <StackPanel>
+                    <Image Source="Images/Save_icon.png" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

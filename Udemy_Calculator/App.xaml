@@ -1,10 +1,97 @@
 ﻿<Application x:Class="Udemy_Calculator.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Udemy_Calculator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
-      
+        <XmlDataProvider Source="Params\Theme.xml"
+                         XPath="/Themes/Theme[@name=../ThemeSelected/@name]"
+                         x:Key="colorThemes" />
+        <SolidColorBrush x:Key="mainCalculatorBackground"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MainTheme/MainCalculatorBackground}" />
+        <SolidColorBrush x:Key="mainCalculatorForeground"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MainTheme/MainCalculatorForeground}" />
+        <SolidColorBrush x:Key="mainCalculatorBorderBrush"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MainTheme/MainCalculatorBorderBrush}" />
+
+        <SolidColorBrush x:Key="backgroundBaseButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=BaseButtons/BackgroundBaseButtons}" />
+        <SolidColorBrush x:Key="foregroundBaseButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=BaseButtons/ForegroundBaseButtons}" />
+        <SolidColorBrush x:Key="borderBrushBaseButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=BaseButtons/BorderBrushBaseButtons}" />
+
+        <SolidColorBrush x:Key="background2ndeButton"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=SndeButton/Background2ndeButton}" />
+        <SolidColorBrush x:Key="foreground2ndeButton"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=SndeButton/Foreground2ndeButton}" />
+        <SolidColorBrush x:Key="borderBrush2ndeButton"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=SndeButton/BorderBrush2ndeButton}" />
+
+        <SolidColorBrush x:Key="backgroundScientificButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=ScientificButtons/BackgroundScientificButtons}" />
+        <SolidColorBrush x:Key="foregroundScientificButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=ScientificButtons/ForegroundScientificButtons}" />
+        <SolidColorBrush x:Key="borderBrushScientificButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=ScientificButtons/BorderBrushScientificButtons}" />
+        
+        <SolidColorBrush x:Key="backgroundOperatorsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=OperatorsButtons/BackgroundOperatorsButtons}" />
+        <SolidColorBrush x:Key="foregroundOperatorsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=OperatorsButtons/ForegroundOperatorsButtons}" />
+        <SolidColorBrush x:Key="borderBrushOperatorsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=OperatorsButtons/BorderBrushOperatorsButtons}" />
+
+        <SolidColorBrush x:Key="backgroundNumericalsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=NumericalsButtons/BackgroundNumericalsButtons}" />
+        <SolidColorBrush x:Key="foregroundNumericalsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=NumericalsButtons/ForegroundNumericalsButtons}" />
+        <SolidColorBrush x:Key="borderBrushNumericalsButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=NumericalsButtons/BorderBrushNumericalsButtons}" />
+
+        <SolidColorBrush x:Key="backgroundMemoryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MemoryButtons/BackgroundMemoryButtons}" />
+        <SolidColorBrush x:Key="foregroundMemoryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MemoryButtons/ForegroundMemoryButtons}" />
+        <SolidColorBrush x:Key="borderBrushMemoryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=MemoryButtons/BorderBrushMemoryButtons}" />
+
+        <SolidColorBrush x:Key="backgroundTrigonometryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=Trigonometry/BackgroundTrigonometryButtons}" />
+        <SolidColorBrush x:Key="foregroundTrigonometryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=Trigonometry/ForegroundTrigonometryButtons}" />
+        <SolidColorBrush x:Key="borderBrushTrigonometryButtons"
+                         Color="{Binding Source={StaticResource colorThemes}, XPath=Trigonometry/BorderBrushTrigonometryButtons}" />
+
+        <Style x:Key="MainThemeButtonStyle" TargetType="Button"
+               BasedOn="{StaticResource SndeButton}">
+            <Setter Property="Width"
+                    Value="auto" />
+            <Setter Property="Height"
+                    Value="25" />
+            <Setter Property="Padding"
+                    Value="10 0 10 0" />
+            <Setter Property="Margin"
+                    Value="5 0 5 0" />
+        </Style>
+        <Style TargetType="Image">
+            <Setter Property="Width"
+                    Value="17" />
+            <Setter Property="Height"
+                    Value="17" />
+        </Style>
+        
+        <Style x:Key="MainWindowStyle">
+            <Setter Property="Control.Background"
+                    Value="{DynamicResource mainCalculatorBackground}" />
+            <Setter Property="Control.Foreground"
+                    Value="{DynamicResource mainCalculatorForeground}" />
+            <Setter Property="Control.BorderBrush"
+                    Value="{DynamicResource mainCalculatorBorderBrush}" />
+            <Setter Property="Control.BorderThickness"
+                    Value="1.5" />
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Padding"
                     Value="5" />
@@ -22,8 +109,10 @@
                     Value="Center" />
             <Setter Property="VerticalAlignment"
                     Value="Center" />
+            <Setter Property="BorderThickness"
+                    Value="10" />
         </Style>
-        
+
         <Style TargetType="Label">
             <Setter Property="Foreground"
                     Value="White" />
@@ -34,7 +123,7 @@
             <Setter Property="Margin"
                     Value="0 0 0 0" />
         </Style>
-        
+
         <Style x:Key="BaseButtons"
                TargetType="Button">
             <Setter Property="FontSize"
@@ -46,13 +135,11 @@
             <Setter Property="Padding"
                     Value="0 0 0 3" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundBaseButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource foregroundBaseButtons}" />
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundBaseButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundBaseButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushBaseButtons, ElementName=calculatorControl}" />
-            <Setter Property="BorderThickness"
-                    Value="{Binding Path=BorderThicknessBaseButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushBaseButtons}" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="VerticalContentAlignment"
@@ -62,6 +149,8 @@
             <Setter Property="Height"
                     Value="45" />
             <Setter Property="Margin"
+                    Value="1" />
+            <Setter Property="BorderThickness"
                     Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -95,11 +184,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=BaseButtons}">
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundOperatorsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundOperatorsButtons}" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundOperatorsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource foregroundOperatorsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushOperatorsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushOperatorsButtons}" />
         </Style>
 
         <Style x:Key="NumericalsButtons"
@@ -114,11 +203,11 @@
             <Setter Property="Padding"
                     Value="0 -2 0 0" />
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundNumericalsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundNumericalsButtons}" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundNumericalsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource foregroundNumericalsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushNumericalsButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushNumericalsButtons}" />
         </Style>
 
         <Style x:Key="MemoryButtons"
@@ -129,11 +218,11 @@
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundMemoryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundMemoryButtons}" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundMemoryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource foregroundMemoryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushMemoryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushMemoryButtons}" />
             <Setter Property="Width"
                     Value="65" />
             <Setter Property="Height"
@@ -150,11 +239,11 @@
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundScientificButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundScientificButtons}" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundScientificButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource foregroundScientificButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushScientificButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushScientificButtons}" />
             <Setter Property="Width"
                     Value="50.5" />
             <Setter Property="Height"
@@ -167,11 +256,22 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=ScientificButtons}">
             <Setter Property="Background"
-                    Value="{Binding Path=BackgroundTrigonometryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource backgroundTrigonometryButtons}" />
             <Setter Property="Foreground"
-                    Value="{Binding Path=ForegroundTrigonometryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource boregroundTrigonometryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{Binding Path=BorderBrushTrigonometryButtons, ElementName=calculatorControl}" />
+                    Value="{DynamicResource borderBrushTrigonometryButtons}" />
+        </Style>
+
+        <Style x:Key="SndeButton"
+               TargetType="Button"
+               BasedOn="{StaticResource ResourceKey=ScientificButtons}">
+            <Setter Property="Background"
+                    Value="{DynamicResource background2ndeButton}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource foreground2ndeButton}" />
+            <Setter Property="BorderBrush"
+                    Value="{DynamicResource borderBrush2ndeButton}" />
         </Style>
 
         <Style TargetType="Image">

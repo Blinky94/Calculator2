@@ -8,8 +8,8 @@
         Title="Calculator"
         WindowStyle="None"
         ResizeMode="NoResize"
-        AllowsTransparency="True"
         Background="Transparent"
+        AllowsTransparency="True"
         WindowStartupLocation="Manual"
         x:Name="mainCalculator"
         SizeToContent="WidthAndHeight"
@@ -29,7 +29,9 @@
                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                     <!--Main Container Grid-->
-                    <Border CornerRadius="25">
+                    <Border CornerRadius="25"
+                            Style="{DynamicResource MainWindowStyle}" 
+                            BorderThickness="2">
                         <Grid x:Name="MainGrid"
                               Margin="10 10 10 20">
                             <Grid.ColumnDefinitions>
@@ -64,20 +66,23 @@
 
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
-                                                   x:Name="UIDisplay" />
+                                                   x:Name="UIDisplay"
+                                                   Style="{DynamicResource MainWindowStyle}"/>
 
                             <!--Call the Calculator User control-->
                             <local:Calculator_Control Grid.Column="0"
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
-                                                      Margin="1 10 0 0" />
+                                                      Margin="1 10 0 0"
+                                                      Style="{DynamicResource MainWindowStyle}"/>
 
                             <!--Call the History User control-->
                             <local:HistoryControl x:Name="UIHistory"
                                                   Grid.Column="1"
                                                   Grid.Row="2"
                                                   Visibility="Collapsed"
-                                                  Margin="0 -95 0 0" />
+                                                  Margin="0 -95 0 0"
+                                                  Style="{DynamicResource MainWindowStyle}"/>
                         </Grid>
                     </Border>
                 </StackPanel>

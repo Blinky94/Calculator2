@@ -7,26 +7,32 @@
         Title="Calculator theme"
         ResizeMode="NoResize"
         WindowStyle="None"
+        Style="{StaticResource MainWindowStyle}"
         WindowStartupLocation="Manual"
         SizeToContent="WidthAndHeight">
 
     <Canvas x:Name="Canvas"
-            Background="Transparent"
             Width="325"
-            Height="550">
+            Height="450">
+        
+        <!--Main Grid-->
         <Grid Canvas.Top="1"
               Canvas.Left="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="460" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
+
+            <!--StackPanel for Theme name and selection Combobox-->
             <StackPanel Orientation="Horizontal"
-                        Margin="5 10 0 -10"
+                        Margin="10"
                         HorizontalAlignment="Left"
                         Background="Transparent"
                         Grid.Row="0">
-                <Label x:Name="ComboBoxThemeListLabel" Content="Theme name " />
+                <Label x:Name="ComboBoxThemeListLabel"
+                       Content="Theme name"
+                       FontSize="12" />
                 <ComboBox x:Name="ComboBoxThemeList"
                           HorizontalAlignment="Stretch"
                           Width="200"
@@ -39,36 +45,46 @@
                           SelectionChanged="ComboBoxThemeList_SelectionChanged" />
             </StackPanel>
 
-            <WrapPanel x:Name="UICustomThemesList"
-                       Background="Transparent"
-                       Grid.Row="1"
-                       Orientation="Vertical"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-          
-            <StackPanel Orientation="Horizontal" 
-                        Background="Transparent"
+            <!--Grid for ListBox of elements name and Combo to select colors-->
+            <Grid Grid.Row="1"
+                  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.25*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ListBox x:Name="ItemsListComboBox"
+                         Grid.Column="0"
+                         Height="330"
+                         SelectedItem="ItemsListComboBox_Selected" />
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="1">
+
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal"
                         Grid.Row="2"
-                        Margin="85 5 0 0"
-                        HorizontalAlignment="Left" 
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center">
-                <Button Click="Button_Add" 
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ResourceKey=MainThemeButtonStyle}" />
+                </StackPanel.Resources>
+
+                <Button Click="Button_Add"
                         HorizontalAlignment="Center">
                     <StackPanel>
-                        <Image Width="20"
-                               Source="/Images/Add_icon.png" />
+                        <Image Source="/Images/Add_icon.png" />
                     </StackPanel>
                 </Button>
                 <Button Click="Button_Save">
                     <StackPanel>
-                        <Image Width="20"
-                               Source="/Images/Save_icon.png" />
+                        <Image Source="/Images/Save_icon.png" />
                     </StackPanel>
                 </Button>
                 <Button Click="Button_Cancel">
                     <StackPanel>
-                        <Image Width="23"
-                               Source="/Images/Cancel_icon.png" />
+                        <Image Source="/Images/Cancel_icon.png" />
                     </StackPanel>
                 </Button>
             </StackPanel>
