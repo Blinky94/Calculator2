@@ -35,7 +35,7 @@
                          Color="{Binding Source={StaticResource colorThemes}, XPath=ScientificButtons/ForegroundScientificButtons}" />
         <SolidColorBrush x:Key="borderBrushScientificButtons"
                          Color="{Binding Source={StaticResource colorThemes}, XPath=ScientificButtons/BorderBrushScientificButtons}" />
-        
+
         <SolidColorBrush x:Key="backgroundOperatorsButtons"
                          Color="{Binding Source={StaticResource colorThemes}, XPath=OperatorsButtons/BackgroundOperatorsButtons}" />
         <SolidColorBrush x:Key="foregroundOperatorsButtons"
@@ -63,25 +63,8 @@
                          Color="{Binding Source={StaticResource colorThemes}, XPath=Trigonometry/ForegroundTrigonometryButtons}" />
         <SolidColorBrush x:Key="borderBrushTrigonometryButtons"
                          Color="{Binding Source={StaticResource colorThemes}, XPath=Trigonometry/BorderBrushTrigonometryButtons}" />
+   
 
-        <Style x:Key="MainThemeButtonStyle" TargetType="Button"
-               BasedOn="{StaticResource SndeButton}">
-            <Setter Property="Width"
-                    Value="auto" />
-            <Setter Property="Height"
-                    Value="25" />
-            <Setter Property="Padding"
-                    Value="10 0 10 0" />
-            <Setter Property="Margin"
-                    Value="5 0 5 0" />
-        </Style>
-        <Style TargetType="Image">
-            <Setter Property="Width"
-                    Value="17" />
-            <Setter Property="Height"
-                    Value="17" />
-        </Style>
-        
         <Style x:Key="MainWindowStyle">
             <Setter Property="Control.Background"
                     Value="{DynamicResource mainCalculatorBackground}" />
@@ -274,11 +257,23 @@
                     Value="{DynamicResource borderBrush2ndeButton}" />
         </Style>
 
+        <Style x:Key="MainThemeButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource SndeButton}">
+            <Setter Property="Width"
+                    Value="auto" />
+            <Setter Property="Height"
+                    Value="25" />
+            <Setter Property="Padding"
+                    Value="10 0 10 0" />
+            <Setter Property="Margin"
+                    Value="5 0 5 0" />
+        </Style>
         <Style TargetType="Image">
             <Setter Property="Width"
-                    Value="20" />
+                    Value="17" />
             <Setter Property="Height"
-                    Value="18" />
+                    Value="17" />
         </Style>
 
     </Application.Resources>

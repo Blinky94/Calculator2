@@ -8,5 +8,10 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
         }
+
+        private void UIColorPicker_SelectedColorChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
+        {
+            // HERE THE CODE UPDATE COLOR FOR CONTROL CONCERNED !!!
+        }
     }
 }

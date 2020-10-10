@@ -6,33 +6,24 @@
              xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="35"
-             d:DesignWidth="200"
-             Width="Auto"
-             Height="Auto">
+             d:DesignWidth="200">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="UITitle"
-                       Text="Title"
-                       VerticalAlignment="Center"
-                       FontSize="12"
-                       Grid.Column="0"
-                       Margin="0 0 10 5" />
-        </StackPanel>
 
-        <StackPanel Grid.Column="1"
-                    Orientation="Horizontal">
-            <wpfx:ColorPicker x:Name="UIColorPicker"
-                              Grid.Column="1"
-                              Width="75"
-                              Height="auto"
-                              Padding="0 1 0 0" />
-        </StackPanel>
+        <Label x:Name="TitleLabel"
+               Grid.Column="0"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Center"
+               Content="Ceic est un test"
+               FontSize="12" />
 
+        <wpfx:ColorPicker x:Name="UIColorPicker"
+                          Grid.Column="1"
+                          Width="115"
+                          DisplayColorAndName="True"
+                          SelectedColorChanged="UIColorPicker_SelectedColorChanged" />
     </Grid>
 </UserControl>
