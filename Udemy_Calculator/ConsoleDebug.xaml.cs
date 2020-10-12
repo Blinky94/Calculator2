@@ -105,7 +105,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         private List<LogDebug> ReturnListCategoriesFromChecked()
         {
-            return GlobalUsage.ListLogDebug.Where(p => GridCheckBoxes.Children.Cast<CheckBox>().Where(c => (bool)c.IsChecked).Select(d => (int)Enum.Parse(typeof(LogCategory), d.Content.ToString(), true)).ToList().Contains(p.DetailCategory)).ToList();
+            return GlobalUsage.ListLogDebug.Where(p => GridCheckBoxes.Children.Cast<CheckBox>().Where(c => (bool)c.IsChecked).Select(d => (int)Enum.Parse(typeof(LogCategory), d.Uid.ToString(), true)).ToList().Contains(p.DetailCategory)).ToList();
         }
 
         /// <summary>

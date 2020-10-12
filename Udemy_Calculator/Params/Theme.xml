@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Ice" />
+  <ThemeSelected name="Fire" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Main theme background">#FFCBCDCE</MainCalculatorBackground>
@@ -12,7 +12,7 @@
       <ForegroundBaseButtons name="General buttons foreground">#FFFFFFFF</ForegroundBaseButtons>
       <BorderBrushBaseButtons name="General buttons border color">#FF000000</BorderBrushBaseButtons>
     </BaseButtons>
-    <SndeButton name="Seconde button">
+    <SndeButton name="Second button">
       <Background2ndeButton name="Seconde button background">#FF084A03</Background2ndeButton>
       <Foreground2ndeButton name="Seconde button foreground">#FFFFFFFF</Foreground2ndeButton>
       <BorderBrush2ndeButton name="Seconde button border color">#FF000000</BorderBrush2ndeButton>

@@ -9,12 +9,13 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Style="{StaticResource MainWindowStyle}"
+        Style="{DynamicResource MainWindowStyle}"
         WindowStartupLocation="Manual"
         Height="500"
         Width="1000">
     <Window.Resources>
         <local:EnumConverter x:Key="enumConverter" />
+        <local:DateConverter x:Key="dateConverter" />
     </Window.Resources>
     <Grid x:Name="UIGridConsoleDebug">
         <Grid.ColumnDefinitions>
@@ -81,7 +82,7 @@
                             </Style>
                         </DataTemplate.Resources>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding DetailDate}" />
+                            <TextBlock Text="{Binding DetailDate, Converter={StaticResource dateConverter}, ConverterParameter={x:Type local:LogCategory}}" />
                             <TextBlock Text=": " />
                             <TextBlock Text="{Binding DetailCategory, Converter={StaticResource enumConverter}, ConverterParameter={x:Type local:LogCategory}}" />
                             <TextBlock Text=" - " />
@@ -108,49 +109,72 @@
                 </Style>
             </StackPanel.Resources>
             <CheckBox x:Name="CheckBoxInfo"
-                      Content="Info"
+                      Uid="Info"
                       Checked="CheckBox_DisplayMessageFromChecked"
-                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+                      Unchecked="CheckBox_DisplayMessageFromChecked">
+                <Label Content="Info"
+                       FontSize="11"
+                       Margin="-5,-3,0,0"
+                       Style="{DynamicResource MainLabel}" />
+            </CheckBox>
             <CheckBox x:Name="CheckBoxWarning"
-                      Content="Warning"
+                      Uid="Warning"
                       Checked="CheckBox_DisplayMessageFromChecked"
-                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+                      Unchecked="CheckBox_DisplayMessageFromChecked">
+                <Label Content="Warning"
+                       FontSize="11"
+                       Margin="-5,-3,0,0"
+                       Style="{DynamicResource MainLabel}" />
+            </CheckBox>
             <CheckBox x:Name="CheckBoxError"
-                      Content="Error"
+                      Uid="Error"
                       Checked="CheckBox_DisplayMessageFromChecked"
-                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+                      Unchecked="CheckBox_DisplayMessageFromChecked">
+                <Label Content="Error"
+                       FontSize="11"
+                       Margin="-5,-3,0,0"
+                       Style="{DynamicResource MainLabel}" />
+            </CheckBox>
             <CheckBox x:Name="CheckBoxOutput"
-                      Content="Output"
+                      Uid="Output"
                       Checked="CheckBox_DisplayMessageFromChecked"
-                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+                      Unchecked="CheckBox_DisplayMessageFromChecked">
+                <Label Content="Output"
+                       FontSize="11"
+                       Margin="-5,-3,0,0"
+                       Style="{DynamicResource MainLabel}" />
+            </CheckBox>
             <CheckBox x:Name="CheckBoxTechnical"
-                      Content="Technical"
+                      Uid="Technical"
                       Checked="CheckBox_DisplayMessageFromChecked"
-                      Unchecked="CheckBox_DisplayMessageFromChecked" />
+                      Unchecked="CheckBox_DisplayMessageFromChecked">
+                <Label Content="Technical"
+                       FontSize="11"
+                       Margin="-5,-3,0,0"
+                       Style="{DynamicResource MainLabel}" />
+            </CheckBox>
         </StackPanel>
 
         <StackPanel Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Grid.Row="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <StackPanel.Resources>
-                <Style TargetType="Button"
-                       BasedOn="{StaticResource ResourceKey=MainThemeButtonStyle}">
-                </Style>
-            </StackPanel.Resources>
-            <Button Click="ClearConsole_Click">
+            <Button Click="ClearConsole_Click"
+                    Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
                     <Image Source="Images/Cleaner_icon.png" />
                 </StackPanel>
             </Button>
-            <Button Click="CloseConsole_Click">
+            <Button Click="CloseConsole_Click"
+                    Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
                     <Image Source="Images/Cancel_icon.png" />
                 </StackPanel>
             </Button>
-            <Button Click="Button_SaveClick">
+            <Button Click="Button_SaveClick"
+                    Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
                     <Image Source="Images/Save_icon.png" />
                 </StackPanel>

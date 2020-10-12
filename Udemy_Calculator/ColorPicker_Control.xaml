@@ -6,19 +6,21 @@
              xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="35"
-             d:DesignWidth="200">
+             d:DesignWidth="200"
+             x:Name="colorPickerControl">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+      
         <Label x:Name="TitleLabel"
+               Content="{Binding Path=ColorPickerText, ElementName=colorPickerControl}"
                Grid.Column="0"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
-               Content="Ceic est un test"
-               FontSize="12" />
+               FontSize="12"
+               Style="{DynamicResource MainLabel}" />
 
         <wpfx:ColorPicker x:Name="UIColorPicker"
                           Grid.Column="1"

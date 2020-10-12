@@ -123,22 +123,28 @@ namespace Udemy_Calculator
 
         private void UISignOrUnSignButton_Click(object sender, RoutedEventArgs e)
         {
+            ToCalculusDisplay = ToCalculusDisplay.Replace("(", "").Replace(")", "");
+
             if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
-                if (!mIsResult)
+                lResult *= (-1);
+                string lStr = lResult.ToString();
+
+                if (Math.Sign(lResult) == -1)
                 {
-                    ToCalculusDisplay = (lResult * (-1)).ToString();
+                    lStr = $"({lResult})";
+                    if (!mIsResult)
+                    {
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(ToCalculusDisplay.Length);
+                    }                
                 }
-                else
+
+                if (mIsResult)
                 {
                     mIsResult = false;
-                    string lDuplicate = LastNumber;
-                    _ = lDuplicate.Replace("(", "").Replace(")", "");
-
-                    double.TryParse(lDuplicate, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNum);
-
-                    ToCalculusDisplay = (lNum * (-1)).ToString();
                 }
+
+                ToCalculusDisplay = lStr;
 
                 ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(ToCalculusDisplay, mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
@@ -181,6 +187,7 @@ namespace Udemy_Calculator
                 {
                     lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
 
+                    ToCalculusDisplay = ToCalculusDisplay.Replace("(", "").Replace(")", "");
                     if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
                     {
                         // Ici PEMDAS

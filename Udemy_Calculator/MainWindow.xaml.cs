@@ -35,98 +35,7 @@ namespace Udemy_Calculator
         public SolidColorBrush BackgroundTrigonometryButtons { get; set; }
         public SolidColorBrush ForegroundTrigonometryButtons { get; set; }
         public SolidColorBrush BorderBrushTrigonometryButtons { get; set; }
-
-        private void LoadXmlValues()
-        {
-            // Load the current theme from the params xml file
-            XmlParser.LoadParamsXmlTheme();
-
-            // Get the list from xml file loaded
-            var lList = XmlParser.GetListOfParametersFromXmlFile().Where(p => p.ParentThemeName == p.ThemeSelected).Select(p => p);
-
-            foreach (var item in lList)
-            {
-                var lBrushVal = (SolidColorBrush)new BrushConverter().ConvertFromString(item.ParameterValue);
-                switch (item.ParameterName)
-                {
-                    case "MainCalculatorBackground":
-                        MainCalculatorBackground = lBrushVal;
-                        break;
-                    case "MainCalculatorForeground":
-                        MainCalculatorForeground = lBrushVal;
-                        break;
-                    case "MainCalculatorBorderBrush":
-                        MainCalculatorBorderBrush = lBrushVal;
-                        break;
-                    case "BackgroundBaseButtons":
-                        BackgroundBaseButtons = lBrushVal;
-                        break;
-                    case "ForegroundBaseButtons":
-                        ForegroundBaseButtons = lBrushVal;
-                        break;
-                    case "BorderBrushBaseButtons":
-                        BorderBrushBaseButtons = lBrushVal;
-                        break;
-                    case "Background2ndeButton":
-                        Background2ndeButton = lBrushVal;
-                        break;
-                    case "Foreground2ndeButton":
-                        Foreground2ndeButton = lBrushVal;
-                        break;
-                    case "BorderBrush2ndeButton":
-                        BorderBrush2ndeButton = lBrushVal;
-                        break;
-                    case "BackgroundScientificButtons":
-                        BackgroundScientificButtons = lBrushVal;
-                        break;
-                    case "ForegroundScientificButtons":
-                        ForegroundScientificButtons = lBrushVal;
-                        break;
-                    case "BorderBrushScientificButtons":
-                        BorderBrushScientificButtons = lBrushVal;
-                        break;
-                    case "BackgroundOperatorsButtons":
-                        BackgroundOperatorsButtons = lBrushVal;
-                        break;
-                    case "ForegroundOperatorsButtons":
-                        ForegroundOperatorsButtons = lBrushVal;
-                        break;
-                    case "BorderBrushOperatorsButtons":
-                        BorderBrushOperatorsButtons = lBrushVal;
-                        break;
-                    case "BackgroundNumericalsButtons":
-                        BackgroundNumericalsButtons = lBrushVal;
-                        break;
-                    case "ForegroundNumericalsButtons":
-                        ForegroundNumericalsButtons = lBrushVal;
-                        break;
-                    case "BorderBrushNumericalsButtons":
-                        BorderBrushNumericalsButtons = lBrushVal;
-                        break;
-                    case "BackgroundMemoryButtons":
-                        BackgroundMemoryButtons = lBrushVal;
-                        break;
-                    case "ForegroundMemoryButtons":
-                        ForegroundMemoryButtons = lBrushVal;
-                        break;
-                    case "BorderBrushMemoryButtons":
-                        BorderBrushMemoryButtons = lBrushVal;
-                        break;
-                    case "BackgroundTrigonometryButtons":
-                        BackgroundTrigonometryButtons = lBrushVal;
-                        break;
-                    case "ForegroundTrigonometryButtons":
-                        ForegroundTrigonometryButtons = lBrushVal;
-                        break;
-                    case "BorderBrushTrigonometryButtons":
-                        BorderBrushTrigonometryButtons = lBrushVal;
-                        break;
-                }
-            }
-            //CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
-        }
-
-
+   
         // Event to raise number pressed by user to display to the UIDisplay
         public delegate void EventUpdateUIDisplayHandler(string pContent);
         public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
@@ -147,31 +56,18 @@ namespace Udemy_Calculator
         public MainWindow()
         {
             InitializeComponent();
-            LoadXmlValues();
             this.DataContext = this;
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Scientific.ToString();
 
             // Set all events
             SetEvents();
-
-            // Load the current theme from the params xml file
-            XmlParser.LoadParamsXmlTheme();
-            // Get the list from xml file loaded
-            UIMenuSide.SetThemesList = XmlParser.GetListOfParametersFromXmlFile();
-
-            CommonTheme.ThemeSelectedName = CommonTheme.CompleteListThemes.FirstOrDefault().ThemeSelected;
-            // UIMenuSide.SetMenuItems();
-            CommonTheme.LoadPropertiesFromXmlFile();
-            SetThemes();
-
-            //GlobalUsage.SetSqlitePragmaConfiguration();
         }
 
         /// <summary>
         /// Set all the themes color for the current window
         /// </summary>
-        public void SetThemes()
-        {
+        //public void SetThemes()
+       // {
             //MainCalculator.Background = CommonTheme.MainCalculatorBackground;
             //UIMenuSide.UIMenuSelected.Foreground = CommonTheme.MainCalculatorForeground;
             //MainCalculator.BorderBrush = CommonTheme.MainCalculatorBorderBrush;
@@ -211,7 +107,7 @@ namespace Udemy_Calculator
             //        }
             //    }
             //}
-        }
+       // }
 
         public void ModifyUIDisplay(string pContent)
         {

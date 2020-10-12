@@ -63,7 +63,6 @@
                                        Height="17" />
                             </ToggleButton>
 
-
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
                                                    x:Name="UIDisplay"

@@ -27,24 +27,20 @@
                     Grid.Column="0">
             <!--Memorisation Panel-->
             <WrapPanel HorizontalAlignment="Right">
-                <WrapPanel.Resources>
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource ResourceKey=MemoryButtons}">
-                        <Setter Property="Padding"
-                                Value="0 1 0 1" />
-                    </Style>
-                </WrapPanel.Resources>
                 <Button x:Name="UIMCButton"
+                        Style="{DynamicResource MemoryButtons}"
                         x:Uid="MC"
                         Content="MC"
                         Click="UIMCButton_Click">
                 </Button>
                 <Button x:Name="UIMemoryPlusButton"
+                        Style="{DynamicResource MemoryButtons}"
                         x:Uid="M+"
                         Content="M+"
                         Click="UIMemoryPlusButton_Click">
                 </Button>
                 <Button x:Name="UIMemoryRecallButton"
+                        Style="{DynamicResource MemoryButtons}"
                         x:Uid="MR"
                         Content="MR"
                         Click="UIMemoryRecallButton_Click">
@@ -53,140 +49,154 @@
 
             <!--Scientific panel-->
             <WrapPanel>
-                <WrapPanel.Resources>
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource ResourceKey=ScientificButtons}">
-                        <Setter Property="Padding"
-                                Value="0 -2 0 3" />
-                        <Setter Property="FontSize"
-                                Value="14" />
-                    </Style>
-                </WrapPanel.Resources>
                 <!--First Range-->
                 <Button x:Name="DummyButton"
                         Visibility="Hidden"
+                        Style="{DynamicResource ScientificButtons}"
                         Click="UISecondFuncButton_Click">
                 </Button>
                 <Button x:Name="UISecondFuncButton"
-                        Style="{StaticResource ResourceKey=SndeButton}"
+                        Style="{DynamicResource SndeButton}"
                         x:Uid="2nde"
                         Content="2nde"
                         Padding="0"
                         Click="UISecondFuncButton_Click">
                 </Button>
                 <Button x:Name="UIXSquareButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="x²"
                         Content="x²"
                         Click="UIXSquareButton_Click">
                 </Button>
                 <Button x:Name="UIXCubeButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="x³"
                         Content="x³"
                         Click="UIXCubeButton_Click">
                 </Button>
                 <Button x:Name="UIXExpXButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="xª"
                         Content="xª"
                         Click="UIXExpXButton_Click">
                 </Button>
                 <!--Second Range-->
                 <Button x:Name="UINFactorielButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="n!"
                         Content="n!"
                         Click="UINFactorielButton_Click">
                 </Button>
                 <Button x:Name="UIRootXButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="√x"
                         Content="√x"
                         Click="UIRootXButton_Click">
                 </Button>
                 <Button x:Name="UITwoSquareRootButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="²√x"
                         Content="²√x"
                         Click="UITwoSquareRootButton_Click">
                 </Button>
                 <Button x:Name="UIThreeSquareRootButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="³√x"
                         Content="³√x"
                         Click="UIThreeSquareRootButton_Click">
                 </Button>
                 <!--Second Range-->
                 <Button x:Name="UIXSquareRootYButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="ª√x"
                         Content="ª√x"
                         Click="UIXSquareRootYButton_Click">
                 </Button>
                 <Button x:Name="UITenExpXButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="10ª"
                         Content="10ª"
                         Click="UITenExpXButton_Click">
                 </Button>
                 <Button x:Name="UIMODButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="mod"
                         Content="mod"
                         Click="UIMODButton_Click">
                 </Button>
                 <!--Thirst Range-->
                 <Button x:Name="UIAbsoluteValButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="|N|"
                         Content="|N|"
                         Click="UIAbsoluteValButton_Click">
                 </Button>
                 <!--Fourth Range-->
                 <Button x:Name="UIRandomButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="rand"
                         Content="rand"
                         Click="UIRandomButton_Click">
                 </Button>
                 <Button x:Name="UIEXPButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="e"
                         Content="e"
                         Click="UIEXPButton_Click_1">
                 </Button>
                 <Button x:Name="UIEXPSquareButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="eª"
                         Content="eª"
                         Click="UIEXPSquareButton_Click">
                 </Button>
                 <Button x:Name="UIOneOnXButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="1/x"
                         Content="1/x"
                         Click="UIOneOnXButton_Click">
                 </Button>
                 <!--Fifth Range-->
                 <Button x:Name="UIExpButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="^"
                         Content="exp"
                         Click="UIExpButton_Click" />
                 <Button x:Name="UISquareRootButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="√"
                         Content="√"
                         Click="UISquareRootButton_Click">
                 </Button>
                 <!--Sixth Range-->
                 <Button x:Name="UIPIButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="π"
                         Content="π"
                         Click="UICloseParenthesisButton_Click">
                 </Button>
                 <Button x:Name="UILOGButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="log"
                         Content="log"
-                        Padding="0,-4,0,0"
                         Click="UILOGButton_Click" />
                 <Button x:Name="UILNButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="ln"
                         Content="ln"
                         Click="UILNButton_Click" />
                 <Button x:Name="UICOSButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="cos"
                         Content="cos"
                         Click="UICOSButton_Click" />
                 <Button x:Name="UIOpenParenthesisButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid="("
                         Content="("
                         Click="UIOpenParenthesisButton_Click" />
                 <Button x:Name="UICloseParenthesisButton"
+                        Style="{DynamicResource ScientificButtons}"
                         x:Uid=")"
                         Content=")"
                         Click="UICloseParenthesisButton_Click" />
@@ -195,28 +205,23 @@
                 <StackPanel x:Name="FirstFunctions"
                             Orientation="Horizontal"
                             Visibility="Visible">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource ResourceKey=TrigonometryButtons}">
-                            <Setter Property="Padding"
-                                    Value="0 -2 0 1" />
-                            <Setter Property="FontSize"
-                                    Value="15" />
-                        </Style>
-                    </StackPanel.Resources>
                     <Button x:Name="UICOTButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="cot"
                             Content="cot"
                             Click="UICOTButton_Click" />
                     <Button x:Name="UISECButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="sec"
                             Content="sec"
                             Click="UISECButton_Click" />
                     <Button x:Name="UICSCButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="csc"
                             Content="csc"
                             Click="UICSCButton_Click" />
                     <Button x:Name="UITANButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="tan"
                             Content="tan"
                             Click="UITANButton_Click" />
@@ -226,23 +231,23 @@
                 <StackPanel x:Name="SndeFunctions"
                             Orientation="Horizontal"
                             Visibility="Collapsed">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource ResourceKey=TrigonometryButtons}" />
-                    </StackPanel.Resources>
                     <Button x:Name="UIACOTButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="Acot"
                             Content="Acot"
                             Click="UIACOTButton_Click" />
                     <Button x:Name="UIASECButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="Asec"
                             Content="Asec"
                             Click="UIASECButton_Click" />
                     <Button x:Name="UIACSCButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="Acsc"
                             Content="Acsc"
                             Click="UIACSCButton_Click" />
                     <Button x:Name="UIATANButton"
+                            Style="{DynamicResource TrigonometryButtons}"
                             x:Uid="Atan"
                             Content="Atan"
                             Click="UIATANButton_Click" />
@@ -252,27 +257,26 @@
                 <Button x:Name="UIHYPButton"
                         x:Uid="hyp"
                         Content="hyp"
-                        Style="{DynamicResource ResourceKey=TrigonometryButtons}"
+                        Style="{DynamicResource TrigonometryButtons}"
                         Click="UIHYPButton_Click" />
             </WrapPanel>
 
             <!--Main panel-->
             <WrapPanel Margin="0 10 0 0">
-                <WrapPanel.Resources>
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource ResourceKey=BaseButtons}" />
-                </WrapPanel.Resources>
                 <!--First range-->
                 <Button x:Name="UIACButton"
+                        Style="{DynamicResource BaseButtons}"
                         x:Uid="AC"
                         Content="AC"
                         Click="UIACButton_Click" />
                 <Button x:Name="UIBackReturnButton"
+                        Style="{DynamicResource BaseButtons}"
                         x:Uid="CE"
                         Content="CE"
                         Click="UIBackReturnButton_Click">
                 </Button>
                 <Button x:Name="UIPercentButton"
+                        Style="{DynamicResource BaseButtons}"
                         x:Uid="%"
                         Content="%"
                         FontSize="23"
@@ -283,107 +287,102 @@
                         x:Uid="÷"
                         Content="÷"
                         FontSize="35"
-                        Padding="0 -6 0 0"
-                        Style="{StaticResource OperatorsButtons}"
+                        Style="{DynamicResource OperatorsButtons}"
                         Click="UIOperatorButton_Click">
                 </Button>
                 <!--Second range-->
                 <Button x:Name="UISevenButton"
                         x:Uid="7"
                         Content="7"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIHeightButton"
                         x:Uid="8"
                         Content="8"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UINineButton"
                         x:Uid="9"
                         Content="9"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIMultiplyButton"
                         x:Uid="×"
                         Content="×"
                         FontSize="35"
-                        Padding="0 -6 0 0"
-                        Style="{StaticResource OperatorsButtons}"
+                        Style="{DynamicResource OperatorsButtons}"
                         Click="UIOperatorButton_Click">
                 </Button>
                 <!--Third range-->
                 <Button x:Name="UIFourButton"
                         x:Uid="4"
                         Content="4"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIFiveButton"
                         x:Uid="5"
                         Content="5"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UISixButton"
                         x:Uid="6"
                         Content="6"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIPlusButton"
                         x:Uid="+"
                         Content="+"
                         FontSize="35"
-                        Padding="0 -7 0 2"
-                        Style="{StaticResource OperatorsButtons}"
+                        Style="{DynamicResource OperatorsButtons}"
                         Click="UIOperatorButton_Click">
                 </Button>
                 <!--Fourth range-->
                 <Button x:Name="UIOneButton"
                         x:Uid="1"
                         Content="1"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UITwoButton"
                         x:Uid="2"
                         Content="2"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIThreeButton"
                         x:Uid="3"
                         Content="3"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UIMinusButton"
                         x:Uid="−"
                         Content="-"
                         FontSize="37"
-                        Padding="0 -9 0 6"
-                        Style="{StaticResource OperatorsButtons}"
+                        Style="{DynamicResource OperatorsButtons}"
                         Click="UIOperatorButton_Click">
                 </Button>
                 <!--Fifth range-->
                 <Button x:Name="UIZeroButton"
                         x:Uid="0"
                         Content="0"
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UINumberButton_Click" />
                 <Button x:Name="UISignButton"
                         x:Uid="±"
                         Content="±"
                         FontSize="25"
-                        Style="{StaticResource BaseButtons}"
+                        Style="{DynamicResource BaseButtons}"
                         Click="UISignOrUnSignButton_Click">
 
                 </Button>
                 <Button x:Name="UIPointButton"
                         x:Uid="."
                         Content="."
-                        Style="{StaticResource NumericalsButtons}"
+                        Style="{DynamicResource NumericalsButtons}"
                         Click="UIPointButton_Click" />
                 <Button x:Name="UIEqualButton"
                         x:Uid="="
                         Content="="
-                        FontSize="35"
-                        Padding="0 -7 0 4"
-                        Style="{StaticResource OperatorsButtons}"
+                        FontSize="35"         
+                        Style="{DynamicResource OperatorsButtons}"
                         Click="UIEqualButton_Click">
                 </Button>
             </WrapPanel>

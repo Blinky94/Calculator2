@@ -213,7 +213,7 @@
                    Background="Transparent"
                    HorizontalContentAlignment="Center"
                    Margin="0 0 50 0"
-                   Style="{StaticResource StyleUIMenuSelected}" />
+                   Style="{DynamicResource MainLabel}" />
         </Grid>
     </Border>
 
