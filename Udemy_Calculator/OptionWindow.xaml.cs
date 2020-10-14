@@ -22,15 +22,22 @@ namespace Udemy_Calculator
             //Loading the xml configuration to provide access to all elements
             CommonTheme.LoadFromXmlProvider(this);
 
-            // Applying every values to controls from selected item
+            // Applying every properties values to the listBox from selected theme
             PopulateListPropertiesToSource();
 
             // Combobox List for main theme to select
             ThemeListComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
 
             // Selecting default values into controls
-            ItemsListBox.SelectedItem = CommonTheme.GetParentThemeLongNames[0];
-            ThemeListComboBox.SelectedIndex = ThemeListComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
+            if (CommonTheme.GetParentThemeLongNames.Count > 0)
+            {
+                ItemsListBox.SelectedItem = CommonTheme.GetParentThemeLongNames[0];
+            }
+
+            if (!string.IsNullOrEmpty(CommonTheme.ThemeSelectedName))
+            {
+                ThemeListComboBox.SelectedIndex = ThemeListComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
+            }
         }
 
         /// <summary>
@@ -65,7 +72,7 @@ namespace Udemy_Calculator
         private void Button_Add(object sender, RoutedEventArgs e)
         {
             // Add new theme
-        }     
+        }
 
         private void ComboBoxThemeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

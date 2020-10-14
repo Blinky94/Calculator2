@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Fire" />
+  <ThemeSelected name="Dark" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Main theme background">#FFCBCDCE</MainCalculatorBackground>
@@ -37,11 +37,11 @@
       <ForegroundMemoryButtons name="Memory buttons foreground">#FFF0F8FF</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Memory buttons border color">#FFF0F8FF</BorderBrushMemoryButtons>
     </MemoryButtons>
-    <Trigonometry name="Trigonometry buttons">
+    <TrigonometryButtons name="Trigonometry buttons">
       <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FFF0F8FF</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FF000000</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FF000000</BorderBrushTrigonometryButtons>
-    </Trigonometry>
+    </TrigonometryButtons>
   </Theme>
   <Theme name="Fire">
     <MainTheme name="Main theme">
@@ -79,11 +79,11 @@
       <ForegroundMemoryButtons name="Memory buttons foreground">#FFFF0000</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Memory buttons border color">#FFF0F8FF</BorderBrushMemoryButtons>
     </MemoryButtons>
-    <Trigonometry name="Trigonometry buttons">
+    <TrigonometryButtons name="Trigonometry buttons">
       <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FFED0000</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFFFFF00</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFFFB34B</BorderBrushTrigonometryButtons>
-    </Trigonometry>
+    </TrigonometryButtons>
   </Theme>
   <Theme name="Ice">
     <MainTheme name="Main theme">
@@ -121,11 +121,11 @@
       <ForegroundMemoryButtons name="Memory buttons foreground">#FFF0FFFF</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Memory buttons border color">#FF4169E1</BorderBrushMemoryButtons>
     </MemoryButtons>
-    <Trigonometry name="Trigonometry buttons">
+    <TrigonometryButtons name="Trigonometry buttons">
       <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FF001354</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFF0F8FF</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFF0FFFF</BorderBrushTrigonometryButtons>
-    </Trigonometry>
+    </TrigonometryButtons>
   </Theme>
   <Theme name="Dark">
     <MainTheme name="Main theme">
@@ -163,10 +163,10 @@
       <ForegroundMemoryButtons name="Memory buttons foreground">#FFF0F8FF</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Memory buttons border color">#FFF0F8FF</BorderBrushMemoryButtons>
     </MemoryButtons>
-    <Trigonometry name="Trigonometry buttons">
+    <TrigonometryButtons name="Trigonometry buttons">
       <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FF000000</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFF0F8FF</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFF0F8FF</BorderBrushTrigonometryButtons>
-    </Trigonometry>
+    </TrigonometryButtons>
   </Theme>
 </Themes>

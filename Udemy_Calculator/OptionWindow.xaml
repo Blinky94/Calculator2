@@ -15,6 +15,9 @@
 
     <!--Main Grid-->
     <Grid Margin="10">
+        <Grid.Resources>
+            <local:TestingBackgroundConverter x:Key="testingBGConverter" />
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -87,19 +90,64 @@
                     HorizontalAlignment="Center"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="/Images/Add_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Add_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Add_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
             <Button Click="Button_Save"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="/Images/Save_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Save_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Save_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
             <Button Click="Button_Cancel"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="/Images/Cancel_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Cancel_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Cancel_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
         </StackPanel>

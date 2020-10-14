@@ -16,6 +16,7 @@
     <Window.Resources>
         <local:EnumConverter x:Key="enumConverter" />
         <local:DateConverter x:Key="dateConverter" />
+        <local:TestingBackgroundConverter x:Key="testingBGConverter" />
     </Window.Resources>
     <Grid x:Name="UIGridConsoleDebug">
         <Grid.ColumnDefinitions>
@@ -97,7 +98,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Grid.Row="1"
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
             <StackPanel.Resources>
@@ -115,7 +116,7 @@
                 <Label Content="Info"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabel}" />
+                       Style="{DynamicResource MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxWarning"
                       Uid="Warning"
@@ -124,7 +125,7 @@
                 <Label Content="Warning"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabel}" />
+                       Style="{DynamicResource MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxError"
                       Uid="Error"
@@ -133,7 +134,7 @@
                 <Label Content="Error"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabel}" />
+                       Style="{DynamicResource MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxOutput"
                       Uid="Output"
@@ -142,7 +143,7 @@
                 <Label Content="Output"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabel}" />
+                       Style="{DynamicResource MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxTechnical"
                       Uid="Technical"
@@ -151,7 +152,7 @@
                 <Label Content="Technical"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabel}" />
+                       Style="{DynamicResource MainLabelStyle}" />
             </CheckBox>
         </StackPanel>
 
@@ -164,19 +165,64 @@
             <Button Click="ClearConsole_Click"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="Images/Cleaner_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Cleaner_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Cleaner_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
             <Button Click="CloseConsole_Click"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="Images/Cancel_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Cancel_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Cancel_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
             <Button Click="Button_SaveClick"
                     Style="{DynamicResource MainThemeButtonStyle}">
                 <StackPanel>
-                    <Image Source="Images/Save_icon.png" />
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                <Setter Property="Source"
+                                        Value="Images/Save_icon.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                                 Value="true">
+                                        <Setter Property="Source"
+                                                Value="Images/Save_icon_reverse.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </StackPanel>
             </Button>
         </StackPanel>

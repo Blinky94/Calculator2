@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Xml;
-using System.Linq;
-using System.Windows;
-using System;
 
 namespace Udemy_Calculator
 {
@@ -16,6 +14,31 @@ namespace Udemy_Calculator
     public static class CommonTheme
     {
         #region public
+
+        public static SolidColorBrush MainCalculatorBackground { get; set; }
+        public static SolidColorBrush MainCalculatorForeground { get; set; }
+        public static SolidColorBrush MainCalculatorBorderBrush { get; set; }
+        public static SolidColorBrush Background2ndeButton { get; set; }
+        public static SolidColorBrush Foreground2ndeButton { get; set; }
+        public static SolidColorBrush BorderBrush2ndeButton { get; set; }
+        public static SolidColorBrush BackgroundBaseButtons { get; set; }
+        public static SolidColorBrush ForegroundBaseButtons { get; set; }
+        public static SolidColorBrush BorderBrushBaseButtons { get; set; }
+        public static SolidColorBrush BackgroundScientificButtons { get; set; }
+        public static SolidColorBrush ForegroundScientificButtons { get; set; }
+        public static SolidColorBrush BorderBrushScientificButtons { get; set; }
+        public static SolidColorBrush BackgroundOperatorsButtons { get; set; }
+        public static SolidColorBrush ForegroundOperatorsButtons { get; set; }
+        public static SolidColorBrush BorderBrushOperatorsButtons { get; set; }
+        public static SolidColorBrush BackgroundNumericalsButtons { get; set; }
+        public static SolidColorBrush ForegroundNumericalsButtons { get; set; }
+        public static SolidColorBrush BorderBrushNumericalsButtons { get; set; }
+        public static SolidColorBrush BackgroundMemoryButtons { get; set; }
+        public static SolidColorBrush ForegroundMemoryButtons { get; set; }
+        public static SolidColorBrush BorderBrushMemoryButtons { get; set; }
+        public static SolidColorBrush BackgroundTrigonometryButtons { get; set; }
+        public static SolidColorBrush ForegroundTrigonometryButtons { get; set; }
+        public static SolidColorBrush BorderBrushTrigonometryButtons { get; set; }
 
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
@@ -65,19 +88,12 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Get the theme selected object from the ListOfAllThemes object
+        /// Set the theme selected and apply to all the windows opened
         /// </summary>
         /// <param name="pSelectedTheme">Optional parameter</param>
         public static void SetSelectedThemeListObject(string pSelectedTheme = "")
         {
-            if (string.IsNullOrEmpty(pSelectedTheme))
-            {
-                ListSelectedTheme = ListOfAllThemes.Where(p => p.ThemeSelected == p.ThemeRootName).ToList();
-            }
-            else
-            {
-                ListSelectedTheme = ListOfAllThemes.Where(p => pSelectedTheme == p.ThemeRootName).ToList();
-            }
+            ListSelectedTheme = !string.IsNullOrEmpty(pSelectedTheme) ? ListOfAllThemes.Where(p => pSelectedTheme == p.ThemeRootName).ToList() : ListOfAllThemes.Where(p => p.ThemeSelected == p.ThemeRootName).ToList();
 
             UpdateThemeToAllWindow();
         }
@@ -91,8 +107,10 @@ namespace Udemy_Calculator
         /// </summary>
         private static void GetAllThemesListObject()
         {
-            var lNodeList = LoadXmlConfiguration.SelectNodes("Themes");
+            var lNodeList = LoadXmlConfiguration?.SelectNodes("Themes");
 
+            if (lNodeList == null)
+                return;
             string lThemeSelected;
 
             foreach (XmlElement lElement in lNodeList)
@@ -138,15 +156,16 @@ namespace Udemy_Calculator
         private static void UpdateThemeToAllWindow()
         {
             SetThemesProperties("MainTheme", "MainWindowStyle");
-            SetThemesProperties("BaseButtons", "BaseButtons");
-            SetThemesProperties("ScientificButtons", "ScientificButtons");
-            SetThemesProperties("SndeButton", "SndeButton");
-            SetThemesProperties("OperatorsButtons", "OperatorsButtons");
-            SetThemesProperties("NumericalsButtons", "NumericalsButtons");
-            SetThemesProperties("MemoryButtons", "MemoryButtons");
-            SetThemesProperties("Trigonometry", "TrigonometryButtons");
-            SetThemesProperties("Trigonometry", "MainThemeButtonStyle");
-            SetThemesProperties("MainTheme", "MainLabel");
+            SetThemesProperties("BaseButtons", "BaseButtonsStyle");
+            SetThemesProperties("ScientificButtons", "ScientificButtonsStyle");
+            SetThemesProperties("SndeButton", "SndeButtonStyle");
+            SetThemesProperties("OperatorsButtons", "OperatorsButtonsStyle");
+            SetThemesProperties("NumericalsButtons", "NumericalsButtonsStyle");
+            SetThemesProperties("MemoryButtons", "MemoryButtonsStyle");
+            SetThemesProperties("TrigonometryButtons", "TrigonometryButtonsStyle");
+            SetThemesProperties("BaseButtons", "MainThemeButtonStyle");
+            SetThemesProperties("MainTheme", "MainLabelStyle");
+            SetThemesProperties("SndeButton", "MenuStyle");
         }
 
         /// <summary>
@@ -160,6 +179,8 @@ namespace Udemy_Calculator
             var lCurrentStyle = (Style)Application.Current.FindResource(pThemeStyle);
             var lNewStyle = new Style(lCurrentStyle.TargetType, lCurrentStyle.BasedOn);
 
+            lNewStyle.BasedOn = lCurrentStyle.BasedOn;
+
             // Copying all old values to the new one
             foreach (Setter lSetter in lCurrentStyle.Setters)
             {
@@ -169,13 +190,21 @@ namespace Udemy_Calculator
                 }
             }
 
-            var lThemeProperty = CommonTheme.ListSelectedTheme.Where(p => p.ParentName == pThemeName);
+            foreach (var lTrigger in lCurrentStyle.Triggers)
+            {
+                lNewStyle.Triggers.Add(lTrigger);
+            }
 
-            lNewStyle.Setters.Add(new Setter(Control.BackgroundProperty, (Brush)lThemeProperty.Select(p => p.Background).First()));
-            lNewStyle.Setters.Add(new Setter(Control.ForegroundProperty, (Brush)lThemeProperty.Select(p => p.Foreground).First()));
-            lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.BorderBrush).First()));
+            if (CommonTheme.ListSelectedTheme.Count > 0)
+            {
+                var lThemeProperty = CommonTheme.ListSelectedTheme.Where(p => p.ParentName == pThemeName);
 
-            Application.Current.Resources[pThemeStyle] = lNewStyle;
+                lNewStyle.Setters.Add(new Setter(Control.BackgroundProperty, (Brush)lThemeProperty.Select(p => p.Background).First()));
+                lNewStyle.Setters.Add(new Setter(Control.ForegroundProperty, (Brush)lThemeProperty.Select(p => p.Foreground).First()));
+                lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.BorderBrush).First()));
+
+                Application.Current.Resources[pThemeStyle] = lNewStyle;
+            }
         }
 
         /// <summary>
@@ -184,13 +213,18 @@ namespace Udemy_Calculator
         /// <returns></returns>
         private static List<string> AllParentNodeNameFromXmlFile()
         {
-            var lNodeList = LoadXmlConfiguration.SelectNodes("Themes/Theme");
+            var lNodeList = LoadXmlConfiguration?.SelectNodes("Themes/Theme");
 
             List<string> lList = new List<string>();
-            foreach (XmlNode lNode in lNodeList)
+
+            if (lNodeList != null)
             {
-                lList.Add(lNode.Attributes["name"].Value);
+                foreach (XmlNode lNode in lNodeList)
+                {
+                    lList.Add(lNode.Attributes["name"].Value);
+                }
             }
+
 
             return lList;
         }
@@ -201,12 +235,16 @@ namespace Udemy_Calculator
         /// <returns></returns>
         private static List<string> AllParentNodeLongName()
         {
-            var lNodes = LoadXmlConfiguration.SelectSingleNode($"Themes/Theme[@name='{ThemeSelectedName}']");
+            var lNodes = LoadXmlConfiguration?.SelectSingleNode($"Themes/Theme[@name='{ThemeSelectedName}']");
 
             List<string> lList = new List<string>();
-            foreach (XmlNode lParentNode in lNodes.ChildNodes)
+
+            if (lNodes != null && lNodes.ChildNodes != null)
             {
-                lList.Add(lParentNode.Attributes["name"].Value);
+                foreach (XmlNode lParentNode in lNodes?.ChildNodes)
+                {
+                    lList.Add(lParentNode.Attributes["name"].Value);
+                }
             }
 
             return lList;
@@ -218,79 +256,10 @@ namespace Udemy_Calculator
         /// <returns></returns>
         private static string ThemeSelected()
         {
-            return LoadXmlConfiguration.SelectSingleNode("Themes/ThemeSelected/@name").Value;
+            return LoadXmlConfiguration?.SelectSingleNode("Themes/ThemeSelected/@name").Value;
         }
 
         #endregion
 
-        //    /// <summary>
-        //    /// Set the theme with pName as the parameter name, and pValue as the value of this parameter
-        //    /// </summary>
-        //    /// <param name="pName"></param>
-        //    /// <param name="pValue"></param>
-        //    private static void SetProperty(string pValue)
-        //    {
-        //        SolidColorBrush lSolidColorBrushValue = default;
-
-        //        if (double.TryParse(pValue.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lDoubleValue) == false)
-        //        {
-        //            if (!string.IsNullOrEmpty(pValue))
-        //            {
-        //                lSolidColorBrushValue = (SolidColorBrush)new BrushConverter().ConvertFromString(pValue);
-        //            }
-        //        }
-
-        //        //switch (pName)
-        //        //{
-        //        //    case "MainCalculatorBackground":
-        //        //        MainCalculatorBackground = lSolidColorBrushValue; break;
-        //        //    case "MainCalculatorForeground":
-        //        //        MainCalculatorForeground = lSolidColorBrushValue; break;
-        //        //    case "MainCalculatorBorderBrush":
-        //        //        MainCalculatorBorderBrush = lSolidColorBrushValue; break;             
-        //        //    case "BackgroundBaseButtons":
-        //        //        BackgroundBaseButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundBaseButtons":
-        //        //        ForegroundBaseButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushBaseButtons":
-        //        //        BorderBrushBaseButtons = lSolidColorBrushValue; break;              
-        //        //    case "Background2ndeButton":
-        //        //        Background2ndeButton = lSolidColorBrushValue; break;
-        //        //    case "Foreground2ndeButton":
-        //        //        Foreground2ndeButton = lSolidColorBrushValue; break;
-        //        //    case "BorderBrush2ndeButton":
-        //        //        BorderBrush2ndeButton = lSolidColorBrushValue; break;
-        //        //    case "BackgroundScientificButtons":
-        //        //        BackgroundScientificButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundScientificButtons":
-        //        //        ForegroundScientificButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushScientificButtons":
-        //        //        BorderBrushScientificButtons = lSolidColorBrushValue; break;
-        //        //    case "BackgroundOperatorsButtons":
-        //        //        BackgroundOperatorsButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundOperatorsButtons":
-        //        //        ForegroundOperatorsButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushOperatorsButtons":
-        //        //        BorderBrushOperatorsButtons = lSolidColorBrushValue; break;
-        //        //    case "BackgroundNumericalsButtons":
-        //        //        BackgroundNumericalsButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundNumericalsButtons":
-        //        //        ForegroundNumericalsButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushNumericalsButtons":
-        //        //        BorderBrushNumericalsButtons = lSolidColorBrushValue; break;
-        //        //    case "BackgroundMemoryButtons":
-        //        //        BackgroundMemoryButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundMemoryButtons":
-        //        //        ForegroundMemoryButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushMemoryButtons":
-        //        //        BorderBrushMemoryButtons = lSolidColorBrushValue; break;
-        //        //    case "BackgroundTrigonometryButtons":
-        //        //        BackgroundTrigonometryButtons = lSolidColorBrushValue; break;
-        //        //    case "ForegroundTrigonometryButtons":
-        //        //        ForegroundTrigonometryButtons = lSolidColorBrushValue; break;
-        //        //    case "BorderBrushTrigonometryButtons":
-        //        //        BorderBrushTrigonometryButtons = lSolidColorBrushValue; break;
-        //        //}
-        //    }
     }
 }

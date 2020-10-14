@@ -14,11 +14,10 @@ namespace Udemy_Calculator
     public enum LogCategory { Info, Warning, Error, Output, Technical }
 
     public partial class ConsoleDebug : Window
-    {     
+    {
         public ConsoleDebug()
         {
             InitializeComponent();
-
             TraceLogs.IsConsoleDebugVisible = true;
             GlobalUsage.ListLogDebug.ListChanged += new ListChangedEventHandler(LogList_ListChanged);
         }
@@ -30,7 +29,7 @@ namespace Udemy_Calculator
         /// <param name="e"></param>
         private void LogList_ListChanged(object sender, ListChangedEventArgs e)
         {
-           SetNewParagraph();
+            SetNewParagraph();
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Refreshing the console debug listview with categories selected checkboxes
+        /// Refreshing the console debug listview with categories selected into eahc checkboxe
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -139,7 +138,7 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Event to allow the wheel of the mouse to be mouved on the console debug screen
+        /// Event that allow the mouse's wheel to be mouved on the console debug screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

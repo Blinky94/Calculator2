@@ -15,13 +15,9 @@
         SizeToContent="WidthAndHeight"
         KeyDown="SpecialKeysPressed">
     <Grid HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
+        <Grid.Resources>
+            <local:TestingBackgroundConverter x:Key="testingBGConverter" />
+        </Grid.Resources>
         <DockPanel UseLayoutRounding="True">
             <Border x:Name="MainCalculator"
                     CornerRadius="25"
@@ -49,7 +45,7 @@
                                                     Grid.Row="0"
                                                     x:Name="UIMenuSide" />
                             <ToggleButton Grid.Row="0"
-                                          Margin="240 -12 0 0"
+                                          Margin="240 -4 0 0"
                                           HorizontalAlignment="Left"
                                           BorderBrush="Transparent"
                                           BorderThickness="0"
@@ -58,9 +54,21 @@
                                           Height="20"
                                           Checked="UIHistoryExpander_Expanded"
                                           Unchecked="UIHistoryExpander_Collapsed">
-                                <Image Source="Images/History_icon.png"
-                                       Width="17"
-                                       Height="17" />
+                                <Image>
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Source"
+                                                    Value="Images/History_icon.png" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGConverter}}"
+                                                             Value="true">
+                                                    <Setter Property="Source"
+                                                            Value="Images/History_icon_reverse.png" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                             </ToggleButton>
 
                             <!--Call the Display User control-->

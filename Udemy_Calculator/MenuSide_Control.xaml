@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="200">
-    <Border CornerRadius="25"
-            Background="Transparent">
-        <Grid>
+    <Border>
+        <Grid Style="{DynamicResource ResourceKey=MainWindowStyle}">
             <Grid.Resources>
-
+                <local:TestingBackgroundConverter x:Key="testingBGConverter" />
                 <Style TargetType="Menu">
                     <Setter Property="Background"
                             Value="Transparent" />
@@ -29,17 +29,6 @@
                     </Grid>
                 </ControlTemplate>
 
-                <Style TargetType="Label"
-                       x:Key="StyleUIMenuSelected">
-                    <Setter Property="FontSize"
-                            Value="18" />
-                    <Setter Property="FontFamily"
-                            Value="Courrier" />
-                    <Setter Property="FontWeight"
-                            Value="Bold" />
-                    <Setter Property="Foreground"
-                            Value="Black" />
-                </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -51,15 +40,30 @@
 
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
+                  Style="{DynamicResource MenuStyle}"
                   Height="25"
                   Width="25"
                   VerticalAlignment="Top"
                   BorderBrush="Transparent"
-                  Background="Transparent"
                   Foreground="Black">
-                <MenuItem x:Name="MenuSideControlItem">
+                <MenuItem x:Name="MenuSideControlItem" IsHitTestVisible="True" BorderThickness="0" BorderBrush="Transparent">
                     <MenuItem.Header>
-                        <Image Source="Images/Menu_icon.png" />
+                        <Image Width="25" Height="25" Margin="-10 -3 0 0">
+                            <Image.Style>
+                                <Style TargetType="Image"
+                                       BasedOn="{StaticResource ImageButtonStyle}">
+                                    <Setter Property="Source"
+                                            Value="Images/Menu_icon.png" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Converter={StaticResource testingBGConverter}}"
+                                                     Value="true">
+                                            <Setter Property="Source"
+                                                    Value="Images/Menu_icon_reverse.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </MenuItem.Header>
                     <MenuItem Header="_Standard"
                               Click="MenuItem_Click">
@@ -213,7 +217,7 @@
                    Background="Transparent"
                    HorizontalContentAlignment="Center"
                    Margin="0 0 50 0"
-                   Style="{DynamicResource MainLabel}" />
+                   Style="{DynamicResource MainLabelStyle}" />
         </Grid>
     </Border>
 

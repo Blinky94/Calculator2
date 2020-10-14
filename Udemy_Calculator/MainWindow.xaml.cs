@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -10,32 +7,7 @@ namespace Udemy_Calculator
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        public SolidColorBrush MainCalculatorBackground { get; set; }      
-        public SolidColorBrush MainCalculatorForeground { get; set; }
-        public SolidColorBrush MainCalculatorBorderBrush { get; set; }  
-        public SolidColorBrush Background2ndeButton { get; set; }
-        public SolidColorBrush Foreground2ndeButton { get; set; }
-        public SolidColorBrush BorderBrush2ndeButton { get; set; }
-        public SolidColorBrush BackgroundBaseButtons { get; set; }
-        public SolidColorBrush ForegroundBaseButtons { get; set; }
-        public SolidColorBrush BorderBrushBaseButtons { get; set; }
-        public SolidColorBrush BackgroundScientificButtons { get; set; }
-        public SolidColorBrush ForegroundScientificButtons { get; set; }
-        public SolidColorBrush BorderBrushScientificButtons { get; set; }
-        public SolidColorBrush BackgroundOperatorsButtons { get; set; }
-        public SolidColorBrush ForegroundOperatorsButtons { get; set; }
-        public SolidColorBrush BorderBrushOperatorsButtons { get; set; }
-        public SolidColorBrush BackgroundNumericalsButtons { get; set; }
-        public SolidColorBrush ForegroundNumericalsButtons { get; set; }
-        public SolidColorBrush BorderBrushNumericalsButtons { get; set; }
-        public SolidColorBrush BackgroundMemoryButtons { get; set; }
-        public SolidColorBrush ForegroundMemoryButtons { get; set; }
-        public SolidColorBrush BorderBrushMemoryButtons { get; set; }
-        public SolidColorBrush BackgroundTrigonometryButtons { get; set; }
-        public SolidColorBrush ForegroundTrigonometryButtons { get; set; }
-        public SolidColorBrush BorderBrushTrigonometryButtons { get; set; }
-   
+    {  
         // Event to raise number pressed by user to display to the UIDisplay
         public delegate void EventUpdateUIDisplayHandler(string pContent);
         public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
@@ -62,53 +34,7 @@ namespace Udemy_Calculator
             // Set all events
             SetEvents();
         }
-
-        /// <summary>
-        /// Set all the themes color for the current window
-        /// </summary>
-        //public void SetThemes()
-       // {
-            //MainCalculator.Background = CommonTheme.MainCalculatorBackground;
-            //UIMenuSide.UIMenuSelected.Foreground = CommonTheme.MainCalculatorForeground;
-            //MainCalculator.BorderBrush = CommonTheme.MainCalculatorBorderBrush;
-            //UICalculator.BackgroundBaseButtons = CommonTheme.BackgroundBaseButtons;
-            //UICalculator.ForegroundBaseButtons = CommonTheme.ForegroundBaseButtons;
-            //UICalculator.BorderBrushBaseButtons = CommonTheme.BorderBrushBaseButtons;
-            //UICalculator.UISecondFuncButton.Background = CommonTheme.Background2ndeButton;
-            //UICalculator.UISecondFuncButton.Foreground = CommonTheme.Foreground2ndeButton;
-            //UICalculator.UISecondFuncButton.BorderBrush = CommonTheme.BorderBrush2ndeButton;
-            //UICalculator.BackgroundScientificButtons = CommonTheme.BackgroundScientificButtons;
-            //UICalculator.ForegroundScientificButtons = CommonTheme.ForegroundScientificButtons;
-            //UICalculator.BorderBrushScientificButtons = CommonTheme.BorderBrushScientificButtons;
-            //UICalculator.BackgroundOperatorsButtons = CommonTheme.BackgroundOperatorsButtons;
-            //UICalculator.ForegroundOperatorsButtons = CommonTheme.ForegroundOperatorsButtons;
-            //UICalculator.BorderBrushOperatorsButtons = CommonTheme.BorderBrushOperatorsButtons;
-            //UICalculator.BackgroundNumericalsButtons = CommonTheme.BackgroundNumericalsButtons;
-            //UICalculator.ForegroundNumericalsButtons = CommonTheme.ForegroundNumericalsButtons;
-            //UICalculator.BorderBrushNumericalsButtons = CommonTheme.BorderBrushNumericalsButtons;
-            //UICalculator.BackgroundMemoryButtons = CommonTheme.BackgroundMemoryButtons;
-            //UICalculator.ForegroundMemoryButtons = CommonTheme.ForegroundMemoryButtons;
-            //UICalculator.BorderBrushMemoryButtons = CommonTheme.BorderBrushMemoryButtons;
-            //UICalculator.BackgroundTrigonometryButtons = CommonTheme.BackgroundTrigonometryButtons;
-            //UICalculator.ForegroundTrigonometryButtons = CommonTheme.ForegroundTrigonometryButtons;
-            //UICalculator.BorderBrushTrigonometryButtons = CommonTheme.BorderBrushTrigonometryButtons;
-            //UIDisplay.UIDisplayBorderBrush = CommonTheme.MainCalculatorBorderBrush;
-            //foreach (var lWindow in Application.Current.Windows)
-            //{
-            //    if (lWindow is ConsoleDebug)
-            //    {
-            //        (lWindow as ConsoleDebug).UIGridConsoleDebug.Background = CommonTheme.MainCalculatorBackground;
-            //        foreach (var lChild in (lWindow as ConsoleDebug).GridCheckBoxes.Children)
-            //        {
-            //            if (lChild is CheckBox)
-            //            {
-            //                (lChild as CheckBox).Foreground = CommonTheme.MainCalculatorForeground;
-            //            }
-            //        }
-            //    }
-            //}
-       // }
-
+    
         public void ModifyUIDisplay(string pContent)
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;

@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Udemy_Calculator"
-             StartupUri="MainWindow.xaml">
+             Startup="Application_Startup">
     <Application.Resources>
+        <local:TestingBackgroundConverter x:Key="testingBGConverter" />
         <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
         <XmlDataProvider Source="Params\Theme.xml"
                          XPath="/Themes/Theme[@name=../ThemeSelected/@name]"
@@ -58,19 +59,19 @@
                          Color="{Binding Source={StaticResource colorThemesXml}, XPath=MemoryButtons/BorderBrushMemoryButtons}" />
 
         <SolidColorBrush x:Key="backgroundTrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=Trigonometry/BackgroundTrigonometryButtons}" />
+                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/BackgroundTrigonometryButtons}" />
         <SolidColorBrush x:Key="foregroundTrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=Trigonometry/ForegroundTrigonometryButtons}" />
+                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/ForegroundTrigonometryButtons}" />
         <SolidColorBrush x:Key="borderBrushTrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=Trigonometry/BorderBrushTrigonometryButtons}" />
+                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/BorderBrushTrigonometryButtons}" />
 
         <Style x:Key="MainWindowStyle">
             <Setter Property="Control.Background"
-                    Value="{DynamicResource mainCalculatorBackground}" />
+                    Value="{StaticResource mainCalculatorBackground}" />
             <Setter Property="Control.Foreground"
-                    Value="{DynamicResource mainCalculatorForeground}" />
+                    Value="{StaticResource mainCalculatorForeground}" />
             <Setter Property="Control.BorderBrush"
-                    Value="{DynamicResource mainCalculatorBorderBrush}" />
+                    Value="{StaticResource mainCalculatorBorderBrush}" />
             <Setter Property="Control.BorderThickness"
                     Value="1.5" />
         </Style>
@@ -96,10 +97,10 @@
                     Value="10" />
         </Style>
 
-        <Style x:Key="MainLabel"
-            TargetType="Label">
+        <Style x:Key="MainLabelStyle"
+               TargetType="Label">
             <Setter Property="Foreground"
-                    Value="{DynamicResource mainCalculatorForeground}" />
+                    Value="{StaticResource mainCalculatorForeground}" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="FontSize"
@@ -108,7 +109,7 @@
                     Value="0 0 0 0" />
         </Style>
 
-        <Style x:Key="BaseButtons"
+        <Style x:Key="BaseButtonsStyle"
                TargetType="Button">
             <Setter Property="FontSize"
                     Value="20" />
@@ -119,11 +120,11 @@
             <Setter Property="Padding"
                     Value="0 0 0 3" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundBaseButtons}" />
+                    Value="{StaticResource foregroundBaseButtons}" />
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundBaseButtons}" />
+                    Value="{StaticResource backgroundBaseButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushBaseButtons}" />
+                    Value="{StaticResource borderBrushBaseButtons}" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="VerticalContentAlignment"
@@ -164,22 +165,22 @@
             </Setter>
         </Style>
 
-        <Style x:Key="OperatorsButtons"
+        <Style x:Key="OperatorsButtonsStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=BaseButtons}">
+               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundOperatorsButtons}" />
+                    Value="{StaticResource backgroundOperatorsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundOperatorsButtons}" />
+                    Value="{StaticResource foregroundOperatorsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushOperatorsButtons}" />
+                    Value="{StaticResource borderBrushOperatorsButtons}" />
             <Setter Property="Padding"
                     Value="0 -10 0 0" />
         </Style>
 
-        <Style x:Key="NumericalsButtons"
+        <Style x:Key="NumericalsButtonsStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=BaseButtons}">
+               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="FontSize"
                     Value="35" />
             <Setter Property="FontFamily"
@@ -187,28 +188,28 @@
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="Padding"
-                    Value="0 -2 0 0" />
+                    Value="0 0 0 0" />
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundNumericalsButtons}" />
+                    Value="{StaticResource backgroundNumericalsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundNumericalsButtons}" />
+                    Value="{StaticResource foregroundNumericalsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushNumericalsButtons}" />
+                    Value="{StaticResource borderBrushNumericalsButtons}" />
         </Style>
 
-        <Style x:Key="MemoryButtons"
+        <Style x:Key="MemoryButtonsStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=BaseButtons}">
+               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="FontSize"
                     Value="15" />
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundMemoryButtons}" />
+                    Value="{StaticResource backgroundMemoryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundMemoryButtons}" />
+                    Value="{StaticResource foregroundMemoryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushMemoryButtons}" />
+                    Value="{StaticResource borderBrushMemoryButtons}" />
             <Setter Property="Width"
                     Value="67" />
             <Setter Property="Height"
@@ -217,19 +218,19 @@
                     Value="2 0 0 15" />
         </Style>
 
-        <Style x:Key="ScientificButtons"
+        <Style x:Key="ScientificButtonsStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=BaseButtons}">
+               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="FontSize"
                     Value="14" />
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundScientificButtons}" />
+                    Value="{StaticResource backgroundScientificButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundScientificButtons}" />
+                    Value="{StaticResource foregroundScientificButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushScientificButtons}" />
+                    Value="{StaticResource borderBrushScientificButtons}" />
             <Setter Property="Width"
                     Value="50.5" />
             <Setter Property="Height"
@@ -238,33 +239,33 @@
                     Value="2 0 0 2" />
         </Style>
 
-        <Style x:Key="TrigonometryButtons"
+        <Style x:Key="TrigonometryButtonsStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=ScientificButtons}">
+               BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource backgroundTrigonometryButtons}" />
+                    Value="{StaticResource backgroundTrigonometryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foregroundTrigonometryButtons}" />
+                    Value="{StaticResource foregroundTrigonometryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrushTrigonometryButtons}" />
+                    Value="{StaticResource borderBrushTrigonometryButtons}" />
             <Setter Property="Padding"
                     Value="0,-3,0,0" />
         </Style>
 
-        <Style x:Key="SndeButton"
+        <Style x:Key="SndeButtonStyle"
                TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=ScientificButtons}">
+               BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource background2ndeButton}" />
+                    Value="{StaticResource background2ndeButton}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource foreground2ndeButton}" />
+                    Value="{StaticResource foreground2ndeButton}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource borderBrush2ndeButton}" />
+                    Value="{StaticResource borderBrush2ndeButton}" />
         </Style>
 
         <Style x:Key="MainThemeButtonStyle"
                TargetType="Button"
-               BasedOn="{StaticResource BaseButtons}">
+               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="Width"
                     Value="auto" />
             <Setter Property="Height"
@@ -273,12 +274,36 @@
                     Value="10 0 10 0" />
             <Setter Property="Margin"
                     Value="5,0,5,0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{StaticResource background2ndeButton}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
-        <Style TargetType="Image">
+
+        <Style x:Key="ImageButtonStyle"
+               BasedOn="{StaticResource ResourceKey=MainWindowStyle}"
+               TargetType="Image">
             <Setter Property="Width"
-                    Value="17" />
+                    Value="18" />
             <Setter Property="Height"
-                    Value="17" />
+                    Value="18" />
+        </Style>
+
+        <Style TargetType="Menu"
+               x:Key="MenuStyle"
+               BasedOn="{StaticResource ResourceKey=MainWindowStyle}">
+            <Setter Property="Background"
+                    Value="{StaticResource mainCalculatorBackground}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{StaticResource background2ndeButton}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Application.Resources>
