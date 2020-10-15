@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -110,7 +111,10 @@ namespace Udemy_Calculator
             var lNodeList = LoadXmlConfiguration?.SelectNodes("Themes");
 
             if (lNodeList == null)
+            {
                 return;
+            }
+
             string lThemeSelected;
 
             foreach (XmlElement lElement in lNodeList)
@@ -125,6 +129,11 @@ namespace Udemy_Calculator
 
                         foreach (XmlNode lPropertyNode in lSubNode.ChildNodes)
                         {
+                            string lThemeName = lPropertyNode.Name;
+                            SolidColorBrush lThemeValue = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+
+                            FillCommonPropertiesValues(lThemeName, lThemeValue);
+
                             if (lPropertyNode.Name.Contains("Background"))
                             {
                                 lTheme.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
@@ -151,20 +160,103 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Fill each of the public getter setter to the right values
+        /// </summary>
+        /// <param name="lThemeName"></param>
+        /// <param name="lThemeValue"></param>
+        private static void FillCommonPropertiesValues(string lThemeName, SolidColorBrush lThemeValue)
+        {
+            switch (lThemeName)
+            {
+                case "MainCalculatorBackground":
+                    MainCalculatorBackground = lThemeValue;
+                    break;
+                case "MainCalculatorForeground":
+                    MainCalculatorForeground = lThemeValue;
+                    break;
+                case "MainCalculatorBorderBrush":
+                    MainCalculatorBorderBrush = lThemeValue;
+                    break;
+                case "Background2ndeButton":
+                    Background2ndeButton = lThemeValue;
+                    break;
+                case "Foreground2ndeButton":
+                    Foreground2ndeButton = lThemeValue;
+                    break;
+                case "BorderBrush2ndeButton":
+                    BorderBrush2ndeButton = lThemeValue;
+                    break;
+                case "BackgroundBaseButtons":
+                    BackgroundBaseButtons = lThemeValue;
+                    break;
+                case "ForegroundBaseButtons":
+                    ForegroundBaseButtons = lThemeValue;
+                    break;
+                case "BorderBrushBaseButtons":
+                    BorderBrushBaseButtons = lThemeValue;
+                    break;
+                case "BackgroundScientificButtons":
+                    BackgroundScientificButtons = lThemeValue;
+                    break;
+                case "ForegroundScientificButtons":
+                    ForegroundScientificButtons = lThemeValue;
+                    break;
+                case "BorderBrushScientificButtons":
+                    BorderBrushScientificButtons = lThemeValue;
+                    break;
+                case "BackgroundOperatorsButtons":
+                    BackgroundOperatorsButtons = lThemeValue;
+                    break;
+                case "ForegroundOperatorsButtons":
+                    ForegroundOperatorsButtons = lThemeValue;
+                    break;
+                case "BorderBrushOperatorsButtons":
+                    BorderBrushOperatorsButtons = lThemeValue;
+                    break;
+                case "BackgroundNumericalsButtons":
+                    BackgroundNumericalsButtons = lThemeValue;
+                    break;
+                case "ForegroundNumericalsButtons":
+                    ForegroundNumericalsButtons = lThemeValue;
+                    break;
+                case "BorderBrushNumericalsButtons":
+                    BorderBrushNumericalsButtons = lThemeValue;
+                    break;
+                case "BackgroundMemoryButtons":
+                    BackgroundMemoryButtons = lThemeValue;
+                    break;
+                case "ForegroundMemoryButtons":
+                    ForegroundMemoryButtons = lThemeValue;
+                    break;
+                case "BorderBrushMemoryButtons":
+                    BorderBrushMemoryButtons = lThemeValue;
+                    break;
+                case "BackgroundTrigonometryButtons":
+                    BackgroundTrigonometryButtons = lThemeValue;
+                    break;
+                case "ForegroundTrigonometryButtons":
+                    ForegroundTrigonometryButtons = lThemeValue;
+                    break;
+                case "BorderBrushTrigonometryButtons":
+                    BorderBrushTrigonometryButtons = lThemeValue;
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Updating the current theme to all windows
         /// </summary>
         private static void UpdateThemeToAllWindow()
         {
             SetThemesProperties("MainTheme", "MainWindowStyle");
+            SetThemesProperties("MainTheme", "MainLabelStyle");
             SetThemesProperties("BaseButtons", "BaseButtonsStyle");
-            SetThemesProperties("ScientificButtons", "ScientificButtonsStyle");
-            SetThemesProperties("SndeButton", "SndeButtonStyle");
             SetThemesProperties("OperatorsButtons", "OperatorsButtonsStyle");
             SetThemesProperties("NumericalsButtons", "NumericalsButtonsStyle");
             SetThemesProperties("MemoryButtons", "MemoryButtonsStyle");
+            SetThemesProperties("ScientificButtons", "ScientificButtonsStyle");
             SetThemesProperties("TrigonometryButtons", "TrigonometryButtonsStyle");
-            SetThemesProperties("BaseButtons", "MainThemeButtonStyle");
-            SetThemesProperties("MainTheme", "MainLabelStyle");
+            SetThemesProperties("SndeButton", "SndeButtonStyle");
             SetThemesProperties("SndeButton", "MenuStyle");
         }
 
@@ -177,9 +269,13 @@ namespace Udemy_Calculator
         private static void SetThemesProperties(string pThemeName, string pThemeStyle)
         {
             var lCurrentStyle = (Style)Application.Current.FindResource(pThemeStyle);
+
             var lNewStyle = new Style(lCurrentStyle.TargetType, lCurrentStyle.BasedOn);
 
-            lNewStyle.BasedOn = lCurrentStyle.BasedOn;
+            if (lCurrentStyle.Setters == null)
+            {
+                return;
+            }
 
             // Copying all old values to the new one
             foreach (Setter lSetter in lCurrentStyle.Setters)

@@ -20,7 +20,7 @@
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
                FontSize="12"
-               Style="{DynamicResource MainLabel}" />
+               Style="{DynamicResource MainLabelStyle}" />
 
         <wpfx:ColorPicker x:Name="UIColorPicker"
                           Grid.Column="1"

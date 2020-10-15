@@ -46,7 +46,7 @@
                   VerticalAlignment="Top"
                   BorderBrush="Transparent"
                   Foreground="Black">
-                <MenuItem x:Name="MenuSideControlItem" IsHitTestVisible="True" BorderThickness="0" BorderBrush="Transparent">
+                <MenuItem x:Name="MenuSideControlItem" IsHitTestVisible="True" BorderThickness="0">
                     <MenuItem.Header>
                         <Image Width="25" Height="25" Margin="-10 -3 0 0">
                             <Image.Style>

@@ -163,7 +163,9 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <Button Click="ClearConsole_Click"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
@@ -184,7 +186,9 @@
                 </StackPanel>
             </Button>
             <Button Click="CloseConsole_Click"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
@@ -205,7 +209,9 @@
                 </StackPanel>
             </Button>
             <Button Click="Button_SaveClick"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>

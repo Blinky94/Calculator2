@@ -66,7 +66,9 @@
                         DockPanel.Dock="Bottom">
                 <Button x:Name="UICleaner"
                         Click="UICleaner_Click"
-                        Style="{DynamicResource MainThemeButtonStyle}">
+                        Style="{DynamicResource BaseButtonsStyle}"
+                        Width="40"
+                        Height="25">
                     <StackPanel Orientation="Horizontal">
                         <Image>
                             <Image.Style>
@@ -88,7 +90,9 @@
                 </Button>
                 <Button x:Name="UISave"
                         Click="UISave_Click"
-                        Style="{DynamicResource MainThemeButtonStyle}">
+                        Style="{DynamicResource BaseButtonsStyle}"
+                        Width="40"
+                        Height="25">
                     <StackPanel Orientation="Horizontal">
                         <Image>
                             <Image.Style>

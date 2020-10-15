@@ -38,7 +38,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2">
             <Label x:Name="ThemeListLabel"
-                   Style="{DynamicResource MainLabel}"
+                   Style="{DynamicResource MainLabelStyle}"
                    Content="Theme name"
                    FontSize="12" />
             <ComboBox x:Name="ThemeListComboBox"
@@ -88,7 +88,9 @@
                     Margin="0,10,0,0">
             <Button Click="Button_Add"
                     HorizontalAlignment="Center"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
@@ -109,7 +111,9 @@
                 </StackPanel>
             </Button>
             <Button Click="Button_Save"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
@@ -130,7 +134,9 @@
                 </StackPanel>
             </Button>
             <Button Click="Button_Cancel"
-                    Style="{DynamicResource MainThemeButtonStyle}">
+                    Style="{DynamicResource BaseButtonsStyle}"
+                    Width="40"
+                    Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>

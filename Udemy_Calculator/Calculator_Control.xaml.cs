@@ -188,7 +188,11 @@ namespace Udemy_Calculator
                     lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
 
                     ToCalculusDisplay = ToCalculusDisplay.Replace("(", "").Replace(")", "");
-                    if (!double.IsNaN(double.Parse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture)))
+                    if(double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumberParsed) == false)
+                    {
+                        TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: Impossible to parse the current number: {ToCalculusDisplay}");
+                    }
+                    if (!double.IsNaN(lNumberParsed))
                     {
                         // Ici PEMDAS
                         string lResult;

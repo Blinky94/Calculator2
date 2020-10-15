@@ -76,27 +76,6 @@
                     Value="1.5" />
         </Style>
 
-        <Style TargetType="Button">
-            <Setter Property="Padding"
-                    Value="5" />
-            <Setter Property="Width"
-                    Value="35" />
-            <Setter Property="Height"
-                    Value="35" />
-            <Setter Property="Margin"
-                    Value="10 0 0 0" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalAlignment"
-                    Value="Center" />
-            <Setter Property="BorderThickness"
-                    Value="10" />
-        </Style>
-
         <Style x:Key="MainLabelStyle"
                TargetType="Label">
             <Setter Property="Foreground"
@@ -152,14 +131,38 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value="White" />
-                                <Setter Property="Foreground"
-                                        Value="Black" />
-                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed"
+                                               Value="False" />
+                                    <Condition Property="IsMouseOver"
+                                               Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Opacity"
+                                            Value="0.5" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed"
+                                               Value="True" />
+                                    <Condition Property="IsMouseOver"
+                                               Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Background"
+                                            Value="Yellow" />
+                                    <Setter Property="Foreground"
+                                            Value="Black" />
+                                    <Setter Property="BorderBrush"
+                                            Value="White" />
+                                    <Setter Property="BorderThickness"
+                                            Value="1" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -237,6 +240,8 @@
                     Value="20" />
             <Setter Property="Margin"
                     Value="2 0 0 2" />
+            <Setter Property="Padding"
+                    Value="0 -2 0 0" />
         </Style>
 
         <Style x:Key="TrigonometryButtonsStyle"
@@ -262,27 +267,7 @@
             <Setter Property="BorderBrush"
                     Value="{StaticResource borderBrush2ndeButton}" />
         </Style>
-
-        <Style x:Key="MainThemeButtonStyle"
-               TargetType="Button"
-               BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
-            <Setter Property="Width"
-                    Value="auto" />
-            <Setter Property="Height"
-                    Value="25" />
-            <Setter Property="Padding"
-                    Value="10 0 10 0" />
-            <Setter Property="Margin"
-                    Value="5,0,5,0" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="{StaticResource background2ndeButton}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
+   
         <Style x:Key="ImageButtonStyle"
                BasedOn="{StaticResource ResourceKey=MainWindowStyle}"
                TargetType="Image">
@@ -292,8 +277,8 @@
                     Value="18" />
         </Style>
 
-        <Style TargetType="Menu"
-               x:Key="MenuStyle"
+        <Style x:Key="MenuStyle"
+               TargetType="Menu"
                BasedOn="{StaticResource ResourceKey=MainWindowStyle}">
             <Setter Property="Background"
                     Value="{StaticResource mainCalculatorBackground}" />
