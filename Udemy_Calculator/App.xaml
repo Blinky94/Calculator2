@@ -108,13 +108,15 @@
             <Setter Property="VerticalContentAlignment"
                     Value="Center" />
             <Setter Property="Width"
-                    Value="63" />
+                    Value="60" />
             <Setter Property="Height"
-                    Value="45" />
+                    Value="50" />
             <Setter Property="Margin"
                     Value="1" />
             <Setter Property="BorderThickness"
                     Value="1" />
+            <Setter Property="Margin"
+                    Value="2.5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -128,6 +130,11 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Margin="{TemplateBinding Padding}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5"
+                                                  ShadowDepth="3"
+                                                  Color="{TemplateBinding BorderBrush}" />
+                            </Border.Effect>
                         </Border>
                         <ControlTemplate.Triggers>
                             <MultiTrigger>
@@ -184,13 +191,13 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="FontSize"
-                    Value="35" />
+                    Value="40" />
             <Setter Property="FontFamily"
                     Value="{StaticResource Digital}" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="Padding"
-                    Value="0 0 0 0" />
+                    Value="0" />
             <Setter Property="Background"
                     Value="{StaticResource backgroundNumericalsButtons}" />
             <Setter Property="Foreground"

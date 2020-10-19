@@ -11,12 +11,17 @@
              x:Name="displayControl">
 
     <!--Calulus Area-->
-    <Grid>
+    <Grid Width="263">
         <Border x:Name="UIDisplayBorder"
                 HorizontalAlignment="Stretch"
                 Background="White"
                 CornerRadius="10"
-                BorderThickness="1.5">
+                BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5"
+                                  ShadowDepth="5"
+                                  Color="{TemplateBinding BorderBrush}" />
+            </Border.Effect>
             <Viewbox HorizontalAlignment="Right">
                 <TextBox x:Name="UIDisplayCalculus"
                      Background="Transparent"
