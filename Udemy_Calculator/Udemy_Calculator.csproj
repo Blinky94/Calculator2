@@ -171,7 +171,7 @@
     <Compile Include="StandardCalculator.xaml.cs">
       <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestingBackgroundConverter.cs" />
+    <Compile Include="TestingBackgroundDarkerConverter.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="TraceLogs.cs" />
     <Compile Include="XmlParser.cs" />
@@ -547,6 +547,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Add_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Left_icon.png" />
+    <Resource Include="Images\Right_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Left_icon_reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Right_icon_reverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

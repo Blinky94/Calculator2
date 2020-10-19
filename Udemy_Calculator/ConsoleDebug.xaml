@@ -16,7 +16,7 @@
     <Window.Resources>
         <local:EnumConverter x:Key="enumConverter" />
         <local:DateConverter x:Key="dateConverter" />
-        <local:TestingBackgroundConverter x:Key="testingBGConverter" />
+        <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
     </Window.Resources>
     <Grid x:Name="UIGridConsoleDebug">
         <Grid.ColumnDefinitions>
@@ -174,7 +174,7 @@
                                 <Setter Property="Source"
                                         Value="Images/Cleaner_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Cleaner_icon_reverse.png" />
@@ -197,7 +197,7 @@
                                 <Setter Property="Source"
                                         Value="Images/Cancel_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Cancel_icon_reverse.png" />
@@ -220,7 +220,7 @@
                                 <Setter Property="Source"
                                         Value="Images/Save_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Save_icon_reverse.png" />

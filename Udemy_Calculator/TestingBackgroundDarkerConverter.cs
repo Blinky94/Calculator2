@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
-    public class TestingBackgroundConverter : IValueConverter
+    public class TestingBackgroundDarkerConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

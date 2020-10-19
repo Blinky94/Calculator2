@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -23,7 +22,7 @@ namespace Udemy_Calculator
             CommonTheme.LoadFromXmlProvider(this);
 
             // Applying every properties values to the listBox from selected theme
-            PopulateListPropertiesToSource();
+            PopulateListPropertiesToListView();
 
             // Combobox List for main theme to select
             ThemeListComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
@@ -34,6 +33,8 @@ namespace Udemy_Calculator
                 ItemsListBox.SelectedItem = CommonTheme.GetParentThemeLongNames[0];
             }
 
+            CommonTheme.ThemeSelectedName = CommonTheme.LoadXmlConfiguration?.SelectSingleNode("Themes/ThemeSelected/@name").Value;
+
             if (!string.IsNullOrEmpty(CommonTheme.ThemeSelectedName))
             {
                 ThemeListComboBox.SelectedIndex = ThemeListComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
@@ -43,7 +44,7 @@ namespace Udemy_Calculator
         /// <summary>
         /// Applying values from list to the listBox control
         /// </summary>
-        private void PopulateListPropertiesToSource()
+        private void PopulateListPropertiesToListView()
         {
             ItemsListBox.ItemsSource = CommonTheme.GetParentThemeLongNames;
         }
@@ -60,7 +61,7 @@ namespace Udemy_Calculator
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             //Save theme
-            //XmlParser.SaveTheme();
+            XmlParser.SaveTheme(CommonTheme.ThemeSelectedName);
         }
 
         private void Button_Cancel(object sender, RoutedEventArgs e)
@@ -78,8 +79,15 @@ namespace Udemy_Calculator
         {
             var lSelectedVal = (sender as ComboBox).SelectedValue.ToString();
 
+            CommonTheme.ThemeSelectedName = lSelectedVal;
+
             // Updating the list of objects selected
             CommonTheme.SetSelectedThemeListObject(lSelectedVal);
+
+            PopulateListPropertiesToListView();
+            if (ItemsListBox != null && ItemsListBox.Items.Count > 0)
+            // Apply the default color for the first ListItem
+            ItemsListBox_Selected(ItemsListBox, null);
         }
 
         #region Moving the Window
@@ -101,8 +109,18 @@ namespace Udemy_Calculator
 
         #endregion
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void ItemsListBox_Selected(object sender, RoutedEventArgs e)
         {
+            if((sender as ListBox).SelectedItem == null)
+            {
+                (sender as ListBox).SelectedItem = CommonTheme.GetParentThemeLongNames[0];
+            }
+
             var lSelectedVal = (sender as ListBox).SelectedItem.ToString();
 
             foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.ParentLongName == lSelectedVal))
@@ -111,11 +129,6 @@ namespace Udemy_Calculator
                 ForegroundColorPicker.UIColorPicker.SelectedColor = (lTheme.Foreground).Color;
                 BorderBrushColorPicker.UIColorPicker.SelectedColor = (lTheme.BorderBrush).Color;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

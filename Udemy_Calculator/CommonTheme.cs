@@ -41,10 +41,17 @@ namespace Udemy_Calculator
         public static SolidColorBrush ForegroundTrigonometryButtons { get; set; }
         public static SolidColorBrush BorderBrushTrigonometryButtons { get; set; }
 
+        private static string mThemeSelectedName;
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
+        /// Set the value
         /// </summary>
-        public static string ThemeSelectedName => ThemeSelected();
+        public static string ThemeSelectedName
+        {
+            get => mThemeSelectedName;
+
+            set => mThemeSelectedName = value;
+        }
 
         /// <summary>
         /// Getting all theme names
@@ -85,6 +92,7 @@ namespace Udemy_Calculator
             ListOfAllThemes = new List<Theme>();
 
             GetAllThemesListObject();
+
             SetSelectedThemeListObject();
         }
 
@@ -248,16 +256,16 @@ namespace Udemy_Calculator
         /// </summary>
         private static void UpdateThemeToAllWindow()
         {
-            SetThemesProperties("MainTheme", "MainWindowStyle");
-            SetThemesProperties("MainTheme", "MainLabelStyle");
-            SetThemesProperties("BaseButtons", "BaseButtonsStyle");
-            SetThemesProperties("OperatorsButtons", "OperatorsButtonsStyle");
-            SetThemesProperties("NumericalsButtons", "NumericalsButtonsStyle");
-            SetThemesProperties("MemoryButtons", "MemoryButtonsStyle");
-            SetThemesProperties("ScientificButtons", "ScientificButtonsStyle");
-            SetThemesProperties("TrigonometryButtons", "TrigonometryButtonsStyle");
-            SetThemesProperties("SndeButton", "SndeButtonStyle");
-            SetThemesProperties("SndeButton", "MenuStyle");
+            SetThemeProperties("MainTheme", "MainWindowStyle");
+            SetThemeProperties("MainTheme", "MainLabelStyle");
+            SetThemeProperties("BaseButtons", "BaseButtonsStyle");
+            SetThemeProperties("OperatorsButtons", "OperatorsButtonsStyle");
+            SetThemeProperties("NumericalsButtons", "NumericalsButtonsStyle");
+            SetThemeProperties("MemoryButtons", "MemoryButtonsStyle");
+            SetThemeProperties("ScientificButtons", "ScientificButtonsStyle");
+            SetThemeProperties("TrigonometryButtons", "TrigonometryButtonsStyle");
+            SetThemeProperties("SndeButton", "SndeButtonStyle");
+            SetThemeProperties("MainTheme", "MenuStyle");
         }
 
         /// <summary>
@@ -266,7 +274,7 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pThemeName">Theme name in the xml file config</param>
         /// <param name="pThemeStyle">Theme style name declared in xaml</param>
-        private static void SetThemesProperties(string pThemeName, string pThemeStyle)
+        private static void SetThemeProperties(string pThemeName, string pThemeStyle)
         {
             var lCurrentStyle = (Style)Application.Current.FindResource(pThemeStyle);
 
@@ -344,15 +352,6 @@ namespace Udemy_Calculator
             }
 
             return lList;
-        }
-
-        /// <summary>
-        /// Getting the theme name selected
-        /// </summary>
-        /// <returns></returns>
-        private static string ThemeSelected()
-        {
-            return LoadXmlConfiguration?.SelectSingleNode("Themes/ThemeSelected/@name").Value;
         }
 
         #endregion

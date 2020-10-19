@@ -8,15 +8,66 @@
         Title="Calculator"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="Manual"
+        Background="Transparent"
         x:Name="mainCalculator"
         SizeToContent="WidthAndHeight"
         KeyDown="SpecialKeysPressed">
+    <Window.Resources>
+        <ControlTemplate x:Key="ToggleButtonControlTemplate1"
+                         TargetType="{x:Type ToggleButton}">
+            <Border x:Name="border"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Style="{DynamicResource ResourceKey=MainWindowStyle}"
+                    SnapsToDevicePixels="True">
+                <ContentPresenter x:Name="contentPresenter"
+                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                  Content="{TemplateBinding Content}"
+                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                  Focusable="False"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  Margin="{TemplateBinding Padding}"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted"
+                         Value="True">
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="Transparent" />
+                </Trigger>
+             
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="Transparent" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="Transparent" />
+                </Trigger>
+              
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush"
+                            TargetName="border"
+                            Value="Red" />
+                    <Setter Property="Foreground"
+                            Value="Transparent" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid HorizontalAlignment="Center">
         <Grid.Resources>
-            <local:TestingBackgroundConverter x:Key="testingBGConverter" />
+            <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
         </Grid.Resources>
         <DockPanel UseLayoutRounding="True">
             <Border x:Name="MainCalculator"
@@ -26,7 +77,7 @@
                             VerticalAlignment="Center">
                     <!--Main Container Grid-->
                     <Border CornerRadius="25"
-                            Style="{DynamicResource MainWindowStyle}" 
+                            Style="{DynamicResource MainWindowStyle}"
                             BorderThickness="2">
                         <Grid x:Name="MainGrid"
                               Margin="10 10 10 20">
@@ -44,27 +95,73 @@
                             <local:MenuSide_Control Grid.Column="0"
                                                     Grid.Row="0"
                                                     x:Name="UIMenuSide" />
-                            <ToggleButton Grid.Row="0"
+                            <ToggleButton Width="20"
+                                          Height="20"
+                                          Grid.Row="0"
                                           Margin="240 -4 0 0"
                                           HorizontalAlignment="Left"
-                                          BorderBrush="Transparent"
-                                          BorderThickness="0"
-                                          Background="Transparent"
-                                          Width="20"
-                                          Height="20"
+                                          IsEnabled="True"
                                           Checked="UIHistoryExpander_Expanded"
-                                          Unchecked="UIHistoryExpander_Collapsed">
-                                <Image>
+                                          Unchecked="UIHistoryExpander_Collapsed"
+                                          Template="{DynamicResource ToggleButtonControlTemplate1}">
+                                <Image ToolTip="Open/Close compute details">
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Setter Property="Source"
-                                                    Value="Images/History_icon.png" />
+                                                    Value="Images/Right_icon.png" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGConverter}}"
-                                                             Value="true">
-                                                    <Setter Property="Source"
-                                                            Value="Images/History_icon_reverse.png" />
-                                                </DataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
+                                                                   Value="false" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="true" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Source"
+                                                                Value="Images/Right_icon_reverse.png" />
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
+                                                                   Value="false" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="false" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Source"
+                                                                Value="Images/Right_icon.png" />
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
+                                                                   Value="true" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="true" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Source"
+                                                                Value="Images/Left_icon_reverse.png" />
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
+                                                                   Value="true" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="false" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Source"
+                                                                Value="Images/Left_icon.png" />
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+
                                             </Style.Triggers>
                                         </Style>
                                     </Image.Style>
@@ -74,14 +171,14 @@
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
                                                    x:Name="UIDisplay"
-                                                   Style="{DynamicResource MainWindowStyle}"/>
+                                                   Style="{DynamicResource MainWindowStyle}" />
 
                             <!--Call the Calculator User control-->
                             <local:Calculator_Control Grid.Column="0"
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
                                                       Margin="1 10 0 0"
-                                                      Style="{DynamicResource MainWindowStyle}"/>
+                                                      Style="{DynamicResource MainWindowStyle}" />
 
                             <!--Call the History User control-->
                             <local:HistoryControl x:Name="UIHistory"
@@ -89,7 +186,7 @@
                                                   Grid.Row="2"
                                                   Visibility="Collapsed"
                                                   Margin="0 -95 0 0"
-                                                  Style="{DynamicResource MainWindowStyle}"/>
+                                                  Style="{DynamicResource MainWindowStyle}" />
                         </Grid>
                     </Border>
                 </StackPanel>

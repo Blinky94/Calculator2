@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Dark" />
+  <ThemeSelected name="Fire" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <MainCalculatorBackground name="Main theme background">#FFCBCDCE</MainCalculatorBackground>
@@ -45,7 +45,7 @@
   </Theme>
   <Theme name="Fire">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Main theme background">#FF842C0B</MainCalculatorBackground>
+      <MainCalculatorBackground name="Main theme background">#FFA12323</MainCalculatorBackground>
       <MainCalculatorForeground name="Main theme foreground">#FFFFFF00</MainCalculatorForeground>
       <MainCalculatorBorderBrush name="Main theme border color">#FFFFA500</MainCalculatorBorderBrush>
     </MainTheme>
@@ -60,34 +60,34 @@
       <BorderBrush2ndeButton name="Seconde button border color">#FFF0FF00</BorderBrush2ndeButton>
     </SndeButton>
     <ScientificButtons name="Scientific buttons">
-      <BackgroundScientificButtons name="Scientific buttons background">#FFF7F269</BackgroundScientificButtons>
+      <BackgroundScientificButtons name="Scientific buttons background">#FFF50C00</BackgroundScientificButtons>
       <ForegroundScientificButtons name="Scientific buttons foreground">#FF0D0000</ForegroundScientificButtons>
       <BorderBrushScientificButtons name="Scientific buttons border color">#FFF0F8FF</BorderBrushScientificButtons>
     </ScientificButtons>
     <OperatorsButtons name="Operator buttons">
-      <BackgroundOperatorsButtons name="Operator buttons background">#FF701616</BackgroundOperatorsButtons>
+      <BackgroundOperatorsButtons name="Operator buttons background">#FF4A010F</BackgroundOperatorsButtons>
       <ForegroundOperatorsButtons name="Operator buttons foreground">#FFFFFFFF</ForegroundOperatorsButtons>
       <BorderBrushOperatorsButtons name="Operator buttons border color">#FFFCFF00</BorderBrushOperatorsButtons>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <BackgroundNumericalsButtons name="Numerical buttons background">#FFD1CA2C</BackgroundNumericalsButtons>
-      <ForegroundNumericalsButtons name="Numerical buttons foreground">#FFFF0000</ForegroundNumericalsButtons>
-      <BorderBrushNumericalsButtons name="Numerical buttons border color">#FFEE0000</BorderBrushNumericalsButtons>
+      <BackgroundNumericalsButtons name="Numerical buttons background">#FFFCFF00</BackgroundNumericalsButtons>
+      <ForegroundNumericalsButtons name="Numerical buttons foreground">#FF000000</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons name="Numerical buttons border color">#FFDC143C</BorderBrushNumericalsButtons>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
-      <BackgroundMemoryButtons name="Memory buttons background">#FFFFF500</BackgroundMemoryButtons>
+      <BackgroundMemoryButtons name="Memory buttons background">#FF380606</BackgroundMemoryButtons>
       <ForegroundMemoryButtons name="Memory buttons foreground">#FFFF0000</ForegroundMemoryButtons>
       <BorderBrushMemoryButtons name="Memory buttons border color">#FFF0F8FF</BorderBrushMemoryButtons>
     </MemoryButtons>
     <TrigonometryButtons name="Trigonometry buttons">
-      <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FFED0000</BackgroundTrigonometryButtons>
+      <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FF00AEED</BackgroundTrigonometryButtons>
       <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFFFFF00</ForegroundTrigonometryButtons>
       <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFFFB34B</BorderBrushTrigonometryButtons>
     </TrigonometryButtons>
   </Theme>
   <Theme name="Ice">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Main theme background">#FFD0D3D9</MainCalculatorBackground>
+      <MainCalculatorBackground name="Main theme background">#FFC6DBE5</MainCalculatorBackground>
       <MainCalculatorForeground name="Main theme foreground">#FF2C2C78</MainCalculatorForeground>
       <MainCalculatorBorderBrush name="Main theme border color">#FF84A3A3</MainCalculatorBorderBrush>
     </MainTheme>
@@ -129,44 +129,44 @@
   </Theme>
   <Theme name="Dark">
     <MainTheme name="Main theme">
-      <MainCalculatorBackground name="Main theme background">#FF211E1E</MainCalculatorBackground>
-      <MainCalculatorForeground name="Main theme foreground">#FFF0FFFF</MainCalculatorForeground>
-      <MainCalculatorBorderBrush name="Main theme border color">#FF4A4A4A</MainCalculatorBorderBrush>
+      <MainCalculatorBackground name="Main theme background">#FF383131</MainCalculatorBackground>
+      <MainCalculatorForeground name="Main theme foreground">#FFFFFFFF</MainCalculatorForeground>
+      <MainCalculatorBorderBrush name="Main theme border color">#FFFF0000</MainCalculatorBorderBrush>
     </MainTheme>
     <BaseButtons name="General buttons">
       <BackgroundBaseButtons name="General buttons background">#FF292929</BackgroundBaseButtons>
       <ForegroundBaseButtons name="General buttons foreground">#FFFFFFFF</ForegroundBaseButtons>
-      <BorderBrushBaseButtons name="General buttons border color">#FFF0F8FF</BorderBrushBaseButtons>
+      <BorderBrushBaseButtons name="General buttons border color">#FFFFFFFF</BorderBrushBaseButtons>
     </BaseButtons>
     <SndeButton name="Seconde button">
-      <Background2ndeButton name="Seconde button background">#FFFF0000</Background2ndeButton>
+      <Background2ndeButton name="Seconde button background">#FFFF0303</Background2ndeButton>
       <Foreground2ndeButton name="Seconde button foreground">#FFFFFFFF</Foreground2ndeButton>
-      <BorderBrush2ndeButton name="Seconde button border color">#FFF0F8FF</BorderBrush2ndeButton>
+      <BorderBrush2ndeButton name="Seconde button border color">#FFFFFFFF</BorderBrush2ndeButton>
     </SndeButton>
     <ScientificButtons name="Scientific buttons">
       <BackgroundScientificButtons name="Scientific buttons background">#FF262626</BackgroundScientificButtons>
-      <ForegroundScientificButtons name="Scientific buttons foreground">#FFF0F8FF</ForegroundScientificButtons>
-      <BorderBrushScientificButtons name="Scientific buttons border color">#FFF0F8FF</BorderBrushScientificButtons>
+      <ForegroundScientificButtons name="Scientific buttons foreground">#FFFFFFFF</ForegroundScientificButtons>
+      <BorderBrushScientificButtons name="Scientific buttons border color">#FFFFFFFF</BorderBrushScientificButtons>
     </ScientificButtons>
     <OperatorsButtons name="Operator buttons">
-      <BackgroundOperatorsButtons name="Operator buttons background">#FF2B2B2B</BackgroundOperatorsButtons>
-      <ForegroundOperatorsButtons name="Operator buttons foreground">#FFF0F8FF</ForegroundOperatorsButtons>
-      <BorderBrushOperatorsButtons name="Operator buttons border color">#FFF0FFFF</BorderBrushOperatorsButtons>
+      <BackgroundOperatorsButtons name="Operator buttons background">#FF262626</BackgroundOperatorsButtons>
+      <ForegroundOperatorsButtons name="Operator buttons foreground">#FFFFFFFF</ForegroundOperatorsButtons>
+      <BorderBrushOperatorsButtons name="Operator buttons border color">#FFFFFFFF</BorderBrushOperatorsButtons>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
       <BackgroundNumericalsButtons name="Numerical buttons background">#FF000000</BackgroundNumericalsButtons>
-      <ForegroundNumericalsButtons name="Numerical buttons foreground">#FFF0F8FF</ForegroundNumericalsButtons>
-      <BorderBrushNumericalsButtons name="Numerical buttons border color">#FFF0F8FF</BorderBrushNumericalsButtons>
+      <ForegroundNumericalsButtons name="Numerical buttons foreground">#FFFFFFFF</ForegroundNumericalsButtons>
+      <BorderBrushNumericalsButtons name="Numerical buttons border color">#FFFFFFFF</BorderBrushNumericalsButtons>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
       <BackgroundMemoryButtons name="Memory buttons background">#FF020202</BackgroundMemoryButtons>
-      <ForegroundMemoryButtons name="Memory buttons foreground">#FFF0F8FF</ForegroundMemoryButtons>
-      <BorderBrushMemoryButtons name="Memory buttons border color">#FFF0F8FF</BorderBrushMemoryButtons>
+      <ForegroundMemoryButtons name="Memory buttons foreground">#FFFFFFFF</ForegroundMemoryButtons>
+      <BorderBrushMemoryButtons name="Memory buttons border color">#FFFFFFFF</BorderBrushMemoryButtons>
     </MemoryButtons>
     <TrigonometryButtons name="Trigonometry buttons">
       <BackgroundTrigonometryButtons name="Trigonometry buttons background">#FF000000</BackgroundTrigonometryButtons>
-      <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFF0F8FF</ForegroundTrigonometryButtons>
-      <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFF0F8FF</BorderBrushTrigonometryButtons>
+      <ForegroundTrigonometryButtons name="Trigonometry buttons foreground">#FFFFFFFF</ForegroundTrigonometryButtons>
+      <BorderBrushTrigonometryButtons name="Trigonometry buttons border color">#FFFFFFFF</BorderBrushTrigonometryButtons>
     </TrigonometryButtons>
   </Theme>
 </Themes>

@@ -53,7 +53,7 @@ namespace Udemy_Calculator
 
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
             lCurrentBlock.TextAlignment = TextAlignment.Left;
-            lCurrentBlock.Foreground = pIsDetail ? Brushes.Gray : Brushes.Black;
+            lCurrentBlock.Foreground = pIsDetail ? Brushes.CadetBlue : Brushes.Black;
             lCurrentBlock.FontSize = pIsDetail ? 10 : 16;
         }
 

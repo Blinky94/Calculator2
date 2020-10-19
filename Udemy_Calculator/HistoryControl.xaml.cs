@@ -71,15 +71,5 @@ namespace Udemy_Calculator
             TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Saving history logs");
             GlobalUsage.SaveToFile(UIHistoryTextBox);
         }
-
-        private void CheckBoxWithDetails_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckBoxWithDetails_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
