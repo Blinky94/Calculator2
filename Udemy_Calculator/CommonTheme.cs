@@ -15,32 +15,7 @@ namespace Udemy_Calculator
     public static class CommonTheme
     {
         #region public
-
-        public static SolidColorBrush MainCalculatorBackground { get; set; }
-        public static SolidColorBrush MainCalculatorForeground { get; set; }
-        public static SolidColorBrush MainCalculatorBorderBrush { get; set; }
-        public static SolidColorBrush Background2ndeButton { get; set; }
-        public static SolidColorBrush Foreground2ndeButton { get; set; }
-        public static SolidColorBrush BorderBrush2ndeButton { get; set; }
-        public static SolidColorBrush BackgroundBaseButtons { get; set; }
-        public static SolidColorBrush ForegroundBaseButtons { get; set; }
-        public static SolidColorBrush BorderBrushBaseButtons { get; set; }
-        public static SolidColorBrush BackgroundScientificButtons { get; set; }
-        public static SolidColorBrush ForegroundScientificButtons { get; set; }
-        public static SolidColorBrush BorderBrushScientificButtons { get; set; }
-        public static SolidColorBrush BackgroundOperatorsButtons { get; set; }
-        public static SolidColorBrush ForegroundOperatorsButtons { get; set; }
-        public static SolidColorBrush BorderBrushOperatorsButtons { get; set; }
-        public static SolidColorBrush BackgroundNumericalsButtons { get; set; }
-        public static SolidColorBrush ForegroundNumericalsButtons { get; set; }
-        public static SolidColorBrush BorderBrushNumericalsButtons { get; set; }
-        public static SolidColorBrush BackgroundMemoryButtons { get; set; }
-        public static SolidColorBrush ForegroundMemoryButtons { get; set; }
-        public static SolidColorBrush BorderBrushMemoryButtons { get; set; }
-        public static SolidColorBrush BackgroundTrigonometryButtons { get; set; }
-        public static SolidColorBrush ForegroundTrigonometryButtons { get; set; }
-        public static SolidColorBrush BorderBrushTrigonometryButtons { get; set; }
-
+   
         private static string mThemeSelectedName;
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
@@ -136,23 +111,22 @@ namespace Udemy_Calculator
                         var lTheme = new Theme();
 
                         foreach (XmlNode lPropertyNode in lSubNode.ChildNodes)
-                        {
-                            string lThemeName = lPropertyNode.Name;
-                            SolidColorBrush lThemeValue = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
-
-                            FillCommonPropertiesValues(lThemeName, lThemeValue);
-
-                            if (lPropertyNode.Name.Contains("Background"))
+                        {                     
+                            if (lPropertyNode.Name.Contains("Color1"))
                             {
-                                lTheme.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color1 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
                             }
-                            else if (lPropertyNode.Name.Contains("Foreground"))
+                            else if (lPropertyNode.Name.Contains("Color2"))
                             {
-                                lTheme.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color2 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
                             }
-                            else if (lPropertyNode.Name.Contains("BorderBrush"))
+                            else if (lPropertyNode.Name.Contains("Color3"))
                             {
-                                lTheme.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color3 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                            }
+                            else if (lPropertyNode.Name.Contains("Color4"))
+                            {
+                                lTheme.Color4 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
                             }
                         }
 
@@ -164,90 +138,6 @@ namespace Udemy_Calculator
                         ListOfAllThemes.Add(lTheme);
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// Fill each of the public getter setter to the right values
-        /// </summary>
-        /// <param name="lThemeName"></param>
-        /// <param name="lThemeValue"></param>
-        private static void FillCommonPropertiesValues(string lThemeName, SolidColorBrush lThemeValue)
-        {
-            switch (lThemeName)
-            {
-                case "MainCalculatorBackground":
-                    MainCalculatorBackground = lThemeValue;
-                    break;
-                case "MainCalculatorForeground":
-                    MainCalculatorForeground = lThemeValue;
-                    break;
-                case "MainCalculatorBorderBrush":
-                    MainCalculatorBorderBrush = lThemeValue;
-                    break;
-                case "Background2ndeButton":
-                    Background2ndeButton = lThemeValue;
-                    break;
-                case "Foreground2ndeButton":
-                    Foreground2ndeButton = lThemeValue;
-                    break;
-                case "BorderBrush2ndeButton":
-                    BorderBrush2ndeButton = lThemeValue;
-                    break;
-                case "BackgroundBaseButtons":
-                    BackgroundBaseButtons = lThemeValue;
-                    break;
-                case "ForegroundBaseButtons":
-                    ForegroundBaseButtons = lThemeValue;
-                    break;
-                case "BorderBrushBaseButtons":
-                    BorderBrushBaseButtons = lThemeValue;
-                    break;
-                case "BackgroundScientificButtons":
-                    BackgroundScientificButtons = lThemeValue;
-                    break;
-                case "ForegroundScientificButtons":
-                    ForegroundScientificButtons = lThemeValue;
-                    break;
-                case "BorderBrushScientificButtons":
-                    BorderBrushScientificButtons = lThemeValue;
-                    break;
-                case "BackgroundOperatorsButtons":
-                    BackgroundOperatorsButtons = lThemeValue;
-                    break;
-                case "ForegroundOperatorsButtons":
-                    ForegroundOperatorsButtons = lThemeValue;
-                    break;
-                case "BorderBrushOperatorsButtons":
-                    BorderBrushOperatorsButtons = lThemeValue;
-                    break;
-                case "BackgroundNumericalsButtons":
-                    BackgroundNumericalsButtons = lThemeValue;
-                    break;
-                case "ForegroundNumericalsButtons":
-                    ForegroundNumericalsButtons = lThemeValue;
-                    break;
-                case "BorderBrushNumericalsButtons":
-                    BorderBrushNumericalsButtons = lThemeValue;
-                    break;
-                case "BackgroundMemoryButtons":
-                    BackgroundMemoryButtons = lThemeValue;
-                    break;
-                case "ForegroundMemoryButtons":
-                    ForegroundMemoryButtons = lThemeValue;
-                    break;
-                case "BorderBrushMemoryButtons":
-                    BorderBrushMemoryButtons = lThemeValue;
-                    break;
-                case "BackgroundTrigonometryButtons":
-                    BackgroundTrigonometryButtons = lThemeValue;
-                    break;
-                case "ForegroundTrigonometryButtons":
-                    ForegroundTrigonometryButtons = lThemeValue;
-                    break;
-                case "BorderBrushTrigonometryButtons":
-                    BorderBrushTrigonometryButtons = lThemeValue;
-                    break;
             }
         }
 
@@ -288,7 +178,7 @@ namespace Udemy_Calculator
             // Copying all old values to the new one
             foreach (Setter lSetter in lCurrentStyle.Setters)
             {
-                if (lSetter.Property.Name != "Background" && lSetter.Property.Name != "Foreground" && lSetter.Property.Name != "BorderBrush")
+                if (lSetter.Property.Name != "Color1" && lSetter.Property.Name != "Color2" && lSetter.Property.Name != "Color3" && lSetter.Property.Name != "Color4")
                 {
                     lNewStyle.Setters.Add(lSetter);
                 }
@@ -303,9 +193,10 @@ namespace Udemy_Calculator
             {
                 var lThemeProperty = CommonTheme.ListSelectedTheme.Where(p => p.ParentName == pThemeName);
 
-                lNewStyle.Setters.Add(new Setter(Control.BackgroundProperty, (Brush)lThemeProperty.Select(p => p.Background).First()));
-                lNewStyle.Setters.Add(new Setter(Control.ForegroundProperty, (Brush)lThemeProperty.Select(p => p.Foreground).First()));
-                lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.BorderBrush).First()));
+                lNewStyle.Setters.Add(new Setter(Control.BackgroundProperty, (Brush)lThemeProperty.Select(p => p.Color1).First()));
+                lNewStyle.Setters.Add(new Setter(Control.ForegroundProperty, (Brush)lThemeProperty.Select(p => p.Color2).First()));
+                lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.Color3).First()));
+               // lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.Color4).First()));
 
                 Application.Current.Resources[pThemeStyle] = lNewStyle;
             }

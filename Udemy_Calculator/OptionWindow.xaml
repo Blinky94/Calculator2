@@ -73,10 +73,12 @@
             </StackPanel.Resources>
             <local:ColorPicker_Control x:Name="BackgroundColorPicker"
                                        ColorPickerText="Background" />
-            <local:ColorPicker_Control x:Name="ForegroundColorPicker"
-                                       ColorPickerText="Foreground" />
-            <local:ColorPicker_Control x:Name="BorderBrushColorPicker"
-                                       ColorPickerText="BorderBrush" />
+            <local:ColorPicker_Control x:Name="Color1Picker"
+                                       ColorPickerText="Color 1" />
+            <local:ColorPicker_Control x:Name="Color2Picker"
+                                       ColorPickerText="Color 2" />
+            <local:ColorPicker_Control x:Name="Color3Picker"
+                                       ColorPickerText="Color 3" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"

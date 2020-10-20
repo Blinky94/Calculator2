@@ -21,6 +21,7 @@
                     BorderBrush="Transparent"
                     BorderThickness="0"
                     Style="{DynamicResource ResourceKey=MainWindowStyle}"
+                    Background="Transparent"
                     SnapsToDevicePixels="True">
                 <ContentPresenter x:Name="contentPresenter"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -40,7 +41,7 @@
                             TargetName="border"
                             Value="Transparent" />
                 </Trigger>
-             
+
                 <Trigger Property="IsPressed"
                          Value="True">
                     <Setter Property="Background"
@@ -50,7 +51,7 @@
                             TargetName="border"
                             Value="Transparent" />
                 </Trigger>
-              
+
                 <Trigger Property="IsEnabled"
                          Value="False">
                     <Setter Property="Background"
@@ -78,7 +79,7 @@
                     <!--Main Container Grid-->
                     <Border CornerRadius="25"
                             Style="{DynamicResource MainWindowStyle}"
-                            BorderThickness="2">
+                            BorderThickness="5">
                         <Grid x:Name="MainGrid"
                               Margin="10 10 10 20">
                             <Grid.ColumnDefinitions>
@@ -101,6 +102,7 @@
                                           Margin="240 -4 0 0"
                                           HorizontalAlignment="Left"
                                           IsEnabled="True"
+                                          Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
                                           Checked="UIHistoryExpander_Expanded"
                                           Unchecked="UIHistoryExpander_Collapsed"
                                           Template="{DynamicResource ToggleButtonControlTemplate1}">
@@ -114,20 +116,7 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="false" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
-                                                                   Value="true" />
-                                                    </MultiDataTrigger.Conditions>
-                                                    <MultiDataTrigger.Setters>
-                                                        <Setter Property="Source"
-                                                                Value="Images/Right_icon_reverse.png" />
-                                                    </MultiDataTrigger.Setters>
-                                                </MultiDataTrigger>
-
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
-                                                                   Value="false" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
                                                                    Value="false" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
@@ -140,12 +129,25 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="true" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="false" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.Setters>
+                                                        <Setter Property="Source"
+                                                                Value="Images/Left_icon.png" />
+                                                    </MultiDataTrigger.Setters>
+                                                </MultiDataTrigger>
+
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
+                                                                   Value="false" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
                                                                    Value="true" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
                                                         <Setter Property="Source"
-                                                                Value="Images/Left_icon_reverse.png" />
+                                                                Value="Images/Right_icon_reverse.png" />
                                                     </MultiDataTrigger.Setters>
                                                 </MultiDataTrigger>
 
@@ -153,12 +155,12 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="true" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Converter={StaticResource testingBGDarkerConverter}}"
-                                                                   Value="false" />
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                                   Value="true" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
                                                         <Setter Property="Source"
-                                                                Value="Images/Left_icon.png" />
+                                                                Value="Images/Left_icon_reverse.png" />
                                                     </MultiDataTrigger.Setters>
                                                 </MultiDataTrigger>
 

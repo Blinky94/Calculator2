@@ -63,17 +63,21 @@ namespace Udemy_Calculator
                         {
                             CommonTheme.ListSelectedTheme.Where(p => p.ParentName == lSubNode.Name).ToList().ForEach(p =>
                             {
-                                if (lSubSubNode.Name.Contains("Background"))
+                                if (lSubSubNode.Name.Contains("Color1") && p.Color1 != null)
                                 {
-                                    lSubSubNode.InnerText = p.Background.ToString();
+                                    lSubSubNode.InnerText = p.Color1.ToString();
                                 }
-                                if (lSubSubNode.Name.Contains("Foreground"))
+                                if (lSubSubNode.Name.Contains("Color2") && p.Color2 != null)
                                 {
-                                    lSubSubNode.InnerText = p.Foreground.ToString();
+                                    lSubSubNode.InnerText = p.Color2.ToString();
                                 }
-                                if (lSubSubNode.Name.Contains("BorderBrush"))
+                                if (lSubSubNode.Name.Contains("Color3") && p.Color3 != null)
                                 {
-                                    lSubSubNode.InnerText = p.BorderBrush.ToString();
+                                    lSubSubNode.InnerText = p.Color3.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("Color4") && p.Color4 != null)
+                                {
+                                    lSubSubNode.InnerText = p.Color4.ToString();
                                 }
                             });
                         }

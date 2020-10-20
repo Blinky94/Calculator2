@@ -28,8 +28,6 @@ namespace Udemy_Calculator
         {
             SolidColorBrush lColorSelected = new SolidColorBrush((Color)e.NewValue);
 
-            // HERE THE CODE UPDATE COLOR FOR CONTROL CONCERNED !!!
-            //CommonTheme.ListOfAllThemes.Where(p => p.ThemeRootName == p.ThemeSelected).Sel
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(OptionWindow))
@@ -41,17 +39,21 @@ namespace Udemy_Calculator
 
                     CommonTheme.ListOfAllThemes.Where(p => p.ThemeRootName == CommonTheme.ThemeSelectedName).Where(p => p.ParentLongName == lItemSelected).ToList().ForEach(p =>
                     {
-                        if(lColorPickerText == "Background")
+                        if(lColorPickerText == "Color1")
                         {
-                            p.Background = lColorSelected;
+                            p.Color1 = lColorSelected;
                         }
-                        else if (lColorPickerText == "Foreground")
+                        else if (lColorPickerText == "Color2")
                         {
-                            p.Foreground = lColorSelected;
+                            p.Color2 = lColorSelected;
                         }
-                        else if (lColorPickerText == "BorderBrush")
+                        else if (lColorPickerText == "Color3")
                         {
-                            p.BorderBrush = lColorSelected;
+                            p.Color3 = lColorSelected;
+                        }
+                        else if (lColorPickerText == "Color4")
+                        {
+                            p.Color4 = lColorSelected;
                         }
                     });
                 }

@@ -86,8 +86,8 @@ namespace Udemy_Calculator
 
             PopulateListPropertiesToListView();
             if (ItemsListBox != null && ItemsListBox.Items.Count > 0)
-            // Apply the default color for the first ListItem
-            ItemsListBox_Selected(ItemsListBox, null);
+                // Apply the default color for the first ListItem
+                ItemsListBox_Selected(ItemsListBox, null);
         }
 
         #region Moving the Window
@@ -116,7 +116,7 @@ namespace Udemy_Calculator
 
         private void ItemsListBox_Selected(object sender, RoutedEventArgs e)
         {
-            if((sender as ListBox).SelectedItem == null)
+            if ((sender as ListBox).SelectedItem == null)
             {
                 (sender as ListBox).SelectedItem = CommonTheme.GetParentThemeLongNames[0];
             }
@@ -125,9 +125,57 @@ namespace Udemy_Calculator
 
             foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.ParentLongName == lSelectedVal))
             {
-                BackgroundColorPicker.UIColorPicker.SelectedColor = (lTheme.Background).Color;
-                ForegroundColorPicker.UIColorPicker.SelectedColor = (lTheme.Foreground).Color;
-                BorderBrushColorPicker.UIColorPicker.SelectedColor = (lTheme.BorderBrush).Color;
+                if (lTheme.Color1 != null)
+                {
+                    // Activating parameter
+                    BackgroundColorPicker.IsEnabled = true;
+                    // Affecting the color
+                    BackgroundColorPicker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    BackgroundColorPicker.IsEnabled = false;
+                }
+
+                if (lTheme.Color1 != null)
+                {
+                    // Activating parameter
+                    Color1Picker.IsEnabled = true;
+                    // Affecting the color
+                    Color1Picker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    Color1Picker.IsEnabled = false;
+                }
+
+                if (lTheme.Color2 != null)
+                {
+                    // Activating parameter
+                    Color2Picker.IsEnabled = true;
+                    // Affecting the color
+                    Color2Picker.UIColorPicker.SelectedColor = (lTheme.Color2).Color;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    Color2Picker.IsEnabled = false;
+                }
+
+                if (lTheme.Color3 != null)
+                {
+                    // Activating parameter
+                    Color3Picker.IsEnabled = true;
+                    // Affecting the color
+                    Color3Picker.UIColorPicker.SelectedColor = (lTheme.Color3).Color;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    Color3Picker.IsEnabled = false;
+                }
             }
         }
     }

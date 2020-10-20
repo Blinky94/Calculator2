@@ -25,18 +25,23 @@ namespace Udemy_Calculator
         public string ParentLongName { get; set; }
 
         /// <summary>
-        /// Property background value
+        /// Property Color 1 value
         /// </summary>
-        public SolidColorBrush Background { get; set; }
+        public SolidColorBrush Color1 { get; set; }
 
         /// <summary>
-        /// Property foreground value
+        /// Property Color 2 value
         /// </summary>
-        public SolidColorBrush Foreground { get; set; }
+        public SolidColorBrush Color2 { get; set; }
 
         /// <summary>
-        /// Property borderbrush value
+        /// Property Color 3 value
         /// </summary>
-        public SolidColorBrush BorderBrush { get; set; }
+        public SolidColorBrush Color3 { get; set; }
+
+        /// <summary>
+        /// Property Color 4 value
+        /// </summary>
+        public SolidColorBrush Color4 { get; set; }
     }
 }

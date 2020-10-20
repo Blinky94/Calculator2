@@ -23,13 +23,13 @@
         <Grid Name="HistoryGrid"
               Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="500" />
+                <RowDefinition Height="540" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <Style TargetType="RichTextBox">
                     <Setter Property="FontSize"
-                            Value="16" />
+                            Value="15" />
                     <Setter Property="FontWeight"
                             Value="Bold" />
                     <Setter Property="Padding"

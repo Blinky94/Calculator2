@@ -19,8 +19,7 @@
                 BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="5"
-                                  ShadowDepth="5"
-                                  Color="{TemplateBinding BorderBrush}" />
+                                  ShadowDepth="5"/>
             </Border.Effect>
             <Viewbox HorizontalAlignment="Right">
                 <TextBox x:Name="UIDisplayCalculus"

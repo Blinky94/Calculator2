@@ -23,6 +23,12 @@ namespace Udemy_Calculator
             AddNewHistory();
         }
 
+        /// <summary>
+        /// Append history
+        /// </summary>
+        /// <param name="pText"></param>
+        /// <param name="pUITextBox"></param>
+        /// <returns></returns>
         private Block AppendHistory(string pText, ref RichTextBox pUITextBox)
         {
             pText = pText.Replace(',', '.');
@@ -36,6 +42,14 @@ namespace Udemy_Calculator
             return pUITextBox.Document.Blocks.LastOrDefault();
         }
 
+        /// <summary>
+        /// Append the formula to the history panel
+        /// </summary>
+        /// <param name="pText"></param>
+        /// <param name="pUITextBox"></param>
+        /// <param name="pIsResult"></param>
+        /// <param name="pLastNumber"></param>
+        /// <param name="pIsDetail"></param>
         public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, string pLastNumber = default, bool pIsDetail = false)
         {
             double.TryParse(pText, NumberStyles.Any, CultureInfo.InvariantCulture, out double lTextSigned);
@@ -52,11 +66,26 @@ namespace Udemy_Calculator
             }
 
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
-            lCurrentBlock.TextAlignment = TextAlignment.Left;
-            lCurrentBlock.Foreground = pIsDetail ? Brushes.CadetBlue : Brushes.Black;
-            lCurrentBlock.FontSize = pIsDetail ? 10 : 16;
+
+            if (pIsDetail)
+            {
+                lCurrentBlock.TextAlignment = TextAlignment.Center;
+                lCurrentBlock.Foreground = Brushes.CadetBlue;
+                lCurrentBlock.FontSize = 14;
+            }
+            else
+            {
+                lCurrentBlock.TextAlignment = TextAlignment.Left;
+                lCurrentBlock.Foreground = Brushes.Black;
+                lCurrentBlock.FontSize = 16;
+            }
         }
 
+        /// <summary>
+        /// Append the result to the history panel
+        /// </summary>
+        /// <param name="pText"></param>
+        /// <param name="pUITextBox"></param>
         public void AppendHistoryResult(string pText, RichTextBox pUITextBox)
         {
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
@@ -65,6 +94,10 @@ namespace Udemy_Calculator
             lCurrentBlock.LineHeight = 0.1;
         }
 
+        /// <summary>
+        /// Remove a part of the formula depending of the length to remove
+        /// </summary>
+        /// <param name="pUILength"></param>
         public void RemoveHistoryFormula(int pUILength)
         {
             var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
@@ -79,12 +112,19 @@ namespace Udemy_Calculator
             }
         }
 
+        /// <summary>
+        /// Add a new blank history
+        /// </summary>
         public void AddNewHistory()
         {
             mParagraph = new Paragraph();
             FormulaStr = string.Empty;
         }
 
+        /// <summary>
+        /// Erase everything in the history panel
+        /// </summary>
+        /// <param name="pUI"></param>
         internal void CleanHistory(ref RichTextBox pUI)
         {
             pUI.Document.Blocks.Clear();
