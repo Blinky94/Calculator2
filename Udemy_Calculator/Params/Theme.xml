@@ -99,7 +99,7 @@
   </Theme>
   <Theme name="Ice">
     <MainTheme name="Main theme">
-      <Color1 name="Background">#FF86A5CC</Color1>
+      <Color1 name="Background">#FFA0B8D6</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FF000A61</Color3>
     </MainTheme>

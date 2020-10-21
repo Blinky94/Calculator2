@@ -61,7 +61,7 @@ namespace Udemy_Calculator
                 {
                     if (lColorPickerUID.Contains("Color1"))
                     {
-                        lTheme.Color1 = lColorSelected;                     
+                        lTheme.Color1 = lColorSelected; 
                     }
                     else if (lColorPickerUID.Contains("Color2"))
                     {

@@ -131,7 +131,7 @@ namespace Udemy_Calculator
                     Color1Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color1Picker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
-                    Color1Picker.ColorPickerUID = lTheme.Color1Attribute;
+                    Color1Picker.ColorPickerText = lTheme.Color1Attribute;
                 }
                 else
                 {
@@ -146,7 +146,7 @@ namespace Udemy_Calculator
                     Color2Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color2Picker.UIColorPicker.SelectedColor = (lTheme.Color2).Color;
-                    Color2Picker.ColorPickerUID = lTheme.Color2Attribute;
+                    Color2Picker.ColorPickerText = lTheme.Color2Attribute;
                 }
                 else
                 {
@@ -161,7 +161,7 @@ namespace Udemy_Calculator
                     Color3Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color3Picker.UIColorPicker.SelectedColor = (lTheme.Color3).Color;
-                    Color3Picker.ColorPickerUID = lTheme.Color3Attribute;
+                    Color3Picker.ColorPickerText = lTheme.Color3Attribute;
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace Udemy_Calculator
                     Color4Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color4Picker.UIColorPicker.SelectedColor = (lTheme.Color4).Color;
-                    Color4Picker.ColorPickerUID = lTheme.Color4Attribute;
+                    Color4Picker.ColorPickerText = lTheme.Color4Attribute;
                 }
                 else
                 {
