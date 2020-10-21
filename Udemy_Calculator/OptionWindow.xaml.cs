@@ -123,21 +123,8 @@ namespace Udemy_Calculator
 
             var lSelectedVal = (sender as ListBox).SelectedItem.ToString();
 
-            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.ParentLongName == lSelectedVal))
+            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lSelectedVal))
             {
-                if (lTheme.Color1 != null)
-                {
-                    // Activating parameter
-                    BackgroundColorPicker.IsEnabled = true;
-                    // Affecting the color
-                    BackgroundColorPicker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
-                }
-                else
-                {
-                    // Desactivating the parameter
-                    BackgroundColorPicker.IsEnabled = false;
-                }
-
                 if (lTheme.Color1 != null)
                 {
                     // Activating parameter
@@ -149,6 +136,7 @@ namespace Udemy_Calculator
                 {
                     // Desactivating the parameter
                     Color1Picker.IsEnabled = false;
+                    Color1Picker.UIColorPicker.SelectedColor = null;
                 }
 
                 if (lTheme.Color2 != null)
@@ -162,6 +150,7 @@ namespace Udemy_Calculator
                 {
                     // Desactivating the parameter
                     Color2Picker.IsEnabled = false;
+                    Color2Picker.UIColorPicker.SelectedColor = null;
                 }
 
                 if (lTheme.Color3 != null)
@@ -175,6 +164,21 @@ namespace Udemy_Calculator
                 {
                     // Desactivating the parameter
                     Color3Picker.IsEnabled = false;
+                    Color3Picker.UIColorPicker.SelectedColor = null;
+                }
+
+                if (lTheme.Color4 != null)
+                {
+                    // Activating parameter
+                    Color4Picker.IsEnabled = true;
+                    // Affecting the color
+                    Color4Picker.UIColorPicker.SelectedColor = (lTheme.Color4).Color;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    Color4Picker.IsEnabled = false;
+                    Color4Picker.UIColorPicker.SelectedColor = null;
                 }
             }
         }

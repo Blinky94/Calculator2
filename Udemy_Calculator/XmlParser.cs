@@ -61,7 +61,7 @@ namespace Udemy_Calculator
                     {
                         foreach (XmlElement lSubSubNode in lSubNode)
                         {
-                            CommonTheme.ListSelectedTheme.Where(p => p.ParentName == lSubNode.Name).ToList().ForEach(p =>
+                            CommonTheme.ListSelectedTheme.Where(p => p.SubThemeName == lSubNode.Name).ToList().ForEach(p =>
                             {
                                 if (lSubSubNode.Name.Contains("Color1") && p.Color1 != null)
                                 {

@@ -15,7 +15,7 @@ namespace Udemy_Calculator
     public static class CommonTheme
     {
         #region public
-   
+
         private static string mThemeSelectedName;
         /// <summary>
         /// Return the value from the "ThemeSelected" in the xml file
@@ -77,9 +77,10 @@ namespace Udemy_Calculator
         /// <param name="pSelectedTheme">Optional parameter</param>
         public static void SetSelectedThemeListObject(string pSelectedTheme = "")
         {
-            ListSelectedTheme = !string.IsNullOrEmpty(pSelectedTheme) ? ListOfAllThemes.Where(p => pSelectedTheme == p.ThemeRootName).ToList() : ListOfAllThemes.Where(p => p.ThemeSelected == p.ThemeRootName).ToList();
+            ListSelectedTheme = !string.IsNullOrEmpty(pSelectedTheme) ? ListOfAllThemes.Where(p => pSelectedTheme == p.ThemeName).ToList() : ListOfAllThemes.Where(p => p.ThemeSelected == p.ThemeName).ToList();
 
-            UpdateThemeToAllWindow();
+            // Set all themes properties with the selected theme
+            SetThemeProperties();
         }
 
         #endregion
@@ -111,29 +112,33 @@ namespace Udemy_Calculator
                         var lTheme = new Theme();
 
                         foreach (XmlNode lPropertyNode in lSubNode.ChildNodes)
-                        {                     
+                        {
                             if (lPropertyNode.Name.Contains("Color1"))
                             {
                                 lTheme.Color1 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color1Attribute = lPropertyNode.Attributes["name"].Value;
                             }
                             else if (lPropertyNode.Name.Contains("Color2"))
                             {
                                 lTheme.Color2 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color2Attribute = lPropertyNode.Attributes["name"].Value;
                             }
                             else if (lPropertyNode.Name.Contains("Color3"))
                             {
                                 lTheme.Color3 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color3Attribute = lPropertyNode.Attributes["name"].Value;
                             }
                             else if (lPropertyNode.Name.Contains("Color4"))
                             {
                                 lTheme.Color4 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
+                                lTheme.Color4Attribute = lPropertyNode.Attributes["name"].Value;
                             }
                         }
 
                         lTheme.ThemeSelected = lThemeSelected;
-                        lTheme.ThemeRootName = lNode.GetAttribute("name");
-                        lTheme.ParentName = lSubNode.Name;
-                        lTheme.ParentLongName = lSubNode.Attributes["name"].Value;
+                        lTheme.ThemeName = lNode.GetAttribute("name");
+                        lTheme.SubThemeName = lSubNode.Name;
+                        lTheme.SubThemeAttribute = lSubNode.Attributes["name"].Value;
 
                         ListOfAllThemes.Add(lTheme);
                     }
@@ -142,63 +147,34 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Updating the current theme to all windows
+        /// Set all the themes properties values with the selected one
         /// </summary>
-        private static void UpdateThemeToAllWindow()
+        private static void SetThemeProperties()
         {
-            SetThemeProperties("MainTheme", "MainWindowStyle");
-            SetThemeProperties("MainTheme", "MainLabelStyle");
-            SetThemeProperties("BaseButtons", "BaseButtonsStyle");
-            SetThemeProperties("OperatorsButtons", "OperatorsButtonsStyle");
-            SetThemeProperties("NumericalsButtons", "NumericalsButtonsStyle");
-            SetThemeProperties("MemoryButtons", "MemoryButtonsStyle");
-            SetThemeProperties("ScientificButtons", "ScientificButtonsStyle");
-            SetThemeProperties("TrigonometryButtons", "TrigonometryButtonsStyle");
-            SetThemeProperties("SndeButton", "SndeButtonStyle");
-            SetThemeProperties("MainTheme", "MenuStyle");
-        }
-
-        /// <summary>
-        /// Define the new properties values for a specific theme and style
-        /// from the old Style property defined
-        /// </summary>
-        /// <param name="pThemeName">Theme name in the xml file config</param>
-        /// <param name="pThemeStyle">Theme style name declared in xaml</param>
-        private static void SetThemeProperties(string pThemeName, string pThemeStyle)
-        {
-            var lCurrentStyle = (Style)Application.Current.FindResource(pThemeStyle);
-
-            var lNewStyle = new Style(lCurrentStyle.TargetType, lCurrentStyle.BasedOn);
-
-            if (lCurrentStyle.Setters == null)
+            foreach (Theme lTheme in CommonTheme.ListSelectedTheme)
             {
-                return;
-            }
+                string lPorpertyName;
 
-            // Copying all old values to the new one
-            foreach (Setter lSetter in lCurrentStyle.Setters)
-            {
-                if (lSetter.Property.Name != "Color1" && lSetter.Property.Name != "Color2" && lSetter.Property.Name != "Color3" && lSetter.Property.Name != "Color4")
+                if (lTheme.Color1 != null)
                 {
-                    lNewStyle.Setters.Add(lSetter);
+                    lPorpertyName = string.Concat(nameof(lTheme.Color1), lTheme.SubThemeName);
+                    Application.Current.Resources[lPorpertyName] = lTheme.Color1;
                 }
-            }
-
-            foreach (var lTrigger in lCurrentStyle.Triggers)
-            {
-                lNewStyle.Triggers.Add(lTrigger);
-            }
-
-            if (CommonTheme.ListSelectedTheme.Count > 0)
-            {
-                var lThemeProperty = CommonTheme.ListSelectedTheme.Where(p => p.ParentName == pThemeName);
-
-                lNewStyle.Setters.Add(new Setter(Control.BackgroundProperty, (Brush)lThemeProperty.Select(p => p.Color1).First()));
-                lNewStyle.Setters.Add(new Setter(Control.ForegroundProperty, (Brush)lThemeProperty.Select(p => p.Color2).First()));
-                lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.Color3).First()));
-               // lNewStyle.Setters.Add(new Setter(Control.BorderBrushProperty, (Brush)lThemeProperty.Select(p => p.Color4).First()));
-
-                Application.Current.Resources[pThemeStyle] = lNewStyle;
+                if (lTheme.Color2 != null)
+                {
+                    lPorpertyName = string.Concat(nameof(lTheme.Color2), lTheme.SubThemeName);
+                    Application.Current.Resources[lPorpertyName] = lTheme.Color2;
+                }
+                if (lTheme.Color3 != null)
+                {
+                    lPorpertyName = string.Concat(nameof(lTheme.Color3), lTheme.SubThemeName);
+                    Application.Current.Resources[lPorpertyName] = lTheme.Color3;
+                }
+                if (lTheme.Color4 != null)
+                {
+                    lPorpertyName = string.Concat(nameof(lTheme.Color4), lTheme.SubThemeName);
+                    Application.Current.Resources[lPorpertyName] = lTheme.Color4;
+                }
             }
         }
 

@@ -71,14 +71,14 @@
                             Value="0,5,0,5" />
                 </Style>
             </StackPanel.Resources>
-            <local:ColorPicker_Control x:Name="BackgroundColorPicker"
-                                       ColorPickerText="Background" />
             <local:ColorPicker_Control x:Name="Color1Picker"
-                                       ColorPickerText="Color 1" />
+                                       ColorPickerText="Color1" />
             <local:ColorPicker_Control x:Name="Color2Picker"
-                                       ColorPickerText="Color 2" />
+                                       ColorPickerText="Color2" />
             <local:ColorPicker_Control x:Name="Color3Picker"
-                                       ColorPickerText="Color 3" />
+                                       ColorPickerText="Color3" />
+            <local:ColorPicker_Control x:Name="Color4Picker"
+                                       ColorPickerText="Color4" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"

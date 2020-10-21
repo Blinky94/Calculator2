@@ -26,36 +26,42 @@ namespace Udemy_Calculator
 
         private void UIColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
+            if(e.NewValue == null)
+            {
+                return;
+            }
+
             SolidColorBrush lColorSelected = new SolidColorBrush((Color)e.NewValue);
 
             foreach (Window window in Application.Current.Windows)
             {
-                if (window.GetType() == typeof(OptionWindow))
+                if (window.GetType() != typeof(OptionWindow))
                 {
-                    var loPtionWindox = window as OptionWindow;
+                    continue;
+                }
+                var loPtionWindox = window as OptionWindow;
 
-                    var lItemSelected = loPtionWindox.ItemsListBox.SelectedItem.ToString();
-                    var lColorPickerText = TitleLabel.Content.ToString();
+                var lItemSelected = loPtionWindox.ItemsListBox.SelectedItem.ToString();
+                var lColorPickerText = TitleLabel.Content.ToString();
 
-                    CommonTheme.ListOfAllThemes.Where(p => p.ThemeRootName == CommonTheme.ThemeSelectedName).Where(p => p.ParentLongName == lItemSelected).ToList().ForEach(p =>
+                foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+                {
+                    if (lColorPickerText == "Color1")
                     {
-                        if(lColorPickerText == "Color1")
-                        {
-                            p.Color1 = lColorSelected;
-                        }
-                        else if (lColorPickerText == "Color2")
-                        {
-                            p.Color2 = lColorSelected;
-                        }
-                        else if (lColorPickerText == "Color3")
-                        {
-                            p.Color3 = lColorSelected;
-                        }
-                        else if (lColorPickerText == "Color4")
-                        {
-                            p.Color4 = lColorSelected;
-                        }
-                    });
+                        lTheme.Color1 = lColorSelected;
+                    }
+                    else if (lColorPickerText == "Color2")
+                    {
+                        lTheme.Color2 = lColorSelected;
+                    }
+                    else if (lColorPickerText == "Color3")
+                    {
+                        lTheme.Color3 = lColorSelected;
+                    }
+                    else if (lColorPickerText == "Color4")
+                    {
+                        lTheme.Color4 = lColorSelected;
+                    }
                 }
             }
 
