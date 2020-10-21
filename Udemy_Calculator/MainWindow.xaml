@@ -106,7 +106,7 @@
                                           Checked="UIHistoryExpander_Expanded"
                                           Unchecked="UIHistoryExpander_Collapsed"
                                           Template="{DynamicResource ToggleButtonControlTemplate1}">
-                                <Image ToolTip="Open/Close compute details">
+                                <Image ToolTip="History">
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Setter Property="Source"

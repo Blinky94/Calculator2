@@ -241,9 +241,9 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="FontSize"
-                    Value="12" />
+                    Value="13" />
             <Setter Property="FontWeight"
-                    Value="DemiBold" />
+                    Value="UltraBold" />
             <Setter Property="Background"
                     Value="{DynamicResource Color1ScientificButtons}" />
             <Setter Property="Foreground"
@@ -257,7 +257,7 @@
             <Setter Property="Margin"
                     Value="5 0 0 5" />
             <Setter Property="Padding"
-                    Value="0 0 0 4" />
+                    Value="0 -2 0 0" />
         </Style>
 
         <Style x:Key="TrigonometryButtonsStyle"

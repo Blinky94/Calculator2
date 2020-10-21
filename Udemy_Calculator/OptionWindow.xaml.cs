@@ -128,56 +128,60 @@ namespace Udemy_Calculator
                 if (lTheme.Color1 != null)
                 {
                     // Activating parameter
-                    Color1Picker.IsEnabled = true;
+                    Color1Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color1Picker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
+                    Color1Picker.ColorPickerUID = lTheme.Color1Attribute;
                 }
                 else
                 {
                     // Desactivating the parameter
-                    Color1Picker.IsEnabled = false;
+                    Color1Picker.Visibility = Visibility.Hidden;
                     Color1Picker.UIColorPicker.SelectedColor = null;
                 }
 
                 if (lTheme.Color2 != null)
                 {
                     // Activating parameter
-                    Color2Picker.IsEnabled = true;
+                    Color2Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color2Picker.UIColorPicker.SelectedColor = (lTheme.Color2).Color;
+                    Color2Picker.ColorPickerUID = lTheme.Color2Attribute;
                 }
                 else
                 {
                     // Desactivating the parameter
-                    Color2Picker.IsEnabled = false;
+                    Color2Picker.Visibility = Visibility.Hidden;
                     Color2Picker.UIColorPicker.SelectedColor = null;
                 }
 
                 if (lTheme.Color3 != null)
                 {
                     // Activating parameter
-                    Color3Picker.IsEnabled = true;
+                    Color3Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color3Picker.UIColorPicker.SelectedColor = (lTheme.Color3).Color;
+                    Color3Picker.ColorPickerUID = lTheme.Color3Attribute;
                 }
                 else
                 {
                     // Desactivating the parameter
-                    Color3Picker.IsEnabled = false;
+                    Color3Picker.Visibility = Visibility.Hidden;
                     Color3Picker.UIColorPicker.SelectedColor = null;
                 }
 
                 if (lTheme.Color4 != null)
                 {
                     // Activating parameter
-                    Color4Picker.IsEnabled = true;
+                    Color4Picker.Visibility = Visibility.Visible;
                     // Affecting the color
                     Color4Picker.UIColorPicker.SelectedColor = (lTheme.Color4).Color;
+                    Color4Picker.ColorPickerUID = lTheme.Color4Attribute;
                 }
                 else
                 {
                     // Desactivating the parameter
-                    Color4Picker.IsEnabled = false;
+                    Color4Picker.Visibility = Visibility.Hidden;
                     Color4Picker.UIColorPicker.SelectedColor = null;
                 }
             }

@@ -59,7 +59,7 @@
                         Style="{DynamicResource SndeButtonStyle}"
                         x:Uid="2nde"
                         Content="2nde"
-                        Padding="0"
+                        Padding="1 0 0 1"
                         Click="UISecondFuncButton_Click">
                 </Button>
                 <Button x:Name="UIXSquareButton"

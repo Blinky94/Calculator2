@@ -3,8 +3,8 @@
   <ThemeSelected name="Ice" />
   <Theme name="Default">
     <MainTheme name="Main theme">
-      <Color1 name="Background">#FFE8E8CA</Color1>
-      <Color2 name="Foreground">#FF000000</Color2>
+      <Color1 name="Background">#FF9E9E9E</Color1>
+      <Color2 name="Foreground">#FFF2F2F2</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
@@ -13,7 +13,7 @@
       <Color3 name="Border brush">#FF000000</Color3>
     </BaseButtons>
     <SndeButton name="Second button">
-      <Color1 name="Background">#FF0EC200</Color1>
+      <Color1 name="Background">#FF4C8F47</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </SndeButton>
@@ -28,8 +28,8 @@
       <Color3 name="Border brush">#FF000000</Color3>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <Color1 name="Background">#FFFFFFFF</Color1>
-      <Color2 name="Foreground">#FF000000</Color2>
+      <Color1 name="Background">#FF424242</Color1>
+      <Color2 name="Foreground">#FFF7F7F7</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
@@ -38,8 +38,8 @@
       <Color3 name="Border brush">#FFF0F8FF</Color3>
     </MemoryButtons>
     <TrigonometryButtons name="Trigonometry buttons">
-      <Color1 name="Background">#FFFFFFFF</Color1>
-      <Color2 name="Foreground">#FF000000</Color2>
+      <Color1 name="Background">#FF242323</Color1>
+      <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </TrigonometryButtons>
     <History name="History">
@@ -99,9 +99,9 @@
   </Theme>
   <Theme name="Ice">
     <MainTheme name="Main theme">
-      <Color1 name="Main theme background">#FF6CB1D1</Color1>
-      <Color2 name="Main theme foreground">#FFF0F8FF</Color2>
-      <Color3 name="Main theme border color">#FF000A61</Color3>
+      <Color1 name="Background">#FF86A5CC</Color1>
+      <Color2 name="Foreground">#FFFFFFFF</Color2>
+      <Color3 name="Border brush">#FF000A61</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
       <Color1 name="Background">#FF88DFFF</Color1>
@@ -119,17 +119,17 @@
       <Color3 name="Border brush">#FF000A61</Color3>
     </ScientificButtons>
     <OperatorsButtons name="Operator buttons">
-      <Color1 name="Background">#FF010A24</Color1>
+      <Color1 name="Background">#FF0034CC</Color1>
       <Color2 name="Foreground">#FFF0F8FF</Color2>
       <Color3 name="Border brush">#FF000A61</Color3>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <Color1 name="Background">#FF008AFF</Color1>
+      <Color1 name="Background">#FF000996</Color1>
       <Color2 name="Foreground">#FFF0F8FF</Color2>
       <Color3 name="Border brush">#FF000A61</Color3>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
-      <Color1 name="Background">#FF008B59</Color1>
+      <Color1 name="Background">#FF12008B</Color1>
       <Color2 name="Foreground">#FFF0F8FF</Color2>
       <Color3 name="Border brush">#FF000A61</Color3>
     </MemoryButtons>
@@ -147,7 +147,7 @@
   </Theme>
   <Theme name="Dark">
     <MainTheme name="Main theme">
-      <Color1 name="Background">#FF211313</Color1>
+      <Color1 name="Background">#FF212121</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FF88898A</Color3>
     </MainTheme>

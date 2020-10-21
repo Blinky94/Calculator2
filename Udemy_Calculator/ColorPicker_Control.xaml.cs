@@ -19,6 +19,19 @@ namespace Udemy_Calculator
             set { SetValue(ColorPickerTextProperty, value); }
         }
 
+
+        public static readonly DependencyProperty ColorPickerUIDProperty =
+         DependencyProperty.Register("ColorPickerUID",
+         typeof(string),
+         typeof(ColorPicker_Control),
+         new PropertyMetadata(""));
+        public string ColorPickerUID
+        {
+            get { return (string)GetValue(ColorPickerUIDProperty); }
+            set { SetValue(ColorPickerUIDProperty, value); }
+        }
+
+
         public ColorPicker_Control()
         {
             InitializeComponent();
@@ -42,23 +55,23 @@ namespace Udemy_Calculator
                 var loPtionWindox = window as OptionWindow;
 
                 var lItemSelected = loPtionWindox.ItemsListBox.SelectedItem.ToString();
-                var lColorPickerText = TitleLabel.Content.ToString();
+                var lColorPickerUID = TitleLabel.Uid.ToString();
 
                 foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
                 {
-                    if (lColorPickerText == "Color1")
+                    if (lColorPickerUID.Contains("Color1"))
                     {
-                        lTheme.Color1 = lColorSelected;
+                        lTheme.Color1 = lColorSelected;                     
                     }
-                    else if (lColorPickerText == "Color2")
+                    else if (lColorPickerUID.Contains("Color2"))
                     {
                         lTheme.Color2 = lColorSelected;
                     }
-                    else if (lColorPickerText == "Color3")
+                    else if (lColorPickerUID.Contains("Color3"))
                     {
                         lTheme.Color3 = lColorSelected;
                     }
-                    else if (lColorPickerText == "Color4")
+                    else if (lColorPickerUID.Contains("Color4"))
                     {
                         lTheme.Color4 = lColorSelected;
                     }

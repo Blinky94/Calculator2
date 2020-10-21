@@ -15,7 +15,8 @@
         </Grid.ColumnDefinitions>
       
         <Label x:Name="TitleLabel"
-               Content="{Binding Path=ColorPickerText, ElementName=colorPickerControl}"
+               Uid="{Binding Path=ColorPickerUID, ElementName=colorPickerControl}"
+               Content="{Binding Path=ColorPickerUID, ElementName=colorPickerControl}"
                Grid.Column="0"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
