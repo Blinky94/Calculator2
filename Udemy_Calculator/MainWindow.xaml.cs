@@ -11,6 +11,7 @@ namespace Udemy_Calculator
         // Event to raise number pressed by user to display to the UIDisplay
         public delegate void EventUpdateUIDisplayHandler(string pContent);
         public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
+        internal static ConsoleDebug mConsoleDebug;
 
         private void SetEvents()
         {
@@ -22,8 +23,6 @@ namespace Udemy_Calculator
             mConsoleDebug = new ConsoleDebug();
             mConsoleDebug.Show();
         }
-
-        internal static ConsoleDebug mConsoleDebug;
 
         public MainWindow()
         {

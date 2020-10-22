@@ -20,8 +20,7 @@
             <Border x:Name="border"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Style="{DynamicResource ResourceKey=MainWindowStyle}"
-                    Background="Transparent"
+                    Background="{DynamicResource ResourceKey=Color1MainTheme}"
                     SnapsToDevicePixels="True">
                 <ContentPresenter x:Name="contentPresenter"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -78,7 +77,8 @@
                             VerticalAlignment="Center">
                     <!--Main Container Grid-->
                     <Border CornerRadius="25"
-                            Style="{DynamicResource MainWindowStyle}"
+                            Background="{DynamicResource ResourceKey=Color1MainTheme}"
+                            BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
                             BorderThickness="5">
                         <Grid x:Name="MainGrid"
                               Margin="10 10 10 20">
@@ -102,10 +102,11 @@
                                           Margin="240 -4 0 0"
                                           HorizontalAlignment="Left"
                                           IsEnabled="True"
-                                          Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                                          Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
+                                          Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Mode=TwoWay}"
                                           Checked="UIHistoryExpander_Expanded"
                                           Unchecked="UIHistoryExpander_Collapsed"
-                                          Template="{DynamicResource ToggleButtonControlTemplate1}">
+                                          Template="{DynamicResource ResourceKey=ToggleButtonControlTemplate1}">
                                 <Image ToolTip="History">
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -116,7 +117,7 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="false" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                                    Value="false" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
@@ -129,7 +130,7 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="true" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                                    Value="false" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
@@ -142,7 +143,7 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="false" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}, Mode=TwoWay}"
                                                                    Value="true" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
@@ -155,7 +156,7 @@
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}"
                                                                    Value="true" />
-                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource testingBGDarkerConverter}}"
+                                                        <Condition Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                                    Value="true" />
                                                     </MultiDataTrigger.Conditions>
                                                     <MultiDataTrigger.Setters>
@@ -172,23 +173,20 @@
 
                             <!--Call the Display User control-->
                             <local:Display_Control Grid.Row="1"
-                                                   x:Name="UIDisplay"
-                                                   Style="{DynamicResource MainWindowStyle}" />
+                                                   x:Name="UIDisplay" />
 
                             <!--Call the Calculator User control-->
                             <local:Calculator_Control Grid.Column="0"
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
-                                                      Margin="1 10 0 0"
-                                                      Style="{DynamicResource MainWindowStyle}" />
+                                                      Margin="1 10 0 0" />
 
                             <!--Call the History User control-->
                             <local:HistoryControl x:Name="UIHistory"
                                                   Grid.Column="1"
                                                   Grid.Row="2"
                                                   Visibility="Collapsed"
-                                                  Margin="0 -95 0 0"
-                                                  Style="{DynamicResource MainWindowStyle}" />
+                                                  Margin="0 -95 0 0" />
                         </Grid>
                     </Border>
                 </StackPanel>

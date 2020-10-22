@@ -134,6 +134,9 @@
     <Compile Include="Calculator_Control.xaml.cs">
       <DependentUpon>Calculator_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComboBox_Control.xaml.cs">
+      <DependentUpon>ComboBox_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DateConverter.cs" />
     <Compile Include="EnumConverter.cs" />
     <Compile Include="Tables\ChunkTable.cs" />
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ColorPicker_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBox_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +257,7 @@
       <Link>.editorconfig</Link>
     </None>
     <Resource Include="Fonts\digital-7.ttf" />
+    <Resource Include="Fonts\Roboto-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

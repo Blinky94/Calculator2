@@ -10,8 +10,8 @@
              x:Name="colorPickerControl">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="115" />
         </Grid.ColumnDefinitions>
       
         <Label x:Name="TitleLabel"
@@ -24,8 +24,7 @@
                Style="{DynamicResource MainLabelStyle}" />
 
         <wpfx:ColorPicker x:Name="UIColorPicker"
-                          Grid.Column="1"
-                          Width="115"
+                          Grid.Column="1"             
                           DisplayColorAndName="True"
                           SelectedColorChanged="UIColorPicker_SelectedColorChanged" />
     </Grid>

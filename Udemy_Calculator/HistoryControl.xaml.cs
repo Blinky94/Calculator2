@@ -35,22 +35,26 @@ namespace Udemy_Calculator
 
         internal void AppendElement(string pStr, bool pIsResult = false, string pNum = default, bool pIsDetail = false)
         {
+            Style lStyle = pIsDetail ? (Style)FindResource("HistoryChunkStyle") : (Style)FindResource("HistoryFormulaStyle");
+
             if (!pIsResult)
             {
                 TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append {pStr}, is result: {pIsResult}, number: {pNum}");
-                mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum, pIsDetail);
+
+               
+                mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
             }
             else
             {
                 if (pNum != default)
                 {
                     TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append into the formula the last result {pNum}");
-                    mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, pIsResult, pNum, pIsDetail);
+                    mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
                 }
                 else
                 {
                     TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append the result {pStr}");
-                    mDisplayHistory.AppendHistoryResult(pStr, UIHistoryTextBox);
+                    mDisplayHistory.AppendHistoryResult(pStr, UIHistoryTextBox, (Style)FindResource("HistoryResultStyle"));
                 }
             }
         }

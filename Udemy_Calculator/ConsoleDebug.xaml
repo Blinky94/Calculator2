@@ -9,7 +9,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Style="{DynamicResource MainWindowStyle}"
+        Background="{DynamicResource ResourceKey=Color1MainTheme}"
+        Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
+        BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
         WindowStartupLocation="Manual"
         Height="500"
         Width="1000">
@@ -83,9 +85,9 @@
                             </Style>
                         </DataTemplate.Resources>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding DetailDate, Converter={StaticResource dateConverter}, ConverterParameter={x:Type local:LogCategory}}" />
+                            <TextBlock Text="{Binding DetailDate, Converter={StaticResource ResourceKey=dateConverter}, ConverterParameter={x:Type local:LogCategory}}" />
                             <TextBlock Text=": " />
-                            <TextBlock Text="{Binding DetailCategory, Converter={StaticResource enumConverter}, ConverterParameter={x:Type local:LogCategory}}" />
+                            <TextBlock Text="{Binding DetailCategory, Converter={StaticResource ResourceKey=enumConverter}, ConverterParameter={x:Type local:LogCategory}}" />
                             <TextBlock Text=" - " />
                             <TextBlock Text="{Binding DetailText}" />
                         </StackPanel>
@@ -116,7 +118,7 @@
                 <Label Content="Info"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabelStyle}" />
+                       Style="{DynamicResource ResourceKey=MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxWarning"
                       Uid="Warning"
@@ -125,7 +127,7 @@
                 <Label Content="Warning"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabelStyle}" />
+                       Style="{DynamicResource ResourceKey=MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxError"
                       Uid="Error"
@@ -134,7 +136,7 @@
                 <Label Content="Error"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabelStyle}" />
+                       Style="{DynamicResource ResourceKey=MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxOutput"
                       Uid="Output"
@@ -143,7 +145,7 @@
                 <Label Content="Output"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabelStyle}" />
+                       Style="{DynamicResource ResourceKey=MainLabelStyle}" />
             </CheckBox>
             <CheckBox x:Name="CheckBoxTechnical"
                       Uid="Technical"
@@ -152,7 +154,7 @@
                 <Label Content="Technical"
                        FontSize="11"
                        Margin="-5,-3,0,0"
-                       Style="{DynamicResource MainLabelStyle}" />
+                       Style="{DynamicResource ResourceKey=MainLabelStyle}" />
             </CheckBox>
         </StackPanel>
 
@@ -163,18 +165,19 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <Button Click="ClearConsole_Click"
-                    Style="{DynamicResource BaseButtonsStyle}"
+                    Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                    Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                     Width="40"
                     Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
                             <Style TargetType="Image"
-                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                   BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                 <Setter Property="Source"
                                         Value="Images/Cleaner_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Cleaner_icon_reverse.png" />
@@ -186,18 +189,19 @@
                 </StackPanel>
             </Button>
             <Button Click="CloseConsole_Click"
-                    Style="{DynamicResource BaseButtonsStyle}"
+                    Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                    Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                     Width="40"
                     Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
                             <Style TargetType="Image"
-                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                   BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                 <Setter Property="Source"
                                         Value="Images/Cancel_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Cancel_icon_reverse.png" />
@@ -209,18 +213,19 @@
                 </StackPanel>
             </Button>
             <Button Click="Button_SaveClick"
-                    Style="{DynamicResource BaseButtonsStyle}"
+                    Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                    Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                     Width="40"
                     Height="25">
                 <StackPanel>
                     <Image>
                         <Image.Style>
                             <Style TargetType="Image"
-                                   BasedOn="{StaticResource ImageButtonStyle}">
+                                   BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                 <Setter Property="Source"
                                         Value="Images/Save_icon.png" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
+                                    <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                  Value="true">
                                         <Setter Property="Source"
                                                 Value="Images/Save_icon_reverse.png" />

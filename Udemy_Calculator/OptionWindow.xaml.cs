@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -17,7 +19,8 @@ namespace Udemy_Calculator
         {
             // Private constructor to instanciate local objects here 
             InitializeComponent();
-
+            // Event on theme name selected
+            ThemeListComboBox.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxThemeList_SelectionChanged);
             //Loading the xml configuration to provide access to all elements
             CommonTheme.LoadFromXmlProvider(this);
 
@@ -25,7 +28,7 @@ namespace Udemy_Calculator
             PopulateListPropertiesToListView();
 
             // Combobox List for main theme to select
-            ThemeListComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
+            ThemeListComboBox.ItemsComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
 
             // Selecting default values into controls
             if (CommonTheme.GetParentThemeLongNames.Count > 0)
@@ -37,7 +40,7 @@ namespace Udemy_Calculator
 
             if (!string.IsNullOrEmpty(CommonTheme.ThemeSelectedName))
             {
-                ThemeListComboBox.SelectedIndex = ThemeListComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
+                ThemeListComboBox.ItemsComboBox.SelectedIndex = ThemeListComboBox.ItemsComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
             }
         }
 
@@ -109,9 +112,52 @@ namespace Udemy_Calculator
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Update Property value type to a Control with the right title to put on Label
+        /// </summary>
+        /// <param name="pFontSize"></param>
+        /// <param name="pControl"></param>
+        /// <param name="pTitle"></param>
+        private static void UpdatePropertyValuesAndTitles(string pValue, Control pControl, string pTitle)
         {
-
+            if(pControl is ComboBox_Control)
+            {
+                ComboBox_Control lComboBxCtrl = pControl as ComboBox_Control;
+                if (!string.IsNullOrEmpty(pValue) && pValue != "0")
+                {
+                    // Activating parameter
+                    lComboBxCtrl.Visibility = Visibility.Visible;
+                    // Affecting the value
+                    lComboBxCtrl.ItemsComboBox.SelectedItem = pValue;
+                    // Set the right text for the property
+                    lComboBxCtrl.ComboBoxTitle.Content = pTitle;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    lComboBxCtrl.Visibility = Visibility.Collapsed;
+                    lComboBxCtrl.ItemsComboBox.SelectedItem = null;
+                }
+            }
+            else if(pControl is ColorPicker_Control)
+            {
+                ColorPicker_Control lColorPkrCtrl = pControl as ColorPicker_Control;
+                if (!string.IsNullOrEmpty(pValue))
+                {
+                    // Activating parameter
+                    lColorPkrCtrl.Visibility = Visibility.Visible;
+                    // Affecting the color
+                    lColorPkrCtrl.UIColorPicker.SelectedColor = ((SolidColorBrush)new BrushConverter().ConvertFromString(pValue)).Color;
+                    // Set the right text for the property
+                    lColorPkrCtrl.ColorPickerText = pTitle;
+                }
+                else
+                {
+                    // Desactivating the parameter
+                    lColorPkrCtrl.Visibility = Visibility.Collapsed;
+                    lColorPkrCtrl.UIColorPicker.SelectedColor = null;
+                }
+            }        
         }
 
         private void ItemsListBox_Selected(object sender, RoutedEventArgs e)
@@ -125,65 +171,19 @@ namespace Udemy_Calculator
 
             foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lSelectedVal))
             {
-                if (lTheme.Color1 != null)
-                {
-                    // Activating parameter
-                    Color1Picker.Visibility = Visibility.Visible;
-                    // Affecting the color
-                    Color1Picker.UIColorPicker.SelectedColor = (lTheme.Color1).Color;
-                    Color1Picker.ColorPickerText = lTheme.Color1Attribute;
-                }
-                else
-                {
-                    // Desactivating the parameter
-                    Color1Picker.Visibility = Visibility.Hidden;
-                    Color1Picker.UIColorPicker.SelectedColor = null;
-                }
-
-                if (lTheme.Color2 != null)
-                {
-                    // Activating parameter
-                    Color2Picker.Visibility = Visibility.Visible;
-                    // Affecting the color
-                    Color2Picker.UIColorPicker.SelectedColor = (lTheme.Color2).Color;
-                    Color2Picker.ColorPickerText = lTheme.Color2Attribute;
-                }
-                else
-                {
-                    // Desactivating the parameter
-                    Color2Picker.Visibility = Visibility.Hidden;
-                    Color2Picker.UIColorPicker.SelectedColor = null;
-                }
-
-                if (lTheme.Color3 != null)
-                {
-                    // Activating parameter
-                    Color3Picker.Visibility = Visibility.Visible;
-                    // Affecting the color
-                    Color3Picker.UIColorPicker.SelectedColor = (lTheme.Color3).Color;
-                    Color3Picker.ColorPickerText = lTheme.Color3Attribute;
-                }
-                else
-                {
-                    // Desactivating the parameter
-                    Color3Picker.Visibility = Visibility.Hidden;
-                    Color3Picker.UIColorPicker.SelectedColor = null;
-                }
-
-                if (lTheme.Color4 != null)
-                {
-                    // Activating parameter
-                    Color4Picker.Visibility = Visibility.Visible;
-                    // Affecting the color
-                    Color4Picker.UIColorPicker.SelectedColor = (lTheme.Color4).Color;
-                    Color4Picker.ColorPickerText = lTheme.Color4Attribute;
-                }
-                else
-                {
-                    // Desactivating the parameter
-                    Color4Picker.Visibility = Visibility.Hidden;
-                    Color4Picker.UIColorPicker.SelectedColor = null;
-                }
+                UpdatePropertyValuesAndTitles(lTheme.Color1?.ToString(), Color1Picker, lTheme.Color1Attribute);
+                UpdatePropertyValuesAndTitles(lTheme.Color2?.ToString(), Color2Picker, lTheme.Color2Attribute);
+                UpdatePropertyValuesAndTitles(lTheme.Color3?.ToString(), Color3Picker, lTheme.Color3Attribute);
+                UpdatePropertyValuesAndTitles(lTheme.Color4?.ToString(), Color4Picker, lTheme.Color4Attribute);
+                UpdatePropertyValuesAndTitles(lTheme.FontFamily1?.ToString(), ComboBoxFontFamily1, lTheme.FontFamilyAttribute1);
+                UpdatePropertyValuesAndTitles(lTheme.FontFamily2?.ToString(), ComboBoxFontFamily2, lTheme.FontFamilyAttribute2);
+                UpdatePropertyValuesAndTitles(lTheme.FontFamily3?.ToString(), ComboBoxFontFamily3, lTheme.FontFamilyAttribute3);
+                UpdatePropertyValuesAndTitles(lTheme.FontSize1.ToString(), ComboBoxFontSize1, lTheme.FontSizeAttribute1);
+                UpdatePropertyValuesAndTitles(lTheme.FontSize2.ToString(), ComboBoxFontSize2, lTheme.FontSizeAttribute2);
+                UpdatePropertyValuesAndTitles(lTheme.FontSize3.ToString(), ComboBoxFontSize3, lTheme.FontSizeAttribute3);
+                UpdatePropertyValuesAndTitles(lTheme.FontWeight1.ToString(), ComboBoxFontWeight1, lTheme.FontWeightAttribute1);
+                UpdatePropertyValuesAndTitles(lTheme.FontWeight2.ToString(), ComboBoxFontWeight2, lTheme.FontWeightAttribute2);
+                UpdatePropertyValuesAndTitles(lTheme.FontWeight3.ToString(), ComboBoxFontWeight3, lTheme.FontWeightAttribute3);
             }
         }
     }

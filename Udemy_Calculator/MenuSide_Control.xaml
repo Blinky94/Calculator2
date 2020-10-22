@@ -8,7 +8,7 @@
              d:DesignHeight="30"
              d:DesignWidth="200">
     <Border>
-        <Grid Style="{DynamicResource ResourceKey=MainWindowStyle}" Background="Transparent">
+        <Grid Background="Transparent">
             <Grid.Resources>
                 <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
                 <Style TargetType="Menu">
@@ -40,22 +40,27 @@
 
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
-                  Style="{DynamicResource MenuStyle}"
+                  Background="{DynamicResource ResourceKey=Color1MainTheme}"
+                  Style="{DynamicResource ResourceKey=MenuStyle}"
                   Height="25"
                   Width="25"
                   VerticalAlignment="Top"
-                  BorderBrush="Transparent"
+                  BorderBrush="{DynamicResource Color3MainTheme}"
                   Foreground="Black">
-                <MenuItem x:Name="MenuSideControlItem" IsHitTestVisible="True" BorderThickness="0">
+                <MenuItem x:Name="MenuSideControlItem"
+                          IsHitTestVisible="True"
+                          BorderThickness="0">
                     <MenuItem.Header>
-                        <Image Width="25" Height="25" Margin="-10 -3 0 0">
+                        <Image Width="25"
+                               Height="25"
+                               Margin="-10 -3 0 0">
                             <Image.Style>
                                 <Style TargetType="Image"
-                                       BasedOn="{StaticResource ImageButtonStyle}">
+                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                     <Setter Property="Source"
                                             Value="Images/Menu_icon.png" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Converter={StaticResource testingBGDarkerConverter}}"
+                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}, Mode=TwoWay}"
                                                      Value="true">
                                             <Setter Property="Source"
                                                     Value="Images/Menu_icon_reverse.png" />
@@ -217,7 +222,7 @@
                    Background="Transparent"
                    HorizontalContentAlignment="Center"
                    Margin="0 0 50 0"
-                   Style="{DynamicResource MainLabelStyle}" />
+                   Style="{DynamicResource ResourceKey=MainLabelStyle}" />
         </Grid>
     </Border>
 

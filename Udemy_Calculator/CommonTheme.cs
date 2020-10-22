@@ -133,6 +133,51 @@ namespace Udemy_Calculator
                                 lTheme.Color4 = (SolidColorBrush)new BrushConverter().ConvertFromString(lPropertyNode.InnerText);
                                 lTheme.Color4Attribute = lPropertyNode.Attributes["name"].Value;
                             }
+                            else if (lPropertyNode.Name.Contains("FontFamily1"))
+                            {
+                                lTheme.FontFamily1 = new FontFamily(lPropertyNode.InnerText);
+                                lTheme.FontFamilyAttribute1 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontFamily2"))
+                            {
+                                lTheme.FontFamily2 = new FontFamily(lPropertyNode.InnerText);
+                                lTheme.FontFamilyAttribute2 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontFamily3"))
+                            {
+                                lTheme.FontFamily3 = new FontFamily(lPropertyNode.InnerText);
+                                lTheme.FontFamilyAttribute3 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontSize1"))
+                            {
+                                lTheme.FontSize1 = int.Parse(lPropertyNode.InnerText);
+                                lTheme.FontSizeAttribute1 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontSize2"))
+                            {
+                                lTheme.FontSize2 = int.Parse(lPropertyNode.InnerText);
+                                lTheme.FontSizeAttribute2 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontSize3"))
+                            {
+                                lTheme.FontSize3 = int.Parse(lPropertyNode.InnerText);
+                                lTheme.FontSizeAttribute3 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontWeight1"))
+                            {
+                                lTheme.FontWeight1 = GlobalUsage.ConvertStringToFontWeight(lPropertyNode.InnerText);
+                                lTheme.FontWeightAttribute1 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontWeight2"))
+                            {
+                                lTheme.FontWeight2 = GlobalUsage.ConvertStringToFontWeight(lPropertyNode.InnerText);
+                                lTheme.FontWeightAttribute2 = lPropertyNode.Attributes["name"].Value;
+                            }
+                            else if (lPropertyNode.Name.Contains("FontWeight3"))
+                            {
+                                lTheme.FontWeight3 = GlobalUsage.ConvertStringToFontWeight(lPropertyNode.InnerText);
+                                lTheme.FontWeightAttribute3 = lPropertyNode.Attributes["name"].Value;
+                            }
                         }
 
                         lTheme.ThemeSelected = lThemeSelected;

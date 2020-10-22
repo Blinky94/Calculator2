@@ -50,7 +50,7 @@ namespace Udemy_Calculator
         /// <param name="pIsResult"></param>
         /// <param name="pLastNumber"></param>
         /// <param name="pIsDetail"></param>
-        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, bool pIsResult = false, string pLastNumber = default, bool pIsDetail = false)
+        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, Style pStyle, string pLastNumber = default, bool pIsResult = false)
         {
             double.TryParse(pText, NumberStyles.Any, CultureInfo.InvariantCulture, out double lTextSigned);
 
@@ -66,19 +66,7 @@ namespace Udemy_Calculator
             }
 
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
-
-            if (pIsDetail)
-            {
-                lCurrentBlock.TextAlignment = TextAlignment.Center;
-                lCurrentBlock.Foreground = Brushes.CadetBlue;
-                lCurrentBlock.FontSize = 14;
-            }
-            else
-            {
-                lCurrentBlock.TextAlignment = TextAlignment.Left;
-                lCurrentBlock.Foreground = Brushes.Black;
-                lCurrentBlock.FontSize = 16;
-            }
+            lCurrentBlock.Style = pStyle;         
         }
 
         /// <summary>
@@ -86,12 +74,10 @@ namespace Udemy_Calculator
         /// </summary>
         /// <param name="pText"></param>
         /// <param name="pUITextBox"></param>
-        public void AppendHistoryResult(string pText, RichTextBox pUITextBox)
+        public void AppendHistoryResult(string pText, RichTextBox pUITextBox, Style pStyle)
         {
             Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
-            lCurrentBlock.TextAlignment = TextAlignment.Right;
-            lCurrentBlock.Foreground = Brushes.Blue;
-            lCurrentBlock.LineHeight = 0.1;
+            lCurrentBlock.Style = pStyle;
         }
 
         /// <summary>

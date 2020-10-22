@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -153,6 +154,72 @@ namespace Udemy_Calculator
                     TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: {dialog.FileName} has been saved !");
                 }
             }
-        }   
+        }
+
+        /// <summary>
+        /// Converting string value to FontWeight
+        /// </summary>
+        /// <param name="pFontWtStr"></param>
+        /// <returns>FontWeight</returns>
+        internal static FontWeight? ConvertStringToFontWeight(string pFontWtStr)
+        {
+            FontWeight? lFontWt;
+
+            switch (pFontWtStr)
+            {
+                case "Thin":
+                    lFontWt = FontWeights.Thin;
+                    break;
+                case "ExtraLight":
+                    lFontWt = FontWeights.ExtraLight;
+                    break;
+                case "UltraLight":
+                    lFontWt = FontWeights.UltraLight;
+                    break;
+                case "Light":
+                    lFontWt = FontWeights.Light;
+                    break;
+                case "Normal":
+                    lFontWt = FontWeights.Normal;
+                    break;
+                case "Regular":
+                    lFontWt = FontWeights.Regular;
+                    break;
+                case "Medium":
+                    lFontWt = FontWeights.Medium;
+                    break;
+                case "DemiBold":
+                    lFontWt = FontWeights.DemiBold;
+                    break;
+                case "SemiBold":
+                    lFontWt = FontWeights.SemiBold;
+                    break;
+                case "Bold":
+                    lFontWt = FontWeights.Bold;
+                    break;
+                case "ExtraBold":
+                    lFontWt = FontWeights.ExtraBold;
+                    break;
+                case "UltraBold":
+                    lFontWt = FontWeights.UltraBold;
+                    break;
+                case "Black":
+                    lFontWt = FontWeights.Black;
+                    break;
+                case "Heavy":
+                    lFontWt = FontWeights.Heavy;
+                    break;
+                case "ExtraBlack":
+                    lFontWt = FontWeights.ExtraBlack;
+                    break;
+                case "UltraBlack":
+                    lFontWt = FontWeights.UltraBlack;
+                    break;
+                default:
+                    lFontWt = null;
+                    break;
+            }
+            return lFontWt;
+        }
     }
 }

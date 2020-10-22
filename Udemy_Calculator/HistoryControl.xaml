@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             BorderBrush="Transparent"
-             Style="{DynamicResource MainWindowStyle}"
+             Background="{DynamicResource ResourceKey=Color1MainTheme}"
+             Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
+             BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
              d:DesignWidth="260">
 
     <Grid x:Name="HistoryControlMainGrid"
@@ -47,15 +48,9 @@
                              BorderBrush="LightGray"
                              BorderThickness="0 0 0 0"
                              ScrollViewer.CanContentScroll="True"
+                             Style="{DynamicResource ResourceKey=HistoryStyle}"
                              Padding="0"
                              TextChanged="UIHistoryTextBox_TextChanged">
-                    <RichTextBox.Background>
-                        <SolidColorBrush Color="White"
-                                         Opacity="0.7" />
-                    </RichTextBox.Background>
-                    <FlowDocument x:Name="UIHistoryFlowDoc"
-                                  LineHeight="1">
-                    </FlowDocument>
                 </RichTextBox>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal"
@@ -66,18 +61,19 @@
                         DockPanel.Dock="Bottom">
                 <Button x:Name="UICleaner"
                         Click="UICleaner_Click"
-                        Style="{DynamicResource BaseButtonsStyle}"
+                        Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                        Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                         Width="40"
                         Height="25">
                     <StackPanel Orientation="Horizontal">
                         <Image>
                             <Image.Style>
                                 <Style TargetType="Image"
-                                       BasedOn="{StaticResource ImageButtonStyle}">
+                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                     <Setter Property="Source"
                                             Value="Images/Cleaner_icon.png" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
+                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                      Value="true">
                                             <Setter Property="Source"
                                                     Value="Images/Cleaner_icon_reverse.png" />
@@ -90,18 +86,19 @@
                 </Button>
                 <Button x:Name="UISave"
                         Click="UISave_Click"
-                        Style="{DynamicResource BaseButtonsStyle}"
+                        Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                        Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                         Width="40"
                         Height="25">
                     <StackPanel Orientation="Horizontal">
                         <Image>
                             <Image.Style>
                                 <Style TargetType="Image"
-                                       BasedOn="{StaticResource ImageButtonStyle}">
+                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
                                     <Setter Property="Source"
                                             Value="Images/Save_icon.png" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource testingBGDarkerConverter}}"
+                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
                                                      Value="true">
                                             <Setter Property="Source"
                                                     Value="Images/Save_icon_reverse.png" />

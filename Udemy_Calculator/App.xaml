@@ -5,6 +5,7 @@
              Startup="Application_Startup">
     <Application.Resources>
         <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
+        <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto-Regular</FontFamily>
         <XmlDataProvider Source="Params\Theme.xml"
                          XPath="/Themes/Theme[@name=../ThemeSelected/@name]"
                          x:Key="colorThemesXml" />
@@ -73,22 +74,10 @@
         <SolidColorBrush x:Key="Color4History"
                          Color="{Binding Source={StaticResource colorThemesXml}, XPath=History/Color4}" />
 
-        <Style x:Key="MainWindowStyle">
-            <Setter Property="Control.Background"
-                    Value="{DynamicResource Color1MainTheme}">
-            </Setter>
-            <Setter Property="Control.Foreground"
-                    Value="{DynamicResource Color2MainTheme}" />
-            <Setter Property="Control.BorderBrush"
-                    Value="{DynamicResource Color3MainTheme}" />
-            <Setter Property="Control.BorderThickness"
-                    Value="1.5" />
-        </Style>
-
         <Style x:Key="MainLabelStyle"
                TargetType="Label">
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2MainTheme}" />
+                    Value="{DynamicResource ResourceKey=Color2MainTheme}" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="FontSize"
@@ -108,11 +97,11 @@
             <Setter Property="Padding"
                     Value="0 2 0 3" />
             <Setter Property="Background"
-                    Value="{DynamicResource Color1BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1BaseButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2BaseButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3BaseButtons}" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="VerticalContentAlignment"
@@ -188,11 +177,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource Color1OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1OperatorsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2OperatorsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3OperatorsButtons}" />
             <Setter Property="Padding"
                     Value="0 -10 0 0" />
         </Style>
@@ -203,17 +192,17 @@
             <Setter Property="FontSize"
                     Value="40" />
             <Setter Property="FontFamily"
-                    Value="{StaticResource Digital}" />
+                    Value="{DynamicResource ResourceKey=Digital}" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="Padding"
                     Value="0" />
             <Setter Property="Background"
-                    Value="{DynamicResource Color1NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1NumericalsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2NumericalsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3NumericalsButtons}" />
         </Style>
 
         <Style x:Key="MemoryButtonsStyle"
@@ -224,11 +213,11 @@
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource Color1MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1MemoryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2MemoryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3MemoryButtons}" />
             <Setter Property="Width"
                     Value="67" />
             <Setter Property="Height"
@@ -245,11 +234,11 @@
             <Setter Property="FontWeight"
                     Value="UltraBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource Color1ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1ScientificButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2ScientificButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3ScientificButtons}" />
             <Setter Property="Width"
                     Value="47" />
             <Setter Property="Height"
@@ -264,11 +253,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource Color1TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color1TrigonometryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color2TrigonometryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=Color3TrigonometryButtons}" />
             <Setter Property="Padding"
                     Value="0,-3,0,0" />
         </Style>
@@ -277,15 +266,14 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource Color1SndeButton}" />
+                    Value="{DynamicResource ResourceKey=Color1SndeButton}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource Color2SndeButton}" />
+                    Value="{DynamicResource ResourceKey=Color2SndeButton}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource Color3SndeButton}" />
+                    Value="{DynamicResource ResourceKey=Color3SndeButton}" />
         </Style>
-   
+
         <Style x:Key="ImageButtonStyle"
-               BasedOn="{StaticResource ResourceKey=MainWindowStyle}"
                TargetType="Image">
             <Setter Property="Width"
                     Value="18" />
@@ -294,10 +282,9 @@
         </Style>
 
         <Style x:Key="MenuStyle"
-               TargetType="Menu"
-               BasedOn="{StaticResource ResourceKey=MainWindowStyle}">
+               TargetType="Menu">
             <Setter Property="Background"
-                    Value="{DynamicResource Color1MainTheme}" />
+                    Value="{DynamicResource ResourceKey=Color1MainTheme}" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver"
                          Value="True">
@@ -308,18 +295,54 @@
         </Style>
 
         <Style x:Key="HistoryStyle"
-               TargetType="Button">
-            <Setter Property="Background" x:Name="backgroundHistory"
-                    Value="{DynamicResource Color1History}" />
+               TargetType="RichTextBox">
+            <Setter Property="Background"
+                    x:Name="backgroundHistory"
+                    Value="{DynamicResource ResourceKey=Color1History}" />
+            <Setter Property="Opacity"
+                    Value="0.7" />
+        </Style>
+
+        <Style x:Key="HistoryFormulaStyle"
+               TargetType="Paragraph">
             <Setter Property="Foreground"
-                    x:Name="foregroundFormulaHistory"
-                    Value="{DynamicResource Color2History}" />
+                    Value="{DynamicResource ResourceKey=Color2History}" />
+            <Setter Property="TextAlignment"
+                    Value="Left" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource ResourceKey=Roboto}" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+        </Style>
+
+        <Style x:Key="HistoryChunkStyle"
+               TargetType="Paragraph">
             <Setter Property="Foreground"
-                    x:Name="foregroundChunkHistory"
-                    Value="{DynamicResource Color3History}" />
+                    Value="{DynamicResource ResourceKey=Color3History}" />
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource ResourceKey=Roboto}" />
+            <Setter Property="FontSize"
+                    Value="13" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="HistoryResultStyle"
+               TargetType="Paragraph">
             <Setter Property="Foreground"
-                    x:Name="foregroundResultHistory"
-                    Value="{DynamicResource Color4History}" />
+                    Value="{DynamicResource ResourceKey=Color4History}" />
+            <Setter Property="TextAlignment"
+                    Value="Right" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource ResourceKey=Roboto}" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
         </Style>
 
     </Application.Resources>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -63,5 +64,95 @@ namespace Udemy_Calculator
         /// Property Color 4 attribute value
         /// </summary>
         public string Color4Attribute { get; set; }
+
+        /// <summary>
+        /// Property FontFamily value
+        /// </summary>
+        public FontFamily FontFamily1 { get; set; }
+
+        /// <summary>
+        /// Property FontFamily attribute value
+        /// </summary>
+        public string FontFamilyAttribute1 { get; set; }
+
+        /// <summary>
+        /// Property FontFamily value
+        /// </summary>
+        public FontFamily FontFamily2 { get; set; }
+
+        /// <summary>
+        /// Property FontFamily attribute value
+        /// </summary>
+        public string FontFamilyAttribute2 { get; set; }
+
+        /// <summary>
+        /// Property FontFamily value
+        /// </summary>
+        public FontFamily FontFamily3 { get; set; }
+
+        /// <summary>
+        /// Property FontFamily attribute value
+        /// </summary>
+        public string FontFamilyAttribute3 { get; set; }
+
+        /// <summary>
+        /// Property FontSize value
+        /// </summary>
+        public int FontSize1 { get; set; }
+
+        /// <summary>
+        /// Property FontSize attribute value
+        /// </summary>
+        public string FontSizeAttribute1 { get; set; }
+
+        /// <summary>
+        /// Property FontSize value
+        /// </summary>
+        public int FontSize2 { get; set; }
+
+        /// <summary>
+        /// Property FontSize attribute value
+        /// </summary>
+        public string FontSizeAttribute2 { get; set; }
+
+        /// <summary>
+        /// Property FontSize value
+        /// </summary>
+        public int FontSize3 { get; set; }
+
+        /// <summary>
+        /// Property FontSize attribute value
+        /// </summary>
+        public string FontSizeAttribute3 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight value
+        /// </summary>
+        public FontWeight? FontWeight1 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight attribute value
+        /// </summary>
+        public string FontWeightAttribute1 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight value
+        /// </summary>
+        public FontWeight? FontWeight2 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight attribute value
+        /// </summary>
+        public string FontWeightAttribute2 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight value
+        /// </summary>
+        public FontWeight? FontWeight3 { get; set; }
+
+        /// <summary>
+        /// Property FontWeight attribute value
+        /// </summary>
+        public string FontWeightAttribute3 { get; set; }
     }
 }
