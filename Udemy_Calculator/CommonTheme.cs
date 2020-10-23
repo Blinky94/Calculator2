@@ -34,6 +34,11 @@ namespace Udemy_Calculator
         public static List<string> GetParentThemeNames => AllParentNodeNameFromXmlFile();
 
         /// <summary>
+        /// Getting all the fonts availables in the solution
+        /// </summary>
+        public static List<string> GetFontList => GetAllAvailablesFonts();
+
+        /// <summary>
         /// Getting all subNodes long name from theme
         /// </summary>
         public static List<string> GetParentThemeLongNames => AllParentNodeLongName();
@@ -52,6 +57,11 @@ namespace Udemy_Calculator
         /// Get all the themes from the Xml file configuration
         /// </summary>
         public static List<Theme> ListOfAllThemes { get; set; }
+
+        /// <summary>
+        /// Get all font weight available
+        /// </summary>
+        public static List<FontWeight> GetFontWeightList => GetAllFontWeightsAvailables();
 
         /// <summary>
         /// Load all properties from xml data provider from current control
@@ -86,6 +96,23 @@ namespace Udemy_Calculator
         #endregion
 
         #region private
+
+        /// <summary>
+        /// Get all font weight available from the FontWeights class
+        /// </summary>
+        /// <returns></returns>
+        private static List<FontWeight> GetAllFontWeightsAvailables()
+        {
+            var lList = new List<FontWeight>();
+
+            var type = typeof(FontWeights);
+            foreach (var p in type.GetProperties().Where(s => s.PropertyType == typeof(FontWeight)))
+            {
+                lList.Add((FontWeight)p.GetValue(null, null));
+            }
+
+            return lList.Distinct().ToList();
+        }
 
         /// <summary>
         /// Getting all the xml file configuration objects list
@@ -221,6 +248,25 @@ namespace Udemy_Calculator
                     Application.Current.Resources[lPorpertyName] = lTheme.Color4;
                 }
             }
+        }
+
+        /// <summary>
+        /// Getting all the fonts available in the App xaml
+        /// </summary>
+        /// <returns></returns>
+        private static List<string> GetAllAvailablesFonts()
+        {
+            var lListOfFonts = new List<string>();
+
+            foreach (System.Collections.DictionaryEntry lResourceDict in Application.Current.Resources)
+            {
+                if(lResourceDict.Value is FontFamily)
+                {
+                    lListOfFonts.Add(lResourceDict.Key.ToString());
+                }
+            }
+
+            return lListOfFonts;
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Fire" />
+  <ThemeSelected name="Default" />
   <Theme name="Default">
     <MainTheme name="Main theme">
-      <Color1 name="Background">#FF9E9E9E</Color1>
-      <Color2 name="Foreground">#FFF2F2F2</Color2>
+      <Color1 name="Background">#FFD6D6D6</Color1>
+      <Color2 name="Foreground">#FF000000</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
@@ -28,25 +28,25 @@
       <Color3 name="Border brush">#FF000000</Color3>
     </OperatorsButtons>
     <NumericalsButtons name="Numerical buttons">
-      <Color1 name="Background">#FF424242</Color1>
-      <Color2 name="Foreground">#FFF7F7F7</Color2>
+      <Color1 name="Background">#FFA1A1A1</Color1>
+      <Color2 name="Foreground">#FF000000</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </NumericalsButtons>
     <MemoryButtons name="Memory buttons">
-      <Color1 name="Background">#FF000000</Color1>
+      <Color1 name="Background">#FF686868</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FFF0F8FF</Color3>
     </MemoryButtons>
     <TrigonometryButtons name="Trigonometry buttons">
-      <Color1 name="Background">#FF242323</Color1>
+      <Color1 name="Background">#FF737373</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FF000000</Color3>
     </TrigonometryButtons>
     <History name="History">
-      <Color1 name="Background">#FF1FD7F0</Color1>
+      <Color1 name="Background">#FFF0F0F0</Color1>
       <Color2 name="Formula foreground">#FF000000</Color2>
-      <Color3 name="Chunk foreground">#FF0008FF</Color3>
-      <Color4 name="Result foreground">#FFFF0000</Color4>
+      <Color3 name="Chunk foreground">#FF0B0C33</Color3>
+      <Color4 name="Result foreground">#FF6E0202</Color4>
       <FontFamily1 name="Formula font family">Roboto</FontFamily1>
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
@@ -62,7 +62,7 @@
     <MainTheme name="Main theme">
       <Color1 name="Background">#FFFCB800</Color1>
       <Color2 name="Foreground">#FF000000</Color2>
-      <Color3 name="Border brush">#FF000000</Color3>
+      <Color3 name="Border brush">#FFA52A2A</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
       <Color1 name="Background">#FFF2841E</Color1>
@@ -100,10 +100,10 @@
       <Color3 name="Border brush">#FFFF0000</Color3>
     </TrigonometryButtons>
     <History name="History">
-      <Color1 name="Background">#FFFF4B00</Color1>
-      <Color2 name="Formula foreground">#FF020202</Color2>
-      <Color3 name="Chunk foreground">#FF048C00</Color3>
-      <Color4 name="Result foreground">#FF001CFF</Color4>
+      <Color1 name="Background">#FF7F2F0E</Color1>
+      <Color2 name="Formula foreground">#FFFF0000</Color2>
+      <Color3 name="Chunk foreground">#FFA2FF9F</Color3>
+      <Color4 name="Result foreground">#FFAFEEEE</Color4>
       <FontFamily1 name="Formula font family">Roboto</FontFamily1>
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
@@ -119,7 +119,7 @@
     <MainTheme name="Main theme">
       <Color1 name="Background">#FF88BDFF</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
-      <Color3 name="Border brush">#FF000A61</Color3>
+      <Color3 name="Border brush">#FF1893FF</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
       <Color1 name="Background">#FF88DFFF</Color1>
@@ -157,10 +157,10 @@
       <Color3 name="Border brush">#FF000A61</Color3>
     </TrigonometryButtons>
     <History name="History">
-      <Color1 name="Background">#FF1FD7F0</Color1>
-      <Color2 name="Formula foreground">#FF000000</Color2>
-      <Color3 name="Chunk foreground">#FF0008FF</Color3>
-      <Color4 name="Result foreground">#FFFF0000</Color4>
+      <Color1 name="Background">#FF07224A</Color1>
+      <Color2 name="Formula foreground">#FFF0F8FF</Color2>
+      <Color3 name="Chunk foreground">#FF00FFFF</Color3>
+      <Color4 name="Result foreground">#FF00FF7F</Color4>
       <FontFamily1 name="Formula font family">Roboto</FontFamily1>
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
@@ -174,12 +174,12 @@
   </Theme>
   <Theme name="Dark">
     <MainTheme name="Main theme">
-      <Color1 name="Background">#FF212121</Color1>
+      <Color1 name="Background">#FF171616</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
-      <Color3 name="Border brush">#FF88898A</Color3>
+      <Color3 name="Border brush">#FF000000</Color3>
     </MainTheme>
     <BaseButtons name="General buttons">
-      <Color1 name="Background">#FF570303</Color1>
+      <Color1 name="Background">#FF000000</Color1>
       <Color2 name="Foreground">#FFFFFFFF</Color2>
       <Color3 name="Border brush">#FFFFFFFF</Color3>
     </BaseButtons>
@@ -214,10 +214,10 @@
       <Color3 name="Border brush">#FFFFFFFF</Color3>
     </TrigonometryButtons>
     <History name="History">
-      <Color1 name="Background">#FF1FD7F0</Color1>
-      <Color2 name="Formula foreground">#FF000000</Color2>
-      <Color3 name="Chunk foreground">#FF0008FF</Color3>
-      <Color4 name="Result foreground">#FFFF0000</Color4>
+      <Color1 name="Background">#FF2B1733</Color1>
+      <Color2 name="Formula foreground">#FFC0C0E5</Color2>
+      <Color3 name="Chunk foreground">#FF848487</Color3>
+      <Color4 name="Result foreground">#FFFFFEFE</Color4>
       <FontFamily1 name="Formula font family">Roboto</FontFamily1>
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
              d:DesignHeight="620"
-             Background="{DynamicResource ResourceKey=Color1MainTheme}"
+             Background="Transparent"
              Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
              BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
              d:DesignWidth="260">

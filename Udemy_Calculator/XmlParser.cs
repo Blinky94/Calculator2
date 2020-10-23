@@ -78,6 +78,42 @@ namespace Udemy_Calculator
                                 {
                                     lSubSubNode.InnerText = p.Color4.ToString();
                                 }
+                                if (lSubSubNode.Name.Contains("FontFamily1") && p.FontFamily1 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontFamily1.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontSize1") && p.FontSize1 != 0)
+                                {
+                                    lSubSubNode.InnerText = p.FontSize1.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontWeight1") && p.FontWeight1 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontWeight1.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontFamily2") && p.FontFamily2 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontFamily2.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontSize2") && p.FontSize2 != 0)
+                                {
+                                    lSubSubNode.InnerText = p.FontSize2.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontWeight2") && p.FontWeight2 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontWeight2.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontFamily3") && p.FontFamily3 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontFamily3.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontSize3") && p.FontSize3 != 0)
+                                {
+                                    lSubSubNode.InnerText = p.FontSize3.ToString();
+                                }
+                                if (lSubSubNode.Name.Contains("FontWeight3") && p.FontWeight3 != null)
+                                {
+                                    lSubSubNode.InnerText = p.FontWeight3.ToString();
+                                }
                             });
                         }
                     }

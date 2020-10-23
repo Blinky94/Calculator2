@@ -10,6 +10,24 @@ using System.Windows.Documents;
 
 namespace Udemy_Calculator
 {
+    /// <summary>
+    /// Font enumeration size
+    /// </summary>
+    public enum SizeOfFont
+    {
+        ExtraTiny = 5,
+        Tiny = 7,
+        UltraSmall = 9,
+        ExtraSmall = 11,
+        Small = 13,
+        Normal = 15,
+        Big = 17,
+        ExtraBig = 20,
+        UltraBig = 25,
+        Huge = 30,
+        ExtraHuge = 35
+    }
+
     public static class GlobalUsage
     {
         /// <summary>

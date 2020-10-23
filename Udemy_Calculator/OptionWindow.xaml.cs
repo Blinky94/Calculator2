@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,6 +35,33 @@ namespace Udemy_Calculator
 
             // Combobox List for main theme to select
             ThemeListComboBox.ItemsComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
+
+            // List of font available
+            List<string> lFontFamilyList = CommonTheme.GetFontList;
+            // Get Formula font family
+            ComboBoxFontFamily1.ItemsComboBox.ItemsSource = lFontFamilyList;
+            // Get Chunk font family
+            ComboBoxFontFamily2.ItemsComboBox.ItemsSource = lFontFamilyList;
+            // Get Result font family
+            ComboBoxFontFamily3.ItemsComboBox.ItemsSource = lFontFamilyList;
+
+            // List of font size available
+            List<SizeOfFont> lFontSizeList = Enum.GetValues(typeof(SizeOfFont)).Cast<SizeOfFont>().ToList();
+            // Get Formula font size
+            ComboBoxFontSize1.ItemsComboBox.ItemsSource = lFontSizeList;
+            // Get Chunk font size
+            ComboBoxFontSize2.ItemsComboBox.ItemsSource = lFontSizeList;
+            // Get Result font size
+            ComboBoxFontSize3.ItemsComboBox.ItemsSource = lFontSizeList;
+
+            // List of font weight available
+            List<FontWeight> lFontWeightList = CommonTheme.GetFontWeightList;
+            // Get Formula font weight
+            ComboBoxFontWeight1.ItemsComboBox.ItemsSource = lFontWeightList;
+            // Get Chunk font weight
+            ComboBoxFontWeight2.ItemsComboBox.ItemsSource = lFontWeightList;
+            // Get Result font weight
+            ComboBoxFontWeight3.ItemsComboBox.ItemsSource = lFontWeightList;
 
             // Selecting default values into controls
             if (CommonTheme.GetParentThemeLongNames.Count > 0)
@@ -124,7 +153,7 @@ namespace Udemy_Calculator
         /// <param name="pTitle"></param>
         private static void UpdatePropertyValuesAndTitles(string pValue, Control pControl, string pTitle)
         {
-            if(pControl is ComboBox_Control)
+            if (pControl is ComboBox_Control)
             {
                 ComboBox_Control lComboBxCtrl = pControl as ComboBox_Control;
                 if (!string.IsNullOrEmpty(pValue) && pValue != "0")
@@ -143,7 +172,7 @@ namespace Udemy_Calculator
                     lComboBxCtrl.ItemsComboBox.SelectedItem = null;
                 }
             }
-            else if(pControl is ColorPicker_Control)
+            else if (pControl is ColorPicker_Control)
             {
                 ColorPicker_Control lColorPkrCtrl = pControl as ColorPicker_Control;
                 if (!string.IsNullOrEmpty(pValue))
@@ -161,7 +190,7 @@ namespace Udemy_Calculator
                     lColorPkrCtrl.Visibility = Visibility.Collapsed;
                     lColorPkrCtrl.UIColorPicker.SelectedColor = null;
                 }
-            }        
+            }
         }
 
         private void ItemsListBox_Selected(object sender, RoutedEventArgs e)
