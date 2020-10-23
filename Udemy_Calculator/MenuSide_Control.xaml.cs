@@ -1,8 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Udemy_Calculator
@@ -14,11 +10,7 @@ namespace Udemy_Calculator
     /// </summary>
     public partial class MenuSide_Control : UserControl
     {    
-        public static readonly DependencyProperty CurrentModeProperty =
-                DependencyProperty.Register("CurrentMode",
-                                typeof(CalculatorMode),
-                                typeof(MenuSide_Control),
-                                new PropertyMetadata(CalculatorMode.Standard));
+        public static readonly DependencyProperty CurrentModeProperty = DependencyProperty.Register("CurrentMode", typeof(CalculatorMode), typeof(MenuSide_Control), new PropertyMetadata(CalculatorMode.Standard));
         public CalculatorMode CurrentMode
         {
             get { return (CalculatorMode)GetValue(CurrentModeProperty); }

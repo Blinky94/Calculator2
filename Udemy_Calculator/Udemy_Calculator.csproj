@@ -131,14 +131,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Buttons\BaseButton_Control.xaml.cs">
+      <DependentUpon>BaseButton_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\MemoryButton_Control.xaml.cs">
+      <DependentUpon>MemoryButton_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\NumericalButton_Control.xaml.cs">
+      <DependentUpon>NumericalButton_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\OperatorButton_Control.xaml.cs">
+      <DependentUpon>OperatorButton_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\ScientificButton_Control.xaml.cs">
+      <DependentUpon>ScientificButton_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\TrigonometryButton_Control.xaml.cs">
+      <DependentUpon>TrigonometryButton_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Calculator_Control.xaml.cs">
       <DependentUpon>Calculator_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CheckBoxControl\CheckBox_Control.xaml.cs">
+      <DependentUpon>CheckBox_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComboBox_Control.xaml.cs">
       <DependentUpon>ComboBox_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="DateConverter.cs" />
     <Compile Include="EnumConverter.cs" />
+    <Compile Include="GeneralButton_Control.xaml.cs">
+      <DependentUpon>GeneralButton_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tables\ChunkTable.cs" />
     <Compile Include="ColorPicker_Control.xaml.cs">
       <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
@@ -178,7 +202,35 @@
     <Compile Include="Theme.cs" />
     <Compile Include="TraceLogs.cs" />
     <Compile Include="XmlParser.cs" />
+    <Page Include="Buttons\BaseButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons\MemoryButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons\NumericalButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons\OperatorButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons\ScientificButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons\TrigonometryButton_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Calculator_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckBoxControl\CheckBox_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +247,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Display_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GeneralButton_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

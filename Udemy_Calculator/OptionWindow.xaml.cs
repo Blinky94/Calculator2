@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,6 +20,11 @@ namespace Udemy_Calculator
             InitializeComponent();
             // Event on theme name selected
             ThemeListComboBox.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxThemeList_SelectionChanged);
+
+            Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
+            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
+            Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
+
             //Loading the xml configuration to provide access to all elements
             CommonTheme.LoadFromXmlProvider(this);
 

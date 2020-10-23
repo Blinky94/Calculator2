@@ -14,18 +14,14 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
             mDisplayHistory = new DisplayHistory();
+            Cleaner_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(UICleaner_Click);
+            Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(UISave_Click);
         }
 
         public string ReturnFormula()
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning the formula: {mDisplayHistory.FormulaStr}");
             return mDisplayHistory.FormulaStr;
-        }
-
-        private void UICleaner_Click(object sender, RoutedEventArgs e)
-        {
-            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Cleaning history");
-            mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
         }
 
         internal void NewElement()
@@ -41,7 +37,7 @@ namespace Udemy_Calculator
             {
                 TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append {pStr}, is result: {pIsResult}, number: {pNum}");
 
-               
+
                 mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
             }
             else
@@ -68,6 +64,12 @@ namespace Udemy_Calculator
         private void UIHistoryTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UIHistoryScrollViewer.ScrollToEnd();
+        }
+      
+        private void UICleaner_Click(object sender, RoutedEventArgs e)
+        {
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Cleaning history");
+            mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
         }
 
         private void UISave_Click(object sender, RoutedEventArgs e)

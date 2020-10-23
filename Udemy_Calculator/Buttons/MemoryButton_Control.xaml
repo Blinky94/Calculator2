@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Udemy_Calculator.Buttons.MemoryButton_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Udemy_Calculator.Buttons"
+             mc:Ignorable="d"
+             d:DesignHeight="40"
+             d:DesignWidth="100"
+             x:Name="memoryButtonControl">
+    <StackPanel VerticalAlignment="Center">
+        <Button x:Name="MemoryButtonControl"
+                Style="{DynamicResource ResourceKey=MemoryButtonsStyle}"
+                Uid="{Binding Path=MemoryButtonContent, ElementName=memoryButtonControl}"
+                Content="{Binding Path=MemoryButtonContent, ElementName=memoryButtonControl}"
+                Click="MemoryButtonControl_Click">
+        </Button>
+    </StackPanel>
+</UserControl>

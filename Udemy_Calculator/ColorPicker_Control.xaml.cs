@@ -7,30 +7,19 @@ namespace Udemy_Calculator
 {
     public partial class ColorPicker_Control : UserControl
     {
-
-        public static readonly DependencyProperty ColorPickerTextProperty =
-          DependencyProperty.Register("ColorPickerText",
-          typeof(string),
-          typeof(ColorPicker_Control),
-          new PropertyMetadata(""));
+        public static readonly DependencyProperty ColorPickerTextProperty = DependencyProperty.Register("ColorPickerText", typeof(string), typeof(ColorPicker_Control), new PropertyMetadata(""));
         public string ColorPickerText
         {
             get { return (string)GetValue(ColorPickerTextProperty); }
             set { SetValue(ColorPickerTextProperty, value); }
         }
 
-
-        public static readonly DependencyProperty ColorPickerUIDProperty =
-         DependencyProperty.Register("ColorPickerUID",
-         typeof(string),
-         typeof(ColorPicker_Control),
-         new PropertyMetadata(""));
+        public static readonly DependencyProperty ColorPickerUIDProperty = DependencyProperty.Register("ColorPickerUID", typeof(string), typeof(ColorPicker_Control), new PropertyMetadata(""));
         public string ColorPickerUID
         {
             get { return (string)GetValue(ColorPickerUIDProperty); }
             set { SetValue(ColorPickerUIDProperty, value); }
         }
-
 
         public ColorPicker_Control()
         {

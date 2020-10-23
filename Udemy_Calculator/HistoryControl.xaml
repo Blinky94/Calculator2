@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Udemy_Calculator"
              mc:Ignorable="d"
-             d:DesignHeight="450"
+             d:DesignHeight="620"
              Background="{DynamicResource ResourceKey=Color1MainTheme}"
              Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
              BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
              d:DesignWidth="260">
 
     <Grid x:Name="HistoryControlMainGrid"
-          Margin="10 15 0 -20">
+          Margin="10 15 5 -20">
         <Grid.Resources>
             <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
         </Grid.Resources>
@@ -59,56 +59,13 @@
                         Margin="0"
                         HorizontalAlignment="Center"
                         DockPanel.Dock="Bottom">
-                <Button x:Name="UICleaner"
-                        Click="UICleaner_Click"
-                        Background="{DynamicResource ResourceKey=Color1BaseButtons}"
-                        Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
-                        Width="40"
-                        Height="25">
-                    <StackPanel Orientation="Horizontal">
-                        <Image>
-                            <Image.Style>
-                                <Style TargetType="Image"
-                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
-                                    <Setter Property="Source"
-                                            Value="Images/Cleaner_icon.png" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
-                                                     Value="true">
-                                            <Setter Property="Source"
-                                                    Value="Images/Cleaner_icon_reverse.png" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="UISave"
-                        Click="UISave_Click"
-                        Background="{DynamicResource ResourceKey=Color1BaseButtons}"
-                        Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
-                        Width="40"
-                        Height="25">
-                    <StackPanel Orientation="Horizontal">
-                        <Image>
-                            <Image.Style>
-                                <Style TargetType="Image"
-                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
-                                    <Setter Property="Source"
-                                            Value="Images/Save_icon.png" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
-                                                     Value="true">
-                                            <Setter Property="Source"
-                                                    Value="Images/Save_icon_reverse.png" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </StackPanel>
-                </Button>
+                <local:GeneralButton_Control x:Name="Cleaner_GeneralButtonControl"
+                                             GeneralImageUrl="Images/Cleaner_icon.png"
+                                             GeneralImageUrlReverse="Images/Cleaner_icon_reverse.png" />
+
+                <local:GeneralButton_Control x:Name="Save_GeneralButtonControl"
+                                             GeneralImageUrl="Images/Save_icon.png"
+                                             GeneralImageUrlReverse="Images/Save_icon_reverse.png" />
             </StackPanel>
         </Grid>
 

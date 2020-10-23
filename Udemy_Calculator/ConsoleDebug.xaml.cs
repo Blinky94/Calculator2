@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Udemy_Calculator.CheckBox;
 
 namespace Udemy_Calculator
 {
@@ -20,6 +21,19 @@ namespace Udemy_Calculator
             InitializeComponent();
             TraceLogs.IsConsoleDebugVisible = true;
             GlobalUsage.ListLogDebug.ListChanged += new ListChangedEventHandler(LogList_ListChanged);
+            Cleaner_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(ClearConsole_Click);
+            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(CloseConsole_Click);
+            Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_SaveClick);
+            CheckBoxInfo.OnCheckBoxChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxInfo.OnCheckBoxUnChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxWarning.OnCheckBoxChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxWarning.OnCheckBoxUnChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxError.OnCheckBoxChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxError.OnCheckBoxUnChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxOutput.OnCheckBoxChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxOutput.OnCheckBoxUnChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxTechnical.OnCheckBoxChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
+            CheckBoxTechnical.OnCheckBoxUnChecked += new RoutedEventHandler(CheckBox_DisplayMessageFromChecked);
         }
 
         /// <summary>
@@ -104,7 +118,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         private List<LogDebug> ReturnListCategoriesFromChecked()
         {
-            return GlobalUsage.ListLogDebug.Where(p => GridCheckBoxes.Children.Cast<CheckBox>().Where(c => (bool)c.IsChecked).Select(d => (int)Enum.Parse(typeof(LogCategory), d.Uid.ToString(), true)).ToList().Contains(p.DetailCategory)).ToList();
+            return GlobalUsage.ListLogDebug.Where(p => GridCheckBoxes.Children.Cast<CheckBox_Control>().Where(c => (bool)c.CheckBoxControl.IsChecked).Select(d => (int)Enum.Parse(typeof(LogCategory), d.CheckBoxControl.Uid.ToString(), true)).ToList().Contains(p.DetailCategory)).ToList();
         }
 
         /// <summary>

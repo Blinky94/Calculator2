@@ -63,6 +63,62 @@ namespace Udemy_Calculator
         public Calculator_Control()
         {
             InitializeComponent();
+
+            UIMCButton.OnMemoryButtonClicked += new RoutedEventHandler(UIMCButton_Click);
+            DummyButton.OnScientificButtonClicked += new RoutedEventHandler(UISecondFuncButton_Click);
+            UIXSquareButton.OnScientificButtonClicked += new RoutedEventHandler(UIXSquareButton_Click);
+            UIXCubeButton.OnScientificButtonClicked += new RoutedEventHandler(UIXCubeButton_Click);
+            UIXExpXButton.OnScientificButtonClicked += new RoutedEventHandler(UIXExpXButton_Click);
+            UINFactorielButton.OnScientificButtonClicked += new RoutedEventHandler(UINFactorielButton_Click);
+            UIRootXButton.OnScientificButtonClicked += new RoutedEventHandler(UIRootXButton_Click);
+            UITwoSquareRootButton.OnScientificButtonClicked += new RoutedEventHandler(UITwoSquareRootButton_Click);
+            UIThreeSquareRootButton.OnScientificButtonClicked += new RoutedEventHandler(UIThreeSquareRootButton_Click);
+            UIXSquareRootYButton.OnScientificButtonClicked += new RoutedEventHandler(UIXSquareRootYButton_Click);
+            UITenExpXButton.OnScientificButtonClicked += new RoutedEventHandler(UITenExpXButton_Click);
+            UIMODButton.OnScientificButtonClicked += new RoutedEventHandler(UIMODButton_Click);
+            UIAbsoluteValButton.OnScientificButtonClicked += new RoutedEventHandler(UIAbsoluteValButton_Click);
+            UIRandomButton.OnScientificButtonClicked += new RoutedEventHandler(UIRandomButton_Click);
+            UIEXPButton.OnScientificButtonClicked += new RoutedEventHandler(UIEXPButton_Click);
+            UIEXPSquareButton.OnScientificButtonClicked += new RoutedEventHandler(UIEXPSquareButton_Click);
+            UIOneOnXButton.OnScientificButtonClicked += new RoutedEventHandler(UIOneOnXButton_Click);
+            UIExpButton.OnScientificButtonClicked += new RoutedEventHandler(UIExpButton_Click);
+            UISquareRootButton.OnScientificButtonClicked += new RoutedEventHandler(UISquareRootButton_Click);
+            UIPIButton.OnScientificButtonClicked += new RoutedEventHandler(UIPIButton_Click);
+            UILOGButton.OnScientificButtonClicked += new RoutedEventHandler(UILOGButton_Click);
+            UILNButton.OnScientificButtonClicked += new RoutedEventHandler(UILNButton_Click);
+            UICOSButton.OnScientificButtonClicked += new RoutedEventHandler(UICOSButton_Click);
+            UIOpenParenthesisButton.OnScientificButtonClicked += new RoutedEventHandler(UIOpenParenthesisButton_Click);
+            UICloseParenthesisButton.OnScientificButtonClicked += new RoutedEventHandler(UICloseParenthesisButton_Click);
+            UICOTButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UICOTButton_Click);
+            UISECButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UISECButton_Click);
+            UICSCButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UICSCButton_Click);
+            UITANButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UITANButton_Click);
+            UIACOTButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UIACOTButton_Click);
+            UIASECButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UIASECButton_Click);
+            UIACSCButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UIACSCButton_Click);
+            UIATANButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UIATANButton_Click);
+            UIHYPButton.OnTrigonometryButtonClicked += new RoutedEventHandler(UIHYPButton_Click);
+            UIACButton.OnBaseButtonClicked += new RoutedEventHandler(UIACButton_Click);
+            UIBackReturnButton.OnBaseButtonClicked += new RoutedEventHandler(UIBackReturnButton_Click);
+            UIPercentButton.OnBaseButtonClicked += new RoutedEventHandler(UIPercentButton_Click);
+            UIDivideButton.OnOperatorButtonClicked += new RoutedEventHandler(UIOperatorButton_Click);
+            UISevenButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIHeightButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UINineButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIMultiplyButton.OnOperatorButtonClicked += new RoutedEventHandler(UIOperatorButton_Click);
+            UIFourButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIFiveButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UISixButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIPlusButton.OnOperatorButtonClicked += new RoutedEventHandler(UIOperatorButton_Click);
+            UIOneButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UITwoButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIThreeButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UIMinusButton.OnOperatorButtonClicked += new RoutedEventHandler(UIOperatorButton_Click);
+            UIZeroButton.OnNumericalButtonClicked += new RoutedEventHandler(UINumberButton_Click);
+            UISignButton.OnOperatorButtonClicked += new RoutedEventHandler(UISignOrUnSignButton_Click);
+            UIPointButton.OnNumericalButtonClicked += new RoutedEventHandler(UIPointButton_Click);
+            UIEqualButton.OnOperatorButtonClicked += new RoutedEventHandler(UIEqualButton_Click);
+
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
@@ -136,7 +192,7 @@ namespace Udemy_Calculator
                     if (!mIsResult)
                     {
                         ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(ToCalculusDisplay.Length);
-                    }                
+                    }
                 }
 
                 if (mIsResult)
@@ -152,7 +208,7 @@ namespace Udemy_Calculator
         }
 
         // 50 + 6% (0,06) = 50,06
-        private void UIPercentageButton_Click(object sender, RoutedEventArgs e)
+        private void UIPercentButton_Click(object sender, RoutedEventArgs e)
         {
             if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
             {
@@ -188,7 +244,7 @@ namespace Udemy_Calculator
                     lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
 
                     ToCalculusDisplay = ToCalculusDisplay.Replace("(", "").Replace(")", "");
-                    if(double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumberParsed) == false)
+                    if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumberParsed) == false)
                     {
                         TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: Impossible to parse the current number: {ToCalculusDisplay}");
                     }
@@ -274,6 +330,7 @@ namespace Udemy_Calculator
 
         }
 
+        //Exposant ^
         private void UIExpButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -354,6 +411,11 @@ namespace Udemy_Calculator
 
         }
 
+        private void UIPIButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void UIMCButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -374,7 +436,8 @@ namespace Udemy_Calculator
 
         }
 
-        private void UIEXPButton_Click_1(object sender, RoutedEventArgs e)
+        // Exposant e
+        private void UIEXPButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

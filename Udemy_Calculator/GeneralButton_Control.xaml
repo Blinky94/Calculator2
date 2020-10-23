@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Udemy_Calculator.GeneralButton_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Udemy_Calculator"
+             mc:Ignorable="d"
+             d:DesignHeight="40"
+             d:DesignWidth="50"
+             x:Name="generalButtonControl">
+    <Grid>
+        <Grid.Resources>
+            <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
+        </Grid.Resources>
+        <Button x:Name="GeneralButton"
+                Click="GeneralButton_Click"
+                Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
+                Width="40"
+                Height="25">
+            <StackPanel Orientation="Horizontal">
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="Image"
+                               BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
+                            <Setter Property="Source"
+                                    Value="{Binding Path=GeneralImageUrl, ElementName=generalButtonControl}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}}"
+                                             Value="true">
+                                    <Setter Property="Source"
+                                            Value="{Binding Path=GeneralImageUrlReverse, ElementName=generalButtonControl}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
