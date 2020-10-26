@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Themes>
-  <ThemeSelected name="Default" />
+  <ThemeSelected name="Fire" />
   <Theme name="Default">
     <MainTheme name="Main theme">
       <Color1 name="Background">#FFD6D6D6</Color1>
@@ -47,11 +47,11 @@
       <Color2 name="Formula foreground">#FF000000</Color2>
       <Color3 name="Chunk foreground">#FF0B0C33</Color3>
       <Color4 name="Result foreground">#FF6E0202</Color4>
-      <FontFamily1 name="Formula font family">Roboto</FontFamily1>
-      <FontSize1 name="Formula font size">25</FontSize1>
+      <FontFamily1 name="Formula font family">Digital</FontFamily1>
+      <FontSize1 name="Formula font size">35</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
-      <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
-      <FontSize2 name="Chunk font size">16</FontSize2>
+      <FontFamily2 name="Chunk font family">Digital</FontFamily2>
+      <FontSize2 name="Chunk font size">17</FontSize2>
       <FontWeight2 name="Chunk font weight">Bold</FontWeight2>
       <FontFamily3 name="Result font family">Roboto</FontFamily3>
       <FontSize3 name="Result font size">35</FontSize3>
@@ -105,12 +105,12 @@
       <Color3 name="Chunk foreground">#FFA2FF9F</Color3>
       <Color4 name="Result foreground">#FFAFEEEE</Color4>
       <FontFamily1 name="Formula font family">Roboto</FontFamily1>
-      <FontSize1 name="Formula font size">25</FontSize1>
-      <FontWeight1 name="Formula font weight">Bold</FontWeight1>
+      <FontSize1 name="Formula font size">17</FontSize1>
+      <FontWeight1 name="Formula font weight">Thin</FontWeight1>
       <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
-      <FontSize2 name="Chunk font size">16</FontSize2>
+      <FontSize2 name="Chunk font size">25</FontSize2>
       <FontWeight2 name="Chunk font weight">Bold</FontWeight2>
-      <FontFamily3 name="Result font family">Roboto</FontFamily3>
+      <FontFamily3 name="Result font family">Digital</FontFamily3>
       <FontSize3 name="Result font size">35</FontSize3>
       <FontWeight3 name="Result font weight">Bold</FontWeight3>
     </History>
@@ -165,7 +165,7 @@
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
       <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
-      <FontSize2 name="Chunk font size">16</FontSize2>
+      <FontSize2 name="Chunk font size">17</FontSize2>
       <FontWeight2 name="Chunk font weight">Bold</FontWeight2>
       <FontFamily3 name="Result font family">Roboto</FontFamily3>
       <FontSize3 name="Result font size">35</FontSize3>
@@ -222,7 +222,7 @@
       <FontSize1 name="Formula font size">25</FontSize1>
       <FontWeight1 name="Formula font weight">Bold</FontWeight1>
       <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
-      <FontSize2 name="Chunk font size">16</FontSize2>
+      <FontSize2 name="Chunk font size">17</FontSize2>
       <FontWeight2 name="Chunk font weight">Bold</FontWeight2>
       <FontFamily3 name="Result font family">Roboto</FontFamily3>
       <FontSize3 name="Result font size">35</FontSize3>

@@ -160,6 +160,9 @@
     </Compile>
     <Compile Include="DateConverter.cs" />
     <Compile Include="EnumConverter.cs" />
+    <Compile Include="FontFamilyConverter.cs" />
+    <Compile Include="FontSizeConverter.cs" />
+    <Compile Include="FontWeightConverter.cs" />
     <Compile Include="GeneralButton_Control.xaml.cs">
       <DependentUpon>GeneralButton_Control.xaml</DependentUpon>
     </Compile>

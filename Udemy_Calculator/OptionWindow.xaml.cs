@@ -22,7 +22,6 @@ namespace Udemy_Calculator
             InitializeComponent();
             // Event on theme name selected
             ThemeListComboBox.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxThemeList_SelectionChanged);
-
             Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
             Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
@@ -46,7 +45,7 @@ namespace Udemy_Calculator
             ComboBoxFontFamily3.ItemsComboBox.ItemsSource = lFontFamilyList;
 
             // List of font size available
-            List<SizeOfFont> lFontSizeList = Enum.GetValues(typeof(SizeOfFont)).Cast<SizeOfFont>().ToList();
+            var lFontSizeList = Enum.GetNames(typeof(SizeOfFont)).ToList();
             // Get Formula font size
             ComboBoxFontSize1.ItemsComboBox.ItemsSource = lFontSizeList;
             // Get Chunk font size
@@ -55,7 +54,7 @@ namespace Udemy_Calculator
             ComboBoxFontSize3.ItemsComboBox.ItemsSource = lFontSizeList;
 
             // List of font weight available
-            List<FontWeight> lFontWeightList = CommonTheme.GetFontWeightList;
+            List<string> lFontWeightList = CommonTheme.GetFontWeightList;
             // Get Formula font weight
             ComboBoxFontWeight1.ItemsComboBox.ItemsSource = lFontWeightList;
             // Get Chunk font weight
@@ -120,10 +119,14 @@ namespace Udemy_Calculator
             // Updating the list of objects selected
             CommonTheme.SetSelectedThemeListObject(lSelectedVal);
 
+            // Populate the list of properties (BaseButtons,ScientificButtons...)
             PopulateListPropertiesToListView();
+
+            // Apply the default color for the first ListItem
             if (ItemsListBox != null && ItemsListBox.Items.Count > 0)
-                // Apply the default color for the first ListItem
+            {
                 ItemsListBox_Selected(ItemsListBox, null);
+            }
         }
 
         #region Moving the Window
@@ -211,12 +214,18 @@ namespace Udemy_Calculator
                 UpdatePropertyValuesAndTitles(lTheme.FontFamily1?.ToString(), ComboBoxFontFamily1, lTheme.FontFamilyAttribute1);
                 UpdatePropertyValuesAndTitles(lTheme.FontFamily2?.ToString(), ComboBoxFontFamily2, lTheme.FontFamilyAttribute2);
                 UpdatePropertyValuesAndTitles(lTheme.FontFamily3?.ToString(), ComboBoxFontFamily3, lTheme.FontFamilyAttribute3);
-                UpdatePropertyValuesAndTitles(lTheme.FontSize1.ToString(), ComboBoxFontSize1, lTheme.FontSizeAttribute1);
-                UpdatePropertyValuesAndTitles(lTheme.FontSize2.ToString(), ComboBoxFontSize2, lTheme.FontSizeAttribute2);
-                UpdatePropertyValuesAndTitles(lTheme.FontSize3.ToString(), ComboBoxFontSize3, lTheme.FontSizeAttribute3);
-                UpdatePropertyValuesAndTitles(lTheme.FontWeight1.ToString(), ComboBoxFontWeight1, lTheme.FontWeightAttribute1);
-                UpdatePropertyValuesAndTitles(lTheme.FontWeight2.ToString(), ComboBoxFontWeight2, lTheme.FontWeightAttribute2);
-                UpdatePropertyValuesAndTitles(lTheme.FontWeight3.ToString(), ComboBoxFontWeight3, lTheme.FontWeightAttribute3);
+                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize1).ToString(), ComboBoxFontSize1, lTheme.FontSizeAttribute1);
+                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize2).ToString(), ComboBoxFontSize2, lTheme.FontSizeAttribute2);
+                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize3).ToString(), ComboBoxFontSize3, lTheme.FontSizeAttribute3);
+
+                string lVal = lTheme.FontWeight1 != null ? lTheme.FontWeight1.ToString() : string.Empty;
+                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight1, lTheme.FontWeightAttribute1);
+
+                lVal = lTheme.FontWeight2 != null ? lTheme.FontWeight2.ToString() : string.Empty;
+                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight2, lTheme.FontWeightAttribute2);
+
+                lVal = lTheme.FontWeight3 != null ? lTheme.FontWeight3.ToString() : string.Empty;
+                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight3, lTheme.FontWeightAttribute3);
             }
         }
     }

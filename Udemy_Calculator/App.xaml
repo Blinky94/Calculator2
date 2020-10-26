@@ -4,88 +4,79 @@
              xmlns:local="clr-namespace:Udemy_Calculator"
              Startup="Application_Startup">
     <Application.Resources>
+        <local:FontFamilyConverter x:Key="fontFamilyConverter" />
+        <local:FontSizeConverter x:Key="fontSizeConverter" />
+        <local:FontWeightConverter x:Key="fontWeightConverter" />
         <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
         <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto-Regular</FontFamily>
         <XmlDataProvider Source="Params\Theme.xml"
                          XPath="/Themes/Theme[@name=../ThemeSelected/@name]"
-                         x:Key="colorThemesXml" />
+                         x:Key="ThemesXml" />
         <SolidColorBrush x:Key="Color1MainTheme"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MainTheme/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color1}" />
         <SolidColorBrush x:Key="Color2MainTheme"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MainTheme/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color2}" />
         <SolidColorBrush x:Key="Color3MainTheme"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MainTheme/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color3}" />
 
         <SolidColorBrush x:Key="Color1BaseButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=BaseButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color1}" />
         <SolidColorBrush x:Key="Color2BaseButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=BaseButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color2}" />
         <SolidColorBrush x:Key="Color3BaseButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=BaseButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1SndeButton"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=SndeButton/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color1}" />
         <SolidColorBrush x:Key="Color2SndeButton"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=SndeButton/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color2}" />
         <SolidColorBrush x:Key="Color3SndeButton"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=SndeButton/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color3}" />
 
         <SolidColorBrush x:Key="Color1ScientificButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=ScientificButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color1}" />
         <SolidColorBrush x:Key="Color2ScientificButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=ScientificButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color2}" />
         <SolidColorBrush x:Key="Color3ScientificButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=ScientificButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1OperatorsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=OperatorsButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color1}" />
         <SolidColorBrush x:Key="Color2OperatorsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=OperatorsButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color2}" />
         <SolidColorBrush x:Key="Color3OperatorsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=OperatorsButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1NumericalsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=NumericalsButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color1}" />
         <SolidColorBrush x:Key="Color2NumericalsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=NumericalsButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color2}" />
         <SolidColorBrush x:Key="Color3NumericalsButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=NumericalsButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1MemoryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MemoryButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color1}" />
         <SolidColorBrush x:Key="Color2MemoryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MemoryButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color2}" />
         <SolidColorBrush x:Key="Color3MemoryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=MemoryButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1TrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color1}" />
         <SolidColorBrush x:Key="Color2TrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color2}" />
         <SolidColorBrush x:Key="Color3TrigonometryButtons"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=TrigonometryButtons/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color3}" />
 
         <SolidColorBrush x:Key="Color1History"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=History/Color1}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color1}" />
         <SolidColorBrush x:Key="Color2History"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=History/Color2}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color2}" />
         <SolidColorBrush x:Key="Color3History"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=History/Color3}" />
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color3}" />
         <SolidColorBrush x:Key="Color4History"
-                         Color="{Binding Source={StaticResource colorThemesXml}, XPath=History/Color4}" />
-
-        <Style x:Key="MainLabelStyle"
-               TargetType="Label">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2MainTheme}" />
-            <Setter Property="FontWeight"
-                    Value="Bold" />
-            <Setter Property="FontSize"
-                    Value="15" />
-            <Setter Property="Margin"
-                    Value="0 0 0 0" />
-        </Style>
-
+                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color4}" />
+    
         <Style x:Key="BaseButtonsStyle"
                TargetType="Button">
             <Setter Property="FontSize"
@@ -157,11 +148,11 @@
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter Property="Background"
-                                            Value="Yellow" />
+                                            Value="{DynamicResource ResourceKey=Color2MainTheme}" />
                                     <Setter Property="Foreground"
-                                            Value="Black" />
+                                            Value="{DynamicResource ResourceKey=Color1MainTheme}" />
                                     <Setter Property="BorderBrush"
-                                            Value="White" />
+                                            Value="{DynamicResource ResourceKey=Color3MainTheme}" />
                                     <Setter Property="BorderThickness"
                                             Value="1" />
                                 </MultiTrigger.Setters>
@@ -281,10 +272,22 @@
                     Value="18" />
         </Style>
 
+        <Style x:Key="MainLabelStyle"
+               TargetType="Label">
+            <Setter Property="Foreground"
+                    Value="{DynamicResource ResourceKey=Color2MainTheme}" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="16" />
+        </Style>
+
         <Style x:Key="MenuStyle"
                TargetType="Menu">
             <Setter Property="Background"
                     Value="{DynamicResource ResourceKey=Color1MainTheme}" />
+            <Setter Property="Margin"
+                    Value="0 3 0 0" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver"
                          Value="True">
@@ -310,11 +313,11 @@
             <Setter Property="TextAlignment"
                     Value="Left" />
             <Setter Property="FontFamily"
-                    Value="{DynamicResource ResourceKey=Roboto}" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily1, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="20" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize1, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="Bold" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight1, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
         <Style x:Key="HistoryChunkStyle"
@@ -324,11 +327,11 @@
             <Setter Property="TextAlignment"
                     Value="Center" />
             <Setter Property="FontFamily"
-                    Value="{DynamicResource ResourceKey=Roboto}" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily2, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="13" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize2, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="SemiBold" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight2, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
         <Style x:Key="HistoryResultStyle"
@@ -338,11 +341,11 @@
             <Setter Property="TextAlignment"
                     Value="Right" />
             <Setter Property="FontFamily"
-                    Value="{DynamicResource ResourceKey=Roboto}" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily3, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="20" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize3, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="Bold" />
+                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight3, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
     </Application.Resources>

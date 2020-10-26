@@ -61,7 +61,7 @@ namespace Udemy_Calculator
         /// <summary>
         /// Get all font weight available
         /// </summary>
-        public static List<FontWeight> GetFontWeightList => GetAllFontWeightsAvailables();
+        public static List<string> GetFontWeightList => GetAllFontWeightsAvailables();
 
         /// <summary>
         /// Load all properties from xml data provider from current control
@@ -70,7 +70,7 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public static void LoadFromXmlProvider(Control pControl)
         {
-            XmlDataProvider lXml = (XmlDataProvider)pControl.FindResource("colorThemesXml");
+            XmlDataProvider lXml = (XmlDataProvider)pControl.FindResource("ThemesXml");
             LoadXmlConfiguration = lXml.Document;
 
             ListSelectedTheme = new List<Theme>();
@@ -98,17 +98,17 @@ namespace Udemy_Calculator
         #region private
 
         /// <summary>
-        /// Get all font weight available from the FontWeights class
+        /// Get all font weight string available from the FontWeights class
         /// </summary>
         /// <returns></returns>
-        private static List<FontWeight> GetAllFontWeightsAvailables()
+        private static List<string> GetAllFontWeightsAvailables()
         {
-            var lList = new List<FontWeight>();
+            var lList = new List<string>();
 
             var type = typeof(FontWeights);
             foreach (var p in type.GetProperties().Where(s => s.PropertyType == typeof(FontWeight)))
             {
-                lList.Add((FontWeight)p.GetValue(null, null));
+                lList.Add(p.GetValue(null, null).ToString());
             }
 
             return lList.Distinct().ToList();
@@ -247,6 +247,11 @@ namespace Udemy_Calculator
                     lPorpertyName = string.Concat(nameof(lTheme.Color4), lTheme.SubThemeName);
                     Application.Current.Resources[lPorpertyName] = lTheme.Color4;
                 }
+                if(Enum.GetNames(typeof(SizeOfFont)).ToList().Contains(((SizeOfFont)lTheme.FontSize1).ToString()))
+                {
+                    lPorpertyName = string.Concat(((SizeOfFont)lTheme.FontSize1).ToString(), lTheme.SubThemeName);
+                    Application.Current.Resources[lPorpertyName] = lTheme.FontSize1;
+                }
             }
         }
 
@@ -286,7 +291,6 @@ namespace Udemy_Calculator
                     lList.Add(lNode.Attributes["name"].Value);
                 }
             }
-
 
             return lList;
         }

@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
@@ -18,26 +20,38 @@ namespace Udemy_Calculator
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(UISave_Click);
         }
 
+        /// <summary>
+        /// Return the formula
+        /// </summary>
+        /// <returns></returns>
         public string ReturnFormula()
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning the formula: {mDisplayHistory.FormulaStr}");
             return mDisplayHistory.FormulaStr;
         }
 
+        /// <summary>
+        /// Append new element
+        /// </summary>
         internal void NewElement()
         {
             mDisplayHistory.AddNewHistory();
         }
 
+        /// <summary>
+        /// Adding a new element to the paragraph
+        /// </summary>
+        /// <param name="pStr"></param>
+        /// <param name="pIsResult"></param>
+        /// <param name="pNum"></param>
+        /// <param name="pIsDetail"></param>
         internal void AppendElement(string pStr, bool pIsResult = false, string pNum = default, bool pIsDetail = false)
         {
             Style lStyle = pIsDetail ? (Style)FindResource("HistoryChunkStyle") : (Style)FindResource("HistoryFormulaStyle");
 
             if (!pIsResult)
-            {
+            {              
                 TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append {pStr}, is result: {pIsResult}, number: {pNum}");
-
-
                 mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
             }
             else
@@ -55,6 +69,10 @@ namespace Udemy_Calculator
             }
         }
 
+        /// <summary>
+        /// Remove element with length to remove from string on display history
+        /// </summary>
+        /// <param name="pLength"></param>
         internal void RemoveElement(int pLength)
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: removing element from length: {pLength}");

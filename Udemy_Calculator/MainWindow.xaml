@@ -81,7 +81,7 @@
                             BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
                             BorderThickness="5">
                         <Grid x:Name="MainGrid"
-                              Margin="10 10 10 20">
+                              Margin="10 10 11 20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="auto" />
@@ -99,7 +99,7 @@
                             <ToggleButton Width="20"
                                           Height="20"
                                           Grid.Row="0"
-                                          Margin="240 -4 0 0"
+                                          Margin="240 0 0 0"
                                           HorizontalAlignment="Left"
                                           IsEnabled="True"
                                           Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
@@ -179,14 +179,14 @@
                             <local:Calculator_Control Grid.Column="0"
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
-                                                      Margin="1 10 0 0" />
+                                                      Margin="2 10 0 0" />
 
                             <!--Call the History User control-->
                             <local:HistoryControl x:Name="UIHistory"
                                                   Grid.Column="1"
                                                   Grid.Row="2"
                                                   Visibility="Collapsed"
-                                                  Margin="0 -95 0 0" />
+                                                  Margin="0 -98 0 0" />
                         </Grid>
                     </Border>
                 </StackPanel>

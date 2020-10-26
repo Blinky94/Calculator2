@@ -221,7 +221,7 @@
                    Grid.Column="1"
                    Background="Transparent"
                    HorizontalContentAlignment="Center"
-                   Margin="0 0 50 0"
+                   Margin="0 -2 50 0"
                    Style="{DynamicResource ResourceKey=MainLabelStyle}" />
         </Grid>
     </Border>

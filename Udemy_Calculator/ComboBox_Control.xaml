@@ -17,6 +17,7 @@
                Grid.Column="0"
                Style="{DynamicResource MainLabelStyle}"
                Padding="0"
+               Margin="0 5 5 0"
                HorizontalAlignment="Right"
                Content="{Binding Path=ComboBoxText, ElementName=comboBoxControl}"
                Uid="{Binding Path=ComboBoxUID, ElementName=comboBoxControl}"

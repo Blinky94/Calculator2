@@ -109,9 +109,7 @@ namespace Udemy_Calculator
 
                 return Chunk.SB.ToString();
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -155,9 +153,7 @@ namespace Udemy_Calculator
 
                 TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Chunk start index: {Chunk.StartIndex };Chunk length: {Chunk.Length}");
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -270,9 +266,7 @@ namespace Udemy_Calculator
                 pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
                 TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Operator: {pOperator}");
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -311,9 +305,7 @@ namespace Udemy_Calculator
                     TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: Format of the string is incorrect: ({pStr})");
                 }
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -407,9 +399,7 @@ namespace Udemy_Calculator
                 pResult = Double.Parse(lResult) < 0 ? $"({lResult})" : lResult;
                 TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Compute result: {pResult}");
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -455,9 +445,7 @@ namespace Udemy_Calculator
                         break;
                 }
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: \n" + e.Message.ToString());
             }
@@ -494,11 +482,8 @@ namespace Udemy_Calculator
                 {
                     ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement($"=" + pResult, false, null, true);
                 }
-
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception e)
-#pragma warning restore CA1031 // Do not catch general exception types
             {
                 TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}:\n" + e.Message.ToString());
             }

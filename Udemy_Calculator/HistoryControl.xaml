@@ -24,7 +24,7 @@
         <Grid Name="HistoryGrid"
               Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="540" />
+                <RowDefinition Height="550" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.Resources>
