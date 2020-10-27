@@ -104,9 +104,9 @@
       <Color2 name="Formula foreground">#FFFF0000</Color2>
       <Color3 name="Chunk foreground">#FFA2FF9F</Color3>
       <Color4 name="Result foreground">#FFAFEEEE</Color4>
-      <FontFamily1 name="Formula font family">Roboto</FontFamily1>
-      <FontSize1 name="Formula font size">17</FontSize1>
-      <FontWeight1 name="Formula font weight">Thin</FontWeight1>
+      <FontFamily1 name="Formula font family">Digital</FontFamily1>
+      <FontSize1 name="Formula font size">35</FontSize1>
+      <FontWeight1 name="Formula font weight">ExtraBlack</FontWeight1>
       <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
       <FontSize2 name="Chunk font size">25</FontSize2>
       <FontWeight2 name="Chunk font weight">Bold</FontWeight2>

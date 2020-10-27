@@ -1,55 +1,77 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace Udemy_Calculator
 {
     public class DisplayHistory
     {
-        private Paragraph mParagraph;
-        FlowDocument mFlowDocument;
-        private readonly float mLineHeight = 1;
+        private readonly HistoryControl mHistoryControl;
 
+        /// <summary>
+        /// Return the formula string
+        /// </summary>
         public string FormulaStr { get; private set; }
+
+        /// <summary>
+        /// Return the chunk string
+        /// </summary>
+        public string ChunkStr { get; private set; }
+
+        /// <summary>
+        /// Return the result string
+        /// </summary>
         public string ResultStr { get; private set; }
 
-        public DisplayHistory()
+        Paragraph mFormulaParagraph;
+        Paragraph mChunkParagraph;
+        Paragraph mResultParagraph;
+
+        public DisplayHistory(HistoryControl pHistoryControl)
         {
-            mFlowDocument = new FlowDocument();
-            AddNewHistory();
+            // Control recuperation for operations on it
+            mHistoryControl = pHistoryControl;
+
+            mFormulaParagraph = new Paragraph();
+            mChunkParagraph = new Paragraph();
+            mResultParagraph = new Paragraph();
         }
 
         /// <summary>
         /// Append history
         /// </summary>
         /// <param name="pText"></param>
-        /// <param name="pUITextBox"></param>
-        /// <returns></returns>
-        private Block AppendHistory(string pText, ref RichTextBox pUITextBox)
+        /// <param name="pParagraph"></param>
+        private void AppendHistory(string pText, Paragraph pParagraph)
         {
             pText = pText.Replace(',', '.');
-            mParagraph.Inlines.Add(new Run(pText));
-            mFlowDocument.LineHeight = mLineHeight;
-            mFlowDocument.Blocks.Add(mParagraph);
-            pUITextBox.Document = mFlowDocument;
+            pParagraph.Inlines.Add(new Run(pText));
+            mHistoryControl.UIHistoryFlowDocument.Blocks.Add(pParagraph);
 
-            FormulaStr += pText;
-
-            return pUITextBox.Document.Blocks.LastOrDefault();
+            if (pParagraph.Name == "UIHistoryFormulaParagraph")
+            {
+                FormulaStr += pText;
+                return;
+            }
+            if (pParagraph.Name == "UIHistoryChunkParagraph")
+            {
+                ChunkStr += pText;
+                return;
+            }
+            if (pParagraph.Name == "UIHistoryResultParagraph")
+            {
+                ResultStr += pText;
+                return;
+            }
         }
 
         /// <summary>
-        /// Append the formula to the history panel
+        /// Appying parenthesis on the current text if necessary
         /// </summary>
         /// <param name="pText"></param>
-        /// <param name="pUITextBox"></param>
-        /// <param name="pIsResult"></param>
-        /// <param name="pLastNumber"></param>
-        /// <param name="pIsDetail"></param>
-        public void AppendHistoryFormula(string pText, RichTextBox pUITextBox, Style pStyle, string pLastNumber = default, bool pIsResult = false)
+        /// <returns></returns>
+        private string ApplyingParentheses(string pText)
         {
             double.TryParse(pText, NumberStyles.Any, CultureInfo.InvariantCulture, out double lTextSigned);
 
@@ -59,24 +81,46 @@ namespace Udemy_Calculator
                 pText = $"({pText})";
             }
 
-            if (pIsResult)
+            return pText;
+        }
+
+        /// <summary>
+        /// Append chunk to the history panel
+        /// </summary>
+        /// <param name="pText"></param>
+        public void AppendHistoryChunk(string pText)
+        {
+            mChunkParagraph.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
+            mChunkParagraph.Name = "UIHistoryChunkParagraph";
+            AppendHistory(ApplyingParentheses(pText), mChunkParagraph);
+        }
+
+        /// <summary>
+        /// Append the formula to the history panel
+        /// </summary>
+        /// <param name="pText"></param>
+        public void AppendHistoryFormula(string pText, string lLastResult = "")
+        {
+            mFormulaParagraph.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
+            mFormulaParagraph.Name = "UIHistoryFormulaParagraph";
+
+            if (!string.IsNullOrEmpty(lLastResult))
             {
-                pText = $"{pLastNumber}{pText}";
+                pText = $"{lLastResult}{pText}";
             }
 
-            Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
-            lCurrentBlock.Style = pStyle;         
+            AppendHistory(pText, mFormulaParagraph);
         }
 
         /// <summary>
         /// Append the result to the history panel
         /// </summary>
         /// <param name="pText"></param>
-        /// <param name="pUITextBox"></param>
-        public void AppendHistoryResult(string pText, RichTextBox pUITextBox, Style pStyle)
+        public void AppendHistoryResult(string pText)
         {
-            Block lCurrentBlock = AppendHistory(pText, ref pUITextBox);
-            lCurrentBlock.Style = pStyle;
+            mResultParagraph.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
+            mResultParagraph.Name = "UIHistoryResultParagraph";
+            AppendHistory(ApplyingParentheses(pText), mResultParagraph);
         }
 
         /// <summary>
@@ -85,37 +129,49 @@ namespace Udemy_Calculator
         /// <param name="pUILength"></param>
         public void RemoveHistoryFormula(int pUILength)
         {
-            var textRange = new TextRange(mParagraph.ContentStart, mParagraph.ContentEnd);
+            var textRange = new TextRange(mFormulaParagraph.ContentStart, mFormulaParagraph.ContentEnd);
 
             if (!textRange.IsEmpty)
             {
                 string lOutput = textRange.Text.Substring(0, textRange.Text.Length - pUILength);
-                mParagraph.Inlines.Clear();
-                mParagraph.Inlines.Add(new Run(lOutput));
+                mFormulaParagraph.Inlines.Clear();
+                mFormulaParagraph.Inlines.Add(new Run(lOutput));
 
                 FormulaStr = lOutput;
             }
         }
 
         /// <summary>
-        /// Add a new blank history
+        /// Add a new paragraph, depending of his type (Formula, Chunk, Result)
         /// </summary>
-        public void AddNewHistory()
+        public void AddNewHistoryParagraph(ParagraphType pType)
         {
-            mParagraph = new Paragraph();
-            FormulaStr = string.Empty;
+            switch (pType)
+            {
+                case ParagraphType.Formula:
+                    FormulaStr = string.Empty;
+                    mFormulaParagraph = new Paragraph();
+                    break;
+
+                case ParagraphType.Chunk:
+                    ChunkStr = string.Empty;
+                    mChunkParagraph = new Paragraph();
+                    break;
+
+                case ParagraphType.Result:
+                    ResultStr = string.Empty;
+                    mResultParagraph = new Paragraph();
+                    break;
+            }
         }
 
         /// <summary>
         /// Erase everything in the history panel
         /// </summary>
         /// <param name="pUI"></param>
-        internal void CleanHistory(ref RichTextBox pUI)
+        internal void CleanHistory()
         {
-            pUI.Document.Blocks.Clear();
-            mFlowDocument = new FlowDocument();
-            AddNewHistory();
-            FormulaStr = string.Empty;
+            mHistoryControl.UIHistoryTextBox.Document.Blocks.Clear();
         }
     }
 }

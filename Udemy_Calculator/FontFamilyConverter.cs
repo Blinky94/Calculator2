@@ -9,12 +9,7 @@ namespace Udemy_Calculator
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string && !string.IsNullOrEmpty(value as string))
-            {
-                return Application.Current.Resources[(string)value];
-            }
-
-            return null;
+            return value is string @string && !string.IsNullOrEmpty(value as string) ? Application.Current.Resources[@string] : null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

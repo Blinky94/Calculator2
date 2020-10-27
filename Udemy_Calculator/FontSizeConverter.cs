@@ -16,7 +16,8 @@ namespace Udemy_Calculator
 
                 if (Enum.GetNames(typeof(SizeOfFont)).ToList().Contains(lValStr))
                 {
-                    return value as string;
+                    double lResult = double.Parse(value as string);
+                    return lResult;
                 }
             }
 

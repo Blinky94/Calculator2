@@ -20,8 +20,18 @@ namespace Udemy_Calculator
         {
             // Private constructor to instanciate local objects here 
             InitializeComponent();
+
             // Event on theme name selected
             ThemeListComboBox.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxThemeList_SelectionChanged);
+            ComboBoxFontFamily1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
+            ComboBoxFontSize1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
+            ComboBoxFontWeight1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
+            ComboBoxFontFamily2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
+            ComboBoxFontSize2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
+            ComboBoxFontWeight2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
+            ComboBoxFontFamily3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
+            ComboBoxFontSize3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
+            ComboBoxFontWeight3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
             Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
             Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
@@ -74,6 +84,63 @@ namespace Udemy_Calculator
             {
                 ThemeListComboBox.ItemsComboBox.SelectedIndex = ThemeListComboBox.ItemsComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
             }
+        }
+
+        private void ComboBoxFontWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           // throw new NotImplementedException();
+        }
+
+        private void ComboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lCombo = (sender as ComboBox);
+            var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
+
+            var lItemSelected = ItemsListBox.SelectedItem.ToString();
+            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+            {
+                if (lComboTitle.Uid.ToString() == "FontSize1")
+                {
+                    lTheme.FontSize1 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                }
+                if (lComboTitle.Uid.ToString() == "FontSize2")
+                {
+                    lTheme.FontSize2 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                }
+                if (lComboTitle.Uid.ToString() == "FontSize3")
+                {
+                    lTheme.FontSize3 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                }
+            }
+
+            // Applying the new theme
+            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
+        }
+
+        private void ComboBoxFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lCombo = (sender as ComboBox);
+            var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
+
+            var lItemSelected = ItemsListBox.SelectedItem.ToString();
+            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+            {
+                if (lComboTitle.Uid.ToString() == "FontFamily1")
+                {
+                    lTheme.FontFamily1 = new FontFamily(lCombo.SelectedItem.ToString());
+                }
+                if (lComboTitle.Uid.ToString() == "FontFamily2")
+                {
+                    lTheme.FontFamily2 = new FontFamily(lCombo.SelectedItem.ToString());
+                }
+                if (lComboTitle.Uid.ToString() == "FontFamily3")
+                {
+                    lTheme.FontFamily3 = new FontFamily(lCombo.SelectedItem.ToString());
+                }
+            }
+
+            // Applying the new theme
+            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
         }
 
         /// <summary>

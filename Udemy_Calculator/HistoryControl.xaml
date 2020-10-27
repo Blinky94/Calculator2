@@ -51,6 +51,8 @@
                              Style="{DynamicResource ResourceKey=HistoryStyle}"
                              Padding="0"
                              TextChanged="UIHistoryTextBox_TextChanged">
+                    <FlowDocument x:Name="UIHistoryFlowDocument"
+                                  LineHeight="1" />
                 </RichTextBox>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal"

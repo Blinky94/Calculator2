@@ -189,17 +189,11 @@
       <DependentUpon>MenuSide_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="PEMDAS.cs" />
-    <Compile Include="ScientificCalculator.xaml.cs">
-      <DependentUpon>ScientificCalculator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="OptionWindow.xaml.cs">
       <DependentUpon>OptionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Spinner_Control.xaml.cs">
       <DependentUpon>Spinner_Control.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StandardCalculator.xaml.cs">
-      <DependentUpon>StandardCalculator.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestingBackgroundDarkerConverter.cs" />
     <Compile Include="Theme.cs" />
@@ -277,19 +271,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScientificCalculator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="OptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Spinner_Control.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StandardCalculator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

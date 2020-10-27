@@ -76,7 +76,7 @@
                          Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color3}" />
         <SolidColorBrush x:Key="Color4History"
                          Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color4}" />
-    
+
         <Style x:Key="BaseButtonsStyle"
                TargetType="Button">
             <Setter Property="FontSize"

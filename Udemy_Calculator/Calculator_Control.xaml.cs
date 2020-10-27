@@ -246,7 +246,7 @@ namespace Udemy_Calculator
                     ToCalculusDisplay = ToCalculusDisplay.Replace("(", "").Replace(")", "");
                     if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumberParsed) == false)
                     {
-                        TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: Impossible to parse the current number: {ToCalculusDisplay}");
+                        TraceLogs.AddError($"{GlobalUsage.GetCurrentMethodName}: unable to parse the current number {ToCalculusDisplay}");
                     }
                     if (!double.IsNaN(lNumberParsed))
                     {
@@ -258,19 +258,21 @@ namespace Udemy_Calculator
                         ToCalculusDisplay = lResult;
                         ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber, true);
 
-                        ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+                       ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Chunk);
 
                         LastNumber = ToCalculusDisplay;
                         mIsResult = true;
 
                         ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult, null, true);
-                        ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Formula);
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Chunk);
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Result);
                         OnCalculusDisplayChanged();
                     }
                 }
                 catch (Exception ex)
                 {
-                    TraceLogs.AddWarning($"{ex.Message}: Calcul impossible ({lFormula})");
+                    TraceLogs.AddWarning($"{ex.Message}: Unable to compute this formula ({lFormula})");
                 }
             }
         }

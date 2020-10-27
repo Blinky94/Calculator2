@@ -95,13 +95,6 @@ namespace Udemy_Calculator
                         TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No result to do compute from current chuck!!!");
                     }
 
-                    GlobalUsage.ListChunks.Add(new ChunkTable()
-                    {
-                        ChunkDate = GlobalUsage.GenerateTimeNow(true),
-                        ChunkText = Chunk.SB.ToString(),
-                        ChunkResult = lResult
-                    });
-
                     DoReplaceByResult(lResult);
                     lMatch = lRegex.Match(Chunk.Formula.ToString());
 
@@ -115,6 +108,7 @@ namespace Udemy_Calculator
             }
             finally
             {
+                Chunk.SB.Clear();
                 //GlobalUsage.SaveDebugLogToDatabase();
             }
 
@@ -230,7 +224,7 @@ namespace Udemy_Calculator
         {
             TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Extracting each part of operands from the formula ({Chunk.SB})");
 
-            ((MainWindow)Application.Current.MainWindow).UIHistory.NewElement();
+            ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Chunk);
             ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement($"({Chunk.SB})", false, null, true);
 
             pLeftOperand = default;
@@ -253,13 +247,11 @@ namespace Udemy_Calculator
 
                 if (!string.IsNullOrEmpty(lLeft))
                 {
-                    //pLeftOperand = GetDecimalFromString(lLeft);
                     pLeftOperand = GetDoubleFromString(lLeft);
                 }
 
                 if (!string.IsNullOrEmpty(lRight))
                 {
-                    // pRightOperand = GetDecimalFromString(lRight);
                     pRightOperand = GetDoubleFromString(lRight);
                 }
 

@@ -1,10 +1,27 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace Udemy_Calculator
 {
+    /// <summary>
+    /// Enum for the kind of paragraph
+    /// </summary>
+    public enum ParagraphType
+    {
+        /// <summary>
+        /// Type of formula
+        /// </summary>
+        Formula,
+        /// <summary>
+        /// Type of chunk
+        /// </summary>
+        Chunk,
+        /// <summary>
+        /// Type of result
+        /// </summary>
+        Result
+    }
+
     /// <summary>
     /// Interaction logic for History.xaml
     /// </summary>
@@ -15,7 +32,7 @@ namespace Udemy_Calculator
         public HistoryControl()
         {
             InitializeComponent();
-            mDisplayHistory = new DisplayHistory();
+            mDisplayHistory = new DisplayHistory(this);
             Cleaner_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(UICleaner_Click);
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(UISave_Click);
         }
@@ -31,11 +48,11 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
-        /// Append new element
+        /// Insert a new paragraph to the History panel
         /// </summary>
-        internal void NewElement()
+        internal void InsertNewParagraph(ParagraphType pTypeParagraph)
         {
-            mDisplayHistory.AddNewHistory();
+            mDisplayHistory.AddNewHistoryParagraph(pTypeParagraph);
         }
 
         /// <summary>
@@ -47,24 +64,34 @@ namespace Udemy_Calculator
         /// <param name="pIsDetail"></param>
         internal void AppendElement(string pStr, bool pIsResult = false, string pNum = default, bool pIsDetail = false)
         {
-            Style lStyle = pIsDetail ? (Style)FindResource("HistoryChunkStyle") : (Style)FindResource("HistoryFormulaStyle");
-
             if (!pIsResult)
-            {              
-                TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append {pStr}, is result: {pIsResult}, number: {pNum}");
-                mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
+            {
+                if (pIsDetail)
+                {
+                    // Chunk detail calculus
+                    TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append chunk element {pStr}");
+                    mDisplayHistory.AppendHistoryChunk(pStr);
+                }
+                else
+                {
+                    // Formula calculus
+                    TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append formula element {pStr}");
+                    mDisplayHistory.AppendHistoryFormula(pStr);
+                }
             }
             else
             {
                 if (pNum != default)
                 {
-                    TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append into the formula the last result {pNum}");
-                    mDisplayHistory.AppendHistoryFormula(pStr, UIHistoryTextBox, lStyle, pNum, pIsResult);
+                    // Formula calculus added to the last result
+                    TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append formula element {pStr}");
+                    mDisplayHistory.AppendHistoryFormula(pStr, pNum);
                 }
                 else
                 {
+                    // Last result of calculus
                     TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Append the result {pStr}");
-                    mDisplayHistory.AppendHistoryResult(pStr, UIHistoryTextBox, (Style)FindResource("HistoryResultStyle"));
+                    mDisplayHistory.AppendHistoryResult(pStr);
                 }
             }
         }
@@ -75,7 +102,7 @@ namespace Udemy_Calculator
         /// <param name="pLength"></param>
         internal void RemoveElement(int pLength)
         {
-            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: removing element from length: {pLength}");
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Removing element from length: {pLength}");
             mDisplayHistory.RemoveHistoryFormula(pLength);
         }
 
@@ -83,11 +110,11 @@ namespace Udemy_Calculator
         {
             UIHistoryScrollViewer.ScrollToEnd();
         }
-      
+
         private void UICleaner_Click(object sender, RoutedEventArgs e)
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: Cleaning history");
-            mDisplayHistory.CleanHistory(ref UIHistoryTextBox);
+            mDisplayHistory.CleanHistory();
         }
 
         private void UISave_Click(object sender, RoutedEventArgs e)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Xml;
 
@@ -219,6 +220,26 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Set the style of history app.xaml
+        /// </summary>
+        /// <param name="pFontFamily"></param>
+        /// <param name="pFontSize"></param>
+        /// <param name="pFontWeight"></param>
+        /// <returns></returns>
+        private static Style SetStyleHistory(string pFontFamily, double pFontSize, string pFontWeight, TextAlignment pTextAlignment, SolidColorBrush pColor)
+        {
+            Style lStyle = new Style();
+
+            lStyle.Setters.Add(new Setter(Paragraph.FontFamilyProperty, Application.Current.Resources[pFontFamily]));
+            lStyle.Setters.Add(new Setter(Paragraph.FontSizeProperty, pFontSize));
+            lStyle.Setters.Add(new Setter(Paragraph.FontWeightProperty, GlobalUsage.ConvertStringToFontWeight(pFontWeight)));
+            lStyle.Setters.Add(new Setter(Paragraph.ForegroundProperty, pColor));
+            lStyle.Setters.Add(new Setter(Paragraph.TextAlignmentProperty, pTextAlignment));
+            
+            return lStyle;
+        }
+
+        /// <summary>
         /// Set all the themes properties values with the selected one
         /// </summary>
         private static void SetThemeProperties()
@@ -247,10 +268,71 @@ namespace Udemy_Calculator
                     lPorpertyName = string.Concat(nameof(lTheme.Color4), lTheme.SubThemeName);
                     Application.Current.Resources[lPorpertyName] = lTheme.Color4;
                 }
-                if(Enum.GetNames(typeof(SizeOfFont)).ToList().Contains(((SizeOfFont)lTheme.FontSize1).ToString()))
+                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily1?.ToString()))
                 {
-                    lPorpertyName = string.Concat(((SizeOfFont)lTheme.FontSize1).ToString(), lTheme.SubThemeName);
-                    Application.Current.Resources[lPorpertyName] = lTheme.FontSize1;
+                    // Modify the formula style in the app resource dictionnary styles
+                    Application.Current.Resources["HistoryFormulaStyle"] = SetStyleHistory(lTheme.FontFamily1.ToString(), (double)lTheme.FontSize1, lTheme.FontWeight1.ToString(), TextAlignment.Left, lTheme.Color2);
+
+                    // Filling every kind of block history depending of its type
+                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
+                    {
+                        if(eleme.Name == "UIHistoryFormulaParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryChunkParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryResultParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
+                        }
+                    }
+                }
+                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily2?.ToString()))
+                {
+                    // Modify the chunk style in the app resource dictionnary styles
+                    Application.Current.Resources["HistoryChunkStyle"] = SetStyleHistory(lTheme.FontFamily2.ToString(), (double)lTheme.FontSize2, lTheme.FontWeight2.ToString(), TextAlignment.Center, lTheme.Color3);
+
+                    // Filling every kind of block history depending of its type
+                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
+                    {
+                        if (eleme.Name == "UIHistoryFormulaParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryChunkParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryResultParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
+                        }
+                    }
+                }
+                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily3?.ToString()))
+                {
+                    // Modify the result style in the app resource dictionnary styles
+                    Application.Current.Resources["HistoryResultStyle"] = SetStyleHistory(lTheme.FontFamily3.ToString(), (double)lTheme.FontSize3, lTheme.FontWeight3.ToString(), TextAlignment.Right, lTheme.Color4);
+
+                    // Filling every kind of block history depending of its type
+                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
+                    {
+                        if (eleme.Name == "UIHistoryFormulaParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryChunkParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
+                        }
+                        else if (eleme.Name == "UIHistoryResultParagraph")
+                        {
+                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
+                        }
+                    }
                 }
             }
         }
@@ -265,7 +347,7 @@ namespace Udemy_Calculator
 
             foreach (System.Collections.DictionaryEntry lResourceDict in Application.Current.Resources)
             {
-                if(lResourceDict.Value is FontFamily)
+                if (lResourceDict.Value is FontFamily)
                 {
                     lListOfFonts.Add(lResourceDict.Key.ToString());
                 }

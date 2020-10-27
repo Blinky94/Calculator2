@@ -7,7 +7,7 @@ namespace Udemy_Calculator
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {  
+    {
         // Event to raise number pressed by user to display to the UIDisplay
         public delegate void EventUpdateUIDisplayHandler(string pContent);
         public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
@@ -20,8 +20,8 @@ namespace Udemy_Calculator
             UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
 
             // Event registered to send all logs entries to the console log window
-            mConsoleDebug = new ConsoleDebug();
-            mConsoleDebug.Show();
+            // mConsoleDebug = new ConsoleDebug();
+            //mConsoleDebug.Show();
         }
 
         public MainWindow()
@@ -33,7 +33,7 @@ namespace Udemy_Calculator
             // Set all events
             SetEvents();
         }
-    
+
         public void ModifyUIDisplay(string pContent)
         {
             UIDisplay.UIDisplayCalculus.Text = pContent;
