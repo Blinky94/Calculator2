@@ -235,8 +235,31 @@ namespace Udemy_Calculator
             lStyle.Setters.Add(new Setter(Paragraph.FontWeightProperty, GlobalUsage.ConvertStringToFontWeight(pFontWeight)));
             lStyle.Setters.Add(new Setter(Paragraph.ForegroundProperty, pColor));
             lStyle.Setters.Add(new Setter(Paragraph.TextAlignmentProperty, pTextAlignment));
-            
+
             return lStyle;
+        }
+
+        /// <summary>
+        /// Updating all paragraph styles for History panel control
+        /// </summary>
+        private static void UpdateHistoryParagraphStyles()
+        {
+            // Filling every kind of block history depending of its type
+            foreach (var lBlock in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
+            {
+                if (lBlock.Name == "UIHistoryFormulaParagraph")
+                {
+                    lBlock.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
+                }
+                else if (lBlock.Name == "UIHistoryChunkParagraph")
+                {
+                    lBlock.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
+                }
+                else if (lBlock.Name == "UIHistoryResultParagraph")
+                {
+                    lBlock.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
+                }
+            }
         }
 
         /// <summary>
@@ -268,71 +291,20 @@ namespace Udemy_Calculator
                     lPorpertyName = string.Concat(nameof(lTheme.Color4), lTheme.SubThemeName);
                     Application.Current.Resources[lPorpertyName] = lTheme.Color4;
                 }
-                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily1?.ToString()))
+                if (lTheme.FontFamily1 != null || lTheme.FontFamily2 != null || lTheme.FontFamily3 != null
+                    && (lTheme.FontSize1 != 0 || lTheme.FontSize2 != 0 || lTheme.FontSize3 != 0)
+                    && (lTheme.FontWeight1 != null || lTheme.FontWeight2 != null || lTheme.FontWeight3 != null))
                 {
                     // Modify the formula style in the app resource dictionnary styles
                     Application.Current.Resources["HistoryFormulaStyle"] = SetStyleHistory(lTheme.FontFamily1.ToString(), (double)lTheme.FontSize1, lTheme.FontWeight1.ToString(), TextAlignment.Left, lTheme.Color2);
 
-                    // Filling every kind of block history depending of its type
-                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
-                    {
-                        if(eleme.Name == "UIHistoryFormulaParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryChunkParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryResultParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
-                        }
-                    }
-                }
-                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily2?.ToString()))
-                {
                     // Modify the chunk style in the app resource dictionnary styles
                     Application.Current.Resources["HistoryChunkStyle"] = SetStyleHistory(lTheme.FontFamily2.ToString(), (double)lTheme.FontSize2, lTheme.FontWeight2.ToString(), TextAlignment.Center, lTheme.Color3);
 
-                    // Filling every kind of block history depending of its type
-                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
-                    {
-                        if (eleme.Name == "UIHistoryFormulaParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryChunkParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryResultParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
-                        }
-                    }
-                }
-                if (CommonTheme.GetFontList.Contains(lTheme.FontFamily3?.ToString()))
-                {
                     // Modify the result style in the app resource dictionnary styles
                     Application.Current.Resources["HistoryResultStyle"] = SetStyleHistory(lTheme.FontFamily3.ToString(), (double)lTheme.FontSize3, lTheme.FontWeight3.ToString(), TextAlignment.Right, lTheme.Color4);
 
-                    // Filling every kind of block history depending of its type
-                    foreach (var eleme in ((MainWindow)Application.Current.MainWindow).UIHistory.UIHistoryFlowDocument.Blocks)
-                    {
-                        if (eleme.Name == "UIHistoryFormulaParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryFormulaStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryChunkParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryChunkStyle") as Style;
-                        }
-                        else if (eleme.Name == "UIHistoryResultParagraph")
-                        {
-                            eleme.Style = Application.Current.FindResource("HistoryResultStyle") as Style;
-                        }
-                    }
+                    UpdateHistoryParagraphStyles();
                 }
             }
         }

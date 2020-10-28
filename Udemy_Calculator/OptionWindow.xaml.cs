@@ -88,7 +88,31 @@ namespace Udemy_Calculator
 
         private void ComboBoxFontWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           // throw new NotImplementedException();
+            var lCombo = (sender as ComboBox);
+            var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
+
+            var lItemSelected = ItemsListBox.SelectedItem.ToString();
+            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+            {
+                if (lCombo.SelectedItem != null)
+                {
+                    if (lComboTitle.Uid.ToString() == "FontWeight1")
+                    {
+                        lTheme.FontWeight1 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontWeight2")
+                    {
+                        lTheme.FontWeight2 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontWeight3")
+                    {
+                        lTheme.FontWeight3 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
+                    }
+                }
+            }
+
+            // Applying the new theme
+            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
         }
 
         private void ComboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -99,17 +123,20 @@ namespace Udemy_Calculator
             var lItemSelected = ItemsListBox.SelectedItem.ToString();
             foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
             {
-                if (lComboTitle.Uid.ToString() == "FontSize1")
+                if (lCombo.SelectedItem != null)
                 {
-                    lTheme.FontSize1 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
-                }
-                if (lComboTitle.Uid.ToString() == "FontSize2")
-                {
-                    lTheme.FontSize2 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
-                }
-                if (lComboTitle.Uid.ToString() == "FontSize3")
-                {
-                    lTheme.FontSize3 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                    if (lComboTitle.Uid.ToString() == "FontSize1")
+                    {
+                        lTheme.FontSize1 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontSize2")
+                    {
+                        lTheme.FontSize2 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontSize3")
+                    {
+                        lTheme.FontSize3 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
+                    }
                 }
             }
 
@@ -125,17 +152,20 @@ namespace Udemy_Calculator
             var lItemSelected = ItemsListBox.SelectedItem.ToString();
             foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
             {
-                if (lComboTitle.Uid.ToString() == "FontFamily1")
+                if (lCombo.SelectedItem != null)
                 {
-                    lTheme.FontFamily1 = new FontFamily(lCombo.SelectedItem.ToString());
-                }
-                if (lComboTitle.Uid.ToString() == "FontFamily2")
-                {
-                    lTheme.FontFamily2 = new FontFamily(lCombo.SelectedItem.ToString());
-                }
-                if (lComboTitle.Uid.ToString() == "FontFamily3")
-                {
-                    lTheme.FontFamily3 = new FontFamily(lCombo.SelectedItem.ToString());
+                    if (lComboTitle.Uid.ToString() == "FontFamily1")
+                    {
+                        lTheme.FontFamily1 = new FontFamily(lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontFamily2")
+                    {
+                        lTheme.FontFamily2 = new FontFamily(lCombo.SelectedItem.ToString());
+                    }
+                    if (lComboTitle.Uid.ToString() == "FontFamily3")
+                    {
+                        lTheme.FontFamily3 = new FontFamily(lCombo.SelectedItem.ToString());
+                    }
                 }
             }
 

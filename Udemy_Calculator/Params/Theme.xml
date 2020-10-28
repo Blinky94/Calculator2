@@ -101,17 +101,17 @@
     </TrigonometryButtons>
     <History name="History">
       <Color1 name="Background">#FF7F2F0E</Color1>
-      <Color2 name="Formula foreground">#FFFF0000</Color2>
+      <Color2 name="Formula foreground">#FFFFFF00</Color2>
       <Color3 name="Chunk foreground">#FFA2FF9F</Color3>
-      <Color4 name="Result foreground">#FFAFEEEE</Color4>
-      <FontFamily1 name="Formula font family">Digital</FontFamily1>
-      <FontSize1 name="Formula font size">35</FontSize1>
-      <FontWeight1 name="Formula font weight">ExtraBlack</FontWeight1>
+      <Color4 name="Result foreground">#FF00FFC8</Color4>
+      <FontFamily1 name="Formula font family">Roboto</FontFamily1>
+      <FontSize1 name="Formula font size">25</FontSize1>
+      <FontWeight1 name="Formula font weight">SemiBold</FontWeight1>
       <FontFamily2 name="Chunk font family">Roboto</FontFamily2>
-      <FontSize2 name="Chunk font size">25</FontSize2>
-      <FontWeight2 name="Chunk font weight">Bold</FontWeight2>
-      <FontFamily3 name="Result font family">Digital</FontFamily3>
-      <FontSize3 name="Result font size">35</FontSize3>
+      <FontSize2 name="Chunk font size">13</FontSize2>
+      <FontWeight2 name="Chunk font weight">ExtraLight</FontWeight2>
+      <FontFamily3 name="Result font family">Roboto</FontFamily3>
+      <FontSize3 name="Result font size">20</FontSize3>
       <FontWeight3 name="Result font weight">Bold</FontWeight3>
     </History>
   </Theme>

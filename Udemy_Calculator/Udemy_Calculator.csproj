@@ -166,6 +166,9 @@
     <Compile Include="GeneralButton_Control.xaml.cs">
       <DependentUpon>GeneralButton_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HistoryStyle_Control.xaml.cs">
+      <DependentUpon>HistoryStyle_Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tables\ChunkTable.cs" />
     <Compile Include="ColorPicker_Control.xaml.cs">
       <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
@@ -252,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HistoryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HistoryStyle_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

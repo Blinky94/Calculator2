@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Udemy_Calculator.HistoryStyle_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Udemy_Calculator"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Name="historyStyleControl">
+    <StackPanel Orientation="Vertical">
+        <local:ColorPicker_Control x:Name="ColorPickerHistory"
+                                   ColorPickerText="{Binding Path=ColorPickerColorText, ElementName=historyStyleControl}"
+                                   ColorPickerUID="{Binding Path=ColorPickerColorText, ElementName=historyStyleControl}" />
+        <local:ComboBox_Control x:Name="ComboFamilyHistory"
+                                ComboBoxText="{Binding Path=ComboBoxFamilyText, ElementName=historyStyleControl}"
+                                ComboBoxUID="{Binding Path=ComboBoxFamilyText, ElementName=historyStyleControl}" />
+        <local:ComboBox_Control x:Name="ComboSizeHistory"
+                                ComboBoxText="{Binding Path=ComboBoxSizeText, ElementName=historyStyleControl}"
+                                ComboBoxUID="{Binding Path=ComboBoxSizeText, ElementName=historyStyleControl}" />
+        <local:ComboBox_Control x:Name="ComboWeightHistory"
+                                ComboBoxText="{Binding Path=ComboBoxWeightText, ElementName=historyStyleControl}"
+                                ComboBoxUID="{Binding Path=ComboBoxWeightText, ElementName=historyStyleControl}" />
+    </StackPanel>
+</UserControl>
