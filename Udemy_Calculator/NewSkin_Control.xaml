@@ -1,0 +1,229 @@
+﻿<UserControl x:Class="Udemy_Calculator.MenuSide_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Udemy_Calculator"
+             mc:Ignorable="d"
+             d:DesignHeight="30"
+             d:DesignWidth="200">
+    <Border>
+        <Grid Background="Transparent">
+            <Grid.Resources>
+                <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
+                <Style TargetType="Menu">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="Transparent" />
+                </Style>
+
+                <ControlTemplate x:Key="MenuItemTemplate"
+                                 TargetType="MenuItem">
+                    <Grid>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                        <Border>
+
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Menu x:Name="MenuSide"
+                  HorizontalAlignment="Left"
+                  Background="{DynamicResource ResourceKey=Color1MainTheme}"
+                  Style="{DynamicResource ResourceKey=MenuStyle}"
+                  Height="25"
+                  Width="25"
+                  VerticalAlignment="Top"
+                  BorderBrush="{DynamicResource Color3MainTheme}"
+                  Foreground="Black">
+                <MenuItem x:Name="MenuSideControlItem"
+                          IsHitTestVisible="True"
+                          BorderThickness="0">
+                    <MenuItem.Header>
+                        <Image Width="25"
+                               Height="25"
+                               Margin="-10 -3 0 0">
+                            <Image.Style>
+                                <Style TargetType="Image"
+                                       BasedOn="{StaticResource ResourceKey=ImageButtonStyle}">
+                                    <Setter Property="Source"
+                                            Value="Images/Menu_icon.png" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Menu}, Converter={StaticResource ResourceKey=testingBGDarkerConverter}, Mode=TwoWay}"
+                                                     Value="true">
+                                            <Setter Property="Source"
+                                                    Value="Images/Menu_icon_reverse.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </MenuItem.Header>
+                    <MenuItem Header="_Standard"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Standard_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Scientific"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Scientific_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Binary"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Binary_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Calendar"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Calendar_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Graph">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Graph_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Converter...">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Converter_icon.png" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="_Area"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Area_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Electronic"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Electronic_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Energy"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Energy_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Flow"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Flow_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Force"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Force_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Length"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Length_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Power"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Power_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Pressure"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Pressure_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Speed"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Speed_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Temperature"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Temperature_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Time"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Time_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Volume"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Volume_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Weight"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Weight_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Data"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Data_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Angle"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Angle_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Currency"
+                                  Click="MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Images/Currency_icon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Options"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Options_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Exit"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images/Exit_icon.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <!--Menu Label-->
+            <Label x:Name="UIMenuSelected"
+                   Grid.Column="1"
+                   Background="Transparent"
+                   HorizontalContentAlignment="Center"
+                   Margin="0 -2 50 0"
+                   Style="{DynamicResource ResourceKey=MainLabelStyle}" />
+        </Grid>
+    </Border>
+
+</UserControl>

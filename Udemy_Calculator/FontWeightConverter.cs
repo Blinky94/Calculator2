@@ -10,7 +10,7 @@ namespace Udemy_Calculator
         {
             if (value != null && !string.IsNullOrEmpty(value as string))
             {
-                if (CommonTheme.GetFontWeightList.Contains(value as string))
+                if (CommonSkins.GetFontWeightList.Contains(value as string))
                 {
                     return value as string;
                 }

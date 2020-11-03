@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Udemy_Calculator"
         mc:Ignorable="d"
-        Title="Calculator theme"
+        Title="Calculator Skin"
         ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="Manual"
         SizeToContent="WidthAndHeight"
-        Background="{DynamicResource ResourceKey=Color1MainTheme}"
-        BorderBrush="{DynamicResource ResourceKey=Color2MainTheme}"
-        Foreground="{DynamicResource ResourceKey=Color3MainTheme}">
+        Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
+        BorderBrush="{DynamicResource ResourceKey=ForegroundMainSkin}"
+        Foreground="{DynamicResource ResourceKey=BorderbrushMainSkin}">
 
     <!--Main Grid-->
     <Grid Margin="10 30 5 10">
@@ -31,74 +31,59 @@
         </Grid.RowDefinitions>
 
         <!--Grid for ListBox of elements name and Combo to select colors-->
-        <ListBox x:Name="ItemsListBox"
+        <ListBox x:Name="SkinStylesLongNameListBox"
                  Grid.Column="0"
                  Grid.Row="0"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                 SelectionChanged="ItemsListBox_Selected" />
+                 SelectionChanged="SkinStylesLongNameListBox_Selected" />
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Grid.Column="1"
                     Grid.Row="0">
-            <StackPanel.Resources>
-                <Style TargetType="local:ColorPicker_Control">
-                    <Setter Property="Margin"
-                            Value="0,2,0,2" />
-                </Style>
-                <Style TargetType="local:ComboBox_Control">
-                    <Setter Property="Margin"
-                            Value="0,2,0,2" />
-                </Style>
-            </StackPanel.Resources>
-            <!--StackPanel for Theme name and selection Combobox-->
-            <local:ComboBox_Control x:Name="ThemeListComboBox"
-                                    ComboBoxText="Theme name"
-                                    ComboBoxUID="ThemeName" />
-            
-            <local:ColorPicker_Control x:Name="Color1Picker"
-                                       ColorPickerUID="Color1"
-                                       ColorPickerText="Color1" />
-          
-            <local:ColorPicker_Control x:Name="Color2Picker"
-                                       ColorPickerUID="Color2"
-                                       ColorPickerText="Color2" />
-            <local:ComboBox_Control x:Name="ComboBoxFontFamily1"
-                                    ComboBoxText="FontFamily1"
-                                    ComboBoxUID="FontFamily1" />
-            <local:ComboBox_Control x:Name="ComboBoxFontSize1"
-                                    ComboBoxText="FontSize1"
-                                    ComboBoxUID="FontSize1" />
-            <local:ComboBox_Control x:Name="ComboBoxFontWeight1"
-                                    ComboBoxText="FontWeight1"
-                                    ComboBoxUID="FontWeight1" />
-            
-            <local:ColorPicker_Control x:Name="Color3Picker"
-                                       ColorPickerUID="Color3"
-                                       ColorPickerText="Color3" />
-            <local:ComboBox_Control x:Name="ComboBoxFontFamily2"
-                                    ComboBoxText="FontFamily2"
-                                    ComboBoxUID="FontFamily2" />
-            <local:ComboBox_Control x:Name="ComboBoxFontSize2"
-                                    ComboBoxText="FontSize2"
-                                    ComboBoxUID="FontSize2" />
-            <local:ComboBox_Control x:Name="ComboBoxFontWeight2"
-                                    ComboBoxText="FontWeight2"
-                                    ComboBoxUID="FontWeight2" />
-            
-            <local:ColorPicker_Control x:Name="Color4Picker"
-                                       ColorPickerUID="Color4"
-                                       ColorPickerText="Color4" />
-            <local:ComboBox_Control x:Name="ComboBoxFontFamily3"
-                                    ComboBoxText="FontFamily3"
-                                    ComboBoxUID="FontFamily3" />
-            <local:ComboBox_Control x:Name="ComboBoxFontSize3"
-                                    ComboBoxText="FontSize3"
-                                    ComboBoxUID="FontSize3" />
-            <local:ComboBox_Control x:Name="ComboBoxFontWeight3"
-                                    ComboBoxText="FontWeight3"
-                                    ComboBoxUID="FontWeight3" />
+            <!--StackPanel for Skin name and selection Combobox-->
+            <StackPanel Orientation="Horizontal" Margin="52 0 0 0">
+                <Label Content="Skin selected"
+                       Grid.Column="0"
+                       Style="{DynamicResource MainLabelStyle}"
+                       Padding="0"
+                       Margin="0 7 5 0"
+                       FontSize="12" />
+                <ComboBox x:Name="SkinNamesComboBox"
+                          HorizontalAlignment="Stretch"
+                          Height="25"
+                          VerticalContentAlignment="Center"
+                          Padding="20,0,0,0"
+                          HorizontalContentAlignment="Center"
+                          Margin="0 2 0 2"
+                          Width="115"
+                          SelectionChanged="ComboBoxSkinList_SelectionChanged" />
+            </StackPanel>
+
+            <local:ColorPicker_Control x:Name="BackgroundColorPicker"
+                                       ColorPickerUID="Background"
+                                       ColorPickerText="Background" />
+
+            <local:ColorPicker_Control x:Name="ForegroundColorPicker"
+                                       ColorPickerUID="Foreground"
+                                       ColorPickerText="Foreground" />
+
+            <local:ColorPicker_Control x:Name="BorderbrushColorPicker"
+                                       ColorPickerUID="Borderbrush"
+                                       ColorPickerText="Borderbrush" />
+
+            <local:ComboBox_Control x:Name="FontFamilyComboBox"
+                                    ComboBoxText="FontFamily"
+                                    ComboBoxUID="FontFamily" />
+
+            <local:ComboBox_Control x:Name="FontSizeComboBox"
+                                    ComboBoxText="FontSize"
+                                    ComboBoxUID="FontSize" />
+
+            <local:ComboBox_Control x:Name="FontWeightComboBox"
+                                    ComboBoxText="FontWeight"
+                                    ComboBoxUID="FontWeight" />
 
         </StackPanel>
 

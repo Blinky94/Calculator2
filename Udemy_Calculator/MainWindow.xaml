@@ -20,7 +20,7 @@
             <Border x:Name="border"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    Background="{DynamicResource ResourceKey=Color1MainTheme}"
+                    Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
                     SnapsToDevicePixels="True">
                 <ContentPresenter x:Name="contentPresenter"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -77,8 +77,8 @@
                             VerticalAlignment="Center">
                     <!--Main Container Grid-->
                     <Border CornerRadius="25"
-                            Background="{DynamicResource ResourceKey=Color1MainTheme}"
-                            BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
+                            Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
+                            BorderBrush="{DynamicResource ResourceKey=BorderbrushMainSkin}"
                             BorderThickness="5">
                         <Grid x:Name="MainGrid"
                               Margin="10 10 11 20">
@@ -102,7 +102,7 @@
                                           Margin="240 0 0 0"
                                           HorizontalAlignment="Left"
                                           IsEnabled="True"
-                                          Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
+                                          Foreground="{DynamicResource ResourceKey=ForegroundMainSkin}"
                                           Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}, Mode=TwoWay}"
                                           Checked="UIHistoryExpander_Expanded"
                                           Unchecked="UIHistoryExpander_Collapsed"

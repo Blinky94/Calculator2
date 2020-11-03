@@ -103,6 +103,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -169,11 +170,17 @@
     <Compile Include="HistoryStyle_Control.xaml.cs">
       <DependentUpon>HistoryStyle_Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewSkinName_Control.xaml.cs">
+      <DependentUpon>NewSkinName_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SerializedObjects\SkinStylesCls.cs" />
+    <Compile Include="SerializedObjects\SkinCls.cs" />
+    <Compile Include="SerializedObjects\SkinsCls.cs" />
     <Compile Include="Tables\ChunkTable.cs" />
     <Compile Include="ColorPicker_Control.xaml.cs">
       <DependentUpon>ColorPicker_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonTheme.cs" />
+    <Compile Include="CommonSkins.cs" />
     <Compile Include="ConsoleDebug.xaml.cs">
       <DependentUpon>ConsoleDebug.xaml</DependentUpon>
     </Compile>
@@ -199,7 +206,6 @@
       <DependentUpon>Spinner_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="TestingBackgroundDarkerConverter.cs" />
-    <Compile Include="Theme.cs" />
     <Compile Include="TraceLogs.cs" />
     <Compile Include="XmlParser.cs" />
     <Page Include="Buttons\BaseButton_Control.xaml">
@@ -275,6 +281,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MenuSide_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewSkinName_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -618,6 +628,7 @@
   <ItemGroup>
     <Resource Include="Images\Right_icon_reverse.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="620"
              Background="Transparent"
-             Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
-             BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
+             Foreground="{DynamicResource ResourceKey=ForegroundMainSkin}"
+             BorderBrush="{DynamicResource ResourceKey=BorderbrushMainSkin}"
              d:DesignWidth="260">
 
     <Grid x:Name="HistoryControlMainGrid"

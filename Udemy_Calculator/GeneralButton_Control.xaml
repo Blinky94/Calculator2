@@ -14,7 +14,7 @@
         </Grid.Resources>
         <Button x:Name="GeneralButton"
                 Click="GeneralButton_Click"
-                Background="{DynamicResource ResourceKey=Color1BaseButtons}"
+                Background="{DynamicResource ResourceKey=BackgroundBaseButtons}"
                 Style="{DynamicResource ResourceKey=BaseButtonsStyle}"
                 Width="40"
                 Height="25">

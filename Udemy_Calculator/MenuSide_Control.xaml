@@ -40,12 +40,12 @@
 
             <Menu x:Name="MenuSide"
                   HorizontalAlignment="Left"
-                  Background="{DynamicResource ResourceKey=Color1MainTheme}"
+                  Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
                   Style="{DynamicResource ResourceKey=MenuStyle}"
                   Height="25"
                   Width="25"
                   VerticalAlignment="Top"
-                  BorderBrush="{DynamicResource Color3MainTheme}"
+                  BorderBrush="{DynamicResource BorderbrushMainSkin}"
                   Foreground="Black">
                 <MenuItem x:Name="MenuSideControlItem"
                           IsHitTestVisible="True"

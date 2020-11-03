@@ -10,9 +10,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="{DynamicResource ResourceKey=Color1MainTheme}"
-        Foreground="{DynamicResource ResourceKey=Color2MainTheme}"
-        BorderBrush="{DynamicResource ResourceKey=Color3MainTheme}"
+        Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
+        Foreground="{DynamicResource ResourceKey=ForegroundMainSkin}"
+        BorderBrush="{DynamicResource ResourceKey=BorderbrushMainSkin}"
         WindowStartupLocation="Manual"
         Height="500"
         Width="1000">

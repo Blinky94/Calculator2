@@ -118,7 +118,6 @@ namespace Udemy_Calculator
             UISignButton.OnOperatorButtonClicked += new RoutedEventHandler(UISignOrUnSignButton_Click);
             UIPointButton.OnNumericalButtonClicked += new RoutedEventHandler(UIPointButton_Click);
             UIEqualButton.OnOperatorButtonClicked += new RoutedEventHandler(UIEqualButton_Click);
-
         }
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)

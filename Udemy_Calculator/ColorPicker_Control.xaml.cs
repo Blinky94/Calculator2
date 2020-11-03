@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Udemy_Calculator.SerializedObjects;
 
 namespace Udemy_Calculator
 {
@@ -20,7 +21,6 @@ namespace Udemy_Calculator
             get { return (string)GetValue(ColorPickerUIDProperty); }
             set { SetValue(ColorPickerUIDProperty, value); }
         }
-
         public ColorPicker_Control()
         {
             InitializeComponent();
@@ -28,47 +28,48 @@ namespace Udemy_Calculator
 
         private void UIColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
-            if(e.NewValue == null)
+            if (e.NewValue == null)
             {
                 return;
             }
 
             SolidColorBrush lColorSelected = new SolidColorBrush((Color)e.NewValue);
 
+            string lSkinLongName = string.Empty;
+            string lSkinSelectedName = string.Empty;
+            
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() != typeof(OptionWindow))
                 {
                     continue;
                 }
-                var loPtionWindox = window as OptionWindow;
+                var loPtionWindow = window as OptionWindow;
 
-                var lItemSelected = loPtionWindox.ItemsListBox.SelectedItem.ToString();
+                var lItemSelected = loPtionWindow.SkinStylesLongNameListBox.SelectedItem.ToString();
+                lSkinLongName = lItemSelected;
+                lSkinSelectedName = CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(pStyle => pStyle.Name).FirstOrDefault();
+
                 var lColorPickerUID = TitleLabel.Uid.ToString();
 
-                foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+                var lStyle = (SkinStylesCls)CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(pStyle => pStyle).FirstOrDefault();
+
+                if (lColorPickerUID.Contains("Background"))
                 {
-                    if (lColorPickerUID.Contains("Color1"))
-                    {
-                        lTheme.Color1 = lColorSelected; 
-                    }
-                    else if (lColorPickerUID.Contains("Color2"))
-                    {
-                        lTheme.Color2 = lColorSelected;
-                    }
-                    else if (lColorPickerUID.Contains("Color3"))
-                    {
-                        lTheme.Color3 = lColorSelected;
-                    }
-                    else if (lColorPickerUID.Contains("Color4"))
-                    {
-                        lTheme.Color4 = lColorSelected;
-                    }
+                    CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(p => p.Background).FirstOrDefault().Value = lColorSelected.ToString();
+                }
+                else if (lColorPickerUID.Contains("Foreground"))
+                {
+                    CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(p => p.Foreground).FirstOrDefault().Value = lColorSelected.ToString();
+                }
+                else if (lColorPickerUID.Contains("Borderbrush"))
+                {
+                    CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(p => p.Borderbrush).FirstOrDefault().Value = lColorSelected.ToString();
                 }
             }
 
-            // Applying the new theme
-            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
+            // Applying the new Skin
+            CommonSkins.UpdateResourcesWithSkins(lSkinSelectedName);
         }
     }
 }

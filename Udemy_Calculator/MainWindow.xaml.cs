@@ -13,25 +13,18 @@ namespace Udemy_Calculator
         public event EventUpdateUIDisplayHandler UIEventDisplayValueEvent;
         internal static ConsoleDebug mConsoleDebug;
 
-        private void SetEvents()
-        {
-            // Event registered to the UIDisplay when number is typed
-            UIEventDisplayValueEvent += new EventUpdateUIDisplayHandler(ModifyUIDisplay);
-            UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
-
-            // Event registered to send all logs entries to the console log window
-            // mConsoleDebug = new ConsoleDebug();
-            //mConsoleDebug.Show();
-        }
-
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             UIMenuSide.UIMenuSelected.Content = CalculatorMode.Scientific.ToString();
 
-            // Set all events
-            SetEvents();
+            // Event registered to the UIDisplay when number is typed
+            UIEventDisplayValueEvent += new EventUpdateUIDisplayHandler(ModifyUIDisplay);
+            UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
+
+            //mConsoleDebug = new ConsoleDebug();
+            //mConsoleDebug.Show();
         }
 
         public void ModifyUIDisplay(string pContent)

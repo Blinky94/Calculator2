@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Udemy_Calculator.SerializedObjects;
 
 namespace Udemy_Calculator
 {
@@ -16,132 +17,62 @@ namespace Udemy_Calculator
         // Init singleton
         private static readonly OptionWindow mOptionWindow = new OptionWindow();
 
+        /// <summary>
+        /// Initialize all the local event
+        /// </summary>
+        private void SetAllLocalEvents()
+        {
+            // Event on Skin name selected
+            Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
+            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
+            Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
+        }
+
+        /// <summary>
+        /// Define all the lists values in every History ComboBox
+        /// </summary>
+        private void SetHistoryListToControls()
+        {
+            // List of font available
+            List<string> lFontFamilyList = CommonSkins.GetFontList;
+            // Get Formula font family
+            FontFamilyComboBox.ItemsComboBox.ItemsSource = lFontFamilyList;
+            // Get Chunk font family
+            FontSizeComboBox.ItemsComboBox.ItemsSource = Enum.GetNames(typeof(SizeOfFont)).ToList();
+            // Get Result font family
+            FontWeightComboBox.ItemsComboBox.ItemsSource = CommonSkins.GetFontWeightList;
+        }
+
         private OptionWindow()
         {
             // Private constructor to instanciate local objects here 
             InitializeComponent();
 
-            // Event on theme name selected
-            ThemeListComboBox.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxThemeList_SelectionChanged);
-            ComboBoxFontFamily1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
-            ComboBoxFontSize1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
-            ComboBoxFontWeight1.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
-            ComboBoxFontFamily2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
-            ComboBoxFontSize2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
-            ComboBoxFontWeight2.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
-            ComboBoxFontFamily3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontFamily_SelectionChanged);
-            ComboBoxFontSize3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontSize_SelectionChanged);
-            ComboBoxFontWeight3.OnSelectionChanged += new SelectionChangedEventHandler(ComboBoxFontWeight_SelectionChanged);
-            Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
-            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
-            Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
+            // Initialize all local event
+            SetAllLocalEvents();
 
             //Loading the xml configuration to provide access to all elements
-            CommonTheme.LoadFromXmlProvider(this);
+            CommonSkins.LoadSkinsFromXml();
 
-            // Applying every properties values to the listBox from selected theme
-            PopulateListPropertiesToListView();
+            // Set all history combBox values
+            SetHistoryListToControls();
 
-            // Combobox List for main theme to select
-            ThemeListComboBox.ItemsComboBox.ItemsSource = CommonTheme.GetParentThemeNames;
+            // Applying every properties values to the listBox from selected Skin
+            PopulateSkinStylesToSkinListBox();
 
-            // List of font available
-            List<string> lFontFamilyList = CommonTheme.GetFontList;
-            // Get Formula font family
-            ComboBoxFontFamily1.ItemsComboBox.ItemsSource = lFontFamilyList;
-            // Get Chunk font family
-            ComboBoxFontFamily2.ItemsComboBox.ItemsSource = lFontFamilyList;
-            // Get Result font family
-            ComboBoxFontFamily3.ItemsComboBox.ItemsSource = lFontFamilyList;
-
-            // List of font size available
-            var lFontSizeList = Enum.GetNames(typeof(SizeOfFont)).ToList();
-            // Get Formula font size
-            ComboBoxFontSize1.ItemsComboBox.ItemsSource = lFontSizeList;
-            // Get Chunk font size
-            ComboBoxFontSize2.ItemsComboBox.ItemsSource = lFontSizeList;
-            // Get Result font size
-            ComboBoxFontSize3.ItemsComboBox.ItemsSource = lFontSizeList;
-
-            // List of font weight available
-            List<string> lFontWeightList = CommonTheme.GetFontWeightList;
-            // Get Formula font weight
-            ComboBoxFontWeight1.ItemsComboBox.ItemsSource = lFontWeightList;
-            // Get Chunk font weight
-            ComboBoxFontWeight2.ItemsComboBox.ItemsSource = lFontWeightList;
-            // Get Result font weight
-            ComboBoxFontWeight3.ItemsComboBox.ItemsSource = lFontWeightList;
+            // Combobox List for main Skin to select
+            SkinNamesComboBox.ItemsSource = CommonSkins.GetParentSkinNames;
 
             // Selecting default values into controls
-            if (CommonTheme.GetParentThemeLongNames.Count > 0)
+            if (CommonSkins.GetParentSkinLongNames.Count > 0)
             {
-                ItemsListBox.SelectedItem = CommonTheme.GetParentThemeLongNames[0];
+                SkinStylesLongNameListBox.SelectedItem = CommonSkins.GetParentSkinLongNames[0];
             }
 
-            CommonTheme.ThemeSelectedName = CommonTheme.LoadXmlConfiguration?.SelectSingleNode("Themes/ThemeSelected/@name").Value;
-
-            if (!string.IsNullOrEmpty(CommonTheme.ThemeSelectedName))
+            if (!string.IsNullOrEmpty(CommonSkins.SkinSelectedName))
             {
-                ThemeListComboBox.ItemsComboBox.SelectedIndex = ThemeListComboBox.ItemsComboBox.Items.IndexOf(CommonTheme.ThemeSelectedName);
+                SkinNamesComboBox.SelectedIndex = SkinNamesComboBox.Items.IndexOf(CommonSkins.SkinSelectedName);
             }
-        }
-
-        private void ComboBoxFontWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var lCombo = (sender as ComboBox);
-            var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
-
-            var lItemSelected = ItemsListBox.SelectedItem.ToString();
-            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
-            {
-                if (lCombo.SelectedItem != null)
-                {
-                    if (lComboTitle.Uid.ToString() == "FontWeight1")
-                    {
-                        lTheme.FontWeight1 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontWeight2")
-                    {
-                        lTheme.FontWeight2 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontWeight3")
-                    {
-                        lTheme.FontWeight3 = GlobalUsage.ConvertStringToFontWeight(lCombo.SelectedItem.ToString());
-                    }
-                }
-            }
-
-            // Applying the new theme
-            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
-        }
-
-        private void ComboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var lCombo = (sender as ComboBox);
-            var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
-
-            var lItemSelected = ItemsListBox.SelectedItem.ToString();
-            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
-            {
-                if (lCombo.SelectedItem != null)
-                {
-                    if (lComboTitle.Uid.ToString() == "FontSize1")
-                    {
-                        lTheme.FontSize1 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontSize2")
-                    {
-                        lTheme.FontSize2 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontSize3")
-                    {
-                        lTheme.FontSize3 = (int)Enum.Parse(typeof(SizeOfFont), lCombo.SelectedItem.ToString());
-                    }
-                }
-            }
-
-            // Applying the new theme
-            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
         }
 
         private void ComboBoxFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -149,36 +80,36 @@ namespace Udemy_Calculator
             var lCombo = (sender as ComboBox);
             var lComboTitle = (lCombo.Parent as Grid).Children[0] as Label;
 
-            var lItemSelected = ItemsListBox.SelectedItem.ToString();
-            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lItemSelected))
+            string lValueSelected = FontFamilyComboBox.ItemsComboBox.SelectedItem.ToString();
+
+            foreach (Window window in Application.Current.Windows)
             {
+                if (window.GetType() != typeof(OptionWindow))
+                {
+                    continue;
+                }
+                var loPtionWindow = window as OptionWindow;
+
+                var lItemSelected = loPtionWindow.SkinStylesLongNameListBox.SelectedItem.ToString();
                 if (lCombo.SelectedItem != null)
                 {
-                    if (lComboTitle.Uid.ToString() == "FontFamily1")
+                    if (lComboTitle.Uid == "FontFamily")
                     {
-                        lTheme.FontFamily1 = new FontFamily(lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontFamily2")
-                    {
-                        lTheme.FontFamily2 = new FontFamily(lCombo.SelectedItem.ToString());
-                    }
-                    if (lComboTitle.Uid.ToString() == "FontFamily3")
-                    {
-                        lTheme.FontFamily3 = new FontFamily(lCombo.SelectedItem.ToString());
+                        CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lItemSelected).Select(p => p.FontFamily).FirstOrDefault().Value = lValueSelected;
                     }
                 }
-            }
 
-            // Applying the new theme
-            CommonTheme.SetSelectedThemeListObject(CommonTheme.ThemeSelectedName);
+                // Applying the new Skin
+                CommonSkins.UpdateResourcesWithSkins();
+            }
         }
 
         /// <summary>
         /// Applying values from list to the listBox control
         /// </summary>
-        private void PopulateListPropertiesToListView()
+        private void PopulateSkinStylesToSkinListBox()
         {
-            ItemsListBox.ItemsSource = CommonTheme.GetParentThemeLongNames;
+            SkinStylesLongNameListBox.ItemsSource = CommonSkins.GetParentSkinLongNames;
         }
 
         /// <summary>
@@ -192,8 +123,8 @@ namespace Udemy_Calculator
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {
-            //Save theme
-            XmlParser.SaveTheme(CommonTheme.ThemeSelectedName);
+            //Save Skin
+            XmlParser.SerializeSkinsToXML(CommonSkins.SkinsObj);
         }
 
         private void Button_Cancel(object sender, RoutedEventArgs e)
@@ -204,26 +135,21 @@ namespace Udemy_Calculator
 
         private void Button_Add(object sender, RoutedEventArgs e)
         {
-            // Add new theme
+            NewSkinName_Control.GetInstance().Show();
         }
 
-        private void ComboBoxThemeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxSkinList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var lSelectedVal = (sender as ComboBox).SelectedValue.ToString();
-
-            CommonTheme.ThemeSelectedName = lSelectedVal;
-
-            // Updating the list of objects selected
-            CommonTheme.SetSelectedThemeListObject(lSelectedVal);
-
-            // Populate the list of properties (BaseButtons,ScientificButtons...)
-            PopulateListPropertiesToListView();
+            CommonSkins.SkinSelectedName = (sender as ComboBox).SelectedValue.ToString();
 
             // Apply the default color for the first ListItem
-            if (ItemsListBox != null && ItemsListBox.Items.Count > 0)
+            if (SkinStylesLongNameListBox != null && SkinStylesLongNameListBox.Items.Count > 0)
             {
-                ItemsListBox_Selected(ItemsListBox, null);
+                SkinStylesLongNameListBox_Selected(SkinStylesLongNameListBox, null);
             }
+
+            // Applying the new Skin
+            CommonSkins.UpdateResourcesWithSkins();
         }
 
         #region Moving the Window
@@ -293,37 +219,23 @@ namespace Udemy_Calculator
             }
         }
 
-        private void ItemsListBox_Selected(object sender, RoutedEventArgs e)
+        private void SkinStylesLongNameListBox_Selected(object sender, RoutedEventArgs e)
         {
             if ((sender as ListBox).SelectedItem == null)
             {
-                (sender as ListBox).SelectedItem = CommonTheme.GetParentThemeLongNames[0];
+                (sender as ListBox).SelectedItem = CommonSkins.GetParentSkinLongNames[0];
             }
 
             var lSelectedVal = (sender as ListBox).SelectedItem.ToString();
 
-            foreach (var lTheme in CommonTheme.ListSelectedTheme.Where(p => p.SubThemeAttribute == lSelectedVal))
-            {
-                UpdatePropertyValuesAndTitles(lTheme.Color1?.ToString(), Color1Picker, lTheme.Color1Attribute);
-                UpdatePropertyValuesAndTitles(lTheme.Color2?.ToString(), Color2Picker, lTheme.Color2Attribute);
-                UpdatePropertyValuesAndTitles(lTheme.Color3?.ToString(), Color3Picker, lTheme.Color3Attribute);
-                UpdatePropertyValuesAndTitles(lTheme.Color4?.ToString(), Color4Picker, lTheme.Color4Attribute);
-                UpdatePropertyValuesAndTitles(lTheme.FontFamily1?.ToString(), ComboBoxFontFamily1, lTheme.FontFamilyAttribute1);
-                UpdatePropertyValuesAndTitles(lTheme.FontFamily2?.ToString(), ComboBoxFontFamily2, lTheme.FontFamilyAttribute2);
-                UpdatePropertyValuesAndTitles(lTheme.FontFamily3?.ToString(), ComboBoxFontFamily3, lTheme.FontFamilyAttribute3);
-                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize1).ToString(), ComboBoxFontSize1, lTheme.FontSizeAttribute1);
-                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize2).ToString(), ComboBoxFontSize2, lTheme.FontSizeAttribute2);
-                UpdatePropertyValuesAndTitles(((SizeOfFont)lTheme.FontSize3).ToString(), ComboBoxFontSize3, lTheme.FontSizeAttribute3);
+            var lStyle = (SkinStylesCls)CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lSelectedVal).Select(pStyle => pStyle).FirstOrDefault();
 
-                string lVal = lTheme.FontWeight1 != null ? lTheme.FontWeight1.ToString() : string.Empty;
-                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight1, lTheme.FontWeightAttribute1);
-
-                lVal = lTheme.FontWeight2 != null ? lTheme.FontWeight2.ToString() : string.Empty;
-                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight2, lTheme.FontWeightAttribute2);
-
-                lVal = lTheme.FontWeight3 != null ? lTheme.FontWeight3.ToString() : string.Empty;
-                UpdatePropertyValuesAndTitles(lVal, ComboBoxFontWeight3, lTheme.FontWeightAttribute3);
-            }
+            UpdatePropertyValuesAndTitles(lStyle?.Background?.Value, BackgroundColorPicker, lStyle?.Background?.Name);
+            UpdatePropertyValuesAndTitles(lStyle?.Foreground?.Value, ForegroundColorPicker, lStyle?.Foreground?.Name);
+            UpdatePropertyValuesAndTitles(lStyle?.Borderbrush?.Value, BorderbrushColorPicker, lStyle?.Borderbrush?.Name);
+            UpdatePropertyValuesAndTitles(lStyle?.FontFamily?.Value, FontFamilyComboBox, lStyle?.FontFamily?.Name);
+            UpdatePropertyValuesAndTitles(((SizeOfFont)Convert.ToInt32(lStyle?.FontSize?.Value)).ToString(), FontSizeComboBox, lStyle?.FontSize?.Name);
+            UpdatePropertyValuesAndTitles(GlobalUsage.ConvertStringToFontWeight(lStyle?.FontWeight?.Value).ToString(), FontWeightComboBox, lStyle?.FontWeight?.Name);
         }
     }
 }

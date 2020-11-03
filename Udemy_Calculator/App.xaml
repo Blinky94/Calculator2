@@ -10,73 +10,67 @@
         <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
         <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto-Regular</FontFamily>
         <XmlDataProvider Source="Params\Theme.xml"
-                         XPath="/Themes/Theme[@name=../ThemeSelected/@name]"
-                         x:Key="ThemesXml" />
-        <SolidColorBrush x:Key="Color1MainTheme"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color1}" />
-        <SolidColorBrush x:Key="Color2MainTheme"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color2}" />
-        <SolidColorBrush x:Key="Color3MainTheme"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MainTheme/Color3}" />
+                         XPath="/Skins/Skin[@name=/Skins/@selected]"
+                         x:Key="SkinsXml" />
+        <SolidColorBrush x:Key="BackgroundMainSkin"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MainSkin\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundMainSkin"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MainSkin\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushMainSkin"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MainSkin\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1BaseButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2BaseButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3BaseButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=BaseButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundBaseButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'BaseButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundBaseButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'BaseButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushBaseButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'BaseButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1SndeButton"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color1}" />
-        <SolidColorBrush x:Key="Color2SndeButton"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color2}" />
-        <SolidColorBrush x:Key="Color3SndeButton"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=SndeButton/Color3}" />
+        <SolidColorBrush x:Key="BackgroundSndeButton"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'SndeButton\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundSndeButton"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'SndeButton\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushSndeButton"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'SndeButton\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1ScientificButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2ScientificButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3ScientificButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=ScientificButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundScientificButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'ScientificButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundScientificButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'ScientificButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushScientificButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'ScientificButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1OperatorsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2OperatorsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3OperatorsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=OperatorsButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundOperatorsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'OperatorsButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundOperatorsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'OperatorsButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushOperatorsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'OperatorsButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1NumericalsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2NumericalsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3NumericalsButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=NumericalsButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundNumericalsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'NumericalsButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundNumericalsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'NumericalsButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushNumericalsButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'NumericalsButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1MemoryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2MemoryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3MemoryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=MemoryButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundMemoryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MemoryButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundMemoryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MemoryButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushMemoryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'MemoryButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1TrigonometryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color1}" />
-        <SolidColorBrush x:Key="Color2TrigonometryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color2}" />
-        <SolidColorBrush x:Key="Color3TrigonometryButtons"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=TrigonometryButtons/Color3}" />
+        <SolidColorBrush x:Key="BackgroundTrigonometryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'TrigonometryButtons\']/Background}" />
+        <SolidColorBrush x:Key="ForegroundTrigonometryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'TrigonometryButtons\']/Foreground}" />
+        <SolidColorBrush x:Key="BorderbrushTrigonometryButtons"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'TrigonometryButtons\']/Borderbrush}" />
 
-        <SolidColorBrush x:Key="Color1History"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color1}" />
-        <SolidColorBrush x:Key="Color2History"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color2}" />
-        <SolidColorBrush x:Key="Color3History"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color3}" />
-        <SolidColorBrush x:Key="Color4History"
-                         Color="{Binding Source={StaticResource ThemesXml}, XPath=History/Color4}" />
-
+        <SolidColorBrush x:Key="BackgroundHistory"
+                         Color="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'History\']/Background}" />
+      
         <Style x:Key="BaseButtonsStyle"
                TargetType="Button">
             <Setter Property="FontSize"
@@ -88,11 +82,11 @@
             <Setter Property="Padding"
                     Value="0 2 0 3" />
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundBaseButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundBaseButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3BaseButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushBaseButtons}" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="VerticalContentAlignment"
@@ -148,11 +142,11 @@
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter Property="Background"
-                                            Value="{DynamicResource ResourceKey=Color2MainTheme}" />
+                                            Value="{DynamicResource ResourceKey=ForegroundMainSkin}" />
                                     <Setter Property="Foreground"
-                                            Value="{DynamicResource ResourceKey=Color1MainTheme}" />
+                                            Value="{DynamicResource ResourceKey=BackgroundMainSkin}" />
                                     <Setter Property="BorderBrush"
-                                            Value="{DynamicResource ResourceKey=Color3MainTheme}" />
+                                            Value="{DynamicResource ResourceKey=BorderbrushMainSkin}" />
                                     <Setter Property="BorderThickness"
                                             Value="1" />
                                 </MultiTrigger.Setters>
@@ -168,11 +162,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=BaseButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundOperatorsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundOperatorsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3OperatorsButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushOperatorsButtons}" />
             <Setter Property="Padding"
                     Value="0 -2 0 6" />
         </Style>
@@ -189,11 +183,11 @@
             <Setter Property="Padding"
                     Value="0" />
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundNumericalsButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundNumericalsButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3NumericalsButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushNumericalsButtons}" />
         </Style>
 
         <Style x:Key="MemoryButtonsStyle"
@@ -204,11 +198,11 @@
             <Setter Property="FontWeight"
                     Value="DemiBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundMemoryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundMemoryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3MemoryButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushMemoryButtons}" />
             <Setter Property="Width"
                     Value="67" />
             <Setter Property="Height"
@@ -225,11 +219,11 @@
             <Setter Property="FontWeight"
                     Value="UltraBold" />
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundScientificButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundScientificButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3ScientificButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushScientificButtons}" />
             <Setter Property="Width"
                     Value="47" />
             <Setter Property="Height"
@@ -244,11 +238,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=BackgroundTrigonometryButtons}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=ForegroundTrigonometryButtons}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3TrigonometryButtons}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushTrigonometryButtons}" />
             <Setter Property="Padding"
                     Value="0,-3,0,0" />
         </Style>
@@ -257,11 +251,11 @@
                TargetType="Button"
                BasedOn="{StaticResource ResourceKey=ScientificButtonsStyle}">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1SndeButton}" />
+                    Value="{DynamicResource ResourceKey=BackgroundSndeButton}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2SndeButton}" />
+                    Value="{DynamicResource ResourceKey=ForegroundSndeButton}" />
             <Setter Property="BorderBrush"
-                    Value="{DynamicResource ResourceKey=Color3SndeButton}" />
+                    Value="{DynamicResource ResourceKey=BorderbrushSndeButton}" />
         </Style>
 
         <Style x:Key="ImageButtonStyle"
@@ -275,7 +269,7 @@
         <Style x:Key="MainLabelStyle"
                TargetType="Label">
             <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2MainTheme}" />
+                    Value="{DynamicResource ResourceKey=ForegroundMainSkin}" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="FontSize"
@@ -285,7 +279,7 @@
         <Style x:Key="MenuStyle"
                TargetType="Menu">
             <Setter Property="Background"
-                    Value="{DynamicResource ResourceKey=Color1MainTheme}" />
+                    Value="{DynamicResource ResourceKey=BackgroundMainSkin}" />
             <Setter Property="Margin"
                     Value="0 3 0 0" />
             <Style.Triggers>
@@ -301,51 +295,51 @@
                TargetType="RichTextBox">
             <Setter Property="Background"
                     x:Name="backgroundHistory"
-                    Value="{DynamicResource ResourceKey=Color1History}" />
+                    Value="{DynamicResource ResourceKey=BackgroundHistory}" />
             <Setter Property="Opacity"
                     Value="0.7" />
         </Style>
 
         <Style x:Key="HistoryFormulaStyle"
                TargetType="Paragraph">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color2History}" />
             <Setter Property="TextAlignment"
                     Value="Left" />
+            <Setter Property="Foreground"
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Formula\']/Foreground}" />
             <Setter Property="FontFamily"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily1, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Formula\']/FontFamily, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize1, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Formula\']/FontSize, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight1, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Formula\']/FontWeight, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
         <Style x:Key="HistoryChunkStyle"
                TargetType="Paragraph">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color3History}" />
             <Setter Property="TextAlignment"
                     Value="Center" />
+            <Setter Property="Foreground"
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Chunk\']/Foreground}" />
             <Setter Property="FontFamily"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily2, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Chunk\']/FontFamily, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize2, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Chunk\']/FontSize, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight2, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Chunk\']/FontWeight, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
         <Style x:Key="HistoryResultStyle"
                TargetType="Paragraph">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource ResourceKey=Color4History}" />
             <Setter Property="TextAlignment"
                     Value="Right" />
+            <Setter Property="Foreground"
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Result\']/Foreground}" />
             <Setter Property="FontFamily"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontFamily3, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Result\']/FontFamily, Converter={StaticResource ResourceKey=fontFamilyConverter}}" />
             <Setter Property="FontSize"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontSize3, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Result\']/FontSize, Converter={StaticResource ResourceKey=fontSizeConverter}}" />
             <Setter Property="FontWeight"
-                    Value="{Binding Source={StaticResource ThemesXml}, XPath=History/FontWeight3, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
+                    Value="{Binding Source={StaticResource SkinsXml}, XPath=SkinStyles[@name\=\'Result\']/FontWeight, Converter={StaticResource ResourceKey=fontWeightConverter}}" />
         </Style>
 
     </Application.Resources>

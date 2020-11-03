@@ -13,7 +13,7 @@
             <ColumnDefinition Width="130" />
             <ColumnDefinition Width="115" />
         </Grid.ColumnDefinitions>
-      
+
         <Label x:Name="TitleLabel"
                Uid="{Binding Path=ColorPickerUID, ElementName=colorPickerControl}"
                Content="{Binding Path=ColorPickerText, ElementName=colorPickerControl}"
@@ -24,8 +24,9 @@
                Style="{DynamicResource MainLabelStyle}" />
 
         <wpfx:ColorPicker x:Name="UIColorPicker"
-                          Grid.Column="1"             
+                          Grid.Column="1"
                           DisplayColorAndName="True"
+                          Margin="0 2 0 2"
                           SelectedColorChanged="UIColorPicker_SelectedColorChanged" />
     </Grid>
 </UserControl>
