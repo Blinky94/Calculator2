@@ -40,6 +40,15 @@ namespace Udemy_Calculator
         public static List<string> GetFontList => GetAllAvailablesFonts();
 
         /// <summary>
+        /// Update the selected skin to the Skins objects
+        /// </summary>
+        /// <param name="pSkinName"></param>
+        public static void UpdateDefaultSkinSelected(string pSkinName)
+        {
+            SkinsObj.Selected = pSkinName;
+        }
+
+        /// <summary>
         /// Getting all subNodes long name from Skin
         /// </summary>
         public static List<string> GetParentSkinLongNames

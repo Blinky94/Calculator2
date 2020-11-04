@@ -107,7 +107,7 @@ namespace Udemy_Calculator
         /// <summary>
         /// Applying values from list to the listBox control
         /// </summary>
-        private void PopulateSkinStylesToSkinListBox()
+        public void PopulateSkinStylesToSkinListBox()
         {
             SkinStylesLongNameListBox.ItemsSource = CommonSkins.GetParentSkinLongNames;
         }
@@ -219,7 +219,7 @@ namespace Udemy_Calculator
             }
         }
 
-        private void SkinStylesLongNameListBox_Selected(object sender, RoutedEventArgs e)
+        public void SkinStylesLongNameListBox_Selected(object sender, RoutedEventArgs e)
         {
             if ((sender as ListBox).SelectedItem == null)
             {

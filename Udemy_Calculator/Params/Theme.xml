@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Fire">
+<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Toronto">
   <Skin name="Default">
     <SkinStyles name="MainSkin" longName="Main Skin">
       <Background name="Background">#FFF2F2F2</Background>
@@ -65,7 +65,7 @@
   </Skin>
   <Skin name="Fire">
     <SkinStyles name="MainSkin" longName="Main Skin">
-      <Background name="Background">#FF700000</Background>
+      <Background name="Background">#FFFDFF17</Background>
       <Foreground name="Foreground">#FFB22222</Foreground>
       <Borderbrush name="Border brush">#FFFFDA36</Borderbrush>
     </SkinStyles>
@@ -310,6 +310,132 @@
     </SkinStyles>
     <SkinStyles name="Result" longName="History result styles">
       <Foreground name="Result foreground">#FF2E0059</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">17</FontSize>
+      <FontWeight name="Result font weight">Bold</FontWeight>
+    </SkinStyles>
+  </Skin>
+  <Skin name="Pikou">
+    <SkinStyles name="MainSkin" longName="Main Skin">
+      <Background name="Background">#FF6B24BD</Background>
+      <Foreground name="Foreground">#FF000000</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="BaseButtons" longName="General buttons">
+      <Background name="Background">#FFFFFFFF</Background>
+      <Foreground name="Foreground">#000000</Foreground>
+      <Borderbrush name="Border brush">#000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="SndeButton" longName="Second button">
+      <Background name="Background">#FFBAB53C</Background>
+      <Foreground name="Foreground">#000000</Foreground>
+      <Borderbrush name="Border brush">#000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="ScientificButtons" longName="Scientific buttons">
+      <Background name="Background">#FF7E3FAB</Background>
+      <Foreground name="Foreground">#FF000000</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="OperatorsButtons" longName="Operator buttons">
+      <Background name="Background">#FFF0FF00</Background>
+      <Foreground name="Foreground">#000000</Foreground>
+      <Borderbrush name="Border brush">#000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="NumericalsButtons" longName="Numerical buttons">
+      <Background name="Background">#FFF7FA05</Background>
+      <Foreground name="Foreground">#FF87CEEB</Foreground>
+      <Borderbrush name="Border brush">#FF8A2BE2</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="MemoryButtons" longName="Memory buttons">
+      <Background name="Background">#FF000000</Background>
+      <Foreground name="Foreground">#FF00FFFF</Foreground>
+      <Borderbrush name="Border brush">#FFB8860B</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="TrigonometryButtons" longName="Trigonometry buttons">
+      <Background name="Background">#FF23A683</Background>
+      <Foreground name="Foreground">#FF87CEFA</Foreground>
+      <Borderbrush name="Border brush">#FF00FF7F</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="History" longName="History style">
+      <Background name="Background">#FFC000FF</Background>
+    </SkinStyles>
+    <SkinStyles name="Formula" longName="History formula styles">
+      <Foreground name="Result foreground">#FF00CED1</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">20</FontSize>
+      <FontWeight name="Result font weight">Bold</FontWeight>
+    </SkinStyles>
+    <SkinStyles name="Chunk" longName="History chunk styles">
+      <Foreground name="Result foreground">#FF00FFFF</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">20</FontSize>
+      <FontWeight name="Result font weight">Bold</FontWeight>
+    </SkinStyles>
+    <SkinStyles name="Result" longName="History result styles">
+      <Foreground name="Result foreground">#FFFF7F50</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">20</FontSize>
+      <FontWeight name="Result font weight">Bold</FontWeight>
+    </SkinStyles>
+  </Skin>
+  <Skin name="Toronto">
+    <SkinStyles name="MainSkin" longName="Main Skin">
+      <Background name="Background">#FF124B8D</Background>
+      <Foreground name="Foreground">#FFFAFAFC</Foreground>
+      <Borderbrush name="Border brush">#FFE72C25</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="BaseButtons" longName="General buttons">
+      <Background name="Background">#FF201C4F</Background>
+      <Foreground name="Foreground">#FFFFFFFF</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="SndeButton" longName="Second button">
+      <Background name="Background">#FF266BEA</Background>
+      <Foreground name="Foreground">#FFF0F8FF</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="ScientificButtons" longName="Scientific buttons">
+      <Background name="Background">#FF681818</Background>
+      <Foreground name="Foreground">#FFFFFFFF</Foreground>
+      <Borderbrush name="Border brush">#000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="OperatorsButtons" longName="Operator buttons">
+      <Background name="Background">#FFE72C25</Background>
+      <Foreground name="Foreground">#FF000000</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="NumericalsButtons" longName="Numerical buttons">
+      <Background name="Background">#FF1E2E5C</Background>
+      <Foreground name="Foreground">#FFFFFFFF</Foreground>
+      <Borderbrush name="Border brush">#FFE72C25</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="MemoryButtons" longName="Memory buttons">
+      <Background name="Background">#FF201C4F</Background>
+      <Foreground name="Foreground">#FFFFFFFF</Foreground>
+      <Borderbrush name="Border brush">#000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="TrigonometryButtons" longName="Trigonometry buttons">
+      <Background name="Background">#FF201C4F</Background>
+      <Foreground name="Foreground">#FFFFFFFF</Foreground>
+      <Borderbrush name="Border brush">#FF000000</Borderbrush>
+    </SkinStyles>
+    <SkinStyles name="History" longName="History style">
+      <Background name="Background">#B4000000</Background>
+    </SkinStyles>
+    <SkinStyles name="Formula" longName="History formula styles">
+      <Foreground name="Result foreground">#FFF2F2F2</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">17</FontSize>
+      <FontWeight name="Result font weight">Bold</FontWeight>
+    </SkinStyles>
+    <SkinStyles name="Chunk" longName="History chunk styles">
+      <Foreground name="Result foreground">#FFFF5252</Foreground>
+      <FontFamily name="Result font family">Roboto</FontFamily>
+      <FontSize name="Result font size">11</FontSize>
+      <FontWeight name="Result font weight">SemiBold</FontWeight>
+    </SkinStyles>
+    <SkinStyles name="Result" longName="History result styles">
+      <Foreground name="Result foreground">#FFA3CEFF</Foreground>
       <FontFamily name="Result font family">Roboto</FontFamily>
       <FontSize name="Result font size">17</FontSize>
       <FontWeight name="Result font weight">Bold</FontWeight>

@@ -55,16 +55,51 @@ namespace Udemy_Calculator
                 // Create new object in skin with its default values
                 CommonSkins.SkinsObj.AddNewBlankSkin(lNewSkinName);
 
+                // Update the default value skin added
+                CommonSkins.UpdateDefaultSkinSelected(lNewSkinName);
+
                 //Save Skin
                 XmlParser.SerializeSkinsToXML(CommonSkins.SkinsObj);
-                mNewSkinControl.Close();
-            }           
+
+                HideAndResetControl();
+
+                // Close and reopen OptionControl
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.GetType() != typeof(OptionWindow))
+                    {
+                        continue;
+                    }
+
+                    var lOptionWindow = (window as OptionWindow);
+
+                    //Loading the xml configuration to provide access to all elements
+                    CommonSkins.LoadSkinsFromXml();
+
+                    // Combobox List for main Skin to select
+                    lOptionWindow.SkinNamesComboBox.ItemsSource = CommonSkins.GetParentSkinNames;
+
+                    // Set the new skin as default skin selected
+                    lOptionWindow.SkinNamesComboBox.SelectedIndex = lOptionWindow.SkinNamesComboBox.Items.IndexOf(lNewSkinName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Hidding and reseting text in the control
+        /// </summary>
+        private void HideAndResetControl()
+        {
+            // Suppress new skin name for the next add
+            mNewSkinControl.NewSkin_TextBox.Text = string.Empty;
+
+            // Hide the new skin window name
+            mNewSkinControl.Hide();
         }
 
         private void Button_Cancel(object sender, RoutedEventArgs e)
         {
-            //cancel change
-            mNewSkinControl.Close();
+            HideAndResetControl();
         }
 
         #endregion
