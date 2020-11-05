@@ -209,12 +209,64 @@ namespace Udemy_Calculator
         /// <param name="pHistoryStyleName"></param>
         private static void SetHistoryStylesToResourceDictionary(SkinStylesCls pStyles, string pHistoryStyleName, TextAlignment pTextAlignment)
         {
-            if (!string.IsNullOrEmpty(pStyles.FontFamily.Value) || !string.IsNullOrEmpty(pStyles.FontSize.Value) || !string.IsNullOrEmpty(pStyles.FontWeight.Value) || !string.IsNullOrEmpty(pStyles.Foreground.Value))
+            if (!string.IsNullOrEmpty(pStyles?.FontFamily.Value) || !string.IsNullOrEmpty(pStyles?.FontSize.Value) || !string.IsNullOrEmpty(pStyles?.FontWeight.Value) || !string.IsNullOrEmpty(pStyles?.Foreground.Value))
             {
                 // Modify the style in the app resource dictionnary styles
-                Application.Current.Resources[pHistoryStyleName] = SetStyleHistory(pStyles.FontFamily.Value, double.Parse(pStyles.FontSize.Value), pStyles.FontWeight.Value, pTextAlignment, (SolidColorBrush)new BrushConverter().ConvertFromString(pStyles.Foreground.Value.ToString()));
+                Application.Current.Resources[pHistoryStyleName] = SetStyleHistory(pStyles?.FontFamily.Value, double.Parse(pStyles?.FontSize.Value), pStyles?.FontWeight.Value, pTextAlignment, (SolidColorBrush)new BrushConverter().ConvertFromString(pStyles?.Foreground.Value.ToString()));
 
                 SetHistoryParagraphStyles();
+            }
+        }
+
+        /// <summary>
+        /// Deleting the current selected skin from the SkinsObj
+        /// </summary>
+        public static void DeleteSelectedSkin()
+        {
+            int lIndex = SkinsObj.Skins.IndexOf(SelectedSkinObj);
+
+            if (lIndex > 0)
+            {
+                MessageBoxResult lResult = MessageBox.Show("Are you sure to delete the current skin ?", "Advertisment", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+                switch (lResult)
+                {
+                    case MessageBoxResult.OK:
+                        SkinsObj.Skins.RemoveAt(lIndex);
+
+                        string lDefaultSkinName = SkinsObj.Skins[0].Name;
+                        SkinsObj.Selected = lDefaultSkinName;
+                        SkinSelectedName = lDefaultSkinName;
+                        // Serialize the new SkinsObj
+                        XmlParser.SerializeSkinsToXML(SkinsObj);
+
+                        // Close and reopen OptionControl
+                        foreach (Window window in Application.Current.Windows)
+                        {
+                            if (window.GetType() != typeof(OptionWindow))
+                            {
+                                continue;
+                            }
+
+                            var lOptionWindow = (window as OptionWindow);
+
+                            //Loading the xml configuration to provide access to all elements
+                            CommonSkins.LoadSkinsFromXml();
+
+                            // Combobox List for main Skin to select
+                            lOptionWindow.SkinNamesComboBox.ItemsSource = CommonSkins.GetParentSkinNames;
+
+                            // Set the new skin as default skin selected
+                            lOptionWindow.SkinNamesComboBox.SelectedIndex = lOptionWindow.SkinNamesComboBox.Items.IndexOf(lDefaultSkinName);
+                        }
+                        break;
+                    case MessageBoxResult.Cancel:
+                        return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Can't delete the last skin available !!!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -224,7 +276,7 @@ namespace Udemy_Calculator
         /// <param name="pSelectedSkinName"></param>
         private static void SetResourceDictionary(string pSelectedSkinName)
         {
-            SelectedSkinObj.Skin.Where(p => p.Name == pSelectedSkinName).ToList().ForEach(pStyle =>
+            SelectedSkinObj?.Skin?.Where(p => p.Name == pSelectedSkinName).ToList().ForEach(pStyle =>
             {
                 SetSkinStylesToResources(pStyle, pSelectedSkinName);
 
@@ -254,13 +306,13 @@ namespace Udemy_Calculator
             }
 
             // Set History styles
-            SkinStylesCls lHistoryFormulaStyle = (SkinStylesCls)SelectedSkinObj.Skin.Where(p => p.Name == "Formula").Select(pk => pk).FirstOrDefault();
+            SkinStylesCls lHistoryFormulaStyle = (SkinStylesCls)SelectedSkinObj?.Skin?.Where(p => p.Name == "Formula").Select(pk => pk).FirstOrDefault();
             SetHistoryStylesToResourceDictionary(lHistoryFormulaStyle, "HistoryFormulaStyle", TextAlignment.Left);
 
-            SkinStylesCls lHistoryChunkStyle = (SkinStylesCls)SelectedSkinObj.Skin.Where(p => p.Name == "Chunk").Select(pk => pk).FirstOrDefault();
+            SkinStylesCls lHistoryChunkStyle = (SkinStylesCls)SelectedSkinObj?.Skin?.Where(p => p.Name == "Chunk").Select(pk => pk).FirstOrDefault();
             SetHistoryStylesToResourceDictionary(lHistoryChunkStyle, "HistoryChunkStyle", TextAlignment.Center);
 
-            SkinStylesCls lHistoryResultStyle = (SkinStylesCls)SelectedSkinObj.Skin.Where(p => p.Name == "Result").Select(pk => pk).FirstOrDefault();
+            SkinStylesCls lHistoryResultStyle = (SkinStylesCls)SelectedSkinObj?.Skin?.Where(p => p.Name == "Result").Select(pk => pk).FirstOrDefault();
             SetHistoryStylesToResourceDictionary(lHistoryResultStyle, "HistoryResultStyle", TextAlignment.Right);
         }
 

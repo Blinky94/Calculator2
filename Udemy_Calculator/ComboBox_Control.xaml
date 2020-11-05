@@ -10,7 +10,7 @@
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
-            <ColumnDefinition Width="115" />
+            <ColumnDefinition Width="130" />
         </Grid.ColumnDefinitions>
         <Label x:Name="ComboBoxTitle"
                Grid.Column="0"

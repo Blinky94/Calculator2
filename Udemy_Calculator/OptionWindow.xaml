@@ -16,93 +16,133 @@
         Foreground="{DynamicResource ResourceKey=BorderbrushMainSkin}">
 
     <!--Main Grid-->
-    <Grid Margin="10 30 5 10">
+    <Grid Margin="10 15 5 10">
         <Grid.Resources>
             <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
+            <Style TargetType="GroupBox">
+                <Setter Property="Margin"
+                        Value="10 0 10 5" />
+                <Setter Property="Padding"
+                        Value="10" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource ResourceKey=ForegroundMainSkin}" />
+                <Setter Property="FontSize"
+                        Value="15" />
+            </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <!--Grid for ListBox of elements name and Combo to select colors-->
-        <ListBox x:Name="SkinStylesLongNameListBox"
-                 Grid.Column="0"
-                 Grid.Row="0"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                 SelectionChanged="SkinStylesLongNameListBox_Selected" />
+        <Label Content="Options"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               HorizontalContentAlignment="Center"
+               Style="{DynamicResource ResourceKey=MainLabelStyle}" />
+        <GroupBox Header="Controls"
+                  Padding="10"
+                  Grid.Column="0"
+                  Grid.Row="1">
+            <!--Grid for ListBox of elements name and Combo to select colors-->
+            <ListBox x:Name="SkinStylesLongNameListBox"
+                     Grid.Column="0"
+                     Grid.Row="0"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     SelectionChanged="SkinStylesLongNameListBox_Selected" />
+        </GroupBox>
+       
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Grid.Column="1"
-                    Grid.Row="0">
-            <!--StackPanel for Skin name and selection Combobox-->
-            <StackPanel Orientation="Horizontal" Margin="52 0 0 0">
-                <Label Content="Skin selected"
-                       Grid.Column="0"
-                       Style="{DynamicResource MainLabelStyle}"
-                       Padding="0"
-                       Margin="0 7 5 0"
-                       FontSize="12" />
-                <ComboBox x:Name="SkinNamesComboBox"
-                          HorizontalAlignment="Stretch"
-                          Height="25"
-                          VerticalContentAlignment="Center"
-                          Padding="20,0,0,0"
-                          HorizontalContentAlignment="Center"
-                          Margin="0 2 0 2"
-                          Width="115"
-                          SelectionChanged="ComboBoxSkinList_SelectionChanged" />
-            </StackPanel>
+                    Grid.Row="1">
+            
+            <GroupBox Header="Skins list">
+                <!--StackPanel for Skin name and selection Combobox-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="52 0 0 0">
+                    <Label Content="Skin selected"
+                           Style="{DynamicResource ResourceKey=MainLabelStyle}"
+                           Padding="0"
+                           Margin="0 7 5 0"
+                           FontSize="12" />
+                    <ComboBox x:Name="SkinNamesComboBox"
+                              HorizontalAlignment="Stretch"
+                              Height="25"
+                              VerticalContentAlignment="Center"
+                              Padding="20,0,0,0"
+                              HorizontalContentAlignment="Center"
+                              Margin="0 2 0 2"
+                              Width="130"
+                              SelectionChanged="ComboBoxSkinList_SelectionChanged" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Styles">
+                <StackPanel Orientation="Vertical">
+                    <local:ColorPicker_Control x:Name="BackgroundColorPicker"
+                                               ColorPickerUID="Background"
+                                               ColorPickerText="Background" />
 
-            <local:ColorPicker_Control x:Name="BackgroundColorPicker"
-                                       ColorPickerUID="Background"
-                                       ColorPickerText="Background" />
+                    <local:ColorPicker_Control x:Name="ForegroundColorPicker"
+                                               ColorPickerUID="Foreground"
+                                               ColorPickerText="Foreground" />
 
-            <local:ColorPicker_Control x:Name="ForegroundColorPicker"
-                                       ColorPickerUID="Foreground"
-                                       ColorPickerText="Foreground" />
+                    <local:ColorPicker_Control x:Name="BorderbrushColorPicker"
+                                               ColorPickerUID="Borderbrush"
+                                               ColorPickerText="Borderbrush" />
 
-            <local:ColorPicker_Control x:Name="BorderbrushColorPicker"
-                                       ColorPickerUID="Borderbrush"
-                                       ColorPickerText="Borderbrush" />
+                    <local:ComboBox_Control x:Name="FontFamilyComboBox"
+                                            ComboBoxText="FontFamily"
+                                            ComboBoxUID="FontFamily" />
 
-            <local:ComboBox_Control x:Name="FontFamilyComboBox"
-                                    ComboBoxText="FontFamily"
-                                    ComboBoxUID="FontFamily" />
+                    <local:ComboBox_Control x:Name="FontSizeComboBox"
+                                            ComboBoxText="FontSize"
+                                            ComboBoxUID="FontSize" />
 
-            <local:ComboBox_Control x:Name="FontSizeComboBox"
-                                    ComboBoxText="FontSize"
-                                    ComboBoxUID="FontSize" />
+                    <local:ComboBox_Control x:Name="FontWeightComboBox"
+                                            ComboBoxText="FontWeight"
+                                            ComboBoxUID="FontWeight" />
+                </StackPanel>
 
-            <local:ComboBox_Control x:Name="FontWeightComboBox"
-                                    ComboBoxText="FontWeight"
-                                    ComboBoxUID="FontWeight" />
-
+            </GroupBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,10,0,0">
             <local:GeneralButton_Control x:Name="Add_GeneralButtonControl"
+                                         ToolTip="Add new skin"
                                          GeneralImageUrl="Images/Add_icon.png"
                                          GeneralImageUrlReverse="Images/Add_icon_reverse.png" />
-            <local:GeneralButton_Control x:Name="Cancel_GeneralButtonControl"
+            <local:GeneralButton_Control x:Name="Edit_GeneralButtonControl"
+                                         ToolTip="Rename current skin"
+                                         GeneralImageUrl="Images/History_icon.png"
+                                         GeneralImageUrlReverse="Images/History_icon_reverse.png" />
+            <local:GeneralButton_Control x:Name="Delete_GeneralButtonControl"
+                                         ToolTip="Delete current skin"
                                          GeneralImageUrl="Images/Cancel_icon.png"
                                          GeneralImageUrlReverse="Images/Cancel_icon_reverse.png" />
             <local:GeneralButton_Control x:Name="Save_GeneralButtonControl"
+                                         ToolTip="Save current skin"
                                          GeneralImageUrl="Images/Save_icon.png"
                                          GeneralImageUrlReverse="Images/Save_icon_reverse.png" />
+            <local:GeneralButton_Control x:Name="Exit_GeneralButtonControl"
+                                         ToolTip="Exit"
+                                         GeneralImageUrl="Images/Exit_icon.png"
+                                         GeneralImageUrlReverse="Images/Exit_icon_reverse.png" />
         </StackPanel>
     </Grid>
 

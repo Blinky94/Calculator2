@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using Udemy_Calculator.SerializedObjects;
 
 namespace Udemy_Calculator
 {
@@ -17,6 +18,23 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public static NewSkinName_Control GetInstance()
         {
+            IsSkinEdited = false;
+
+            return mNewSkinControl;
+        }
+
+        public static bool IsSkinEdited { get; private set; }
+
+        /// <summary>
+        /// Singleton Edition
+        /// </summary>
+        /// <param name="pEditName"></param>
+        /// <returns></returns>
+        public NewSkinName_Control EditSkin()
+        {
+            NewSkin_TextBox.Text = CommonSkins.SkinSelectedName;
+            IsSkinEdited = true;
+
             return mNewSkinControl;
         }
 
@@ -24,7 +42,7 @@ namespace Udemy_Calculator
         {
             InitializeComponent();
 
-            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
+            Exit_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Exit);
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
         }
 
@@ -52,8 +70,18 @@ namespace Udemy_Calculator
 
             if (!string.IsNullOrEmpty(lNewSkinName))
             {
-                // Create new object in skin with its default values
-                CommonSkins.SkinsObj.AddNewBlankSkin(lNewSkinName);
+                // New Skin to save
+                if (!IsSkinEdited)
+                {
+                    // Create new object in skin with its default values
+                    CommonSkins.SkinsObj.AddNewBlankSkin(lNewSkinName);             
+                }
+                // Only the name to change to the existing skin
+                else
+                {
+                    // Get the selected skin object
+                    CommonSkins.SelectedSkinObj.Name = lNewSkinName;            
+                }
 
                 // Update the default value skin added
                 CommonSkins.UpdateDefaultSkinSelected(lNewSkinName);
@@ -88,7 +116,7 @@ namespace Udemy_Calculator
         /// <summary>
         /// Hidding and reseting text in the control
         /// </summary>
-        private void HideAndResetControl()
+        private static void HideAndResetControl()
         {
             // Suppress new skin name for the next add
             mNewSkinControl.NewSkin_TextBox.Text = string.Empty;
@@ -97,7 +125,7 @@ namespace Udemy_Calculator
             mNewSkinControl.Hide();
         }
 
-        private void Button_Cancel(object sender, RoutedEventArgs e)
+        private void Button_Exit(object sender, RoutedEventArgs e)
         {
             HideAndResetControl();
         }

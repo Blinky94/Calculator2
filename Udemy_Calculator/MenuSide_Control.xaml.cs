@@ -20,7 +20,7 @@ namespace Udemy_Calculator
         public MenuSide_Control()
         {
             InitializeComponent();
-            CurrentMode = CalculatorMode.Standard;
+            CurrentMode = CalculatorMode.Scientific;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace Udemy_Calculator
                     CurrentMode = CalculatorMode.Currency;
                     break;
                 case "_Options":
-                    CurrentMode = CalculatorMode.Options;
+                    //CurrentMode = CalculatorMode.Options;
                     // Open option window
                     OptionWindow.GetInstance().Show();
                     break;

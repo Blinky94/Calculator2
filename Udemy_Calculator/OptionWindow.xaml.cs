@@ -24,8 +24,10 @@ namespace Udemy_Calculator
         {
             // Event on Skin name selected
             Add_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Add);
-            Cancel_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Cancel);
+            Edit_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Edit);
+            Delete_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Delete);
             Save_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Save);
+            Exit_GeneralButtonControl.OnGeneralButtonClicked += new RoutedEventHandler(Button_Exit);
         }
 
         /// <summary>
@@ -121,26 +123,50 @@ namespace Udemy_Calculator
             return mOptionWindow;
         }
 
+        private void Button_Add(object sender, RoutedEventArgs e)
+        {
+            NewSkinName_Control.GetInstance().Show();
+        }
+
+        private void Button_Edit(object sender, RoutedEventArgs e)
+        {
+            NewSkinName_Control.GetInstance().Show();
+
+            // Editing the current skin name
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() != typeof(NewSkinName_Control))
+                {
+                    continue;
+                }
+
+                var lNewSkinEditingWindow = (window as NewSkinName_Control);
+
+                // Editing the current skin selected
+                lNewSkinEditingWindow.EditSkin();
+            }
+        }
+
+        private void Button_Delete(object sender, RoutedEventArgs e)
+        {
+            CommonSkins.DeleteSelectedSkin();
+        }
+
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             //Save Skin
             XmlParser.SerializeSkinsToXML(CommonSkins.SkinsObj);
         }
 
-        private void Button_Cancel(object sender, RoutedEventArgs e)
+        private void Button_Exit(object sender, RoutedEventArgs e)
         {
             //cancel change
             mOptionWindow.Hide();
         }
 
-        private void Button_Add(object sender, RoutedEventArgs e)
-        {
-            NewSkinName_Control.GetInstance().Show();
-        }
-
         private void ComboBoxSkinList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CommonSkins.SkinSelectedName = (sender as ComboBox).SelectedValue.ToString();
+            CommonSkins.SkinSelectedName = (sender as ComboBox).SelectedValue?.ToString();
 
             // Apply the default color for the first ListItem
             if (SkinStylesLongNameListBox != null && SkinStylesLongNameListBox.Items.Count > 0)
@@ -156,7 +182,7 @@ namespace Udemy_Calculator
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            this.Opacity = 1F;
+            this.Opacity = 0.7F;
             base.OnMouseLeftButtonDown(e);
 
             // Begin dragging the window
@@ -228,7 +254,7 @@ namespace Udemy_Calculator
 
             var lSelectedVal = (sender as ListBox).SelectedItem.ToString();
 
-            var lStyle = (SkinStylesCls)CommonSkins.SelectedSkinObj.Skin.Where(p => p.LongName == lSelectedVal).Select(pStyle => pStyle).FirstOrDefault();
+            var lStyle = (SkinStylesCls)CommonSkins.SelectedSkinObj?.Skin?.Where(p => p.LongName == lSelectedVal).Select(pStyle => pStyle).FirstOrDefault();
 
             UpdatePropertyValuesAndTitles(lStyle?.Background?.Value, BackgroundColorPicker, lStyle?.Background?.Name);
             UpdatePropertyValuesAndTitles(lStyle?.Foreground?.Value, ForegroundColorPicker, lStyle?.Foreground?.Name);
