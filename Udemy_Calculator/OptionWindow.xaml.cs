@@ -120,17 +120,28 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public static OptionWindow GetInstance()
         {
+            var lMainWindow = (Application.Current.MainWindow);
+
+            mOptionWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            mOptionWindow.Left = lMainWindow.Left + lMainWindow.ActualWidth + 20;
+            mOptionWindow.Top = (lMainWindow.Height - mOptionWindow.Height) / 2;
+
             return mOptionWindow;
         }
 
         private void Button_Add(object sender, RoutedEventArgs e)
         {
-            NewSkinName_Control.GetInstance().Show();
+            CommonSkins.IsSkinEdited = false;
+
+            NewSkinName_Control.GetInstance().ShowDialog();
         }
 
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
-            NewSkinName_Control.GetInstance().Show();
+            CommonSkins.IsSkinEdited = true;
+
+            // Call instance et hide before showing with the skin name
+            NewSkinName_Control.GetInstance().Hide();
 
             // Editing the current skin name
             foreach (Window window in Application.Current.Windows)
@@ -141,9 +152,9 @@ namespace Udemy_Calculator
                 }
 
                 var lNewSkinEditingWindow = (window as NewSkinName_Control);
+                lNewSkinEditingWindow.NewSkin_TextBox.Text = CommonSkins.SkinSelectedName;
 
-                // Editing the current skin selected
-                lNewSkinEditingWindow.EditSkin();
+                NewSkinName_Control.GetInstance().ShowDialog();
             }
         }
 

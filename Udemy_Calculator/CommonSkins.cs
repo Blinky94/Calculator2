@@ -219,6 +219,11 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Get or set if the skin edition is selected
+        /// </summary>
+        public static bool IsSkinEdited { get; set; }
+
+        /// <summary>
         /// Deleting the current selected skin from the SkinsObj
         /// </summary>
         public static void DeleteSelectedSkin()

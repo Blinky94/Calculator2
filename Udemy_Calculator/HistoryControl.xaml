@@ -17,7 +17,7 @@
             <local:TestingBackgroundDarkerConverter x:Key="testingBGDarkerConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="350" />
         </Grid.ColumnDefinitions>
 
         <!--History Grid-->
@@ -25,18 +25,8 @@
               Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="550" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="RichTextBox">
-                    <Setter Property="FontSize"
-                            Value="15" />
-                    <Setter Property="FontWeight"
-                            Value="Bold" />
-                    <Setter Property="Padding"
-                            Value="0" />
-                </Style>
-            </Grid.Resources>
             <ScrollViewer x:Name="UIHistoryScrollViewer"
                           Grid.Row="0"
                           VerticalScrollBarVisibility="Auto"
@@ -44,12 +34,8 @@
                           Background="Transparent">
 
                 <RichTextBox x:Name="UIHistoryTextBox"
-                             IsReadOnly="True"
-                             BorderBrush="LightGray"
-                             BorderThickness="0 0 0 0"
                              ScrollViewer.CanContentScroll="True"
                              Style="{DynamicResource ResourceKey=HistoryStyle}"
-                             Padding="0"
                              TextChanged="UIHistoryTextBox_TextChanged">
                     <FlowDocument x:Name="UIHistoryFlowDocument"
                                   LineHeight="1" />

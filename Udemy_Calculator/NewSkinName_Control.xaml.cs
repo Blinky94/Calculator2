@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Udemy_Calculator.SerializedObjects;
 
 namespace Udemy_Calculator
 {
@@ -12,18 +11,29 @@ namespace Udemy_Calculator
         // Init singleton
         private static readonly NewSkinName_Control mNewSkinControl = new NewSkinName_Control();
 
+
+        /// <summary>
+        /// Setting the right position of the current Window
+        /// </summary>
+        private static void SetWindowPosition()
+        {
+            var lMainWindow = (Application.Current.MainWindow);
+
+            mNewSkinControl.WindowStartupLocation = WindowStartupLocation.Manual;
+            mNewSkinControl.Left = lMainWindow.Left + lMainWindow.ActualWidth + 20;
+            mNewSkinControl.Top = lMainWindow.Height - 15;
+        }
+
         /// <summary>
         /// Instance Singleton
         /// </summary>
         /// <returns></returns>
         public static NewSkinName_Control GetInstance()
         {
-            IsSkinEdited = false;
+            SetWindowPosition();
 
             return mNewSkinControl;
         }
-
-        public static bool IsSkinEdited { get; private set; }
 
         /// <summary>
         /// Singleton Edition
@@ -32,9 +42,9 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public NewSkinName_Control EditSkin()
         {
+            SetWindowPosition();
             NewSkin_TextBox.Text = CommonSkins.SkinSelectedName;
-            IsSkinEdited = true;
-
+            
             return mNewSkinControl;
         }
 
@@ -71,16 +81,16 @@ namespace Udemy_Calculator
             if (!string.IsNullOrEmpty(lNewSkinName))
             {
                 // New Skin to save
-                if (!IsSkinEdited)
+                if (!CommonSkins.IsSkinEdited)
                 {
                     // Create new object in skin with its default values
-                    CommonSkins.SkinsObj.AddNewBlankSkin(lNewSkinName);             
+                    CommonSkins.SkinsObj.AddNewBlankSkin(lNewSkinName);
                 }
                 // Only the name to change to the existing skin
                 else
                 {
                     // Get the selected skin object
-                    CommonSkins.SelectedSkinObj.Name = lNewSkinName;            
+                    CommonSkins.SelectedSkinObj.Name = lNewSkinName;
                 }
 
                 // Update the default value skin added

@@ -19,7 +19,7 @@
     <Window.Resources>
         <Style TargetType="GroupBox">
             <Setter Property="Margin"
-                    Value="10 0 10 5" />
+                    Value="15 0 15 5" />
             <Setter Property="Padding"
                     Value="10" />
             <Setter Property="Foreground"
@@ -30,7 +30,7 @@
     </Window.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
@@ -45,7 +45,8 @@
                         Margin="0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Skin name"
-                           Margin="0 8 0 2"
+                           Margin="0 10 0 2"
+                           FontSize="14"
                            Style="{DynamicResource ResourceKey=MainLabelStyle}" />
                     <TextBox x:Name="NewSkin_TextBox"
                              VerticalContentAlignment="Center"

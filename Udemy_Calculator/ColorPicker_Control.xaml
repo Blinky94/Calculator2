@@ -7,6 +7,10 @@
              mc:Ignorable="d"
              d:DesignHeight="35"
              d:DesignWidth="200"
+             Foreground="{DynamicResource ResourceKey=ForegroundMainSkin}"
+             Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
+             BorderBrush="{DynamicResource ResourceKey=BorderbrushMainSkin}"
+             FontSize="{DynamicResource ResourceKey=MainLabelStyle.FontSize}"
              x:Name="colorPickerControl">
     <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -20,10 +24,11 @@
                Grid.Column="0"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
-               FontSize="12"
+               FontSize="14"
                Style="{DynamicResource MainLabelStyle}" />
 
         <wpfx:ColorPicker x:Name="UIColorPicker"
+                          Style="{Binding RelativeSource={RelativeSource Self}}"
                           Grid.Column="1"
                           DisplayColorAndName="True"
                           Margin="0 2 0 2"

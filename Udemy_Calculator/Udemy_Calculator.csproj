@@ -628,7 +628,10 @@
   <ItemGroup>
     <Resource Include="Images\Right_icon_reverse.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Edit_icon.png" />
+    <Resource Include="Images\Edit_icon_reverse.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

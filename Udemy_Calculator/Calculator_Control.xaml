@@ -26,7 +26,7 @@
                     Grid.Row="0"
                     Grid.Column="0">
             <!--Memorisation Panel-->
-            <WrapPanel Margin="52 0 0 0">
+            <WrapPanel Margin="52 5 0 0">
                 <buttons:MemoryButton_Control x:Name="UIMCButton"
                                               MemoryButtonContent="MC" />
                 <buttons:MemoryButton_Control x:Name="UIMemoryPlusButton"
@@ -35,155 +35,160 @@
                                               MemoryButtonContent="MR" />
             </WrapPanel>
 
-            <!--Scientific panel-->
-            <WrapPanel Margin="-2 0 0 0">
-                <!--First Range-->
-                <buttons:ScientificButton_Control x:Name="DummyButton"
-                                                  Visibility="Hidden"
-                                                  ScientificButtonContent="Dummy" />
-                <Button x:Name="UISecondFuncButton"
-                        Style="{DynamicResource ResourceKey=SndeButtonStyle}"
-                        x:Uid="2nde"
-                        Content="2nde"
-                        Padding="1 0 0 1"
-                        Click="UISecondFuncButton_Click">
-                </Button>
-                <buttons:ScientificButton_Control x:Name="UIXSquareButton"
-                                                  ScientificButtonContent="x²" />
-                <buttons:ScientificButton_Control x:Name="UIXCubeButton"
-                                                  ScientificButtonContent="x³" />
-                <buttons:ScientificButton_Control x:Name="UIXExpXButton"
-                                                  ScientificButtonContent="xª" />
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center">
+                <!--Scientific panel-->
+                <WrapPanel Margin="-2 0 0 0"
+                           Visibility="Visible">
+                    <!--First Range-->
+                    <buttons:ScientificButton_Control x:Name="DummyButton"
+                                                      Visibility="Collapsed"
+                                                      ScientificButtonContent="Dummy" />
+                    <Button x:Name="UISecondFuncButton"
+                            Style="{DynamicResource ResourceKey=SndeButtonStyle}"
+                            x:Uid="2nde"
+                            Content="2nde"
+                            Padding="1 0 0 1"
+                            Click="UISecondFuncButton_Click">
+                    </Button>
+                    <buttons:ScientificButton_Control x:Name="UIXSquareButton"
+                                                      ScientificButtonContent="x²" />
+                    <buttons:ScientificButton_Control x:Name="UIXCubeButton"
+                                                      ScientificButtonContent="x³" />
+                    <buttons:ScientificButton_Control x:Name="UIXExpXButton"
+                                                      ScientificButtonContent="xª" />
 
-                <!--Second Range-->
-                <buttons:ScientificButton_Control x:Name="UINFactorielButton"
-                                                  ScientificButtonContent="n!" />
-                <buttons:ScientificButton_Control x:Name="UIRootXButton"
-                                                  ScientificButtonContent="√x" />
-                <buttons:ScientificButton_Control x:Name="UITwoSquareRootButton"
-                                                  ScientificButtonContent="²√x" />
-                <buttons:ScientificButton_Control x:Name="UIThreeSquareRootButton"
-                                                  ScientificButtonContent="³√x" />
-                <buttons:ScientificButton_Control x:Name="UIXSquareRootYButton"
-                                                  ScientificButtonContent="ª√x" />
+                    <!--Second Range-->
+                    <buttons:ScientificButton_Control x:Name="UINFactorielButton"
+                                                      ScientificButtonContent="n!" />
+                    <buttons:ScientificButton_Control x:Name="UIRootXButton"
+                                                      ScientificButtonContent="√x" />
+                    <buttons:ScientificButton_Control x:Name="UITwoSquareRootButton"
+                                                      ScientificButtonContent="²√x" />
+                    <buttons:ScientificButton_Control x:Name="UIThreeSquareRootButton"
+                                                      ScientificButtonContent="³√x" />
+                    <buttons:ScientificButton_Control x:Name="UIXSquareRootYButton"
+                                                      ScientificButtonContent="ª√x" />
 
-                <!--Third Range-->
-                <buttons:ScientificButton_Control x:Name="UITenExpXButton"
-                                                  ScientificButtonContent="10ª" />
-                <buttons:ScientificButton_Control x:Name="UIMODButton"
-                                                  ScientificButtonContent="mod" />
-                <buttons:ScientificButton_Control x:Name="UIAbsoluteValButton"
-                                                  ScientificButtonContent="|N|" />
-                <buttons:ScientificButton_Control x:Name="UIRandomButton"
-                                                  ScientificButtonContent="rand" />
-                <buttons:ScientificButton_Control x:Name="UIEXPButton"
-                                                  ScientificButtonContent="e" />
+                    <!--Third Range-->
+                    <buttons:ScientificButton_Control x:Name="UITenExpXButton"
+                                                      ScientificButtonContent="10ª" />
+                    <buttons:ScientificButton_Control x:Name="UIMODButton"
+                                                      ScientificButtonContent="mod" />
+                    <buttons:ScientificButton_Control x:Name="UIAbsoluteValButton"
+                                                      ScientificButtonContent="|N|" />
+                    <buttons:ScientificButton_Control x:Name="UIRandomButton"
+                                                      ScientificButtonContent="rand" />
+                    <buttons:ScientificButton_Control x:Name="UIEXPButton"
+                                                      ScientificButtonContent="e" />
 
-                <!--Fourth Range-->
-                <buttons:ScientificButton_Control x:Name="UIEXPSquareButton"
-                                                  ScientificButtonContent="eª" />
-                <buttons:ScientificButton_Control x:Name="UIOneOnXButton"
-                                                  ScientificButtonContent="1/x" />
-                <buttons:ScientificButton_Control x:Name="UIExpButton"
-                                                  ScientificButtonContent="^" />
-                <buttons:ScientificButton_Control x:Name="UISquareRootButton"
-                                                  ScientificButtonContent="√" />
-                <buttons:ScientificButton_Control x:Name="UIPIButton"
-                                                  ScientificButtonContent="π" />
+                    <!--Fourth Range-->
+                    <buttons:ScientificButton_Control x:Name="UIEXPSquareButton"
+                                                      ScientificButtonContent="eª" />
+                    <buttons:ScientificButton_Control x:Name="UIOneOnXButton"
+                                                      ScientificButtonContent="1/x" />
+                    <buttons:ScientificButton_Control x:Name="UIExpButton"
+                                                      ScientificButtonContent="^" />
+                    <buttons:ScientificButton_Control x:Name="UISquareRootButton"
+                                                      ScientificButtonContent="√" />
+                    <buttons:ScientificButton_Control x:Name="UIPIButton"
+                                                      ScientificButtonContent="π" />
 
-                <!--Fifth Range-->
-                <buttons:ScientificButton_Control x:Name="UILOGButton"
-                                                  ScientificButtonContent="log" />
-                <buttons:ScientificButton_Control x:Name="UILNButton"
-                                                  ScientificButtonContent="ln" />
-                <buttons:ScientificButton_Control x:Name="UICOSButton"
-                                                  ScientificButtonContent="cos" />
-                <buttons:ScientificButton_Control x:Name="UIOpenParenthesisButton"
-                                                  ScientificButtonContent="(" />
-                <buttons:ScientificButton_Control x:Name="UICloseParenthesisButton"
-                                                  ScientificButtonContent=")" />
+                    <!--Fifth Range-->
+                    <buttons:ScientificButton_Control x:Name="UILOGButton"
+                                                      ScientificButtonContent="log" />
+                    <buttons:ScientificButton_Control x:Name="UILNButton"
+                                                      ScientificButtonContent="ln" />
+                    <buttons:ScientificButton_Control x:Name="UICOSButton"
+                                                      ScientificButtonContent="cos" />
+                    <buttons:ScientificButton_Control x:Name="UIOpenParenthesisButton"
+                                                      ScientificButtonContent="(" />
+                    <buttons:ScientificButton_Control x:Name="UICloseParenthesisButton"
+                                                      ScientificButtonContent=")" />
 
-                <!--Sixth Range-->
-                <StackPanel x:Name="FirstFunctions"
-                            Orientation="Horizontal"
-                            Visibility="Visible">
-                    <!--First Functions-->
-                    <buttons:TrigonometryButton_Control x:Name="UICOTButton"
-                                                        TrigonometryButtonContent="cot" />
-                    <buttons:TrigonometryButton_Control x:Name="UISECButton"
-                                                        TrigonometryButtonContent="sec" />
-                    <buttons:TrigonometryButton_Control x:Name="UICSCButton"
-                                                        TrigonometryButtonContent="csc" />
-                    <buttons:TrigonometryButton_Control x:Name="UITANButton"
-                                                        TrigonometryButtonContent="tan" />
-                </StackPanel>
+                    <!--Sixth Range-->
+                    <StackPanel x:Name="FirstFunctions"
+                                Orientation="Horizontal"
+                                Visibility="Visible">
+                        <!--First Functions-->
+                        <buttons:TrigonometryButton_Control x:Name="UICOTButton"
+                                                            TrigonometryButtonContent="cot" />
+                        <buttons:TrigonometryButton_Control x:Name="UISECButton"
+                                                            TrigonometryButtonContent="sec" />
+                        <buttons:TrigonometryButton_Control x:Name="UICSCButton"
+                                                            TrigonometryButtonContent="csc" />
+                        <buttons:TrigonometryButton_Control x:Name="UITANButton"
+                                                            TrigonometryButtonContent="tan" />
+                    </StackPanel>
 
-                <!--Snde Functions-->
-                <StackPanel x:Name="SndeFunctions"
-                            Orientation="Horizontal"
-                            Visibility="Collapsed">
-                    <buttons:TrigonometryButton_Control x:Name="UIACOTButton"
-                                                        TrigonometryButtonContent="Acot" />
-                    <buttons:TrigonometryButton_Control x:Name="UIASECButton"
-                                                        TrigonometryButtonContent="Asec" />
-                    <buttons:TrigonometryButton_Control x:Name="UIACSCButton"
-                                                        TrigonometryButtonContent="Acsc" />
-                    <buttons:TrigonometryButton_Control x:Name="UIATANButton"
-                                                        TrigonometryButtonContent="Atan" />
-                </StackPanel>
+                    <!--Snde Functions-->
+                    <StackPanel x:Name="SndeFunctions"
+                                Orientation="Horizontal"
+                                Visibility="Collapsed">
+                        <buttons:TrigonometryButton_Control x:Name="UIACOTButton"
+                                                            TrigonometryButtonContent="Acot" />
+                        <buttons:TrigonometryButton_Control x:Name="UIASECButton"
+                                                            TrigonometryButtonContent="Asec" />
+                        <buttons:TrigonometryButton_Control x:Name="UIACSCButton"
+                                                            TrigonometryButtonContent="Acsc" />
+                        <buttons:TrigonometryButton_Control x:Name="UIATANButton"
+                                                            TrigonometryButtonContent="Atan" />
+                    </StackPanel>
 
-                <buttons:TrigonometryButton_Control x:Name="UIHYPButton"
-                                                    TrigonometryButtonContent="hyp" />
-            </WrapPanel>
+                    <buttons:TrigonometryButton_Control x:Name="UIHYPButton"
+                                                        TrigonometryButtonContent="hyp" />
+                </WrapPanel>
 
-            <!--Main panel-->
-            <WrapPanel Margin="0 10 0 0">
-                <!--First range-->
-                <buttons:BaseButton_Control x:Name="UIACButton"
-                                            BaseButtonContent="AC" />
-                <buttons:BaseButton_Control x:Name="UIBackReturnButton"
-                                            BaseButtonContent="CE" />
-                <buttons:BaseButton_Control x:Name="UIPercentButton"
-                                            BaseButtonContent="%" />
-                <buttons:OperatorButton_Control x:Name="UIDivideButton"
-                                                OperatorButtonContent="÷" />
-                <!--Second range-->
-                <buttons:NumericalButton_Control x:Name="UISevenButton"
-                                                 NumericalButtonContent="7" />
-                <buttons:NumericalButton_Control x:Name="UIHeightButton"
-                                                 NumericalButtonContent="8" />
-                <buttons:NumericalButton_Control x:Name="UINineButton"
-                                                 NumericalButtonContent="9" />
-                <buttons:OperatorButton_Control x:Name="UIMultiplyButton"
-                                                OperatorButtonContent="×" />
-                <!--Third range-->
-                <buttons:NumericalButton_Control x:Name="UIFourButton"
-                                                 NumericalButtonContent="4" />
-                <buttons:NumericalButton_Control x:Name="UIFiveButton"
-                                                 NumericalButtonContent="5" />
-                <buttons:NumericalButton_Control x:Name="UISixButton"
-                                                 NumericalButtonContent="6" />
-                <buttons:OperatorButton_Control x:Name="UIPlusButton"
-                                                OperatorButtonContent="+" />
-                <!--Fourth range-->
-                <buttons:NumericalButton_Control x:Name="UIOneButton"
-                                                 NumericalButtonContent="1" />
-                <buttons:NumericalButton_Control x:Name="UITwoButton"
-                                                 NumericalButtonContent="2" />
-                <buttons:NumericalButton_Control x:Name="UIThreeButton"
-                                                 NumericalButtonContent="3" />
-                <buttons:OperatorButton_Control x:Name="UIMinusButton"
-                                                OperatorButtonContent="-" />
-                <!--Fifth range-->
-                <buttons:NumericalButton_Control x:Name="UIZeroButton"
-                                                 NumericalButtonContent="0" />
-                <buttons:OperatorButton_Control x:Name="UISignButton"
-                                                OperatorButtonContent="±" />
-                <buttons:NumericalButton_Control x:Name="UIPointButton"
-                                                 NumericalButtonContent="." />
-                <buttons:OperatorButton_Control x:Name="UIEqualButton"
-                                                OperatorButtonContent="=" />
-            </WrapPanel>
+                <!--Main panel-->
+                <WrapPanel Margin="0 10 0 0">
+                    <!--First range-->
+                    <buttons:BaseButton_Control x:Name="UIACButton"
+                                                BaseButtonContent="AC" />
+                    <buttons:BaseButton_Control x:Name="UIBackReturnButton"
+                                                BaseButtonContent="CE" />
+                    <buttons:BaseButton_Control x:Name="UIPercentButton"
+                                                BaseButtonContent="%" />
+                    <buttons:OperatorButton_Control x:Name="UIDivideButton"
+                                                    OperatorButtonContent="÷" />
+                    <!--Second range-->
+                    <buttons:NumericalButton_Control x:Name="UISevenButton"
+                                                     NumericalButtonContent="7" />
+                    <buttons:NumericalButton_Control x:Name="UIHeightButton"
+                                                     NumericalButtonContent="8" />
+                    <buttons:NumericalButton_Control x:Name="UINineButton"
+                                                     NumericalButtonContent="9" />
+                    <buttons:OperatorButton_Control x:Name="UIMultiplyButton"
+                                                    OperatorButtonContent="×" />
+                    <!--Third range-->
+                    <buttons:NumericalButton_Control x:Name="UIFourButton"
+                                                     NumericalButtonContent="4" />
+                    <buttons:NumericalButton_Control x:Name="UIFiveButton"
+                                                     NumericalButtonContent="5" />
+                    <buttons:NumericalButton_Control x:Name="UISixButton"
+                                                     NumericalButtonContent="6" />
+                    <buttons:OperatorButton_Control x:Name="UIPlusButton"
+                                                    OperatorButtonContent="+" />
+                    <!--Fourth range-->
+                    <buttons:NumericalButton_Control x:Name="UIOneButton"
+                                                     NumericalButtonContent="1" />
+                    <buttons:NumericalButton_Control x:Name="UITwoButton"
+                                                     NumericalButtonContent="2" />
+                    <buttons:NumericalButton_Control x:Name="UIThreeButton"
+                                                     NumericalButtonContent="3" />
+                    <buttons:OperatorButton_Control x:Name="UIMinusButton"
+                                                    OperatorButtonContent="-" />
+                    <!--Fifth range-->
+                    <buttons:NumericalButton_Control x:Name="UIZeroButton"
+                                                     NumericalButtonContent="0" />
+                    <buttons:OperatorButton_Control x:Name="UISignButton"
+                                                    OperatorButtonContent="±" />
+                    <buttons:NumericalButton_Control x:Name="UIPointButton"
+                                                     NumericalButtonContent="." />
+                    <buttons:OperatorButton_Control x:Name="UIEqualButton"
+                                                    OperatorButtonContent="=" />
+                </WrapPanel>
+
+            </StackPanel>
         </StackPanel>
 
     </Grid>

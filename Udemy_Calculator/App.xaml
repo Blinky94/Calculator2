@@ -273,7 +273,7 @@
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="FontSize"
-                    Value="16" />
+                    Value="18" />
         </Style>
 
         <Style x:Key="MenuStyle"
@@ -296,8 +296,14 @@
             <Setter Property="Background"
                     x:Name="backgroundHistory"
                     Value="{DynamicResource ResourceKey=BackgroundHistory}" />
-            <Setter Property="Opacity"
-                    Value="0.7" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Padding"
+                    Value="10" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
         </Style>
 
         <Style x:Key="HistoryFormulaStyle"

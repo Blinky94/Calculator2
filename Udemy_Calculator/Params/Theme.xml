@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Pinky">
+<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Toronto">
   <Skin name="Default">
     <SkinStyles name="MainSkin" longName="Main Skin">
       <Background name="Background">#FFF2F2F2</Background>
@@ -297,7 +297,7 @@
       <Background name="Background">#FFFFE7FF</Background>
     </SkinStyles>
     <SkinStyles name="Formula" longName="History formula styles">
-      <Foreground name="Result foreground">#FF240303</Foreground>
+      <Foreground name="Result foreground">#FFDC143C</Foreground>
       <FontFamily name="Result font family">Roboto</FontFamily>
       <FontSize name="Result font size">15</FontSize>
       <FontWeight name="Result font weight">Bold</FontWeight>
@@ -305,11 +305,11 @@
     <SkinStyles name="Chunk" longName="History chunk styles">
       <Foreground name="Result foreground">#FF000000</Foreground>
       <FontFamily name="Result font family">Roboto</FontFamily>
-      <FontSize name="Result font size">13</FontSize>
+      <FontSize name="Result font size">11</FontSize>
       <FontWeight name="Result font weight">Medium</FontWeight>
     </SkinStyles>
     <SkinStyles name="Result" longName="History result styles">
-      <Foreground name="Result foreground">#FF2E0059</Foreground>
+      <Foreground name="Result foreground">#FFB22222</Foreground>
       <FontFamily name="Result font family">Roboto</FontFamily>
       <FontSize name="Result font size">17</FontSize>
       <FontWeight name="Result font weight">Bold</FontWeight>
@@ -420,7 +420,7 @@
       <Borderbrush name="Border brush">#FF000000</Borderbrush>
     </SkinStyles>
     <SkinStyles name="History" longName="History style">
-      <Background name="Background">#B4000000</Background>
+      <Background name="Background">#50000000</Background>
     </SkinStyles>
     <SkinStyles name="Formula" longName="History formula styles">
       <Foreground name="Result foreground">#FFF2F2F2</Foreground>
