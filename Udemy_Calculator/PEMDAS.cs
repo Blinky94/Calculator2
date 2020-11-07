@@ -1,14 +1,11 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Udemy_Calculator
-{  
+{
     public enum EOperation { Unknown, Multiplication, Division, Addition, Substraction, Sqrt, Exponent }
 
     public class Chunk
@@ -157,7 +154,6 @@ namespace Udemy_Calculator
 
         internal void ExtractParenthesis()
         {
-
             // Regex to select all parenthesis groups
             string lPattern = @"[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)((?<Operator>[+\-÷\/×xX*])(?(?=[({\[][-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[√]?\d+[.,]?\d*([Ee][+]\d*)?))+[)}\]]";
 
@@ -233,12 +229,10 @@ namespace Udemy_Calculator
 
             try
             {
-                string lPattern = @"(?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*))";
-
-                Regex regex = new Regex(lPattern);
+                Regex regex = new Regex(GlobalUsage.Regexp_SeparateElementsInOperation);
                 Match lMatch = regex.Match(Chunk.SB.ToString());
 
-                TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern for extractions ({lPattern})");
+                TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern for extractions ({GlobalUsage.Regexp_SeparateElementsInOperation})");
 
                 string lLeft = lMatch.Groups["LeftOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");
                 string lRight = lMatch.Groups["RightOperand"].Value.Replace(",", ".").Replace("(", "").Replace(")", "");

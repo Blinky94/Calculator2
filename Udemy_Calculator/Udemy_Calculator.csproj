@@ -150,8 +150,17 @@
     <Compile Include="Buttons\TrigonometryButton_Control.xaml.cs">
       <DependentUpon>TrigonometryButton_Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Calculator_Control.xaml.cs">
-      <DependentUpon>Calculator_Control.xaml</DependentUpon>
+    <Compile Include="CalculatorControls\MemoryButtonsPanelControl.xaml.cs">
+      <DependentUpon>MemoryButtonsPanelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalculatorControls\NumericalButtonsPanelControl.xaml.cs">
+      <DependentUpon>NumericalButtonsPanelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalculatorControls\ScientificButtonsPanelControl.xaml.cs">
+      <DependentUpon>ScientificButtonsPanelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScientificCalculator_Control.xaml.cs">
+      <DependentUpon>ScientificCalculator_Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="CheckBoxControl\CheckBox_Control.xaml.cs">
       <DependentUpon>CheckBox_Control.xaml</DependentUpon>
@@ -232,7 +241,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Calculator_Control.xaml">
+    <Page Include="CalculatorControls\MemoryButtonsPanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalculatorControls\NumericalButtonsPanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalculatorControls\ScientificButtonsPanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScientificCalculator_Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

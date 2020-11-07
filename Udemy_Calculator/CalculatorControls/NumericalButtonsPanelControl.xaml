@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Udemy_Calculator.CalculatorControls.NumericalButtonsPanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Udemy_Calculator.CalculatorControls"
+             xmlns:buttons="clr-namespace:Udemy_Calculator.Buttons"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             d:DesignHeight="280" d:DesignWidth="260">
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <!--Main panel-->
+        <WrapPanel>
+            <!--First range-->
+            <buttons:BaseButton_Control x:Name="UIACButton"
+                                        BaseButtonContent="AC" />
+            <buttons:BaseButton_Control x:Name="UIBackReturnButton"
+                                        BaseButtonContent="CE" />
+            <buttons:BaseButton_Control x:Name="UIPercentButton"
+                                        BaseButtonContent="%" />
+            <buttons:OperatorButton_Control x:Name="UIDivideButton"
+                                            OperatorButtonContent="÷" />
+            <!--Second range-->
+            <buttons:NumericalButton_Control x:Name="UISevenButton"
+                                             NumericalButtonContent="7" />
+            <buttons:NumericalButton_Control x:Name="UIHeightButton"
+                                             NumericalButtonContent="8" />
+            <buttons:NumericalButton_Control x:Name="UINineButton"
+                                             NumericalButtonContent="9" />
+            <buttons:OperatorButton_Control x:Name="UIMultiplyButton"
+                                            OperatorButtonContent="×" />
+            <!--Third range-->
+            <buttons:NumericalButton_Control x:Name="UIFourButton"
+                                             NumericalButtonContent="4" />
+            <buttons:NumericalButton_Control x:Name="UIFiveButton"
+                                             NumericalButtonContent="5" />
+            <buttons:NumericalButton_Control x:Name="UISixButton"
+                                             NumericalButtonContent="6" />
+            <buttons:OperatorButton_Control x:Name="UIPlusButton"
+                                            OperatorButtonContent="+" />
+            <!--Fourth range-->
+            <buttons:NumericalButton_Control x:Name="UIOneButton"
+                                             NumericalButtonContent="1" />
+            <buttons:NumericalButton_Control x:Name="UITwoButton"
+                                             NumericalButtonContent="2" />
+            <buttons:NumericalButton_Control x:Name="UIThreeButton"
+                                             NumericalButtonContent="3" />
+            <buttons:OperatorButton_Control x:Name="UIMinusButton"
+                                            OperatorButtonContent="-" />
+            <!--Fifth range-->
+            <buttons:NumericalButton_Control x:Name="UIZeroButton"
+                                             NumericalButtonContent="0" />
+            <buttons:OperatorButton_Control x:Name="UISignButton"
+                                            OperatorButtonContent="±" />
+            <buttons:NumericalButton_Control x:Name="UIPointButton"
+                                             NumericalButtonContent="." />
+            <buttons:OperatorButton_Control x:Name="UIEqualButton"
+                                            OperatorButtonContent="=" />
+        </WrapPanel>
+    </StackPanel>
+
+</UserControl>

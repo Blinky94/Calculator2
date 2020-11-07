@@ -74,6 +74,11 @@ namespace Udemy_Calculator
         }
 
         /// <summary>
+        /// Regex to separate in 3 groups operands and operators (separate the 1rst element from the others, separate the operators, and the left operands.
+        /// </summary>
+        public static readonly string Regexp_SeparateElementsInOperation = @"(?<LeftOperand>(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?))?(?<Operator>[+\-÷\/×xX*\^√])?(?<RightOperand>(?(?=[({\[]+[-])[({\[]+[-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]+|[({\[]*[√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]*))";
+
+        /// <summary>
         /// Getting the parent name calling method
         /// </summary>
         /// <returns></returns>

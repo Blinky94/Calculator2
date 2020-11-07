@@ -130,7 +130,7 @@
                                          GeneralImageUrlReverse="Images/Add_icon_reverse.png" />
             <local:GeneralButton_Control x:Name="Edit_GeneralButtonControl"
                                          ToolTip="Edit"
-                                         GeneralImageUrl="Images/Editicon.png"
+                                         GeneralImageUrl="Images/Edit_icon.png"
                                          GeneralImageUrlReverse="Images/Edit_icon_reverse.png" />
             <local:GeneralButton_Control x:Name="Delete_GeneralButtonControl"
                                          ToolTip="Delete"

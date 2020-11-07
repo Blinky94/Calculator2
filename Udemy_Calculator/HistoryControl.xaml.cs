@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Udemy_Calculator
@@ -45,6 +46,34 @@ namespace Udemy_Calculator
         {
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning the formula: {mDisplayHistory.FormulaStr}");
             return mDisplayHistory.FormulaStr;
+        }
+
+        /// <summary>
+        /// Return the last operand in the formula (Nomber, signed number, with coma, square, parenthesis...)
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnLastOperandInTheFormula()
+        {
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning last numerical part of the formula: {mDisplayHistory.FormulaStr}");
+
+            Regex regex = new Regex(GlobalUsage.Regexp_SeparateElementsInOperation);
+            var lMatches = regex.Matches(mDisplayHistory.FormulaStr);
+
+            if (lMatches.Count > 0)
+            {
+                string ffff = lMatches[lMatches.Count - 1].ToString();
+                Match lMatch = regex.Match(ffff);
+                if (lMatch.Success)
+                {
+                    string lll = lMatch.Groups["RightOperand"].Value;
+
+                    return lll;
+                }
+            }
+
+            TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No operand in the current formula: {mDisplayHistory.FormulaStr}");
+
+            return string.Empty;
         }
 
         /// <summary>

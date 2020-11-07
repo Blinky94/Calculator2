@@ -79,7 +79,7 @@
                     <Border CornerRadius="25"
                             Background="{DynamicResource ResourceKey=BackgroundMainSkin}"
                             BorderBrush="{DynamicResource ResourceKey=BorderbrushMainSkin}"
-                            BorderThickness="5">
+                            BorderThickness="2">
                         <Grid x:Name="MainGrid"
                               Margin="15 10 16 20">
                             <Grid.ColumnDefinitions>
@@ -176,7 +176,7 @@
                                                    x:Name="UIDisplay" />
 
                             <!--Call the Calculator User control-->
-                            <local:Calculator_Control Grid.Column="0"
+                            <local:ScientificCalculator_Control Grid.Column="0"
                                                       Grid.Row="2"
                                                       x:Name="UICalculator"
                                                       Margin="2 10 0 0" />

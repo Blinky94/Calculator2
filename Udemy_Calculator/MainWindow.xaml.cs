@@ -21,7 +21,7 @@ namespace Udemy_Calculator
 
             // Event registered to the UIDisplay when number is typed
             UIEventDisplayValueEvent += new EventUpdateUIDisplayHandler(ModifyUIDisplay);
-            UICalculator.CalculusDisplayDelegate = UIEventDisplayValueEvent;
+            UICalculator.NumericalButtonsPanel.CalculusDisplayDelegate = UIEventDisplayValueEvent;
 
             //mConsoleDebug = new ConsoleDebug();
             //mConsoleDebug.Show();
