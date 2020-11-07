@@ -61,13 +61,14 @@ namespace Udemy_Calculator
 
             if (lMatches.Count > 0)
             {
-                string ffff = lMatches[lMatches.Count - 1].ToString();
-                Match lMatch = regex.Match(ffff);
+                string lMatchesStr = lMatches[lMatches.Count - 1].ToString();
+
+                // Testing on the last match in the matches collection if corresponding operand
+                Match lMatch = regex.Match(lMatchesStr);
                 if (lMatch.Success)
                 {
-                    string lll = lMatch.Groups["RightOperand"].Value;
-
-                    return lll;
+                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: right operand returned: {lMatch.Groups["RightOperand"].Value}");
+                    return lMatch.Groups["RightOperand"].Value; // Return the right operand of the chunk
                 }
             }
 

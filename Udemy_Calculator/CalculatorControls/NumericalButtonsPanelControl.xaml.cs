@@ -195,6 +195,7 @@ namespace Udemy_Calculator.CalculatorControls
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
+            // VOIR POURQUOI AVEC UN NOMBRE AVEC PARENTHESE ON PEUT ENTRER UN AUTRE NOMBRE !!!
             string lInput = (e.Source as Button).Content.ToString().Replace(',', '.');
 
             double.TryParse(lInput, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumber);
