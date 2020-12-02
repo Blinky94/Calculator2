@@ -35,7 +35,7 @@ namespace Udemy_Calculator
             Length = pLength;
         }
     }
-   
+
     public class PEMDAS
     {
         #region Fields
@@ -90,6 +90,7 @@ namespace Udemy_Calculator
                     if (string.IsNullOrEmpty(lResult))
                     {
                         TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No result to do compute from current chuck!!!");
+                        lResult = Chunk.Formula.ToString();
                     }
 
                     DoReplaceByResult(lResult);
@@ -131,7 +132,7 @@ namespace Udemy_Calculator
 
                 if (!lMatch.Success)
                 {
-                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: No matching pattern onto the chunk ({Chunk.SB})");
+                    TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No matching pattern onto the chunk ({Chunk.SB})");
                     return;
                 }
 
@@ -169,7 +170,7 @@ namespace Udemy_Calculator
         internal void ComputeExponent()
         {
             // Regex to select all exponents groups
-            string lPattern = @"(?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[\^]+[({\[](?(?=[({\[][-])[({\[][-][√]?\d+[.,]?\d*([Ee][+]\d*)?[)}\]]|[√]?\d+[.,]?\d*([Ee][+]\d*)?)[)}\]]";
+            string lPattern = @"\(?[-]?\d+[.,]?\d*[Ee]+\(*[-]?\d+[.,]?\d*\)*";
 
             TraceLogs.AddTechnical($"{GlobalUsage.GetCurrentMethodName}: Pattern {lPattern}");
 
@@ -249,7 +250,26 @@ namespace Udemy_Calculator
                     pRightOperand = GetDoubleFromString(lRight);
                 }
 
-                pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
+                bool lIsExponent = false;
+
+                if (string.IsNullOrEmpty(lMatch.Groups["Operator"].Value))
+                {
+                    if (Chunk.SB.ToString().Contains("E") || Chunk.SB.ToString().Contains("e"))
+                    {
+                        pOperator = EOperation.Exponent;
+                        lIsExponent = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                if (!lIsExponent)
+                {
+                    pOperator = WhatOperator(char.Parse(lMatch.Groups["Operator"].Value));
+                }
+
                 TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Operator: {pOperator}");
             }
             catch (Exception e)
@@ -313,19 +333,8 @@ namespace Udemy_Calculator
 
             try
             {
-                bool lHasExponential = (pStr.Contains("E") || pStr.Contains("e"));
-
-                if (lHasExponential)
-                {
-                    lResult = double.Parse(pStr, NumberStyles.Float, null);
-                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Has exponent: {pStr}");
-                }
-                else
-                {
-                    lResult = double.Parse(pStr, NumberStyles.Any, CultureInfo.InvariantCulture);
-                    TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Has no exponent: {pStr}");
-
-                }
+                lResult = double.Parse(pStr, NumberStyles.Any, CultureInfo.InvariantCulture);
+                TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: Has no exponent: {pStr}");
             }
             catch (Exception e)
             {
@@ -355,7 +364,8 @@ namespace Udemy_Calculator
                 if (double.IsNaN(lLeftOperand) || double.IsNaN(lRightOperand) || lOperator == null)
                 {
                     TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: operands are not consistents (leftOperand: {lLeftOperand}, rightOperand: {lRightOperand}, operator: {lOperator}) !!!");
-                    throw new Exception($"{GlobalUsage.GetCurrentMethodName}: operands are not consistents !!!");
+
+                    return;
                 }
 
                 string lResult = string.Empty;
@@ -378,7 +388,11 @@ namespace Udemy_Calculator
                         lResult = MathOperation.Sqrt(lRightOperand);
                         break;
                     case EOperation.Exponent:
-                        lResult = MathOperation.Exponent(lLeftOperand, lRightOperand);
+                        string lStr = Chunk.SB.ToString().Replace("(", "").Replace(")", "");
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(lStr);
+                        Chunk.SB = sb;
+                        lResult = MathOperation.Exponent(double.Parse(Chunk.SB.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture));
                         break;
                 }
 

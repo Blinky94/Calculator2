@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Nana">
+<Skins xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" selected="Toronto">
   <Skin name="Default">
     <SkinStyles name="MainSkin" longName="Main Skin">
       <Background name="Background">#FFB0B0B0</Background>
@@ -507,7 +507,7 @@
   <Skin name="Nana">
     <SkinStyles name="MainSkin" longName="Main Skin">
       <Background name="Background">#FF00FA9A</Background>
-      <Foreground name="Foreground">#000000</Foreground>
+      <Foreground name="Foreground">#FF000000</Foreground>
       <Borderbrush name="Border brush">#FF000000</Borderbrush>
     </SkinStyles>
     <SkinStyles name="BaseButtons" longName="General buttons">

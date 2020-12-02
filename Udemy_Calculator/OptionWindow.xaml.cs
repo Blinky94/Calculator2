@@ -165,6 +165,9 @@ namespace Udemy_Calculator
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {
+            // Set current selected skin to default
+            CommonSkins.SkinsObj.Selected = SkinNamesComboBox.Text;
+
             //Save Skin
             XmlParser.SerializeSkinsToXML(CommonSkins.SkinsObj);
         }

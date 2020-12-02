@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -44,8 +45,33 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public string ReturnFormula()
         {
+            if (string.IsNullOrEmpty(mDisplayHistory.FormulaStr))
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No formula available !!!");
+
+                return null;
+            }
+
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning the formula: {mDisplayHistory.FormulaStr}");
             return mDisplayHistory.FormulaStr;
+        }
+
+        /// <summary>
+        /// Return the last character of the current formula
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnLastCharOfFormula()
+        {
+            if (string.IsNullOrEmpty(mDisplayHistory.FormulaStr))
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No formula available !!!");
+
+                return null;
+            }
+
+            TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning last character of the formula: {mDisplayHistory.FormulaStr}");
+
+            return mDisplayHistory.FormulaStr.Last().ToString();
         }
 
         /// <summary>
@@ -54,6 +80,20 @@ namespace Udemy_Calculator
         /// <returns></returns>
         public string ReturnLastOperandInTheFormula()
         {
+            if (string.IsNullOrEmpty(mDisplayHistory.FormulaStr))
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No formula available !!!");
+
+                return null;
+            }
+
+            if(mDisplayHistory.FormulaStr.Count(c => (c == '.') || (c == ',')) > 1)
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: Operand already contains dot/coma !!!");
+
+                return null;
+            }
+
             TraceLogs.AddOutput($"{GlobalUsage.GetCurrentMethodName}: returning last numerical part of the formula: {mDisplayHistory.FormulaStr}");
 
             Regex regex = new Regex(GlobalUsage.Regexp_SeparateElementsInOperation);
@@ -63,12 +103,25 @@ namespace Udemy_Calculator
             {
                 string lMatchesStr = lMatches[lMatches.Count - 1].ToString();
 
+                if (string.IsNullOrEmpty(lMatchesStr))
+                {
+                    lMatchesStr = lMatches[lMatches.Count - 2].ToString();
+                }
                 // Testing on the last match in the matches collection if corresponding operand
                 Match lMatch = regex.Match(lMatchesStr);
-                if (lMatch.Success)
+                if (lMatch.Success && !string.IsNullOrEmpty(lMatch.Groups["RightOperand"].Value))
                 {
                     TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: right operand returned: {lMatch.Groups["RightOperand"].Value}");
-                    return lMatch.Groups["RightOperand"].Value; // Return the right operand of the chunk
+                    return lMatch.Groups["RightOperand"].Value.Replace("(","").Replace(")",""); // Return the right operand of the chunk
+                }
+                else
+                {
+                    // If nothing in the right operand, return left operand by default if not null or empty value
+                    if (!string.IsNullOrEmpty(lMatch.Groups["LeftOperand"].Value))
+                    {
+                        TraceLogs.AddInfo($"{GlobalUsage.GetCurrentMethodName}: right operand returned: {lMatch.Groups["LeftOperand"].Value}");
+                        return lMatch.Groups["LeftOperand"].Value.Replace("(", "").Replace(")", "");
+                    }
                 }
             }
 

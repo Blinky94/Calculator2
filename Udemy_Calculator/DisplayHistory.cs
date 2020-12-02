@@ -131,7 +131,9 @@ namespace Udemy_Calculator
         {
             var textRange = new TextRange(mFormulaParagraph.ContentStart, mFormulaParagraph.ContentEnd);
 
-            if (!textRange.IsEmpty)
+            FormulaStr = textRange.Text;
+
+            if (!textRange.IsEmpty && (textRange.Text.Length >= pUILength))
             {
                 string lOutput = textRange.Text.Substring(0, textRange.Text.Length - pUILength);
                 mFormulaParagraph.Inlines.Clear();

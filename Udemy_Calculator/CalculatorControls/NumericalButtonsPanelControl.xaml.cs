@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,7 +21,7 @@ namespace Udemy_Calculator.CalculatorControls
         {
             get
             {
-                return mToCalculusDisplay.Replace(",", ".").Replace("(", "").Replace(")", "");
+                return mToCalculusDisplay.Replace(",", ".");
             }
             private set
             {
@@ -92,7 +91,7 @@ namespace Udemy_Calculator.CalculatorControls
         {
             string lUIContent = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastOperandInTheFormula();
 
-            if (!lUIContent.Contains('.') && !lUIContent.Contains('(') && !lUIContent.Contains(')'))
+            if (!string.IsNullOrEmpty(lUIContent) && !lUIContent.Contains('.') && !lUIContent.Contains('(') && !lUIContent.Contains(')'))
             {
                 // If preceding is operator or nothing, add 0 before the point
                 string lOperators = "÷/×xX*-+√";
@@ -114,36 +113,6 @@ namespace Udemy_Calculator.CalculatorControls
             }
         }
 
-        private void UISignOrUnSignButton_Click(object sender, RoutedEventArgs e)
-        {
-            string lNum = ToCalculusDisplay;
-
-            if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
-            {
-                lResult *= (-1);
-                string lStr = lResult.ToString();
-
-                if (Math.Sign(lResult) == -1)
-                {
-                    lStr = $"({lResult})";
-                    if (!mIsResult)
-                    {
-                        ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(ToCalculusDisplay.Length);
-                    }
-                }
-
-                if (mIsResult)
-                {
-                    mIsResult = false;
-                }
-
-                ToCalculusDisplay = lStr;
-
-                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lStr, mIsResult, LastNumber);
-                OnCalculusDisplayChanged();
-            }
-        }
-
         private void UIEqualButton_Click(object sender, RoutedEventArgs e)
         {
             string lFormula = string.Empty;
@@ -152,6 +121,12 @@ namespace Udemy_Calculator.CalculatorControls
                 try
                 {
                     lFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnFormula();
+
+                    string lLastOpOfFormula = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastCharOfFormula();
+                    if (!double.TryParse(lLastOpOfFormula, NumberStyles.Any, CultureInfo.InvariantCulture, out double lLastOpFormulaParsed) && lLastOpOfFormula != ")")
+                    {
+                        return;
+                    }
 
                     if (mSpecialSymbols.Contains(lFormula.LastOrDefault()))
                     {
@@ -167,22 +142,23 @@ namespace Udemy_Calculator.CalculatorControls
                     if (!double.IsNaN(lNumberParsed))
                     {
                         // Ici PEMDAS
-                        string lResult;
                         mPemdas = new PEMDAS(lFormula);
-                        lResult = mPemdas.ComputeFormula();
+                        string lResult = mPemdas.ComputeFormula();
 
                         ToCalculusDisplay = lResult;
                         ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString(), mIsResult, LastNumber, true);
 
                         ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Chunk);
 
-                        LastNumber = ToCalculusDisplay;
+                        //   LastNumber = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastOperandInTheFormula();
                         mIsResult = true;
 
                         ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lResult.Replace(',', '.'), mIsResult, null, true);
                         ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Formula);
                         ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Chunk);
                         ((MainWindow)Application.Current.MainWindow).UIHistory.InsertNewParagraph(ParagraphType.Result);
+
+                        LastNumber = ToCalculusDisplay;
                         OnCalculusDisplayChanged();
                     }
                 }
@@ -195,8 +171,15 @@ namespace Udemy_Calculator.CalculatorControls
 
         private void UINumberButton_Click(object sender, RoutedEventArgs e)
         {
-            // VOIR POURQUOI AVEC UN NOMBRE AVEC PARENTHESE ON PEUT ENTRER UN AUTRE NOMBRE !!!
+            var lUIContent = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastCharOfFormula();
+
             string lInput = (e.Source as Button).Content.ToString().Replace(',', '.');
+
+            if (lUIContent == ")")
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: Last character is a parenthesis !!!");
+                return;
+            }
 
             double.TryParse(lInput, NumberStyles.Any, CultureInfo.InvariantCulture, out double lNumber);
 
@@ -219,11 +202,19 @@ namespace Udemy_Calculator.CalculatorControls
         {
             if (!mSpecialSymbols.Contains(ToCalculusDisplay.LastOrDefault()))
             {
-                ToCalculusDisplay = (e.Source as Button).Content.ToString();
-
-                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, LastNumber);
+                if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
+                {
+                    if (Math.Sign(lResult) == -1)
+                    {
+                        ToCalculusDisplay = $"({ToCalculusDisplay})";
+                    }
+                }
 
                 LastNumber = ToCalculusDisplay;
+
+                ToCalculusDisplay = (e.Source as Button).Content.ToString();
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement((e.Source as Button).Content.ToString().Replace(',', '.'), mIsResult, LastNumber);
+
                 OnCalculusDisplayChanged();
             }
         }
@@ -231,11 +222,86 @@ namespace Udemy_Calculator.CalculatorControls
         // 50 + 6% (0,06) = 50,06
         private void UIPercentButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(ToCalculusDisplay, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
-            {
-                ToCalculusDisplay = (lResult * (0.01)).ToString();
+            string lLastNum = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastOperandInTheFormula();
 
-                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(ToCalculusDisplay, false);
+            if (string.IsNullOrEmpty(lLastNum))
+            {
+                lLastNum = ToCalculusDisplay;
+            }
+
+            if (decimal.TryParse(lLastNum, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal lResult))
+            {
+                string lNum = (lResult * (0.01m)).ToString();
+                ToCalculusDisplay = lNum;
+
+                if (Math.Sign(lResult) == -1)
+                {
+                    lNum = $"({lNum})";
+                    lLastNum = $"({lLastNum})";
+                }
+
+                ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(lLastNum.Length);
+
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lNum, false);
+                OnCalculusDisplayChanged();
+            }
+        }
+
+        private void UISignOrUnSignButton_Click(object sender, RoutedEventArgs e)
+        {
+            string lLastChar = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastCharOfFormula();
+
+            if (string.IsNullOrEmpty(lLastChar))
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: No element in the formula !!!");
+            }
+            else if (mSpecialSymbols.Contains(lLastChar))
+            {
+                TraceLogs.AddWarning($"{GlobalUsage.GetCurrentMethodName}: Last character is not a number !!!");
+                return;
+            }
+
+            string lNum = ((MainWindow)Application.Current.MainWindow).UIHistory.ReturnLastOperandInTheFormula();
+
+            if (string.IsNullOrEmpty(lNum))
+            {
+                lNum = ToCalculusDisplay;
+            }
+
+            if (double.TryParse(lNum, NumberStyles.Any, CultureInfo.InvariantCulture, out double lResult))
+            {
+                double lResultBefore = lResult;
+                lResult *= (-1);
+                string lStr = lResult.ToString();
+
+                if (Math.Sign(lResult) == -1)
+                {
+                    lStr = $"({lResult})";
+                    if (!mIsResult)
+                    {
+                        ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(lNum.Length);
+                    }
+                }
+                else
+                {
+                    if (Math.Sign(lResultBefore) == -1)
+                    {
+                        string OldlStr = $"({lResultBefore})";
+                        if (!mIsResult)
+                        {
+                            ((MainWindow)Application.Current.MainWindow).UIHistory.RemoveElement(OldlStr.Length);
+                        }
+                    }
+                }
+
+                if (mIsResult)
+                {
+                    mIsResult = false;
+                }
+
+                ToCalculusDisplay = lStr;
+
+                ((MainWindow)Application.Current.MainWindow).UIHistory.AppendElement(lStr, mIsResult, LastNumber);
                 OnCalculusDisplayChanged();
             }
         }

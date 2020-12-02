@@ -27,13 +27,15 @@
                     Grid.Column="0">
 
             <!--Memory panel-->
-            <calculatorcontrols:MemoryButtonsPanelControl x:Name="MemoryButtonsPanel" Margin="52 5 0 0" />
-            
+            <calculatorcontrols:MemoryButtonsPanelControl x:Name="MemoryButtonsPanel"
+                                                          Margin="52 5 0 0" />
+
             <!--Scientific panel-->
             <calculatorcontrols:ScientificButtonsPanelControl x:Name="ScientificButtonsPanel" />
 
             <!--Numerical panel-->
-            <calculatorcontrols:NumericalButtonsPanelControl x:Name="NumericalButtonsPanel" Margin="0 5 0 2" />
+            <calculatorcontrols:NumericalButtonsPanelControl x:Name="NumericalButtonsPanel"
+                                                             Margin="0 5 0 2" />
 
         </StackPanel>
 
